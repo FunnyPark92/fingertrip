@@ -11,7 +11,7 @@ public class loginController {
 	
 	@RequestMapping("/login/login.do")
 	public String index() {
-		logger.info("메인화면 보여주기");
+		logger.info("로그인화면 보여주기");
 		
 		return "login/login";
 	}
