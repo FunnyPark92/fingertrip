@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ include file="../inc/top.jsp"%>
+<%@ include file="../../inc/top.jsp"%>
     
     <div class="minHeight580">
         <div class="container login">
@@ -78,4 +78,4 @@
         </div>
     </div>
 
-<%@ include file="../inc/bottom.jsp"%>
+<%@ include file="../../inc/bottom.jsp"%>
