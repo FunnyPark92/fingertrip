@@ -1,0 +1,231 @@
+/* ######## 공통 ######### */
+/* gnb */
+.navbar{
+    -webkit-box-shadow: 0px 3px 31px -4px rgba(212,212,212,1);
+    -moz-box-shadow: 0px 3px 31px -4px rgba(212,212,212,1);
+    box-shadow: 0px 3px 31px -4px rgba(212,212,212,1);
+}
+.disNone992{display: block;}
+.disBlock992{display: none;}
+
+@media (max-width: 992px){
+    .disNone992{display: none;}
+    .disBlock992{display: block;}
+}
+
+footer{border-top: 1px solid #d8d8d8;}
+
+/* margin */
+.marginTop10{margin-top: 10px;}
+.marginTop20{margin-top: 50px;}
+.marginTop30{margin-top: 50px;}
+.marginTop40{margin-top: 50px;}
+.marginTop50{margin-top: 50px;}
+.marginTop60{margin-top: 60px;}
+.marginTop70{margin-top: 70px;}
+.marginTop80{margin-top: 80px;}
+.marginTop90{margin-top: 90px;}
+.marginTop100{margin-top: 100px;}
+.marginBottom10{margin-bottom: 10px;}
+.marginBottom20{margin-bottom: 20px;}
+.marginBottom30{margin-bottom: 30px;}
+.marginBottom40{margin-bottom: 40px;}
+.marginBottom50{margin-bottom: 50px;}
+.marginBottom60{margin-bottom: 60px;}
+.marginBottom70{margin-bottom: 70px;}
+.marginBottom80{margin-bottom: 80px;}
+.marginBottom90{margin-bottom: 90px;}
+.marginBottom100{margin-bottom: 100px;}
+
+/* minheight */
+.minheight300{min-height: 300px;}
+.minheight400{min-height: 400px;}
+.minheight500{min-height: 500px;}
+.minheight600{min-height: 600px;}
+
+
+
+
+/* 메인 */
+
+.fRight {
+    float: right;
+}
+.mar5 {
+    margin-right: 5px;
+}
+.minHeight580{min-height: 580px;}
+
+
+
+
+/* 로그인  */
+.login{
+    background-image: url(../img/loginBg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-bottom: 70px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.login .form-box {
+    margin-top: 70px;
+}
+
+.login .form-top {
+    overflow: hidden;
+    padding: 0 25px 15px 25px;
+    background: #fff;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    text-align: left;
+}
+
+.login .form-top-left {
+    float: left;
+    width: 75%;
+    padding-top: 25px;
+}
+
+.login .form-top-left h3 {
+    margin-top: 0;
+}
+
+.login .form-top-right {
+    float: left;
+    width: 25%;
+    padding-top: 5px;
+    font-size: 66px;
+    color: #ddd;
+    line-height: 100px;
+    text-align: right;
+}
+
+.login .form-bottom {
+    padding: 25px 25px 30px 25px;
+    background: #fff;
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    text-align: left;
+}
+
+.login .form-bottom form textarea {
+    height: 100px;
+}
+
+.login .form-bottom form button.btn {
+    width: 100%;
+}
+
+.login .form-bottom form .input-error {
+    border-color: #19b9e7;
+}
+
+.login button.btn {
+    height: 50px;
+    margin: 0;
+    padding: 0 20px;
+    vertical-align: middle;
+    background: #19b9e7;
+    border: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 50px;
+    color: #fff;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    text-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+}
+
+.login button.btn:hover {
+    opacity: 0.6;
+    color: #fff;
+}
+
+.login button.btn:active {
+    outline: 0;
+    opacity: 0.6;
+    color: #fff;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.login button.btn:focus {
+    outline: 0;
+    opacity: 0.6;
+    background: #19b9e7;
+    color: #fff;
+}
+
+.login button.btn:active:focus,
+.login button.btn.active:focus {
+    outline: 0;
+    opacity: 0.6;
+    background: #19b9e7;
+    color: #fff;
+}
+
+.login .middle-border {
+    min-height: 300px;
+    margin-top: 170px;
+    border-right: 1px solid #fff;
+    border-right: 1px solid rgba(25, 185, 231, 0.6);
+}
+.loginWrap footer{margin-top: 70px;}
+
+
+
+
+/* 공지사항 */
+.tableBorder{ border-bottom: 1px solid #dee2e6;}
+table a{color:#212529;}
+table a:hover, table a:active{text-decoration: none;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
