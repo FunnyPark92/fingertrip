@@ -44,6 +44,33 @@ footer{border-top: 1px solid #d8d8d8;}
 .minheight600{min-height: 600px;}
 
 
+/* 서브 배경 공통 */
+.subBg{
+    background-size: cover;
+    background-position: middle center;
+    background-attachment: fixed;
+    height: 200px;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 70px;
+    text-align: center;
+}
+.subBgBlack{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+.subBg p{
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+    font-size: 1.3em;
+    padding-top: 4em;
+}
+
 
 
 /* 메인 */
@@ -197,6 +224,72 @@ table a{color:#212529;}
 table a:hover, table a:active{text-decoration: none;}
 
 
+
+
+/* 제휴 광고 문의 */
+.subBgAd{background-image: url(../img/subBgAd.jpg);}
+.advertise .info i {
+  font-size: 32px;
+  color: #1dc8cd;
+  float: left;
+  line-height: 1;
+}
+
+.advertise .info p {
+  padding: 0 0 10px 42px;
+  line-height: 28px;
+  font-size: 14px;
+}
+
+.advertise .form #sendmessage {
+  color: #1dc8cd;
+  border: 1px solid #1dc8cd;
+  display: none;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.advertise .form #errormessage {
+  color: red;
+  display: none;
+  border: 1px solid red;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.advertise .form #sendmessage.show, .advertise .form #errormessage.show, .advertise .form .show {
+  display: block;
+}
+
+.advertise .form .validation {
+  color: red;
+  display: none;
+  margin: 0 0 20px;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.advertise .form input, .advertise .form textarea {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+.advertise .form button[type="submit"] {
+  background: #3faeff;
+  border: 0;
+  border-radius: 20px;
+  padding: 8px 30px;
+  color: #fff;
+}
+
+.advertise .form button[type="submit"]:hover {
+  cursor: pointer;
+}
 
 
 
