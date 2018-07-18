@@ -11,7 +11,7 @@ public class IndexController {
 	
 	@RequestMapping("/index.do")
 	public String index() {
-		logger.info("로그인화면 보여주기 나도 여기서 이걸 고쳐버린다면");
+		logger.info("메인화면 보여주기");
 		
 		return "index";
 	}
