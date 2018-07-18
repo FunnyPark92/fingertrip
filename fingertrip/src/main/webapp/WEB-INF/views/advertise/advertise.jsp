@@ -89,7 +89,7 @@
       <div class="container">
         
         <div class="row">
-            <!--<div class="col-lg-4 col-md-4">
+            <!--<div class="col-lg-4 col-md-4"> 
             <div class="contact-about">
               <h3>Avilon</h3>
               <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>

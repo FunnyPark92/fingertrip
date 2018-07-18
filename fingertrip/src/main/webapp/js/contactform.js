@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
         if (pos >= 0) {
           var exp = rule.substr(pos + 1, rule.length);
           rule = rule.substr(0, pos);
-        } else {
+        } else { 
           rule = rule.substr(pos + 1, rule.length);
         }
 

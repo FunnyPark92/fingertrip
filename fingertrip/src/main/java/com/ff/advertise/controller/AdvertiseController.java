@@ -10,7 +10,7 @@ public class AdvertiseController {
 	private static final Logger logger = LoggerFactory.getLogger(AdvertiseController.class); 
 	
 	@RequestMapping("/advertise/advertise.do")
-	public String index() {
+	public String index() {   
 		logger.info("제휴 광고 문의 보여주기");
 		
 		return "/advertise/advertise";
