@@ -1,4 +1,4 @@
-package com.ff.advertise.controller;
+package com.ff.finger.advertise.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ public class AdvertiseController {
 	public String index() {   
 		logger.info("제휴 광고 문의 보여주기");
 		
-		return "/advertise/advertise";
+		return "advertise/advertise";
 	}
 	
 }
