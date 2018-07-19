@@ -1,0 +1,21 @@
+@charset "UTF-8";
+	.findId{
+		margin-top: 80px;
+		border: 3px solid black;
+		padding: 30px;
+		background: #faff07;
+	}
+	.findId div{
+		margin: 5px 0px;
+	}
+	.findId input[type=submit]{
+		margin: 30px 0 15px 0;
+	}
+	.findId span{
+		display: inline-block;
+		margin: 5px 20px;
+		width: 75px;
+	}
+	.findId a{
+		margin: 30px 0 15px 0;
+	}
