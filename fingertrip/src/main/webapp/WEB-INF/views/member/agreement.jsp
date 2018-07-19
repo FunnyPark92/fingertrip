@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,7 +10,7 @@
 <body>
 	<h2>회원 약관</h2>
 	<br>
-	<iframe src="<c:url value='/member/provision.html'/>" width="700px"
+	<iframe src="<c:url value='/inc2/provision.html'/>" width="700px"
 		height="300px"></iframe>
 	<br>
 	<br>
