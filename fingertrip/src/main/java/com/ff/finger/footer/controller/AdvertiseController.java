@@ -11,7 +11,7 @@ public class AdvertiseController {
 	
 	@RequestMapping("/footer/advertise.do")
 	public String index() {   
-		logger.info("제휴 광고 문의 보여주기");
+		logger.info("제휴 광고 문의 보여주기  뀨~~~~~");
 		
 		return "footer/advertise";
 	}

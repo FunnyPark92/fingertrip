@@ -14,21 +14,21 @@ public class myPageController {
 	
 	@RequestMapping("/myPayment/paymentList.do")
 	public String myPayment() {
-		logger.info("결제 내역 화면 보여주기");
+		logger.info("결제 내역 화면 보여주기 뀨~");
 		
 		return "myPage/myPayment/paymentList";
 	}
 	
 	@RequestMapping("/myHeart/heartList.do")
 	public String myHeart() {
-		logger.info("하트 내역 화면 보여주기");
+		logger.info("하트 내역 화면 보여주기 뀨~");
 		
 		return "myPage/myHeart/heartList";
 	}
 	
 	@RequestMapping("/myCoupon/couponList.do")
 	public String myCoupon() {
-		logger.info("쿠폰 내역 화면 보여주기");
+		logger.info("쿠폰 내역 화면 보여주기 뀨~");
 		
 		return "myPage/myCoupon/couponList";
 	}
