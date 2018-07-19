@@ -25,4 +25,11 @@ public class myPageController {
 		
 		return "myPage/myHeart/heartList";
 	}
+	
+	@RequestMapping("/myCoupon/couponList.do")
+	public String myCoupon() {
+		logger.info("쿠폰 내역 화면 보여주기");
+		
+		return "myPage/myCoupon/couponList";
+	}
 }
