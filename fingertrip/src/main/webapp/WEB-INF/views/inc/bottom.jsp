@@ -44,8 +44,8 @@
     <!-- Bootstrap core JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
 
     <!--  bxslider js   -->
     <script src="js/jquery.bxslider.js"></script>

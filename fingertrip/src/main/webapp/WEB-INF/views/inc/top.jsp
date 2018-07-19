@@ -80,7 +80,7 @@
                 </ul>
             </div>
 
-			<c:set var="flag" value="false"></c:set>
+			<c:set var="flag" value="true"></c:set>
 			<c:if test="${flag == false }">
 	            <!-- 로그인 안 했을때 나오는 .topLoginDiv -->
 	            <div class="topMenu disNone992 topLoginDiv">
@@ -100,7 +100,7 @@
 	                    <a class="dropdown-item" href="#">회원 탈퇴</a>
 	                    <a class="dropdown-item" href="#">내가 쓴 글</a>
 	                    <a class="dropdown-item" href="#">내가 찜한 코스</a>
-	                    <a class="dropdown-item" href="#">쿠폰</a>
+	                    <a class="dropdown-item" href="<c:url value='/myPage/myCoupon/couponList.do'/>">쿠폰</a>
 	                    <a class="dropdown-item" href="<c:url value='/myPage/myPayment/paymentList.do'/>">결제확인</a>
 	                    <a class="dropdown-item" href="<c:url value='/myPage/myHeart/heartList.do'/>">하트</a>
 	                </div>
