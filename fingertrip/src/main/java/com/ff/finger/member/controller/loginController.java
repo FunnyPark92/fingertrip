@@ -1,4 +1,4 @@
-package com.ff.finger.login.controller;
+package com.ff.finger.member.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +10,10 @@ public class loginController {
 	private static final Logger logger = LoggerFactory.getLogger(loginController.class); 
 	
 	@RequestMapping("/login/login.do")
-	public String index() {
+	public String login() {
 		logger.info("로그인 화면 보여주기");
 		
-		return "login/login";
+		return "member/login/login";
 	}
 	
 }

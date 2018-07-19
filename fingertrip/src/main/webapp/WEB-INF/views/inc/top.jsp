@@ -82,14 +82,17 @@
 
             </div>
 
-            <!-- 로그인 안 했을때 나오는 .topLoginDiv -->
-            <!--<div class="topMenu disNone992 topLoginDiv">
-                <a class="btn btn-info mar5" style="color:#fff;">회원가입</a>
-                <a class="btn btn-primary" style="color:#fff;" href="login.html">로그인</a>
-            </div>-->
-
+			<c:set var="flag" value="true"></c:set>
+			<c:if test="${flag == false }">
+	            <!-- 로그인 안 했을때 나오는 .topLoginDiv -->
+	            <div class="topMenu disNone992 topLoginDiv">
+	                <a class="btn btn-info mar5" style="color:#fff;">회원가입</a>
+	                <a class="btn btn-primary" style="color:#fff;" href="<c:url value='/login/login.do'/>">로그인</a>
+	            </div>
+			</c:if>
+			<c:if test="${flag == true }">
             <!-- 로그인 했을때 나오는 .topLogoutDiv -->
-             <li class="nav-item dropdown list-unstyled disNone992 topLogoutDiv">
+            <li class="nav-item dropdown list-unstyled disNone992 topLogoutDiv">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                              마이페이지
                     </a>
@@ -99,12 +102,12 @@
                         <a class="dropdown-item" href="#">내가 쓴 글</a>
                         <a class="dropdown-item" href="#">내가 찜한 코스</a>
                         <a class="dropdown-item" href="#">쿠폰</a>
-                        <a class="dropdown-item" href="#">결제확인</a>
+                        <a class="dropdown-item" href="<c:url value='/myPage/myPayment/paymentList.do'/>">결제확인</a>
                         <a class="dropdown-item" href="#">하트</a>
                     </div>
                 </li>
                 <button type="button" class="btn btn-primary disNone992">로그아웃</button>
-
+			</c:if>
         </div>
     </nav>
 
