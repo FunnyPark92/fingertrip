@@ -103,7 +103,7 @@
                         <a class="dropdown-item" href="#">내가 찜한 코스</a>
                         <a class="dropdown-item" href="#">쿠폰</a>
                         <a class="dropdown-item" href="<c:url value='/myPage/myPayment/paymentList.do'/>">결제확인</a>
-                        <a class="dropdown-item" href="#">하트</a>
+                        <a class="dropdown-item" href="<c:url value='/myPage/myHeart/heartList.do'/>">하트</a>
                     </div>
                 </li>
                 <button type="button" class="btn btn-primary disNone992">로그아웃</button>
