@@ -18,4 +18,18 @@ public class myPageController {
 		
 		return "myPage/myPayment/paymentList";
 	}
+	
+	@RequestMapping("/myHeart/heartList.do")
+	public String myHeart() {
+		logger.info("하트 내역 화면 보여주기");
+		
+		return "myPage/myHeart/heartList";
+	}
+	
+	@RequestMapping("/myCoupon/couponList.do")
+	public String myCoupon() {
+		logger.info("쿠폰 내역 화면 보여주기");
+		
+		return "myPage/myCoupon/couponList";
+	}
 }

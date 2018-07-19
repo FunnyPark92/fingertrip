@@ -78,8 +78,6 @@
                         <!--  <a class="nav-link topLogoutDiv" href="#">마이페이지</a>-->
                     </li>
                 </ul>
-
-
             </div>
 
 			<c:set var="flag" value="false"></c:set>
@@ -89,25 +87,27 @@
 	                <a class="btn btn-info mar5" style="color:#fff;" href="<c:url value='/member/agreement.do'/>">회원가입</a>
 	                <a class="btn btn-primary" style="color:#fff;" href="<c:url value='/login/login.do'/>">로그인</a>
 	            </div>
-			</c:if>
+            </c:if>
+
 			<c:if test="${flag == true }">
-            <!-- 로그인 했을때 나오는 .topLogoutDiv -->
-            <li class="nav-item dropdown list-unstyled disNone992 topLogoutDiv">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             마이페이지
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">회원 정보 수정</a>
-                        <a class="dropdown-item" href="#">회원 탈퇴</a>
-                        <a class="dropdown-item" href="#">내가 쓴 글</a>
-                        <a class="dropdown-item" href="#">내가 찜한 코스</a>
-                        <a class="dropdown-item" href="#">쿠폰</a>
-                        <a class="dropdown-item" href="<c:url value='/myPage/myPayment/paymentList.do'/>">결제확인</a>
-                        <a class="dropdown-item" href="#">하트</a>
-                    </div>
-                </li>
-                <button type="button" class="btn btn-primary disNone992">로그아웃</button>
-			</c:if>
+	            <!-- 로그인 했을때 나오는 .topLogoutDiv -->
+	            <li class="nav-item dropdown list-unstyled disNone992 topLogoutDiv">
+	            	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	            		마이페이지
+	            	</a>
+	                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	                    <a class="dropdown-item" href="#">회원 정보 수정</a>
+	                    <a class="dropdown-item" href="#">회원 탈퇴</a>
+	                    <a class="dropdown-item" href="#">내가 쓴 글</a>
+	                    <a class="dropdown-item" href="#">내가 찜한 코스</a>
+	                    <a class="dropdown-item" href="<c:url value='/myPage/myCoupon/couponList.do'/>">쿠폰</a>
+	                    <a class="dropdown-item" href="<c:url value='/myPage/myPayment/paymentList.do'/>">결제확인</a>
+	                    <a class="dropdown-item" href="<c:url value='/myPage/myHeart/heartList.do'/>">하트</a>
+	                </div>
+	            </li>
+	            <button type="button" class="btn btn-primary disNone992">로그아웃</button>
+            </c:if>
+
         </div>
     </nav>
 
