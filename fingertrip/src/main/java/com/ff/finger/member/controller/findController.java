@@ -1,4 +1,4 @@
-package com.ff.finger.login.controller;
+package com.ff.finger.member.controller;
 
 import java.util.UUID;
 
