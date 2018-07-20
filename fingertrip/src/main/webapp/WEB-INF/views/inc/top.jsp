@@ -32,6 +32,8 @@
     <link href="${pageContext.request.contextPath }/css/import.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/ionicons.min.css" rel="stylesheet">
     
+    <!-- 제이쿼리 사용 좀 합시다 ㅋ -->
+    <script type="text/javascript" src="<c:url value='/js/jquery-3.3.1.min.js'/>"></script>
 
 </head>
 

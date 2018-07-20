@@ -4,15 +4,15 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-   $("#email2").change(function(){
-      if ($(this).val() == "etc") {
-         $("#email3").css("visibility", "visible");
-         $("#email3").val("");
-         $("#email3").focus();
-      } else {
-         $("#email3").css("visibility", "hidden");
-      }
-   });
+	$("#email2").change(function(){
+		if ($(this).val() == "etc") {
+			$("#email3").css("visibility", "visible");
+			$("#email3").val("");
+			$("#email3").focus();
+		} else {
+			$("#email3").css("visibility", "hidden");
+		}
+	});
 });
 </script>
 
@@ -48,7 +48,7 @@ $(document).ready(function(){
        <div class="input-group">
          <input type="text" class="form-control" name="address" id="address" placeholder="주소 입력">
          <span class="input-group-btn">
-          <input type="Button" value="우편번호 찾기" class="btn btn-primary" class="fa fa-mail-forward spaceLeft" id="btnZipcode" title="새창열림">
+	       <input type="Button" value="우편번호 찾기" class="btn btn-primary" class="fa fa-mail-forward spaceLeft" id="btnZipcode" title="새창열림">
          </span>
        </div>
      </div>
@@ -67,13 +67,13 @@ $(document).ready(function(){
          <input type="text" class="form-control" name="email1" id="email1" title="이메일 앞자리">
          &nbsp;@&nbsp;
          <select name="email2" class="form-control" id="email2" title="이메일 뒷자리">
-          <option value="naver.com">naver.com</option>
-           <option value="hanmail.net">hanmail.net</option>
-           <option value="gmail.com">gmail.com</option>
-           <option value="nate.com">nate.com</option>
-           <option value="etc">직접입력</option>
-         </select>
-         <input type="text" class="form-control" name="email3" id="email3" title="직접입력인 경우 이메일 뒷자리" style="visibility:hidden">
+    	   <option value="naver.com">naver.com</option>
+     	   <option value="hanmail.net">hanmail.net</option>
+     	   <option value="gmail.com">gmail.com</option>
+     	   <option value="nate.com">nate.com</option>
+     	   <option value="etc">직접입력</option>
+  		 </select>
+  		 <input type="text" class="form-control" name="email3" id="email3" title="직접입력인 경우 이메일 뒷자리" style="visibility:hidden">
        </div>
      </div>
      <div class="form-group">
@@ -86,8 +86,8 @@ $(document).ready(function(){
            <option value="017">017</option>
            <option value="018">018</option>
            <option value="019">019</option>
-         </select>
-         &nbsp;-&nbsp;
+  		 </select>
+  		 &nbsp;-&nbsp;
          <input type="text" class="form-control" name="hp2" id="hp2">
          &nbsp;-&nbsp;
          <input type="text" class="form-control" name="hp3" id="hp3">

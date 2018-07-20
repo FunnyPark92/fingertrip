@@ -3,7 +3,11 @@ package com.ff.finger.member.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ff.finger.member.model.MemberVO;
 
 
 @Controller
@@ -23,7 +27,16 @@ public class MemberController {
    public void register() {
       logger.info("회원가입 화면 보여주기");
    }
-   
+
+   @RequestMapping("/insertMember.do")
+   public String insertMember(@ModelAttribute MemberVO memberVo, Model model) {
+	   logger.info("회원가입 처리 전 파라미터 memberVo={}", memberVo);
+	   
+	   
+	   
+	   return "index";
+   }
+
    @RequestMapping("/memberOut.do")
    public String memberOut() {
       logger.info("회원탈퇴 화면 보여주기");
