@@ -23,7 +23,6 @@ public class MemberController {
 	@RequestMapping("/agreement.do")
 	public String agreement() {
 		logger.info("회원약관 화면 보여주기");
-
 		return "member/agreement";
 	}
 
@@ -80,11 +79,18 @@ public class MemberController {
 	}
 
 	@RequestMapping("/memberEdit.do")
-	public String memberEdit() {
-		logger.info("회원수정 화면 보여주기");
-
-		return "member/memberEdit";
-	}
+	   public String memberEdit() {
+	      logger.info("회원수정 비밀번호 확인 화면 보여주기");
+	      
+	      return "member/memberEdit";
+	   }
+	   
+	   @RequestMapping("/memberEditOk.do")
+	   public String memberEditOk() {
+	      logger.info("회원수정 화면 보여주기");
+	      
+	      return "member/memberEditOk";
+	   }
 
 	@RequestMapping("/memberOutReason.do")
 	public String memberOutReason() {
