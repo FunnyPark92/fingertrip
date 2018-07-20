@@ -87,7 +87,7 @@
 	            <!-- 로그인 안 했을때 나오는 .topLoginDiv -->
 	            <div class="topMenu disNone992 topLoginDiv">
 	                <a class="btn btn-info mar5" style="color:#fff;" href="<c:url value='/member/agreement.do'/>">회원가입</a>
-	                <a class="btn btn-primary" style="color:#fff;" href="<c:url value='/login/login.do'/>">로그인</a>
+	                <a class="btn btn-primary" style="color:#fff;" href="<c:url value='/member/login/login.do'/>">로그인</a>
 	            </div>
             </c:if>
 
