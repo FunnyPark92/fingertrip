@@ -114,4 +114,12 @@
 
         </div>
     </nav>
+    
+       
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script>
 
