@@ -10,9 +10,9 @@
 			<br>
 			<iframe src="<c:url value='/inc2/provision.html'/>" width="100%"
 				height="300px"></iframe>
-			<br>
-			<br>
-			<div > <!-- style="width: 700px" -->
+			<br> <br>
+			<div>
+				<!-- style="width: 700px" -->
 				<form name="frmAgree" method="post"
 					action="<c:url value='/member/register.do'/>">
 					<fieldset>
@@ -22,8 +22,9 @@
 								for="chkAgree">약관에 동의합니다.</label>
 						</div>
 						<div style="text-align: center">
-							<input type="submit" id="submit" value="확인"> <input
-								type="reset" value="취소">
+							<input type="submit" class="btn btn-primary" id="submit"
+								value="확인"> <input type="reset" class="btn btn-warning"
+								value="취소">
 						</div>
 					</fieldset>
 				</form>
@@ -32,5 +33,5 @@
 		<div class="col-md-2"></div>
 	</div>
 </div>
-	
-	<%@ include file="../inc/bottom.jsp"%>
+
+<%@ include file="../inc/bottom.jsp"%>
