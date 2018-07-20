@@ -8,42 +8,48 @@
 		<h1 class="text-center">Found your ID!</h1>
 		<br>
 		<div class="row">
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
+			<div class="col-md-5 text-right">
 				<p>
-					<span>
+					<span class="spanSize">
 						<img src="${pageContext.request.contextPath }/img/checked.png">&nbsp;&nbsp;&nbsp;Name
 					</span>
-					김수윤
 				</p>
 			</div>
-			<div class="col-md-4"></div>
-			
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
+			<div class="col-md-7">
+					<span class="spanSize">김수윤</span>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-5 text-right">
 				<p>
-					<span>
+					<span class="spanSize">
 						<img src="${pageContext.request.contextPath }/img/checked.png">&nbsp;&nbsp;&nbsp;Email
 					</span>
-					suyun@finger.com
 				</p>
 			</div>
-			<div class="col-md-4"></div>
-			
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
+			<div class="col-md-7">
+					<span class="spanSize">suyun@finger.com</span>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-5 text-right">
 				<p>
-					<span>
+					<span class="spanSize spanId">
 						<img src="${pageContext.request.contextPath }/img/checked.png">&nbsp;&nbsp;&nbsp;ID
 					</span>
-					suyun
 				</p>
 			</div>
-			<div class="col-md-4"></div>
-			
+			<div class="col-md-7">
+					<span class="spanSize">suyun</span>
+			</div>	
+		</div>
+		
+		<div class="row">		
 			<div class="col-md-12 text-center">
-				<a href='<c:url value='/member/login/login.do'/>' class="btn btn-primary btn-lg">로그인</a>
-				<a href='<c:url value='/member/login/findPw.do'/>' class="btn btn-danger btn-lg">비밀번호 찾기</a>
+				<a href='<c:url value='/member/login/login.do'/>' class="btn btn-primary btn-lg sbmit">로그인</a>
+				<a href='<c:url value='/member/login/findPw.do'/>' class="btn btn-danger btn-lg sbmit">비밀번호 찾기</a>
 			</div>
 		</div>	
 	</div>

@@ -33,8 +33,8 @@
                                <input type="checkbox" id="saveId1">
                                <label for="saveId1">아이디 저장</label>
                                 <p class="fRight">
-                                    <a href="">아이디 찾기</a>ㅣ
-                                    <a href="">비밀번호 찾기</a>
+                                    <a href="<c:url value='/member/login/findId.do'/>">아이디 찾기</a>ㅣ
+                                    <a href="<c:url value='/member/login/findPw.do'/>">비밀번호 찾기</a>
                                 </p>
                             </div>
                         </div>
