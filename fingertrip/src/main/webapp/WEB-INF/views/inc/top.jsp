@@ -32,6 +32,8 @@
     <link href="${pageContext.request.contextPath }/css/import.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/ionicons.min.css" rel="stylesheet">
     
+    <!-- 제이쿼리 사용 좀 합시다 ㅋ -->
+    <script type="text/javascript" src="<c:url value='/js/jquery-3.3.1.min.js'/>"></script>
 
 </head>
 
@@ -59,7 +61,7 @@
                         <a class="nav-link" href="#">여행가기</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">이용방법</a>
+                        <a class="nav-link" href="<c:url value='/howto/howto.do'/>">이용방법</a>
                     </li>
                     <li class="nav-item dropdown hidden-xs">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -82,8 +84,8 @@
                 </ul>
             </div>
 
-			<c:set var="flag" value="false"></c:set>
-			<c:if test="${flag == false }"> <!-- 로그인한 상태의 top이 필요하면 true로 고쳐서 사용하세요. -->
+			<c:set var="flag" value="false"></c:set>  <!-- 로그인한 상태의 top이 필요하면 false로 고쳐서 사용하세요. -->
+			<c:if test="${flag == true }"> 
 	            <!-- 로그인 안 했을때 나오는 .topLoginDiv -->
 	            <div class="topMenu disNone992 topLoginDiv">
 	                <a class="btn btn-info mar5" style="color:#fff;" href="<c:url value='/member/agreement.do'/>">회원가입</a>
@@ -91,15 +93,15 @@
 	            </div>
             </c:if>
 
-			<c:if test="${flag == true }">
+			<c:if test="${flag == false }">
 	            <!-- 로그인 했을때 나오는 .topLogoutDiv -->
 	            <li class="nav-item dropdown list-unstyled disNone992 topLogoutDiv">
 	            	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	            		마이페이지
 	            	</a>
 	                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-	                    <a class="dropdown-item" href="#">회원 정보 수정</a>
-	                    <a class="dropdown-item" href="#">회원 탈퇴</a>
+	                    <a class="dropdown-item" href="<c:url value='/member/memberEdit.do'/>">회원 정보 수정</a>
+	                    <a class="dropdown-item" href="<c:url value='/member/memberOut.do'/>">회원 탈퇴</a>
 	                    <a class="dropdown-item" href="#">내가 쓴 글</a>
 	                    <a class="dropdown-item" href="#">내가 찜한 코스</a>
 	                    <a class="dropdown-item" href="<c:url value='/myPage/myCoupon/couponList.do'/>">쿠폰</a>

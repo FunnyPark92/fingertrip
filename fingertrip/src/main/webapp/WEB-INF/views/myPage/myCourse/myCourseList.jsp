@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp"%>
+<%@ include file="../../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
 <div class="container margin80">
@@ -11,9 +11,9 @@
             <h3>마이페이지</h3>
             <div class="list-group">
                 <a href="#" class="list-group-item">회원 정보 수정</a>
-                <a href="#" class="list-group-item active">회원 탈퇴</a>
+                <a href="#" class="list-group-item">회원 탈퇴</a>
                 <a href="#" class="list-group-item">내가 쓴 글</a>
-                <a href="#" class="list-group-item">내가 찜한 코스</a>
+                <a href="#" class="list-group-item active">내가 찜한 코스</a>
                 <a href="#" class="list-group-item">쿠폰</a>
                 <a href="#" class="list-group-item">결제확인</a>
                 <a href="#" class="list-group-item">하트</a>
@@ -61,4 +61,4 @@
         </div>
 	</div>
 </div>
-<%@ include file="../inc/bottom.jsp"%>
+<%@ include file="../../inc/bottom.jsp"%>

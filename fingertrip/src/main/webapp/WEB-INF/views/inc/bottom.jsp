@@ -16,7 +16,7 @@
                         </li>
                         <li class="list-inline-item">&sdot;</li>
                         <li class="list-inline-item">
-                            <a href="#<c:url value='/footer/advertise.do'/>">제휴/광고 문의</a>
+                            <a href="<c:url value='/footer/advertise.do'/>">제휴/광고 문의</a>
                         </li>
                     </ul>
                     <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2018. All Rights Reserved.</p>

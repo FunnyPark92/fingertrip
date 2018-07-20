@@ -47,7 +47,7 @@ footer{border-top: 1px solid #d8d8d8;}
 /* 서브 배경 공통 */
 .subBg{
     background-size: contain;
-    background-position: middle center;
+    background-position: top center;
     background-attachment: fixed;
     height: 200px;
     background-repeat: no-repeat;
@@ -314,3 +314,19 @@ table a:hover, table a:active{text-decoration: none;}
 .subBgAbout{
     background-image: url(../img/subBgAbout.jpg);
 }
+
+
+
+/* 이용방법 */
+.subBgHowto{
+    background-image: url(../img/subBgHowto.jpg);
+}
+.howto .col-md-5 img{width: 100%;}
+.howto .col-md-7{margin-top: 2em;}
+.howto .row{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+
