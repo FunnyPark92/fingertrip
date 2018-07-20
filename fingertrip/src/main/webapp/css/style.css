@@ -46,14 +46,14 @@ footer{border-top: 1px solid #d8d8d8;}
 
 /* 서브 배경 공통 */
 .subBg{
-    background-size: cover;
+    background-size: contain;
     background-position: middle center;
     background-attachment: fixed;
     height: 200px;
     background-repeat: no-repeat;
     position: relative;
     margin-bottom: 70px;
-    text-align: center; 
+    text-align: center;
 }
 .subBgBlack{
     position: absolute;
@@ -292,33 +292,25 @@ table a:hover, table a:active{text-decoration: none;}
 }
 
 
+/* 내가 쓴 글 */
+.subBgMyBoard{background-image: url(../img/subBgMyBoard.jpg);}
+.pencilP{
+    background-image: url(../img/pencil.png);
+    background-size: 30px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    font-size: 1.3em;
+    font-weight: 500;
+}
 
 
+/* 회원약관 */
+.subBgTerm{
+    background-image: url(../img/subBgTerm.jpg);
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* 회사소개 */
+.subBgAbout{
+    background-image: url(../img/subBgAbout.jpg);
+}

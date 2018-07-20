@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-    <!-- 추가한 테마 css -->
-    <link href="${pageContext.request.contextPath}/css/ionicons.min.css" rel="stylesheet">
+    
 
 
     
