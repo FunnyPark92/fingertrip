@@ -1,4 +1,4 @@
-package com.ff.finger.advertise.controller;
+package com.ff.finger.footer.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdvertiseController {
 	private static final Logger logger = LoggerFactory.getLogger(AdvertiseController.class); 
 	
-	@RequestMapping("/advertise/advertise.do")
+	@RequestMapping("/footer/advertise.do")
 	public String index() {   
-		logger.info("제휴 광고 문의 보여주기");
+		logger.info("제휴 광고 문의 보여주기  뀨~~~~~");
 		
-		return "advertise/advertise";
+		return "footer/advertise";
 	}
 	
 }

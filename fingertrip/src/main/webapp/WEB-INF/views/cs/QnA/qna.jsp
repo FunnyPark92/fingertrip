@@ -10,8 +10,8 @@
             <div class="col-lg-3">
                 <h3>고객센터</h3>
                 <div class="list-group">
-                    <a href="<c:url value='/cs/notice/board.do'/> " class="list-group-item active">공지사항</a>
-                    <a href="<c:url value='/cs/QnA/qna.do'/> " class="list-group-item">Q&amp;A</a>
+                    <a href="<c:url value='/cs/notice/board.do'/> " class="list-group-item ">공지사항</a>
+                    <a href="<c:url value='/cs/QnA/qna.do'/> " class="list-group-item active">Q&amp;A</a>
                     <a href="<c:url value='/cs/faq/faq.do'/> " class="list-group-item">FAQ</a>
                 </div>
             </div>
@@ -30,20 +30,20 @@
                     <tbody>
                         <tr>
                             <th scope="row">3</th>
-                            <td><a href="boardDetail.html">회원가입을 환영합니다.</a></td>
-                            <td>최고관리자</td>
+                            <td><a href="boardDetail.html">이거 사기아니죠??</a></td>
+                            <td>김수윤</td>
                             <td>18.07.18</td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>
-                            <td>최초 이벤트</td>
-                            <td>관리자</td>
+                            <td>빨리 여행가고싶네요 ㅎㅎ</td>
+                            <td>박백</td>
                             <td>18.07.17</td>
                         </tr>
                         <tr>
                             <th scope="row">1</th>
-                            <td>회원가입을 환영합니다.</td>
-                            <td>최고관리자</td>
+                            <td>혹시 결제를 하였는데 취소가능한가요?</td>
+                            <td>공백</td>
                             <td>18.07.17</td>
                         </tr>
                     </tbody>
