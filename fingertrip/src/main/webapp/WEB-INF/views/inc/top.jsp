@@ -59,7 +59,7 @@
                         <a class="nav-link" href="#">여행가기</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">이용방법</a>
+                        <a class="nav-link" href="<c:url value='/howto/howto.do'/>">이용방법</a>
                     </li>
                     <li class="nav-item dropdown hidden-xs">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
