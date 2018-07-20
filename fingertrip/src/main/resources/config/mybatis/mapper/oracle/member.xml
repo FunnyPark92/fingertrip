@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.member">
-	
+	<insert id="insertMember" parameterType="MemberVO">
+		INSERT INTO MEMBER(MEMBER_NO, NAME, ID, PASSWORD, EMAIL1, EMAIL2, 
+						HP1, HP2, HP3, ZIPCODE, ADDRESS, ADDRESS_DETAIL, GENDER, MAIL_AGREEMENT)
+		VALUES(MEMBER_SEQ.NEXTVAL, #{name}, #{id}, #{password}, #{email1}, #{email2},
+			 #{hp1}, #{hp2}, #{hp3}, #{zipcode}, #{address}, #{addressDetail}, #{gender}, #{mailAgreement})
+	</insert>
 	
 </mapper>
 

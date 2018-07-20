@@ -10,6 +10,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	@Override
+	public int insertMember(MemberVO memberVo) {
+		return sqlSession.insert(namespace + "insertMember", memberVo);
+	}
 	
 	
 }
