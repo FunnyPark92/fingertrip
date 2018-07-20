@@ -3,7 +3,7 @@
 <%@ include file="../../inc/top.jsp" %>
 
 <link href="${pageContext.request.contextPath}/css/jquery-ui.css" rel="stylesheet">
-<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+
 <script>
 $(document).ready(function(){
 
