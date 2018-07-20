@@ -30,7 +30,7 @@
 
     <!-- 추가한 테마 css -->
     <link href="${pageContext.request.contextPath }/css/import.css" rel="stylesheet">
-    
+    <link href="${pageContext.request.contextPath}/css/ionicons.min.css" rel="stylesheet">
     
 
 </head>
