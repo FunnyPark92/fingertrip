@@ -23,4 +23,12 @@ public class MemberController {
    public void register() {
       logger.info("회원가입 화면 보여주기");
    }
+   
+   @RequestMapping("/member/memberOut.do")
+   public String memberOut() {
+      logger.info("회원탈퇴 화면 보여주기");
+      
+      return "member/memberOut";
+   }
+   
 }
