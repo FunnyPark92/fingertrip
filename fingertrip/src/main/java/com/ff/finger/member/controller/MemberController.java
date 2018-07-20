@@ -31,6 +31,13 @@ public class MemberController {
       return "member/memberOut";
    }
    
+   @RequestMapping("/memberEdit.do")
+   public String memberEdit() {
+      logger.info("회원수정 화면 보여주기");
+      
+      return "member/memberEdit";
+   }
+   
    @RequestMapping("/memberOutReason.do")
    public String memberOutReason() {
       logger.info("회원탈퇴 사유 화면 보여주기");

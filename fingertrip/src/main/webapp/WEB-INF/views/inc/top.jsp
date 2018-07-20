@@ -98,7 +98,7 @@
 	            		마이페이지
 	            	</a>
 	                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-	                    <a class="dropdown-item" href="#">회원 정보 수정</a>
+	                    <a class="dropdown-item" href="<c:url value='/member/memberEdit.do'/>">회원 정보 수정</a>
 	                    <a class="dropdown-item" href="<c:url value='/member/memberOut.do'/>">회원 탈퇴</a>
 	                    <a class="dropdown-item" href="#">내가 쓴 글</a>
 	                    <a class="dropdown-item" href="#">내가 찜한 코스</a>
