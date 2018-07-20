@@ -11,8 +11,11 @@ public class IndexController {
 	
 	@RequestMapping("/index.do")
 	public String index() {
+		logger.info("메인화면 보여주기");
 		
 		return "index";
 	}
+	
+	
 	
 }
