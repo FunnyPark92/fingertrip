@@ -3,9 +3,8 @@
     
 <%@ include file="../../inc/top.jsp" %>
 
+<div class="container">
 <h2>쿠폰 내역</h2><br>
-
-<div class="divList">
 <table class="box2">
 	<caption>쿠폰 내역</caption>
 	<colgroup>
@@ -37,7 +36,7 @@
 			
 			<!-- 반복 끝 -->
 		</c:if>
-</tbody>
+	</tbody>
 </table>
 </div>
 

@@ -5,17 +5,49 @@
 		padding: 30px;
 		background: #faff07;
 	}
-	.findId div{
+	.dvFindId{
 		margin: 5px 0px;
 	}
-	.findId input[type=submit]{
+	.sbmit{
 		margin: 30px 0 15px 0;
 	}
-	.findId span{
+	.spanSize{
 		display: inline-block;
-		margin: 5px 20px;
-		width: 75px;
+		margin:0px;
+		font-size: 20px;
+		width: 80px;
 	}
-	.findId a{
-		margin: 30px 0 15px 0;
+	.spanId{
+		margin: 0 25px;
+	}
+	.margin80{
+		margin-top: 80px;
+		margin-bottom: 80px;
+	}
+	.memberOut{
+		border:1px solid silver;
+		padding: 40px;
+		overflow: hidden;
+	}
+	.memberOut img{
+		padding:0 40px 0 0;
+		border-right: 1px solid silver;
+		float: left;
+	}
+	.memberOut div{
+		float: left;
+		margin: 40px;
+	}
+	.colorGray{
+		color: gray;
+	}
+	.frmMemberOut{
+		margin: 50px;
+	}
+	.fontBold{
+		font-weight: bold;
+		font-size: 25px;
+	}
+	.marginTB{
+		margin: 50px 0;
 	}
