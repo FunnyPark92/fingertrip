@@ -22,13 +22,13 @@
 
         <!-- 서브컨텐츠 -->
         <div class="col-lg-9">
-        	<h2>회원 탈퇴</h1>
+        	<h2>회원 탈퇴</h2>
 			<br>
 			<br>
 			<span class="fontBold spanId">회원탈퇴 사유</span>
 			<span class="colorGray">※ 남겨 주신 정보를 바탕으로 더 나은 서비스를 제공해 드리기 위해 노력하겠습니다.</span>
         	<hr class="marginBottom50">
-        	<form action="" method="post">
+        	<form action='<c:url value='/member/memberOutOk.do'/>' method="post">
 	         	<div class="row marginBottom10">
 	         		<span class="col-md-2"></span>
 	 				<span class="col-md-2 dvFindId">회원 아이디</span>
