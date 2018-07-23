@@ -36,6 +36,13 @@
     
     <!-- 제이쿼리 사용 좀 합시다 ㅋ -->
     <script type="text/javascript" src="<c:url value='/js/jquery-3.3.1.min.js'/>"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$("#btnLogout").click(function(){
+    			location.href="<c:url value='/member/login/logout.do'/>";
+    		});
+    	});
+    </script>
 
 </head>
 
@@ -112,7 +119,7 @@
 	                    <a class="dropdown-item" href="<c:url value='/myPage/myHeart/heartList.do'/>">하트</a>
 	                </div>
 	            </li>
-	            <button type="button" class="btn btn-primary disNone992">로그아웃</button>
+	            <button type="button" id="btnLogout" class="btn btn-primary disNone992">로그아웃</button>
             </c:if>
 
         </div>
