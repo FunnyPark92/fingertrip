@@ -98,3 +98,8 @@
 	.colorPink{
 		color: lightpink;
 	}
+	.prev{
+		width: 18px;
+	    margin-right: 10px;
+	    margin-bottom: 5px;
+	}

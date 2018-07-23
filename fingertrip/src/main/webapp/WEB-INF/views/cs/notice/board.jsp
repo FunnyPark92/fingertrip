@@ -30,7 +30,7 @@
                     <tbody>
                         <tr>
                             <th scope="row">3</th>
-                            <td><a href="boardDetail.html">회원가입을 환영합니다.</a></td>
+                            <td><a href="<c:url value='/cs/notice/boardDetail.do'/>">회원가입을 환영합니다.</a></td>
                             <td>최고관리자</td>
                             <td>18.07.18</td>
                         </tr>
