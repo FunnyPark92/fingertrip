@@ -48,9 +48,11 @@
                         </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
+        <div class="form-group text-right">
+	                <a class="btn btn-primary" style="color:#fff;" href="<c:url value='/cs/QnA/qnaWrite.do'/>">글쓰기</a>
+	    </div>
     </section>
 
 
