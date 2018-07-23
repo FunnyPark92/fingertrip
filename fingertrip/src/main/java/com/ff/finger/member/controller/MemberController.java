@@ -51,6 +51,11 @@ public class MemberController {
 			memberVo.setHp3("");
 		}
 		
+		if (memberVo.getMailAgreement() == null || memberVo.getMailAgreement().isEmpty()) {
+			memberVo.setMailAgreement("N");
+		} else {
+			memberVo.setMailAgreement("Y");
+		}
 		logger.info("회원가입 세팅 후 파라미터, memberVo={}", memberVo);
 
 		int cnt = memberService.insertMember(memberVo);
