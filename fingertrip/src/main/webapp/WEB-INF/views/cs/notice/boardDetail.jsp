@@ -47,13 +47,13 @@
                 	<table class="table tableBorder">
                 		<tr>
                 			<th><img class="prev" alt="이전글" src="${pageContext.request.contextPath }/img/up.png">이전글</th>
-                			<td>오늘의 공지사항 제목</td>
+                			<td><a href="">오늘의 공지사항 제목</a></td>
                 			<td>최고관리자</td>
                 			<td>2018. 07. 23</td>
                 		</tr>
                 		<tr>
                 			<th><img class="prev" alt="다음글" src="${pageContext.request.contextPath }/img/down.png">다음글</th>
-                			<td>어제의 공지사항 제목</td>
+                			<td><a href="">어제의 공지사항 제목</a></td>
                 			<td>관리자</td>
                 			<td>2018. 07. 22</td>
                 		</tr>
