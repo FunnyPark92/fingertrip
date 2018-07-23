@@ -15,6 +15,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	public int insertMember(MemberVO memberVo) {
 		return sqlSession.insert(namespace + "insertMember", memberVo);
 	}
+
+	@Override
+	public String selectDbPwd(String id) {
+		return sqlSession.selectOne(namespace + "selectDbPwd", id);
+	}
 	
 	
 }

@@ -9,6 +9,10 @@
 			 #{hp1}, #{hp2}, #{hp3}, #{zipcode}, #{address}, #{addressDetail}, #{gender}, #{mailAgreement})
 	</insert>
 	
+	<select id="selectDbPwd" parameterType="string" resultType="string">
+		SELECT PASSWORD FROM MEMBER WHERE ID=#{id} AND OUT_DATE IS NULL 
+	</select>
+	
 </mapper>
 
 

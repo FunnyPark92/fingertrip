@@ -86,8 +86,8 @@
                 </ul>
             </div>
 
-			<c:set var="flag" value="true"></c:set>  <!-- 로그인한 상태의 top이 필요하면 false로 고쳐서 사용하세요. -->
-			<c:if test="${flag == false }"> 
+			<!-- 로그인 안된 경우 -->
+			<c:if test="${empty sessionScope.userid }">	
 	            <!-- 로그인 안 했을때 나오는 .topLoginDiv -->
 	            <div class="topMenu disNone992 topLoginDiv">
 	                <a class="btn btn-info mar5" style="color:#fff;" href="<c:url value='/member/agreement.do'/>">회원가입</a>
@@ -95,7 +95,8 @@
 	            </div>
             </c:if>
 
-			<c:if test="${flag == true }">
+			<!-- 로그인 된 경우 -->
+			<c:if test="${!empty sessionScope.userid }">
 	            <!-- 로그인 했을때 나오는 .topLogoutDiv -->
 	            <li class="nav-item dropdown list-unstyled disNone992 topLogoutDiv">
 	            	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

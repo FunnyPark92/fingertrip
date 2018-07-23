@@ -20,18 +20,18 @@
                         <div class="form-bottom">
                             <form role="form" action="" method="post" class="login-form">
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-username">Username</label>
-                                    <input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+                                    <label class="sr-only" for="id">Username</label>
+                                    <input type="text" name="id" placeholder="Userid..." class="form-username form-control" id="id">
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-password">Password</label>
-                                    <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+                                    <label class="sr-only" for="password">Password</label>
+                                    <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="password">
                                 </div>
                                 <button type="submit" class="btn">login!</button>
                             </form>
                             <div>
-                               <input type="checkbox" id="saveId1">
-                               <label for="saveId1">아이디 저장</label>
+                               <input type="checkbox" name="saveId" id="saveId">
+                               <label for="saveId">아이디 저장</label>
                                 <p class="fRight">
                                     <a href="<c:url value='/member/login/findId.do'/>">아이디 찾기</a>ㅣ
                                     <a href="<c:url value='/member/login/findPw.do'/>">비밀번호 찾기</a>
