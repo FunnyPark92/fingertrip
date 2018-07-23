@@ -25,12 +25,6 @@ public class myPageController {
 		
 		return "myPage/myHeart/heartList";
 	}
-	@RequestMapping("/myHeart/heartCharge.do")
-	public String heartCharge() {
-		logger.info("하트 충전 화면 보여주기");
-		
-		return "myPage/myHeart/heartCharge";
-	}
 	
 	@RequestMapping("/myCoupon/couponList.do")
 	public String myCoupon() {
@@ -39,7 +33,10 @@ public class myPageController {
 		return "myPage/myCoupon/couponList";
 	}
 	
-	
-	
-	
+	@RequestMapping("/myCourse/myCourseList.do")
+	public String myCourseList() {
+		logger.info("내가 찜한 코스 화면 보여주기");
+		
+		return "myPage/myCourse/myCourseList";
+	}
 }
