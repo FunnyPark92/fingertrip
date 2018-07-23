@@ -52,8 +52,49 @@
 		margin: 50px 0;
 	}
 	.colorBlue{
-		    color: #6495ed;
+		color: #6495ed;
 	}
 	.imgSize{
 		width:85px;
+	}
+	.overflowH{
+		overflow: hidden;
+	}
+	.listDv{
+		border: 1px solid silver;
+	    margin: 10px;
+	    float: left;
+	    width: 255px;
+	}
+	.listImg{
+		width: 100%;
+	}
+	.pad10{
+		padding: 0 10px;
+	}
+	.pad15{
+		padding: 15px;
+	}
+	.listTitle{
+	    font-size: 20px;
+	}
+	.listSmDv{
+		font-size: 17px;
+	    color: black;
+	    font-weight: bold;
+	}
+	.colorGreen{
+		color: #00BCD4;
+	}
+	.colorOrange{
+		color: #FF9800;
+	}
+	.colorRed{
+		color: crimson;
+	}
+	.clear{
+		clear: both;
+	}
+	.colorPink{
+		color: lightpink;
 	}
