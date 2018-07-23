@@ -36,11 +36,12 @@ public class LoginController {
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String login_post(@ModelAttribute MemberVO memberVo,
-							@RequestParam(required=false) String saveId,
+							@RequestParam(required=false) String saveId1,
 							HttpServletRequest request,
 							HttpServletResponse response,
 							Model model) {
-		logger.info("로그인 처리 전 파라미터, memberVo={}, saveId={}", memberVo, saveId);
+		logger.info("로그인 처리 전 파라미터, memberVo={}", memberVo);
+		logger.info("로그인 처리 전 파라미터, saveId={}", saveId1);
 		
 		int result = memberService.processLogin(memberVo.getId(), memberVo.getPassword());
 		logger.info("로그인 처리 결과, result={}", result);		
@@ -57,7 +58,7 @@ public class LoginController {
 			Cookie ck = new Cookie("ck_userid", memberVo.getId());
 			ck.setPath("/");
 			
-			if (saveId != null) {
+			if (saveId1 != null) {
 				ck.setMaxAge(30*24*60*60); //쿠키 유효기간 - 30일
 				response.addCookie(ck);
 			} else {
