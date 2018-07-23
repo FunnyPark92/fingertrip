@@ -92,7 +92,6 @@
                     </li>
                 </ul>
             </div>
-
 			<!-- 로그인 안된 경우 -->
 			<c:if test="${empty sessionScope.userid }">	
 	            <!-- 로그인 안 했을때 나오는 .topLoginDiv -->

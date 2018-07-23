@@ -17,4 +17,6 @@ public class FaqController {
 		
 		return "cs/faq/faq";
 	}
+	
+	
 }
