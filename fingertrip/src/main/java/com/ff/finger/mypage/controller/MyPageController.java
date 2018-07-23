@@ -24,12 +24,20 @@ public class MyPageController {
 		return "myPage/myHeart/heartList";
 	}
 	
+	@RequestMapping("/myHeart/heartCharge.do")
+	public String heartCharge() {
+		logger.info("하트 화면 보여주기");
+		
+		return "myPage/myHeart/heartCharge";
+	}
+	
 	@RequestMapping("/myCoupon/couponList.do")
 	public String myCoupon() {
 		logger.info("쿠폰 내역 화면 보여주기");
 		
 		return "myPage/myCoupon/couponList";
 	}
+	
 	
 	@RequestMapping("/myCourse/myCourseList.do")
 	public String myCourseList() {
