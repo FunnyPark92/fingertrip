@@ -2,6 +2,31 @@
     pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp"%>
 
+
+<script type="text/javascript">
+$(document).ready(function(){
+   $("#london").click(function(){
+	  $("#cityset").prop("placeholder","런던")
+   });
+   $("#kyoto").click(function(){
+      $("#cityset").prop("placeholder","교토")
+   });
+   $("#greece").click(function(){
+	  $("#cityset").prop("placeholder","그리스")
+   });
+   $("#hawaii").click(function(){
+	  $("#cityset").prop("placeholder","하와이")
+   });
+   $("#suisse").click(function(){
+	  $("#cityset").prop("placeholder", "스위스")
+   });
+   $("#roma").click(function(){
+      $("#cityset").prop("placeholder","로마")
+   });
+});
+</script>
+
+
     <!-- Masthead -->
     <header class="masthead text-white text-center">
         <!--<div class="overlay"></div>-->
@@ -15,7 +40,7 @@
                     <form>
                         <div class="form-row">
                             <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                <input type="email" class="form-control form-control-lg" placeholder="가고싶은 어디든">
+                                <input type="text" id="cityset" class="form-control form-control-lg" placeholder="가고싶은 어디든">
                             </div>
                             <div class="col-12 col-md-3">
                                 <button type="submit" class="btn btn-block btn-lg btn-danger">검색</button>
@@ -70,9 +95,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row my-md-3">
+            <div class="row my-md-3" >
                 <!-- start portfolio item -->
-                <div class="col-md-4">
+                <div class="col-md-4" id="london">
                     <div class="ot-portfolio-item">
                         <figure class="effect-bubba">
                             <img src="img/portfolio-1.jpg" alt="img02" class="img-responsive" />
@@ -86,11 +111,11 @@
                 </div>
                 <!-- end portfolio item -->
                 <!-- start portfolio item -->
-                <div class="col-md-4">
+                <div class="col-md-4" id="kyoto">
                     <div class="ot-portfolio-item">
                         <figure class="effect-bubba">
-                            <img src="img/portfolio-2.jpg" alt="img02" class="img-responsive" />
-                            <figcaption>
+                            <img src="img/portfolio-2.jpg" alt="img02" class="img-responsive"/>
+                            <figcaption >
                                 <h2>교토</h2>
                                 <p>고즈넉한 전통이 느껴지는</p>
                                 <a href="#">View more</a>
@@ -100,7 +125,7 @@
                 </div>
                 <!-- end portfolio item -->
                 <!-- start portfolio item -->
-                <div class="col-md-4">
+                <div class="col-md-4" id="greece">
                     <div class="ot-portfolio-item">
                         <figure class="effect-bubba">
                             <img src="img/portfolio-3.jpg" alt="img02" class="img-responsive" />
@@ -116,7 +141,7 @@
             </div>
             <div class="row my-md-3">
                 <!-- start portfolio item -->
-                <div class="col-md-4">
+                <div class="col-md-4" id="hawaii">
                     <div class="ot-portfolio-item">
                         <figure class="effect-bubba">
                             <img src="img/portfolio-4.jpg" alt="img02" class="img-responsive" />
@@ -130,7 +155,7 @@
                 </div>
                 <!-- end portfolio item -->
                 <!-- start portfolio item -->
-                <div class="col-md-4">
+                <div class="col-md-4" id="suisse">
                     <div class="ot-portfolio-item">
                         <figure class="effect-bubba">
                             <img src="img/portfolio-5.jpg" alt="img02" class="img-responsive" />
@@ -144,7 +169,7 @@
                 </div>
                 <!-- end portfolio item -->
                 <!-- start portfolio item -->
-                <div class="col-md-4">
+                <div class="col-md-4" id="roma">
                     <div class="ot-portfolio-item">
                         <figure class="effect-bubba">
                             <img src="img/portfolio-6.jpg" alt="img02" class="img-responsive" />
