@@ -10,7 +10,7 @@ public class HowtoController {
 	private static final Logger logger = LoggerFactory.getLogger(HowtoController.class); 
 	
 	@RequestMapping("/howto/howto.do")
-	public String index() {   
+	public String howto() {   
 		logger.info("이용방법 보여주기");
 		
 		return "howto/howto";

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class loginController {
-	private static final Logger logger = LoggerFactory.getLogger(loginController.class); 
+public class LoginController {
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class); 
 	
 	@RequestMapping("/member/login/login.do")
 	public String login() {

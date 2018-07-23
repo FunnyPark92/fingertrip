@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/cs")
 public class QnAController {
-	private static final Logger logger = LoggerFactory.getLogger(FaqController.class);
+	private static final Logger logger = LoggerFactory.getLogger(QnAController.class);
 	
 	
 	@RequestMapping("/QnA/qna.do")

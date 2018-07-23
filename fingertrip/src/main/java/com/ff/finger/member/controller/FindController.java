@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class findController {
-	private static final Logger logger=LoggerFactory.getLogger(findController.class);
+public class FindController {
+	private static final Logger logger=LoggerFactory.getLogger(FindController.class);
 	
 	@RequestMapping("/member/login/findId.do")
 	public String findId() {

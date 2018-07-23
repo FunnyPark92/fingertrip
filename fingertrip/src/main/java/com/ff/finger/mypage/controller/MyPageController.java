@@ -5,12 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ff.finger.member.controller.loginController;
-
 @Controller
 @RequestMapping("/myPage")
-public class myPageController {
-	private static final Logger logger = LoggerFactory.getLogger(loginController.class); 
+public class MyPageController {
+	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class); 
 	
 	@RequestMapping("/myPayment/paymentList.do")
 	public String myPayment() {
