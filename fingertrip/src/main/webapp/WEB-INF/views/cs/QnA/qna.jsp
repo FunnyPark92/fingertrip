@@ -30,7 +30,7 @@
                     <tbody>
                         <tr>
                             <th scope="row">3</th>
-                            <td><a href="boardDetail.html">이거 사기아니죠??</a></td>
+                            <td><a href="<c:url value='/cs/QnA/qnaDetail.do'/>">이거 사기아니죠??</a></td>
                             <td>김수윤</td>
                             <td>18.07.18</td>
                         </tr>

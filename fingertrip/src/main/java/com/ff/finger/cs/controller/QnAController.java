@@ -17,4 +17,11 @@ public class QnAController {
 		
 		return "cs/QnA/qna";
 	}
+	
+	@RequestMapping("/QnA/qnaDetail.do")
+	public String qnaDetail() {
+		logger.info("Q&A 상세보기 화면");
+		
+		return "cs/QnA/qnaDetail";
+	}
 }

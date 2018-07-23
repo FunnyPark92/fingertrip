@@ -19,7 +19,7 @@ public class BoardController {
 	
 	@RequestMapping("/notice/boardDetail.do")
 	public String boardDetail() {
-		logger.info("공지사항 보기");
+		logger.info("공지사항 상세보기 화면");
 		return "cs/notice/boardDetail";
 	}
 }
