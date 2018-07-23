@@ -38,7 +38,18 @@
                     <tr>
                         <td colspan="2">
                             <div class="minheight300">
-                                트립핑거에 오신 것을 환영하오. 낯선이여.
+                            	<p class="font-italic font-weight-bold"><img class="qna" src="${pageContext.request.contextPath }/img/question.png">Question</p>
+                               	<br>
+                               	<p>여행갈 수 있나용?</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="minheight300">
+                               	<p class="font-italic font-weight-bold"><img class="qna" src="${pageContext.request.contextPath }/img/answer.png">Answer</p>
+                               	<br>
+                               	<p> 트립핑거에 오신 것을 환영하오. 낯선이여.</p>
                             </div>
                         </td>
                     </tr>
