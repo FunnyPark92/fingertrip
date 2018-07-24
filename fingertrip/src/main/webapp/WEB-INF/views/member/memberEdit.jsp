@@ -6,6 +6,7 @@
 
 <script>
 $(document).ready(function(){	
+	$('#password').focus();
 	$('#submitId').click(function(){			
 		var bool=true;
 		
