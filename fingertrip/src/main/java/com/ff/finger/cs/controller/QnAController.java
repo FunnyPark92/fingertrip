@@ -1,6 +1,6 @@
 package com.ff.finger.cs.controller;
 
-import java.util.Iterator;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ff.finger.cs.model.QnAService;
@@ -28,15 +27,6 @@ public class QnAController {
 		logger.info("QnA목록 조회 결과, list.size{}",list.size());
 	
 		model.addAttribute("list", list);
-		
-		
-		Iterator<QnAVO> it=list.iterator();
-		while(it.hasNext()) {
-			QnAVO vo=it.next();
-			
-			System.err.println(vo.getQnaNo());
-			System.err.println(vo.getContent());
-		}
 		
 		return "cs/QnA/qna";
 	}
