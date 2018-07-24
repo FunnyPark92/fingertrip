@@ -329,4 +329,8 @@ table a:hover, table a:active{text-decoration: none;}
 }
 
 
-
+/* 회원가입 */
+.mandatory {
+	font-size: 0.7em;
+	color: red;
+}

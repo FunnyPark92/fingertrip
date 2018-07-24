@@ -34,8 +34,13 @@
     <!-- 제이쿼리 CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">
     
-    <!-- 제이쿼리 사용 좀 합시다 ㅋ -->
-    <script type="text/javascript" src="<c:url value='/js/jquery-3.3.1.min.js'/>"></script>
+     <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script>
+    
     <script type="text/javascript">
     	$(document).ready(function(){
     		$("#btnLogout").click(function(){
@@ -122,10 +127,5 @@
     </nav>
     
        
-    <!-- Bootstrap core JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script>
+   
 
