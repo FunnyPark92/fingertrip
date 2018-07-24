@@ -61,13 +61,10 @@
                         <a class="nav-link" href="#">홈으로 <span class="sr-only">(current)</span></a>
                     </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">검색</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#" title="나만의 코스 짜기">나코짜</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">여행가기</a>
+                        <a class="nav-link" href="<c:url value='/nacojja/nacojjaList.do'/>">여행가기</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value='/howto/howto.do'/>">이용방법</a>

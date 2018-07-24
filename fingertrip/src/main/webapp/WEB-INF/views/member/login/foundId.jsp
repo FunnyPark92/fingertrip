@@ -16,7 +16,7 @@
 				</p>
 			</div>
 			<div class="col-md-7">
-					<span class="spanSize">김수윤</span>
+					<span class="spanSize">${vo.name }</span>
 			</div>
 		</div>
 		
@@ -29,7 +29,7 @@
 				</p>
 			</div>
 			<div class="col-md-7">
-					<span class="spanSize">suyun@finger.com</span>
+					<span class="spanSize">${vo.email1 }@${vo.email2 }</span>
 			</div>
 		</div>
 		
@@ -42,7 +42,7 @@
 				</p>
 			</div>
 			<div class="col-md-7">
-					<span class="spanSize">suyun</span>
+					<span class="spanSize">${vo.id }</span>
 			</div>	
 		</div>
 		

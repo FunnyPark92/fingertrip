@@ -20,6 +20,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	public String selectDbPwd(String id) {
 		return sqlSession.selectOne(namespace + "selectDbPwd", id);
 	}
+
+	@Override
+	public String findId(MemberVO memberVo) {
+		return sqlSession.selectOne(namespace+"findId", memberVo);
+	}
 	
 	
 }

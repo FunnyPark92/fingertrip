@@ -108,7 +108,7 @@ $(document).ready(function(){
            <span class="fa fa-check"></span>
            <input type="checkbox" name="mailAgreement" id="mailAgreement" autocomplete="off" checked>
          </label>
-         <a href="#">메일수신</a>에 동의합니다.
+         <span>메일수신에 동의합니다.</span>
        </div>
      </div>
      <div class="form-group text-center">

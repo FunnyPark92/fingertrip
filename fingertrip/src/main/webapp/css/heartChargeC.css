@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+	.heartC{
+	    border:2px solid #ddd;
+		margin-top:60px;
+		padding: 30xp;
+	}
+	.heartImg{
+		margin: 20px 0 20px 20px;
+		border:2px solid #ddd;
+		width: 152px;
+		height: 121px;
+		float: left;
+	}
+	.heartText{
+		margin: 20px 20px 20px 0;
+		border:2px solid #ddd;
+		float: left;
+		width:360px;
+		height: 121px;
+		border-left: none;
+		background: #f8f8ff;
+		
+	}
+	.heartEtc{
+	   	margin: 20px 20px 20px 0;
+		border:2px solid #ddd;
+		float: left;
+		width:910px;
+		height: 120px;
+		border-left: none;
+	}
+	.divA{position: relative;
+			}
+	.btnA{position: absolute;
+		  top:36px;
+		  	
+		}
+	.area{position: absolute;
+		  width: 120px;
+		  top:37px;
+		  margin-left: 50px;
+		  margin-right: 10px;
+	}
+	.areaEtc{
+		/*   position: absolute; */
+		  width: 80px;
+		  margin-top:20px;
+		  margin-left: 50px;
+		  margin-right: 10px;
+	}
+	.etcSpan{
+		color:#0e54ff;
+	}
+	.etcInput{
+		position: absolute;
+		margin-top: -3px;
+	
+	}
+
+	.price{
+		display: block;
+		color: #222;
+		font-size: 21px;
+	}
+	strong{color: blue;}
+	.etcBtn1{
+		    position: absolute;
+    	left: 320px;
+    	top: 16px;
+	}
+	.etcBtn2{
+		margin-right: 12px;
+	}
+	.etcBtnWrap{
+		padding-left: 131px;
+    	padding-top: 7px;
+	}
+	.etcBtn{
+		    position: absolute;
+    		right: 60px;
+   			 top: 34px;
+	}
+	.spanCharge{
+		    position: absolute;
+   			font-weight: bold;
+   			top: 34px;
+   			right: 360px;
+   			font-size: 28px
+	}

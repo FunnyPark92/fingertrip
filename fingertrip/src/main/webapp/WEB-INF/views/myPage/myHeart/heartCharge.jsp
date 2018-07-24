@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/heartChaerge.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/heartChargeC.css">
 
 
 	

@@ -11,7 +11,7 @@
 
         <div class="row ">
             <div class="col-md-5">
-                <img src="img/howto1.jpg" alt="나코짜">
+                <img src="${pageContext.request.contextPath }/img/howto1.jpg" alt="나코짜">
             </div>
             <div class="col-md-7">
                 <h4>나만의 코스 짜기</h4>
@@ -25,7 +25,7 @@
         
         <div class="row">
             <div class="col-md-5">
-                <img src="img/howto2.jpg" alt="하트">
+                <img src="${pageContext.request.contextPath }/img/howto2.jpg" alt="하트">
             </div>
             <div class="col-md-7">
                 <h4>하트 누르기</h4>
@@ -38,7 +38,7 @@
         
         <div class="row">
             <div class="col-md-5">
-                <img src="img/howto3.jpg" alt="입찰">
+                <img src="${pageContext.request.contextPath }/img/howto3.jpg" alt="입찰">
             </div>
             <div class="col-md-7">
                 <h4>여행사 입찰</h4>
@@ -52,7 +52,7 @@
         
         <div class="row">
             <div class="col-md-5">
-                <img src="img/howto4.jpg" alt="결제">
+                <img src="${pageContext.request.contextPath }/img/howto4.jpg" alt="결제">
             </div>
             <div class="col-md-7">
                 <h4>코스 결제</h4>
@@ -65,7 +65,7 @@
         
         <div class="row">
             <div class="col-md-5">
-                <img src="img/howto5.jpg" alt="여행">
+                <img src="${pageContext.request.contextPath }/img/howto5.jpg" alt="여행">
             </div>
             <div class="col-md-7">
                 <h4>여행 하기</h4>

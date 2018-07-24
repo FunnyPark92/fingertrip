@@ -33,6 +33,11 @@ public class MemberServiceImpl implements MemberService {
 		
 		return result;
 	}
+
+	@Override
+	public String findId(MemberVO memberVo) {
+		return memberDao.findId(memberVo);
+	}
 	
 
 }
