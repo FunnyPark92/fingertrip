@@ -1,6 +1,5 @@
 package com.ff.finger.cs.controller;
 
-
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ff.finger.cs.model.QnAService;
-import com.ff.finger.cs.model.QnAVO;
+import com.ff.finger.cs.QnA.model.QnAService;
+import com.ff.finger.cs.QnA.model.QnAVO;
 
 @Controller
 @RequestMapping("/cs")
@@ -27,7 +26,7 @@ public class QnAController {
 		logger.info("QnA목록 조회 결과, list.size{}",list.size());
 	
 		model.addAttribute("list", list);
-		
+	
 		return "cs/QnA/qna";
 	}
 	

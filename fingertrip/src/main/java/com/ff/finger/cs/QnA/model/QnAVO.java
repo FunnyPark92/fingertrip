@@ -1,4 +1,4 @@
-package com.ff.finger.cs.model;
+package com.ff.finger.cs.QnA.model;
 
 import java.sql.Timestamp;
 
