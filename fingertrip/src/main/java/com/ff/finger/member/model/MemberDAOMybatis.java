@@ -36,4 +36,6 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.update(namespace+"updatePw", memberVo);
 	}
 
+	
+
 }

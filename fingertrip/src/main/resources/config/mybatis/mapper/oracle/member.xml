@@ -13,11 +13,6 @@
 		SELECT PASSWORD FROM MEMBER WHERE ID=#{id} AND OUT_DATE IS NULL 
 	</select>
 	
-	<select id="findIdCnt" parameterType="MemberVo" resultType="int">
-		select count(*) from member
-		where name=#{name} and email1=#{email1} and email2=#{email2}
-	</select>
-	
 	<select id="findId" parameterType="MemberVo" resultType="string">
 		select id from member
 		where name=#{name} and email1=#{email1} and email2=#{email2}

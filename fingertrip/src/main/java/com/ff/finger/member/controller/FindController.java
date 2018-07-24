@@ -42,12 +42,22 @@ public class FindController {
 		logger.info("아이디 찾기, 이메일 처리 후 memberVo={}",memberVo);
 		
 		String id=memberService.findId(memberVo);
-		memberVo.setId(id);
-		logger.info("아이디 찾기 처리 후, memberVo={}", memberVo);
+		logger.info("아이디 찾기 처리 후, id={}",id);
 		
-		model.addAttribute("vo", memberVo);
-		
-		return "member/login/foundId";
+		if(id==null||id.isEmpty()) {
+			model.addAttribute("msg", "존재하지 않는 이름과 이메일입니다.");
+			model.addAttribute("url", "/member/login/findId.do");
+			
+			return "common/message";
+		}else {
+			memberVo.setId(id);
+			logger.info("아이디 찾기 처리 후, memberVo={}", memberVo);
+			
+			model.addAttribute("vo", memberVo);
+			
+			return "member/login/foundId";
+			
+		}
 	}
 	
 	@RequestMapping("/member/login/findPw.do")
