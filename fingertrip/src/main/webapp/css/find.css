@@ -110,3 +110,6 @@
 	.subBgNaco{
     	background-image: url(../img/ocean.jpg);
 	}
+	.margin15{
+		margin: 15px;
+	}
