@@ -10,13 +10,13 @@
         <div class="col-lg-3">
             <h3>마이페이지</h3>
             <div class="list-group">
-                <a href="#" class="list-group-item">회원 정보 수정</a>
-                <a href="#" class="list-group-item active">회원 탈퇴</a>
+                <a href="<c:url value='/member/memberEdit.do'/>" class="list-group-item">회원 정보 수정</a>
+                <a href="<c:url value='/member/memberOut.do'/>" class="list-group-item active">회원 탈퇴</a>
                 <a href="#" class="list-group-item">내가 쓴 글</a>
-                <a href="#" class="list-group-item">내가 찜한 코스</a>
-                <a href="#" class="list-group-item">쿠폰</a>
-                <a href="#" class="list-group-item">결제확인</a>
-                <a href="#" class="list-group-item">하트</a>
+                <a href="<c:url value='/myPage/myCourse/myCourseList.do'/>" class="list-group-item">내가 찜한 코스</a>
+                <a href="<c:url value='/myPage/myCoupon/couponList.do'/>" class="list-group-item">쿠폰</a>
+                <a href="<c:url value='/myPage/myPayment/paymentList.do'/>" class="list-group-item">결제확인</a>
+                <a href="<c:url value='/myPage/myHeart/heartList.do'/>" class="list-group-item">하트</a>
             </div>
         </div>
 

@@ -30,12 +30,12 @@
 		<property name="username" value="fingertrip2018@gmail.com" />
 		<property name="password" value="finger123#" />
 		<property name="javaMailProperties">
-		<props>
-		<prop key="mail.smtp.starttls.enable">true</prop>
-		<prop key="mail.smtp.auth">true</prop>
-		<prop key="mail.transport.protocol">smtp</prop>
-		<prop key="mail.debug">true</prop>
-		</props>
+			<props>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
 		</property>
 	</bean>
 </beans>
