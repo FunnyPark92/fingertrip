@@ -22,30 +22,31 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col" style="width:5%"></th>
-                            <th scope="col" style="width:65%">제목</th>
-                            <th scope="col" style="width:18%">작성자</th>
-                            <th scope="col">등록일</th>
+                            <th scope="col" style="width:57%">제목</th>
+                            <th scope="col" style="width:18%">관리자번호</th>
+                            <th scope="col" style="width:26%">등록일</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${!empty list}">
+                    <!-- Board리스트 내용 반복문 시작 -->
+                    <c:forEach var="vo" items="${list}">
                         <tr>
-                            <th scope="row">3</th>
-                            <td><a href="<c:url value='/cs/notice/boardDetail.do'/>">회원가입을 환영합니다.</a></td>
-                            <td>최고관리자</td>
-                            <td>18.07.18</td>
+                            <th scope="row">${vo.noticeNo }</th>
+                            <td><a href="<c:url value='/cs/QnA/qnaDetail.do'/>">
+                            <!--제목이 긴 경우 일부만 보여주기 -->
+                            <c:if test="${fn:length(vo.title)>25}">
+                            	${fn:substring(vo.title,0,20) }...
+                            </c:if>
+                            <c:if test="${fn:length(vo.title)<=25}">
+                            	${vo.title }
+                            </c:if>
+                            </a></td>
+                            <td>${vo.adminNo }</td>
+                            <td><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>최초 이벤트</td>
-                            <td>관리자</td>
-                            <td>18.07.17</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>회원가입을 환영합니다.</td>
-                            <td>최고관리자</td>
-                            <td>18.07.17</td>
-                        </tr>
+                     </c:forEach>
+                     </c:if>
                     </tbody>
                 </table>
 

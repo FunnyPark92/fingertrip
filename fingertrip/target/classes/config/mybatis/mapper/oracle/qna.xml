@@ -7,6 +7,10 @@
 		order by qna_no
 	</select>
 	
+	<select id="selectAllBoard" resultType="BoardVO">
+		select * from notice
+		order by notice_no
+	</select>
 </mapper>
 
 

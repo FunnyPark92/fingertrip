@@ -1,5 +1,7 @@
 package com.ff.finger.cs.board.model;
 
-public interface BoardService {
+import java.util.List;
 
+public interface BoardService {
+	public List<BoardVO> selectAllBoard();
 }
