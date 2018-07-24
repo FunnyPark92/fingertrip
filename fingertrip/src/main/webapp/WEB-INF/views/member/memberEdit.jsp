@@ -3,6 +3,24 @@
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
+
+<script>
+$(document).ready(function(){	
+	$('#submitId').click(function(){			
+		var bool=true;
+		
+		if($('#password').val().length<1){
+			alert('비밀번호를 입력하세요');
+			$('#password').focus();
+			bool= false;
+		}
+		return bool;
+	});
+});
+
+
+</script>
+
 <div class="container margin80">
 	<div class="row">
 		
@@ -58,7 +76,7 @@
 					
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<input type="submit" class="btn btn-primary btn-lg sbmit" value="SUBMIT">
+							<input type="submit" class="btn btn-primary btn-lg sbmit" value="SUBMIT" id="submitId">
 						</div>
 					</div>
 				</form>
