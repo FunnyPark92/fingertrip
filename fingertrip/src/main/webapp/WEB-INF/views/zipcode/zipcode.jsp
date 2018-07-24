@@ -30,21 +30,20 @@
 				return false;
 			}
 		
-			send(1); //처음엔 1페이지
+			send(1);
 			
-			event.preventDefault(); //ajax 일때는 submit되면 안됨
+			event.preventDefault();
 		});
 	});
 	
 	function send(curPage) {
-		//ajax 작업부를 따로 메서드로 뺌
 		$("#currentPage").val(curPage);
 		
 		$.ajax({
 			url: "<c:url value='/sample/getAddrApiXml.do'/>",
 			type: "post",
 			dataType: "xml",
-			data: $("#frmZip").serializeArray(), //폼속에 들어있는 인풋 태그들을 객체로 만들어 보냄
+			data: $("#frmZip").serializeArray(),
 			success: function(res) {
 				var errorCode = $(res).find("errorCode").text();
 				var errorMessage = $(res).find("errorMessage").text();
@@ -96,7 +95,7 @@
 		//이전 블럭으로 이동
 		if (firstPage > 1) {
 			var prevBlock = $("<a href='#'></a>")
-				.html('<img alt="이전 블럭으로 이동" src="../images/first.JPG">')
+				.html('<img alt="이전 블럭으로 이동" src="../img/first.JPG">')
 				.attr("onclick", "send("+(firstPage-1)+")");
 			
 			$("#divPage").append(prevBlock);
@@ -106,8 +105,7 @@
 		var pageEl = "";
 		for(var i=firstPage;i<=lastPage;i++){
 			if (i==currentPage) {
-				pageEl 
-	= $("<span style='color: blue;font-weight: bold;font-size:1.0em'></span>").text(i);
+				pageEl = $("<span style='color: blue;font-weight: bold;font-size:1.0em'></span>").text(i);
 			} else {
 				pageEl = $("<a href='#'></a>").html("[" + i + "]")
 						.attr("onclick", "send(" + i + ")");
@@ -119,7 +117,7 @@
 		//다음 블럭으로 이동
 		if (lastPage < totalPage) {
 			var nextBlock = $("<a href='#'></a>")
-						.html('<img alt="다음 블럭으로 이동" src="../images/last.JPG">')
+						.html('<img alt="다음 블럭으로 이동" src="../img/last.JPG">')
 						.attr("onclick", "send(" + (lastPage + 1) + ")");
 		
 			$("#divPage").append(nextBlock);
@@ -129,16 +127,10 @@
 	function applyLink() {
 		$("#divList table td a").click(function(){
 			setZipcode($(this).parent().prev().text(), $(this).text());
-			//여기서 this는 이벤트가 발생한 객체
 		});
 	}
 	
-	//j쿼리에서는 매개변수를 넘겨줄수 없다. 그래서 자바스크립트 사용
 	function setZipcode(zipcode, address){ 
-		//opener.frm1.zipcode.value=zipcode;
-		//opener.frm1.address.value=address;
-		
-		//document = <body> 내에서 find(후손들중에 찾기)
 		$(opener.document).find("#zipcode").val(zipcode);
 		$(opener.document).find("#address").val(address);
 		

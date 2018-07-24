@@ -54,7 +54,7 @@ $(document).ready(function(){
      <div class="form-group" style="margin-bottom:0px">
        <label for="address">주소를 입력하세요.</label>
        <div class="input-group">
-         <input type="text" class="form-control" name="address" id="address" placeholder="주소 입력">
+         <input type="text" class="form-control" name="address" id="address" placeholder="주소 입력" readonly="readonly">
          <span class="input-group-btn">
 	       <input type="button" value="우편번호 찾기" class="btn btn-primary" class="fa fa-mail-forward spaceLeft" id="btnZipcode" title="새창열림">
          </span>
@@ -63,7 +63,7 @@ $(document).ready(function(){
      <div class="form-group">
        <div class="input-group" style="width:525px" style="height:30px">
          <label for="zipcode"></label>
-         <input type="text" class="form-control" style="flex:0.3" name="zipcode" id="zipcode" placeholder="우편번호">
+         <input type="text" class="form-control" style="flex:0.3" name="zipcode" id="zipcode" placeholder="우편번호" readonly="readonly">
          <label for="addressDetail"></label>
          <input type="text" class="form-control" name="addressDetail" id="addressDetail" placeholder="상세주소">
        </div>
