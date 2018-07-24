@@ -22,35 +22,36 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col" style="width:5%"></th>
-                            <th scope="col" style="width:65%">제목</th>
+                            <th scope="col" style="width:57%">제목</th>
                             <th scope="col" style="width:18%">작성자</th>
-                            <th scope="col">등록일</th>
+                            <th scope="col" style="width:26%">등록일</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${!empty list}">
+                    <!-- QnA리스트 내용 반목분 시작 -->
+                    <c:forEach var="vo" items="${list}">
                         <tr>
-                            <th scope="row">3</th>
-                            <td><a href="<c:url value='/cs/QnA/qnaDetail.do'/>">이거 사기아니죠??</a></td>
-                            <td>김수윤</td>
-                            <td>18.07.18</td>
+                            <th scope="row">${vo.qnaNo }</th>
+                            <td><a href="<c:url value='/cs/QnA/qnaDetail.do'/>">
+                            <!--제목이 긴 경우 일부만 보여주기 -->
+                            <c:if test="${fn:length(vo.title)>25}">
+                            	${fn:substring(vo.title,0,20) }...
+                            </c:if>
+                            <c:if test="${fn:length(vo.title)<=25}">
+                            	${vo.title }
+                            </c:if>
+                            </a></td>
+                            <td>${vo.name }</td>
+                            <td><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>빨리 여행가고싶네요 ㅎㅎ</td>
-                            <td>박백</td>
-                            <td>18.07.17</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>혹시 결제를 하였는데 취소가능한가요?</td>
-                            <td>공백</td>
-                            <td>18.07.17</td>
-                        </tr>
+                     </c:forEach>
+                     </c:if>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="form-group text-right">
+        <div class="form-group t+9ext-right">
 	                <a class="btn btn-primary" style="color:#fff;" href="<c:url value='/cs/QnA/qnaWrite.do'/>">글쓰기</a>
 	    </div>
     </section>
