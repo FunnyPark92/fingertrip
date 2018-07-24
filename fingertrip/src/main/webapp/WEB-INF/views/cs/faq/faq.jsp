@@ -39,7 +39,8 @@ $(".accordion").accordion({"heightStyle":"content"});
 					<div id="tabs-1">
 						<div class="accordion">
 							<c:forEach var="aa" begin="1" end="5">
-								<h3><span>제목</span></h3>
+								<!-- <h3><span>제목</span></h3> -->
+								<p>제목</p>
 								<div>
 									<p>내용</p>
 								</div>
