@@ -17,6 +17,18 @@
 		select id from member
 		where name=#{name} and email1=#{email1} and email2=#{email2}
 	</select>
+	
+	<select id="findPwCnt" parameterType="MemberVo" resultType="int">
+		select count(*) from member
+		where id=#{id} and email1=#{email1} and email2=#{email2}
+	</select>
+	
+	<update id="updatePw" parameterType="MemberVo">
+		update member
+		set password=#{password}
+		where id=#{id} and email1=#{email1} and email2=#{email2}
+	</update>
+	
 </mapper>
 
 

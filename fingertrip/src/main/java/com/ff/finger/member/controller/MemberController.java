@@ -1,5 +1,7 @@
 package com.ff.finger.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ff.finger.common.CommonConstants;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
 
@@ -89,13 +92,30 @@ public class MemberController {
       
 		return "member/memberEdit";
    }
+	
+
    
 	@RequestMapping("/memberEditOk.do")
-	public String memberEditOk() {
+	public String memberEditOk(@ModelAttribute MemberVO vo, HttpSession session, Model model) {
+		String id = (String) session.getAttribute("userid");
+		logger.info("비밀번호 체크 파라미터 vo={},id={}",vo,id);
+		int result =memberService.processLogin(id, vo.getPassword());
+		
+		String msg="", url="/member/memberEditOk.do";
+		if(result == CommonConstants.PWD_MISMATCH) {
+			msg="비밀번호가 일치하지 않습니다.";
+			url="/member/memberEdit.do";
+		}
+		
 		logger.info("회원수정 화면 보여주기");
-      
-		return "member/memberEditOk";
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		
+		return "common/message";
 	}
+	
+	
 
 	@RequestMapping("/memberOutReason.do")
 	public String memberOutReason() {
