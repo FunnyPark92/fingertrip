@@ -80,17 +80,23 @@ public class MemberController {
 	}
 
 	@RequestMapping("/memberOut.do")
-	public String memberOut() {
+	public String memberOut(Model model) {
 		logger.info("회원탈퇴 화면 보여주기");
-
-		return "member/memberOut";
+		
+		model.addAttribute("menu", "회원탈퇴");
+		model.addAttribute("url", "/member/memberOutReason.do");
+		
+		return "member/memberPwChk";
 	}
 
 	@RequestMapping("/memberEdit.do")
-	public String memberEdit() {
+	public String memberEdit(Model model) {
 		logger.info("회원수정 비밀번호 확인 화면 보여주기");
       
-		return "member/memberEdit";
+		model.addAttribute("menu", "회원정보 수정");
+		model.addAttribute("url", "/member/memberEditOk.do");
+		
+		return "member/memberPwChk";
    }
 	
 
@@ -118,8 +124,20 @@ public class MemberController {
 	
 
 	@RequestMapping("/memberOutReason.do")
-	public String memberOutReason() {
-		logger.info("회원탈퇴 사유 화면 보여주기");
+	public String memberOutReason(HttpSession session, @ModelAttribute MemberVO memberVo) {
+		logger.info("회원탈퇴 사유 화면 보여주기, 파라미터 memberVo={}", memberVo);
+		
+		String id=(String) session.getAttribute("userid");
+		memberVo.setId(id);
+		
+		int result=memberService.processLogin(id, memberVo.getPassword());
+		logger.info("비밀번호 일치 여부 result={}",result);
+		
+		if(result==CommonConstants.LOGIN_OK) {
+			
+		}else if(result==CommonConstants.PWD_MISMATCH) {
+			String msg="비밀번호가 일치하지 않습니다.";
+		}
 
 		return "member/memberOutReason";
 	}
