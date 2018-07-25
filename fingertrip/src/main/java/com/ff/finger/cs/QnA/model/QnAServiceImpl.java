@@ -14,5 +14,10 @@ public class QnAServiceImpl implements QnAService {
 	public List<QnAVO> selectAll() {
 		return qnADao.selectAll();
 	}
+
+	@Override
+	public int countUpdate(int qnaNo) {
+		return qnADao.countUpdate(qnaNo);
+	}
 	
 }
