@@ -1,6 +1,7 @@
 package com.ff.finger.cs.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.ff.finger.cs.QnA.model.QnAVO;
 import com.ff.finger.cs.board.model.BoardService;
-import com.ff.finger.cs.board.model.BoardVO;
 
 @Controller
 @RequestMapping("/cs")
@@ -23,10 +21,10 @@ public class BoardController {
 	@RequestMapping("/notice/board.do")
 	public String board(Model model) {
 		
-		List<BoardVO> list=boardService.selectAllBoard();
+		List<Map<String, Object>> list=boardService.selectAllBoard();
 		logger.info("Board목록 조회 결과, list.size{}",list.size());
 	
-		model.addAttribute("list", list);
+		model.addAttribute("boardlist", list);
 	
 		return "cs/notice/board";
 	}

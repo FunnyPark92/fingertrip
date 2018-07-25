@@ -7,9 +7,10 @@
 		order by qna_no
 	</select>
 	
-	<select id="selectAllBoard" resultType="BoardVO">
-		select * from notice
-		order by notice_no
+	<select id="selectAllBoard" resultType="map">
+		select n.*, a.name
+		from notice n join admin a
+		on n.admin_no=a.admin_no
 	</select>
 	
 	<update id="countUpdate" parameterType="int">
