@@ -73,7 +73,7 @@ $(document).ready(function(){
 	});
 	
 	$("input[name=gender]").click(function(){
-		$(this).siblings("input[type=text]").val($(this).val());
+		$(this).siblings("input[type=hidden]").val($(this).val());
 	});
 	
 	$("input[name=gender]").blur(function(){
