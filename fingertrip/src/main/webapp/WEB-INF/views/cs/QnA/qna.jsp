@@ -33,7 +33,7 @@
                     <c:forEach var="vo" items="${list}">
                         <tr>
                             <th scope="row">${vo.qnaNo }</th>
-                            <td><a href="<c:url value='/cs/QnA/qnaDetail.do'/>">
+                            <td><a href="<c:url value='/cs/QnA/countUpdate.do?qnaNo=${vo.qnaNo }'/>">
                             <!--제목이 긴 경우 일부만 보여주기 -->
                             <c:if test="${fn:length(vo.title)>25}">
                             	${fn:substring(vo.title,0,20) }...
