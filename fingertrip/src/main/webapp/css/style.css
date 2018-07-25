@@ -400,9 +400,9 @@ table a:hover, table a:active{text-decoration: none;}
 li{list-style: none}
 .faq-list .list-group-item.active {
     z-index: 2;
-    color: #0b0b0b;
-    background-color: #8cc4ff;
-    border-color: #65b0ff;
+    color: #fff;
+    background-color: #2288ff;
+    border-color: #2288ff;
 }
 .faq-list .list-group-item{
     color: #777;
@@ -416,4 +416,46 @@ li{list-style: none}
     right: 10px;
     bottom: 10px;
 }
-
+.course{
+    width:100%;
+    border-top: 3px solid #2288ff;
+    border-bottom: 3px solid #2288ff;
+}
+.courseDiv{
+    border-bottom: 1px solid #cbe3ff;
+}
+.courseLabel{
+    width: 20%;
+    box-sizing: border-box;
+    background: #e9f0f5;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}
+.courseInput[type=text]{
+    width: 78%;
+    border: none;
+    padding-left: 3px;
+}
+.mapSearch{
+    margin: 8px 0 10px;
+}
+.mapSearch input[type=textbox]{
+    width:89.5%; 
+    padding: 3px;
+    border: none;
+    border-bottom: 1px solid #ffab3a;
+}
+.mapSearch input[type=button]{
+    position: relative;
+    bottom: 3px;
+}
+.textCK{
+    width: 99.5%;
+    padding: 5px;
+    border: 1px solid #c7c7c7;
+}
+#map{
+    width:100%; 
+    height: 25em;
+}
