@@ -22,28 +22,30 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col" style="width:5%"></th>
-                            <th scope="col" style="width:57%">제목</th>
-                            <th scope="col" style="width:18%">관리자번호</th>
+                            <th scope="col" style="width:45%">제목</th>
+                            <th scope="col" style="width:15%">관리자이름</th>
                             <th scope="col" style="width:26%">등록일</th>
+                            <th scope="col" style="width:9%">조회수</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:if test="${!empty list}">
+                    <c:if test="${!empty boardlist}">
                     <!-- Board리스트 내용 반복문 시작 -->
-                    <c:forEach var="vo" items="${list}">
+                    <c:forEach var="map" items="${boardlist}">
                         <tr>
-                            <th scope="row">${vo.noticeNo }</th>
+                            <th scope="row">${map['NOTICENO']}</th>
                             <td><a href="<c:url value='/cs/QnA/qnaDetail.do'/>">
                             <!--제목이 긴 경우 일부만 보여주기 -->
-                            <c:if test="${fn:length(vo.title)>25}">
-                            	${fn:substring(vo.title,0,20) }...
+                            <c:if test="${fn:length(map['TITLE'])>25}">
+                            	${fn:substring(map['TITLE'],0,20) }...
                             </c:if>
-                            <c:if test="${fn:length(vo.title)<=25}">
-                            	${vo.title }
+                            <c:if test="${fn:length(map['TITLE'])<=25}">
+                            	${map['TITLE'] }
                             </c:if>
                             </a></td>
-                            <td>${vo.adminNo }</td>
-                            <td><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
+                            <td>${map['NAME']}</td>
+                            <td><fmt:formatDate value="${map['REG_DATE']}" pattern="yyyy-MM-dd hh:mm"/></td>
+                            <td>${map['READ_COUNT']}</td>
                         </tr>
                      </c:forEach>
                      </c:if>

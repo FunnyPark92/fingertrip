@@ -8,6 +8,7 @@ public class BoardVO {
 	private String content;
 	private Timestamp regDate;
 	private int adminNo;
+	private int readCount;
 	public int getNoticeNo() {
 		return noticeNo;
 	}
@@ -38,9 +39,16 @@ public class BoardVO {
 	public void setAdminNo(int adminNo) {
 		this.adminNo = adminNo;
 	}
+	public int getReadCount() {
+		return readCount;
+	}
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [noticeNo=" + noticeNo + ", title=" + title + ", content=" + content + ", regDate=" + regDate
-				+ ", adminNo=" + adminNo + "]";
+				+ ", adminNo=" + adminNo + ", readCount=" + readCount + "]";
 	}
+	
 }

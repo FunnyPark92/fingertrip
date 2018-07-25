@@ -22,9 +22,10 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col" style="width:5%"></th>
-                            <th scope="col" style="width:57%">제목</th>
-                            <th scope="col" style="width:18%">작성자</th>
+                            <th scope="col" style="width:45%">제목</th>
+                            <th scope="col" style="width:15%">작성자</th>
                             <th scope="col" style="width:26%">등록일</th>
+                            <th scope="col" style="width:9%">조회수</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,6 +45,7 @@
                             </a></td>
                             <td>${vo.name }</td>
                             <td><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
+                            <td>${vo.readCount}</td>
                         </tr>
                      </c:forEach>
                      </c:if>
