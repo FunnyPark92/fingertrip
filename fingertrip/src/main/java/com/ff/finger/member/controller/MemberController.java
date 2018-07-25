@@ -113,12 +113,14 @@ public class MemberController {
 		if(result == CommonConstants.PWD_MISMATCH) {
 			msg="비밀번호가 일치하지 않습니다.";
 			url="/member/memberEdit.do";
+		}else {
+			logger.info("회원수정 화면 보여주기");
+			return "member/memberEditOk"; 
 		}
+		logger.info("체크여부={}",result);
 		
-		logger.info("회원수정 화면 보여주기");
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
-		
 		
 		return "common/message";
 	}
