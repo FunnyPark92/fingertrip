@@ -1,5 +1,7 @@
 package com.ff.finger.member.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -121,31 +123,57 @@ public class MemberController {
 		return "common/message";
 	}
 	
-	
-
 	@RequestMapping("/memberOutReason.do")
-	public String memberOutReason(HttpSession session, @ModelAttribute MemberVO memberVo) {
-		logger.info("회원탈퇴 사유 화면 보여주기, 파라미터 memberVo={}", memberVo);
-		
+	public String memberOutReason(HttpSession session, @ModelAttribute MemberVO memberVo, Model model) {
 		String id=(String) session.getAttribute("userid");
 		memberVo.setId(id);
+		logger.info("회원탈퇴 사유 화면 보여주기, 파라미터 memberVo={}", memberVo);
 		
 		int result=memberService.processLogin(id, memberVo.getPassword());
 		logger.info("비밀번호 일치 여부 result={}",result);
 		
+		String rst="";
 		if(result==CommonConstants.LOGIN_OK) {
-			
+			rst= "member/memberOutReason";
 		}else if(result==CommonConstants.PWD_MISMATCH) {
-			String msg="비밀번호가 일치하지 않습니다.";
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			model.addAttribute("url", "/member/memberOut.do");
+
+			rst= "common/message";
 		}
 
-		return "member/memberOutReason";
+		return rst;
 	}
 
 	@RequestMapping("/memberOutOk.do")
-	public String memberOutOk() {
-		logger.info("회원탈퇴 완료 화면 보여주기");
+	public String memberOutOk(@ModelAttribute MemberVO memberVo, HttpSession session, Model model, HttpServletResponse response) {
+		String id=(String) session.getAttribute("userid");
+		memberVo.setId(id);
+		logger.info("회원탈퇴 완료 화면 보여주기, 파라미터 memberVo={}", memberVo);
 
-		return "member/memberOutOk";
+		int cnt=memberService.memberOut(memberVo);
+		logger.info("회원탈퇴 처리 cnt={}", cnt);
+		
+		String rst="";
+		if(cnt>0) {
+			session.invalidate();
+			
+			Cookie ck=new Cookie("ck_userid", id);
+			ck.setPath("/");
+			ck.setMaxAge(0);
+			response.addCookie(ck);
+			
+			logger.info("회원탈퇴 완료");
+			rst="member/memberOutOk";
+		}else {
+			logger.info("회원탈퇴 실패");
+			
+			model.addAttribute("msg", "회원탈퇴 실패하였습니다.");
+			model.addAttribute("url", "/member/memberOut.do");
+			
+			rst="common/message";
+		}
+
+		return rst;
 	}
 }

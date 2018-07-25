@@ -49,4 +49,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updatePw(memberVo);
 	}
 
+	@Override
+	public int memberOut(MemberVO memberVo) {
+		return memberDao.memberOut(memberVo);
+	}
+
 }

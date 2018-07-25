@@ -29,6 +29,15 @@
 		where id=#{id} and email1=#{email1} and email2=#{email2}
 	</update>
 	
+	<update id="memberOut" parameterType="MemberVo">
+		update member
+		set out_date=sysdate, 
+			<![CDATA[
+			out_reason_no=case when 0<#{outReasonNo} then #{outReasonNo}
+			]]>
+		   						else null end
+		where id=#{id}
+	</update>
 </mapper>
 
 

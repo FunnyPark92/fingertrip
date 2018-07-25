@@ -57,7 +57,6 @@ $(document).ready(function(){
 						<p class="colorGray">회원 정보를 안전하게 보호하기 위해 회원 비밀번호를 다시 확인합니다.</p>
 					</div>
 				</div>
-<%-- 				<form class="frmMemberOut" action="<c:url value='/member/memberOutReason.do'/>" method="post"> --%>
 				<form class="frmMemberOut" action="<c:url value='${url }'/>" method="post">
 					<div class="row">
 						<div class="col-md-4 text-right dvFindId">
@@ -78,7 +77,7 @@ $(document).ready(function(){
 							</label>
 						</div>
 						<div class="col-md-4">
-							<input type="password" id="password" class="form-control dvFindId" placeholder="비밀번호 입력">
+							<input type="password" id="password" name="password" class="form-control dvFindId" placeholder="비밀번호 입력">
 						</div>
 						<div class="col-md-4"></div>
 					</div>

@@ -6,4 +6,5 @@ public interface MemberService {
 	public String findId(MemberVO memberVo);
 	public int findPwCnt(MemberVO memberVo);
 	public int updatePw(MemberVO memberVo);
+	public int memberOut(MemberVO memberVo);
 }

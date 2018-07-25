@@ -32,22 +32,23 @@
 	         	<div class="row marginBottom10">
 	         		<span class="col-md-2"></span>
 	 				<span class="col-md-2 dvFindId">회원 아이디</span>
-					<span class="col-md-8 dvFindId">suyun</span>
+					<span class="col-md-8 dvFindId">${sessionScope.userid }</span>
 				</div>
 
 				<div class="row">
 	         		<span class="col-md-2"></span>
 	 				<span class="col-md-2 dvFindId">탈퇴 사유</span>
-		          	<select class="form-control col-md-5">
-		          		<option>서비스 불만족</option>
-		          		<option>재가입</option>
-		          		<option>개인정보 보호문제</option>
-		          		<option>자주 이용하지 않음</option>
-		          		<option>원하는 서비스 모두 이용함</option>
-		          		<option>회원간의 트러블</option>
-		          		<option>군입대 영장</option>
-		          		<option>지구온난화</option>
-		          		<option>외계인의 침입</option>
+		          	<select name="outReasonNo" class="form-control col-md-5">
+		          		<option value="0">탈퇴 사유를 선택해주세요</option>
+		          		<option value="1">서비스 불만족</option>
+		          		<option value="2">재가입</option>
+		          		<option value="3">개인정보 보호문제</option>
+		          		<option value="4">자주 이용하지 않음</option>
+		          		<option value="5">원하는 서비스 모두 이용함</option>
+		          		<option value="6">회원간의 트러블</option>
+		          		<option value="7">군입대 영장</option>
+		          		<option value="8">지구온난화</option>
+		          		<option value="9">외계인의 침입</option>
 		          	</select>
 				</div>
 				
