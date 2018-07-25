@@ -7,7 +7,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#btn1').click(function(){
-			location.href="<c:url value='/myPage/myHeart/heartCharge.do'/>";
+			/* location.href="<c:url value='/myPage/myHeart/heartCharge.do'/>";  */
+			window.open("<c:url value='/myPage/myHeart/heartCharge.do'/>","heartCharge",'width=900, height=1024, left=0, top=0, location=yes, resizable=yes');
 		});
 	}); 
 </script>
