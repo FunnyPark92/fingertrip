@@ -72,9 +72,7 @@ footer{border-top: 1px solid #d8d8d8;}
 }
 
 
-
 /* 메인 */
-
 .fRight {
     float: right;
 }
@@ -82,8 +80,6 @@ footer{border-top: 1px solid #d8d8d8;}
     margin-right: 5px;
 }
 .minHeight580{min-height: 580px;}
-
-
 
 
 /* 로그인  */
@@ -216,14 +212,10 @@ footer{border-top: 1px solid #d8d8d8;}
 .loginWrap footer{margin-top: 70px;}
 
 
-
-
 /* 공지사항 */
 .tableBorder{ border-bottom: 1px solid #dee2e6;}
 table a{color:#212529;}
 table a:hover, table a:active{text-decoration: none;}
-
-
 
 
 /* 제휴 광고 문의 */
@@ -316,7 +308,6 @@ table a:hover, table a:active{text-decoration: none;}
 }
 
 
-
 /* 이용방법 */
 .subBgHowto{
     background-image: url(../img/subBgHowto.jpg);
@@ -337,19 +328,6 @@ table a:hover, table a:active{text-decoration: none;}
 .emailWrap .input-group>.form-control {
     flex-basis: 25%;
 }
-
-
-/* 이용방법 */
-.subBgHowto{
-    background-image: url(../img/subBgHowto.jpg);
-}
-.howto .col-md-5 img{width: 100%;}
-.howto .col-md-7{margin-top: 2em;}
-.howto .row{
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
 
 
 /* 나코짜 */
@@ -438,15 +416,4 @@ li{list-style: none}
     right: 10px;
     bottom: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
 
