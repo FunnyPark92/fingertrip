@@ -172,7 +172,6 @@ public class MemberController {
 			
 			model.addAttribute("msg", "회원탈퇴 실패하였습니다.");
 			model.addAttribute("url", "/member/memberOut.do");
-			
 			rst="common/message";
 		}
 

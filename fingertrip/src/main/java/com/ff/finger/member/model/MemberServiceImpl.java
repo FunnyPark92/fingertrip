@@ -54,4 +54,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.memberOut(memberVo);
 	}
 
+	@Override
+	public int memberLogOut(String id) {
+		return memberDao.memberLogOut(id);
+	}
+
 }

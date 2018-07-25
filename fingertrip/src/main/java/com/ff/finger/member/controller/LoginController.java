@@ -85,6 +85,11 @@ public class LoginController {
 	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
+		logger.info("로그아웃처리 ");
+		String id = (String)session.getAttribute("userid");
+		logger.info("현재 세션 id={}",id);
+		memberService.memberLogOut(id);
+		
 		session.removeAttribute("userid");
 		//session.removeAttribute("userName");
 		

@@ -41,6 +41,12 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.update(namespace+"memberOut", memberVo);
 	}
 
+	@Override
+	public int memberLogOut(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+"memberLogOut",id);
+	}
+
 	
 
 }

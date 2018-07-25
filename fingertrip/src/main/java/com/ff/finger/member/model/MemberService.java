@@ -7,4 +7,5 @@ public interface MemberService {
 	public int findPwCnt(MemberVO memberVo);
 	public int updatePw(MemberVO memberVo);
 	public int memberOut(MemberVO memberVo);
+	public int memberLogOut(String id);
 }

@@ -38,6 +38,10 @@
 		   						else null end
 		where id=#{id}
 	</update>
+	
+	<update id="memberLogOut" parameterType="String">
+		update member set logout_date = sysdate where id =#{id}
+	</update>
 </mapper>
 
 
