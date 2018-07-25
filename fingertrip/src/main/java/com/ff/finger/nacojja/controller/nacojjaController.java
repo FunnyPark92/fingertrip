@@ -15,4 +15,25 @@ public class nacojjaController {
 		
 		return "nacojja/nacojjaList";
 	}
+	
+	
+	
+	
+	@RequestMapping("/nacojja/nacojja1.do")
+	public String nacojja1() {
+		logger.info("나코짜 목록 보여주기");
+		
+		return "nacojja/nacojja1";
+	}
+	
+	
+	@RequestMapping("/nacojja/nacojja2.do")
+	public String nacojja2() {
+		logger.info("나코짜 목록 보여주기");
+		
+		return "nacojja/nacojja2";
+	}
+	
+	
+	
 }

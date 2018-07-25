@@ -334,3 +334,117 @@ table a:hover, table a:active{text-decoration: none;}
 	font-size: 0.7em;
 	color: red;
 }
+
+
+
+/* 이용방법 */
+.subBgHowto{
+    background-image: url(../img/subBgHowto.jpg);
+}
+.howto .col-md-5 img{width: 100%;}
+.howto .col-md-7{margin-top: 2em;}
+.howto .row{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+
+/* 나코짜 */
+.plan1{
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 30px 0 70px;
+}
+.plan1>h3{
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+}
+.plan1>div{
+    margin-bottom: 15px;
+}
+.plan1 input[type=text]{
+    border: 1px solid #c1c1c1;
+    padding: 5px;
+    width: 80.5%;
+}
+.plan1 textarea{
+    width: 80.5%;
+    margin-top: 20px;
+}
+.plan1 .datepicker[type=text]{
+    width: 40%;
+    box-sizing: border-box;
+}
+.planImgWrap{
+    width: 80.5%;
+    text-align: left;
+    margin: 0 auto;
+}
+.planImgWrap label { 
+    display: inline-block; 
+    padding: .3em .75em; 
+    color: #fff; 
+    font-size: inherit; 
+    line-height: normal; 
+    vertical-align: middle; 
+    background-color: #888888; 
+    cursor: pointer; 
+    border: 1px solid #ebebeb; 
+    border-bottom-color: #e2e2e2; 
+    border-radius: .25em; 
+} 
+.planImgWrap input[type="file"] { 
+    /* 파일 필드 숨기기 */ 
+    position: absolute; 
+    width: 1px; 
+    height: 1px; 
+    padding: 0; 
+    margin: -1px; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0; 
+}
+.plan1>.btn { 
+    width: 80.5%;
+    margin: 0 auto;
+    padding: 10px 0px;
+    margin-top: 20px;
+}
+
+
+/* 나코짜2 plan2 */
+li{list-style: none}
+.faq-list .list-group-item.active {
+    z-index: 2;
+    color: #0b0b0b;
+    background-color: #8cc4ff;
+    border-color: #65b0ff;
+}
+.faq-list .list-group-item{
+    color: #777;
+    font-weight: 600;
+    position: relative;
+    font-size: 1.05em;
+}
+.plan2 .faq-list small{
+    font-size: 0.7em;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
