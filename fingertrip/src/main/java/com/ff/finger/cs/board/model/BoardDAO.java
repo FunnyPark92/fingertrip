@@ -5,4 +5,5 @@ import java.util.Map;
 
 public interface BoardDAO {
 	public List<Map<String, Object>> selectAllBoard();
+	public int countUpdateboard(int boardNo);
 }

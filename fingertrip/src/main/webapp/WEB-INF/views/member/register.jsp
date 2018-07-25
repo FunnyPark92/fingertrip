@@ -61,7 +61,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
 	$("#email3").blur(function(){
 		if ($(this).val().length < 1) {
 			$(this).siblings("div").text($("#email3").prev().text() + "을 입력해 주세요.");
@@ -79,7 +78,7 @@ $(document).ready(function(){
 	$("input[name=gender]").blur(function(){
 		$(this).siblings("div").text("");
 	});
-	
+
 });
 </script>
 

@@ -34,7 +34,7 @@
                     <c:forEach var="map" items="${boardlist}">
                         <tr>
                             <th scope="row">${map['NOTICENO']}</th>
-                            <td><a href="<c:url value='/cs/QnA/qnaDetail.do'/>">
+                            <td><a href="<c:url value='/cs/notice/countUpdate.do?boardNo=${map["NOTICE_NO"]}'/>">
                             <!--제목이 긴 경우 일부만 보여주기 -->
                             <c:if test="${fn:length(map['TITLE'])>25}">
                             	${fn:substring(map['TITLE'],0,20) }...

@@ -20,4 +20,9 @@ public class BoardDAOMybatis implements BoardDAO {
 		 return sqlSession.selectList(namespace+"selectAllBoard");
 	
 	}
+
+	@Override
+	public int countUpdateboard(int boardNo) {
+		return sqlSession.update(namespace+"countUpdateboard",boardNo);
+	}
 }

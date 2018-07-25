@@ -14,4 +14,9 @@ public class BoardServiceImpl implements BoardService {
 	public List<Map<String, Object>> selectAllBoard() {
 		return boardDao.selectAllBoard();
 	}
+
+	@Override
+	public int countUpdateboard(int boardNo) {
+		return boardDao.countUpdateboard(boardNo);
+	}
 }

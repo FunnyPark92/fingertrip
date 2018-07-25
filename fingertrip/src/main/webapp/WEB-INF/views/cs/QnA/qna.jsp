@@ -15,7 +15,6 @@
                     <a href="<c:url value='/cs/faq/faq.do'/> " class="list-group-item">FAQ</a>
                 </div>
             </div>
-    
            <!-- 서브컨텐츠 -->
             <div class="col-lg-9">
                 <table class="table table-hover tableBorder">

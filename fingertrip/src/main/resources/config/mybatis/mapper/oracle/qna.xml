@@ -18,6 +18,12 @@
 		set read_count=read_count+1
 		where qna_no=#{qnaNo}
 	</update>
+	
+	<update id="countUpdateboard" parameterType="int">
+		update notice 
+		set read_count=read_count+1
+		where notice_no=#{boardNo}
+	</update>
 </mapper>
 
 
