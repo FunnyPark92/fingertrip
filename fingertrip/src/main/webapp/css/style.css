@@ -334,7 +334,9 @@ table a:hover, table a:active{text-decoration: none;}
 	font-size: 0.7em;
 	color: red;
 }
-
+.emailWrap .input-group>.form-control {
+    flex-basis: 25%;
+}
 
 
 /* 이용방법 */

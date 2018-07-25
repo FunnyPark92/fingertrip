@@ -104,7 +104,7 @@ $(document).ready(function(){
          <input type="text" class="form-control" name="addressDetail" id="addressDetail" placeholder="상세주소">
        </div>
      </div>
-     <div class="form-group">
+     <div class="form-group emailWrap">
      	<span style="color: red">*</span>
        <label for="email">이메일 입력</label>
        <div class="input-group" style="width:525px">
@@ -117,7 +117,7 @@ $(document).ready(function(){
      	   <option value="gmail.com">gmail.com</option>
      	   <option value="nate.com">nate.com</option>
      	   <option value="etc">직접입력</option>
-  		 </select>
+  		 </select> &nbsp;
   		 <label for="email3" hidden="">도메인</label>
   		 <input type="text" class="form-control valid" name="email3" id="email3" title="직접입력인 경우 이메일 뒷자리" style="visibility:hidden">
   		 <br>
