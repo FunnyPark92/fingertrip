@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface QnADAO {
 	public List<QnAVO> selectAll();
+	public int countUpdate(int qnaNo);
 }
