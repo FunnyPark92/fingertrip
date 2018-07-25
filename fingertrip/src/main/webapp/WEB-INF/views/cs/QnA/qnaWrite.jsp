@@ -52,10 +52,6 @@ $(document).ready(function(){
             	<label for="title">제목</label>
             	<input type="text" class="form-control" id="title" name="title"  />
             </div>
-        	<div>
-            	<label for="name">작성자</label>
-            	<input type="text" class="form-control" id="name" name="name" />
-            </div>
         	<div>  
            		<label for="content">내용</label>        
           		<textarea id="content" class="form-control" name="content" rows="12" cols="40"></textarea>
