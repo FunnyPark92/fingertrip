@@ -2,6 +2,8 @@ package com.ff.finger.cs.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/QnA/countUpdate.do")
-	public String countUpdate(@RequestParam int qnaNo, Model model) {
+	public String countUpdate(@RequestParam(defaultValue="0") int qnaNo, Model model) {
 		logger.info("Q&A 조회수 증가, 파라미터 qnaNo={}", qnaNo);
 		
 		if(qnaNo==0) {
@@ -49,8 +51,19 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/QnA/qnaDetail.do")
-	public String qnaDetail(@RequestParam(defaultValue="0") int qnaNo) {
-		logger.info("Q&A 상세보기 화면");
+	public String qnaDetail(@RequestParam(defaultValue="0") int qnaNo, HttpServletRequest request, Model model) {
+		logger.info("QnA 상세보기 파라미터 qnaNo={}", qnaNo);
+		
+		if(qnaNo==0) {
+			model.addAttribute("msg","잘못됫 url입니다.");
+			model.addAttribute("url","/cs/QnA/qna.do");
+			return "common/message"; 
+		}
+		
+		QnAVO vo=qnAService.selectByNo(qnaNo);
+		logger.info("QnA 상세보기 결과, vo={}", vo);
+		
+		model.addAttribute("vo",vo);
 		
 		return "cs/QnA/qnaDetail";
 	}

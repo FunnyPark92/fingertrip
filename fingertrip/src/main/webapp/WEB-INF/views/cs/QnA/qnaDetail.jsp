@@ -21,35 +21,26 @@
                 <table class="table tableBorder">
                     <tr>
                         <th>제목</th>
-                        <td>회원가입을 환영합니다</td>
+                        <td>${vo.title}</td>
                     </tr>
                     <tr>
                         <th>작성자</th>
-                        <td>최고관리자</td>
+                        <td>${vo.name}</td>
                     </tr>
                     <tr>
                         <th>등록일</th>
-                        <td>18.07.18</td>
+                        <td><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
                     </tr>
                     <tr>
                         <th>조회수</th>
-                        <td>999</td>
+                        <td>${vo.readCount}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <div class="minheight300">
                             	<p class="font-italic font-weight-bold"><img class="qna" src="${pageContext.request.contextPath }/img/question.png">Question</p>
                                	<br>
-                               	<p>여행갈 수 있나용?</p>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <div class="minheight300">
-                               	<p class="font-italic font-weight-bold"><img class="qna" src="${pageContext.request.contextPath }/img/answer.png">Answer</p>
-                               	<br>
-                               	<p> 트립핑거에 오신 것을 환영하오. 낯선이여.</p>
+                               	<p>${vo.content}</p>
                             </div>
                         </td>
                     </tr>
