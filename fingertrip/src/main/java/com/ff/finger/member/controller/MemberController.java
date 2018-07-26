@@ -101,8 +101,6 @@ public class MemberController {
 		return "member/memberPwChk";
    }
 	
-
-   
 	@RequestMapping("/memberEditOk.do")
 	public String memberEditOk(@ModelAttribute MemberVO vo, HttpSession session, Model model) {
 		String id = (String) session.getAttribute("userid");
@@ -174,7 +172,6 @@ public class MemberController {
 			model.addAttribute("url", "/member/memberOut.do");
 			rst="common/message";
 		}
-
 		return rst;
 	}
 }

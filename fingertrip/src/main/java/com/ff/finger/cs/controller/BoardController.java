@@ -32,7 +32,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/notice/countUpdate.do")
-	public String countUpdate(@RequestParam int boardNo, Model model) {
+	public String countUpdate(@RequestParam (defaultValue="0") int boardNo, Model model) {
 		logger.info("board 조회수 증가, 파라미터 qnaNo={}", boardNo);
 		
 		if(boardNo==0) {

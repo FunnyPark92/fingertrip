@@ -24,6 +24,11 @@
 		set read_count=read_count+1
 		where notice_no=#{boardNo}
 	</update>
+	
+	<select id="selectByNo" parameterType="int" resultType="QnAVO">
+		select * from qna
+		where qna_no=#{qnaNo}
+	</select>
 </mapper>
 
 
