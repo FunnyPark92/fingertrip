@@ -42,6 +42,10 @@
 	<update id="memberLogOut" parameterType="String">
 		update member set logout_date = sysdate where id =#{id}
 	</update>
+	
+	<select id="userCheckId" parameterType="String" resultType="int">
+		select count(*) from member where id =#{id}
+	</select>
 </mapper>
 
 

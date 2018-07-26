@@ -66,7 +66,7 @@
                         <a class="nav-link" href="#">홈으로 <span class="sr-only">(current)</span></a>
                     </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" href="#" title="나만의 코스 짜기">나코짜</a>
+                        <a class="nav-link" href="<c:url value='/nacojja/nacojja1.do'/>" title="나만의 코스 짜기">나코짜</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value='/nacojja/nacojjaList.do'/>">여행가기</a>
@@ -79,7 +79,7 @@
                             고객센터
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="<c:url value='/cs/notice/board.do'/>">공지사항</a>
+                            <a class="dropdown-item" href="<c:url value='/cs/notice/noticeList.do'/>">공지사항</a>
                             <a class="dropdown-item" href="<c:url value='/cs/QnA/qna.do'/>">Q&amp;A</a>
                             <a class="dropdown-item" href="<c:url value='/cs/faq/faq.do'/> ">FAQ</a>
                         </div>

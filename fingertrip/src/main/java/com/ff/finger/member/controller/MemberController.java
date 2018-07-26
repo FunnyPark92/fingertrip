@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.member.model.MemberService;
@@ -35,6 +36,17 @@ public class MemberController {
 	public void register() {
 		logger.info("회원가입 화면 보여주기");
 	}
+	
+	@RequestMapping("/ajaxUserCheckId.do")
+	@ResponseBody
+	public boolean ajaxUserCheckId(@RequestParam String id) {
+		logger.info("유저 아이디 중복 체크 파라미터 id={}",id);
+		
+		boolean result = memberService.userCheckId(id);
+		logger.info("아이디 중복 확인 결과 result={}",result);
+		
+		return result;
+	}
 
 	@RequestMapping("/insertMember.do")
 	public String insertMember(@ModelAttribute MemberVO memberVo, @RequestParam String email3, Model model) {
@@ -44,18 +56,15 @@ public class MemberController {
 		if (email3 != null && !email3.isEmpty()) {
 			memberVo.setEmail2(email3);
 		}
-
 		if (memberVo.getEmail1() == null || memberVo.getEmail1().isEmpty()) {
 			memberVo.setEmail2("");
 		}
-
 		if (memberVo.getHp2() == null || memberVo.getHp2().isEmpty() || 
 			memberVo.getHp3() == null || memberVo.getHp3().isEmpty()) {
 			memberVo.setHp1("");
 			memberVo.setHp2("");
 			memberVo.setHp3("");
 		}
-		
 		if (memberVo.getMailAgreement() == null || memberVo.getMailAgreement().isEmpty()) {
 			memberVo.setMailAgreement("N");
 		} else {

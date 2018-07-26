@@ -10,7 +10,7 @@
             <div class="col-lg-3">
                 <h3>고객센터</h3>
                 <div class="list-group">
-                    <a href="<c:url value='/cs/notice/board.do'/> " class="list-group-item active">공지사항</a>
+                    <a href="<c:url value='/cs/notice/noticeList.do'/> " class="list-group-item active">공지사항</a>
                     <a href="<c:url value='/cs/QnA/qna.do'/> " class="list-group-item">Q&amp;A</a>
                     <a href="<c:url value='/cs/faq/faq.do'/> " class="list-group-item">FAQ</a>
                 </div>
@@ -40,7 +40,7 @@
                     </tr>
                 </table>
                 <div class="fRight">
-                    <a href="<c:url value='/cs/notice/board.do'/>" class="btn btn btn-warning">목록</a>
+                    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="btn btn btn-warning">목록</a>
                 </div>
                 
                 <div class="clear marginTop100">

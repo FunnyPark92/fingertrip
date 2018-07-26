@@ -1,24 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<style type="text/css">
+ .message{ display: none;
+ 		   font-size: 12px;
+ 		   color: red;}
+}
 
+.divId{
+	width: 600px;
+}
+</style>
+
+<script type="text/javascript" src="<c:url value='/js/member.js'/>"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#email2").change(function(){
-		if ($(this).val() == "etc") {
-			$("#email3").css("visibility", "visible");
-			$("#email3").val("");
-			$("#email3").focus();
-		} else {
-			$("#email3").css("visibility", "hidden");
-		}
-	});
-	
-	$("#btnZipcode").click(function(){
-		//우편번호 찾기
-		window.open('/finger/zipcode/zipcode.do', 'zipcode', 
-				'width=500, height=550, left=0, top=0, location=yes, resizable=yes');
-	});
+	$('#name').focus();
 	
 	$("#btnJoin").click(function(){
 		var bool=true;
@@ -37,7 +34,6 @@ $(document).ready(function(){
 					/* if ($(this).css("visibility") == "hidden") {
 						continue;
 					} */
-					
 					$(this).focus();
 					$(this).siblings("div").text($(this).prev().text() + "을 입력해 주세요.");
 					
@@ -45,40 +41,53 @@ $(document).ready(function(){
 					return false;
 				}
 			}
-		});
-		
+		if(bool){
+				if(!validate_username($('#name').val())){
+					alert("이름은 한글 2~10글자만 입력가능합니다.")
+					$('#name').focus();
+					bool=false;
+				 }else if(!validate_userid($('#id').val())){
+					alert("아이디는 알파벳이나 숫자 또는 특수기호인_만 가능합니다.");
+					$('#id').focus();
+					bool=false;
+				}else if($('#password').val()!=$('#password2').val()){
+					alert("비밀번호가 일치하지 않습니다.")
+					$('#password').focus();
+					bool=false;
+				}
+		 	}
+			return bool;
+		}); //정규식 끝
 		return bool;
-	});
+	});  //Click 이벤트
 	
-	$(".valid").each(function(idx, item){
-		$(this).blur(function(){
-			if ($(this).val().length < 1) {
-				$(this).siblings("div").text($(this).prev().text() + "을 입력해 주세요.");
-				
-				return false;
-			} else {
-				$(this).siblings("div").text("");
-			}
-		});
-	});
-	$("#email3").blur(function(){
-		if ($(this).val().length < 1) {
-			$(this).siblings("div").text($("#email3").prev().text() + "을 입력해 주세요.");
-			
-			return false;
-		} else {
-			$(this).siblings("div").text("");
+	$('#id').keyup(function(){
+		if(validate_userid($(this).val()) && $(this).val().length>=2){
+			$.ajax({
+				url:"<c:url value='/member/ajaxUserCheckId.do'/>",
+				type:"get",
+				data:{id:$(this).val()},
+				success:function(res){
+					if(res){
+						$('.message').html("사용 가능합니다.");
+						$('.message').show();
+					}else{
+						$('.message').html("해당 아이디가 이미 존재합니다.");
+						$('.message').show();
+					}
+				},
+				error:function(xhr,status,error){
+					alert("error : "+ error);
+				}
+			});
+		}else if($(this).val().length>=1){
+			$('.message').html("아이디는 2자리 이상!");
+			$('.message').show();
 		}
+		
 	});
 	
-	$("input[name=gender]").click(function(){
-		$(this).siblings("input[type=hidden]").val($(this).val());
-	});
 	
-	$("input[name=gender]").blur(function(){
-		$(this).siblings("div").text("");
-	});
-
 });
 </script>
 
@@ -91,28 +100,29 @@ $(document).ready(function(){
       <div class="form-group">
       	<span style="color: red">*</span>
         <label for="name">이름</label>
-        <input type="text" class="form-control valid" name="name" id="name" placeholder="이름을 입력해 주세요">
+        <input type="text" class="form-control valid" name="name" id="name" placeholder="이름을 입력해 주세요" autocomplete="off">
         <div class="mandatory"></div>
       </div>
      
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="id">회원ID</label>
-       <input type="text" class="form-control valid" name="id" id="id" placeholder="회원ID">
+       <input type="text" class="form-control valid divId" name="id" id="id" placeholder="회원ID" autocomplete="off">
+       <span class="message"></span>
        <div class="mandatory"></div>
      </div>
      
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="password">비밀번호</label>
-       <input type="password" class="form-control valid" name="password" id="password" placeholder="비밀번호">
+       <input type="password" class="form-control valid" name="password" id="password" placeholder="비밀번호" autocomplete="off">
        <div class="mandatory"></div>
      </div>
      
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="password2">비밀번호 확인</label>
-       <input type="password" class="form-control valid" name="password2" id="password2" placeholder="비밀번호 확인">
+       <input type="password" class="form-control valid" name="password2" id="password2" placeholder="비밀번호 확인" autocomplete="off">
        <div class="mandatory"></div>
      </div>
      
@@ -128,7 +138,7 @@ $(document).ready(function(){
      <div class="form-group" style="margin-bottom:0px">
        <label for="address">주소를 입력하세요.</label>
        <div class="input-group">
-         <input type="text" class="form-control" name="address" id="address" placeholder="주소 입력" readonly="readonly">
+         <input type="text" class="form-control" name="address" id="address" placeholder="주소 입력" readonly="readonly" autocomplete="off">
          <span class="input-group-btn">
 	       <input type="button" value="우편번호 찾기" class="btn btn-primary" class="fa fa-mail-forward spaceLeft" id="btnZipcode" title="새창열림">
          </span>

@@ -59,4 +59,16 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.memberLogOut(id);
 	}
 
+	@Override
+	public boolean userCheckId(String id) {
+		int result = memberDao.userCheckId(id);
+		if(result>0) {
+			return false; //아이디가 이미 존재
+		}else {
+			return true; // 사용 가능
+		}
+	}
+
+
+
 }

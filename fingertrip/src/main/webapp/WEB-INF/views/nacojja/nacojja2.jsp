@@ -2,45 +2,185 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
+<style>
+	#floating-panel {
+        position: absolute;
+        top: 140px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        line-height: 30px;
+        padding-left: 10px;
+	}
+</style>
+
 <script type="text/javascript">
 	window.onload = function() {
-		initialize()
+		initialize();
 	}
 </script>
 
-<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYa_utcbQs1RLoVuJguMaQzuX4yxvQyrs&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYa_utcbQs1RLoVuJguMaQzuX4yxvQyrs&libraries=places"></script>
+	
 <script>
 	var geocoder;
 	var map;
+	var marker;
+	var markers = []; //위치 정보를 배열에 담음
+	var poly;
 
 	function initialize() {
 		geocoder = new google.maps.Geocoder();
-		var latlng = new google.maps.LatLng(37.525939, 126.888935);
+		
+		/* var stavanger = new google.maps.LatLng(58.983991,5.734863);
+		var amsterdam = new google.maps.LatLng(52.395715,4.888916);
+		var london = new google.maps.LatLng(51.508742,-0.120850); */
+		
+		var myCenter = new google.maps.LatLng(37.525939, 126.888935);
+		var mapCanvas = document.getElementById("map");
 		var mapOptions = {
-			zoom : 13,
-			center : latlng
-		}
-		map = new google.maps.Map(document.getElementById('map'), mapOptions);
+			center: myCenter, 
+			zoom: 12,
+			//mapTypeId:google.maps.MapTypeId.HYBRID
+		};
+		map = new google.maps.Map(mapCanvas, mapOptions);
+		
+		//경로에 따라 선 그리기
+		poly = new google.maps.Polyline({
+		    //path: [stavanger, amsterdam, london],
+		    strokeColor: "#FF0000",
+		    strokeOpacity: 0.7,
+		    strokeWeight: 3
+		});
+		poly.setMap(map);
+        map.addListener('click', addLatLng); // 클릭 이벤트에 대한 리스너 추가
+		
+		/* //해당 포지션에 마커 뿌리기
+		marker = new google.maps.Marker({
+			position: myCenter,
+			animation: google.maps.Animation.BOUNCE,
+			//icon: "~~~.png" //마커 아이콘 임의 변경 가능.. 어떡할까?
+		});
+		marker.setMap(map); */
+		
+		/* // 클릭시 이전 마커 지우고 새로운 마커 찍기
+        map.addListener('click', function(event) {
+        	deleteMarkers(); //이전 마커 삭제 --> 우클릭 이벤트로 삭제하게 할까?
+        	addMarker(event.latLng);
+        }); */
+		
+		/* //클릭시 마커 여러개 설정
+		google.maps.event.addListener(map, 'click', function(event) {
+		    var marker = new google.maps.Marker({
+		        position: event.latLng,
+		        map: map
+		    });
+	      	var infowindow = new google.maps.InfoWindow({
+	        	content: 'Latitude: ' + event.latLng.lat() + '<br>Longitude: ' + event.latLng.lng()
+	      	});
+	      	infowindow.open(map,marker);
+	      	
+	      	deleteMarkers(); //이전 마커 삭제
+	        addMarker(event.latLng); //새로운 마커 등록
+	      	
+		}); */
+	
+		/* //마커 클릭시 내용 띄우기
+		google.maps.event.addListener(marker,'click',function(event) {
+			var infowindow = new google.maps.InfoWindow({
+			    content: "is your 마지막 여행지?" 
+			    		+ '<br>Latitude: ' + event.latLng.lat() 
+			    		+ '<br>Longitude: ' + event.latLng.lng()
+			});
+			infowindow.open(map,marker);
+		}); */
+		
+		/* // 마커 클릭시 줌 땡기~~
+		google.maps.event.addListener(marker,'click',function() {
+		    map.setZoom(15);
+		    map.setCenter(marker.getPosition());
+		}); */
+		
+	} //initialize()
+	
+	
+	// 맵 클릭시 새로운 경로 라인 추가
+    function addLatLng(event) {
+      var path = poly.getPath();
+
+      path.push(event.latLng);
+
+      // 해당 클릭 경로에 새로운 마커 추가
+      var marker = new google.maps.Marker({
+        position: event.latLng,
+        title: '#' + path.getLength(),
+        animation: google.maps.Animation.BOUNCE,
+        map: map
+      });
+      markers.push(marker);
+      
+    } //addLatLng()
+	
+    
+    function addMarker(location) {
+    	var marker = new google.maps.Marker({
+        	position: location,
+        	map: map,
+        	animation: google.maps.Animation.BOUNCE
+      	});
+      	markers.push(marker);
+      
+      	var infowindow = new google.maps.InfoWindow({
+      		content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
+    	});
+    	infowindow.open(map,marker);
+    }
+
+    function setMapOnAll(map) {
+      	for (var i = 0; i < markers.length; i++) {
+        	markers[i].setMap(map);
+      	}
+    }
+
+    function clearMarkers() {
+      	setMapOnAll(null);
+    }
+
+    function showMarkers() {
+      	setMapOnAll(map);
+    }
+
+    function deleteMarkers() {
+      	clearMarkers();
+      	markers = [];
+    }
+	
+	
+	
+	function addPlace() {
+		//To-do
+		
 	}
 
 	function codeAddress() {
-		var address = document.getElementById('address').value;
-		geocoder.geocode({
-			'address' : address
-		}, function(results, status) {
-			if (status == 'OK') {
+		var address = document.getElementById("address").value;
+		geocoder.geocode({"address": address}, function(results, status) {
+			if (status == "OK") {
 				map.setCenter(results[0].geometry.location);
 				var marker = new google.maps.Marker({
-					map : map,
-					position : results[0].geometry.location
+					position: results[0].geometry.location,
+					map: map
 				});
 				var address_lat = results[0].geometry.location.lat(); //위도 
 				var address_lng = results[0].geometry.location.lng(); //경도
 				console.log(address_lat, address_lng, results);
+				console.log(results[0]);
+				console.log(results[0].formatted_address);
 			} else {
-				alert('Geocode was not successful for the following reason: '
-						+ status);
+				alert("Geocode was not successful for the following reason: " + status);
 			}
 		});
 	}
@@ -50,7 +190,8 @@
 <div class="subBg subBgTerm">
         <p>나만의 코스 짜기</p>
         <div class="subBgBlack"></div>
-    </div>
+</div>
+
 
     <section class="container marginBottom80 minheight400 plan2">
         <div class="row">
@@ -208,22 +349,27 @@
                             </div>
                             <div class="courseDiv">
                                 <label for="city" class="courseLabel">도시</label>
-                                <input type="text" id="city" class="courseInput">
+                                <input type="text" id="city" class="courseInput" readonly="readonly">
                             </div>
 
                             <div class="courseDiv">
                                 <label for="city" class="courseLabel">여행지</label>
-                                <input type="text" id="city" class="courseInput">
+                                <input type="text" id="city" class="courseInput" readonly="readonly">
                             </div>
                             
-                           
+                           <div id="floating-panel">
+						      <input onclick="clearMarkers();" type=button value="Hide Markers">
+						      <input onclick="showMarkers();" type=button value="Show All Markers">
+						      <input onclick="deleteMarkers();" type=button value="Delete Markers">
+    						</div>
                             <div id="map"></div>
+                            
                             <div class="mapSearch">
                                 <input id="address" type="textbox" placeholder="지도에 표시될 여행지를 검색해주세요">
                                 <input type="button" value="장소검색" onclick="codeAddress()" class="btn btn-warning">
+                                <input type="button" value="여행지로 추가" onclick="addPlace()" class="btn btn-warning">
                             </div>
                             
-
                             <textarea name="" id="" rows="10" class="textCK" placeholder="여행지에 대한 설명을 작성해주세요"></textarea>
 
                         </form>
@@ -243,9 +389,6 @@
             </div>
         </div>
     </section>
-
-
-
 
 
 <%@ include file="../inc/bottom.jsp"%>

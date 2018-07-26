@@ -13,8 +13,12 @@
     </style>
 
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
+    <script type="text/javascript">
         $(function() {
+        	$("#btnNext").click(function(){
+        		location.href="/finger/nacojja/nacojja2.do";
+        	});
+        	
             $(".datepicker").datepicker({
                 dateFormat: "yy-mm-dd"
             });
@@ -33,9 +37,6 @@
         });  
     </script>
 
-
-
-
     <div class="subBg subBgTerm">
         <p>나만의 코스 짜기</p>
         <div class="subBgBlack"></div>
@@ -45,7 +46,7 @@
       <div class="plan1">
            <h3>나만의 코스 짜기</h3>
            <div>
-               <input type="text" placeholder="예: 5박 6일 해리포터 투어">
+               <input type="text" placeholder="제목을 작성해주세요. (예: 5박 6일 해리포터 투어)">
                <textarea rows="10" placeholder="일정에 대한 간단한 설명을 해주세요."></textarea>
            </div>
            <div>
@@ -57,17 +58,9 @@
                 <label for="fileBtn">사진첨부</label>
                 <input type="file" id="fileBtn">
            </div>
-           <input type="button" class="btn btn-danger" value="나코짜 만들기">
+           <input type="button" class="btn btn-danger" id="btnNext" value="나코짜 만들기">
       </div>
-     
-       
     </section>
-
-
-
-
-
-
 
 
 <%@ include file="../inc/bottom.jsp"%>

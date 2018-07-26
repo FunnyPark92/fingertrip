@@ -8,4 +8,6 @@ public interface MemberService {
 	public int updatePw(MemberVO memberVo);
 	public int memberOut(MemberVO memberVo);
 	public int memberLogOut(String id);
+	public boolean userCheckId(String id);
+	
 }

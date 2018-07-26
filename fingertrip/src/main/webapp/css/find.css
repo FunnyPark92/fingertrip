@@ -110,6 +110,27 @@
 	.subBgNaco{
     	background-image: url(../img/ocean.jpg);
 	}
+	.margin0{
+		margin: 0 auto;	
+	}
 	.margin15{
 		margin: 15px;
+	}
+	.width500{
+		width: 500px;
+	}
+	.marginT50{
+    	margin-top: 50px;
+	}
+	.marginT30{
+    	margin-top: 30px;
+	}
+	.marginL10{
+		margin-left: 10px;
+	}
+	.width150{
+		width: 150px;
+	}
+	a.decoN{
+		text-decoration: none;
 	}
