@@ -7,10 +7,29 @@
 		order by qna_no
 	</select>
 	
-	<select id="selectAllBoard" resultType="map">
-		select n.*, a.name
-		from notice n join admin a
-		on n.admin_no=a.admin_no
+	<select id="selectAllBoard" parameterType="SearchVo" resultType="BoardVo">
+		select *
+		from (
+			select list.*, rownum as RNUM
+			from(
+				select * from notice 
+				<if test="searchKeyword!=null and searchKeyword!=''">
+					where ${searchCondition} like '%' || #{searchKeyword} || '%'
+				</if>
+				order by notice_no desc
+				)list
+			)
+		<![CDATA[
+		where RNUM>${firstRecordIndex} and RNUM<=${firstRecordIndex}+${recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="totalRecord" resultType="int" parameterType="SearchVo">
+		select count(*)
+		from notice
+		<if test="searchKeyword!=null and searchKeyword!=''">
+			where ${searchCondition} like '%' || #{searchKeyword} || '%'
+		</if>
 	</select>
 	
 	<update id="countUpdate" parameterType="int">
