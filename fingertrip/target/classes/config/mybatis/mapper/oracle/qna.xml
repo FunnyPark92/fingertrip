@@ -41,7 +41,7 @@
 	<update id="countUpdateNotice" parameterType="int">
 		update notice 
 		set read_count=read_count+1
-		where notice_no=#{boardNo}
+		where notice_no=#{noticeNo}
 	</update>
 </mapper>
 

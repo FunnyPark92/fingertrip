@@ -60,6 +60,7 @@ public class NoticeController {
 			
 			return "common/message";
 		}
+		
 		int cnt=noticeService.countUpdateNotice(noticeNo);
 		logger.info("조회수 증가 후 cnt={}", cnt);
 		

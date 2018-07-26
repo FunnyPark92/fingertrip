@@ -10,21 +10,21 @@ import com.ff.finger.common.SearchVO;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {
-	@Autowired NoticeDAO boardDao;
+	@Autowired NoticeDAO noticeDao;
 
 	@Override
 	public List<NoticeVO> selectAllNotice(SearchVO searchVo) {
-		return boardDao.selectAllNotice(searchVo);
+		return noticeDao.selectAllNotice(searchVo);
 	}
 
 	@Override
 	public int totalRecord(SearchVO searchVo) {
-		return boardDao.totalRecord(searchVo);
+		return noticeDao.totalRecord(searchVo);
 	}
 	
 	@Override
 	public int countUpdateNotice(int noticeNo) {
-		return boardDao.countUpdateNotice(noticeNo);
+		return noticeDao.countUpdateNotice(noticeNo);
 	}
 
 	
