@@ -18,7 +18,7 @@
             <div class="col-lg-3">
                 <h3>고객센터</h3>
                 <div class="list-group">
-                    <a href="<c:url value='/cs/notice/board.do'/> " class="list-group-item active">공지사항</a>
+                    <a href="<c:url value='/cs/notice/noticeList.do'/> " class="list-group-item active">공지사항</a>
                     <a href="<c:url value='/cs/QnA/qna.do'/> " class="list-group-item">Q&amp;A</a>
                     <a href="<c:url value='/cs/faq/faq.do'/> " class="list-group-item">FAQ</a>
                 </div>
@@ -27,7 +27,7 @@
            <!-- 서브컨텐츠 -->
             <div class="col-lg-9">
             	<div>
-            		<form name="frmHid" action="<c:url value='/cs/notice/board.do'/>" method="post">
+            		<form name="frmHid" action="<c:url value='/cs/notice/noticeList.do'/>" method="post">
 	            		<input type="hidden" name="currentPage">
 	            		<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 	            		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
@@ -44,12 +44,12 @@
                     </thead>
                     <tbody>
                     <c:if test="${!empty list}">
-	                    <!-- Board리스트 내용 반복문 시작 -->
+	                    <!-- 공지사항 반복문 시작 -->
 	                    <c:forEach var="vo" items="${list}">
 	                        <tr>
 	                            <td scope="row" class="text-center">${vo.noticeNo }</td>
 	                            <td>
-		                            <a href="<c:url value='/cs/notice/countUpdate.do?boardNo=${vo.noticeNo }'/>">
+		                            <a href="<c:url value='/cs/notice/countUpdate.do?noticeNo=${vo.noticeNo }'/>">
 			                            <!--제목이 긴 경우 일부만 보여주기 -->
 			                            <c:if test="${fn:length(vo.title)>25}">
 			                            	${fn:substring(vo.title,0,25) }...
@@ -86,7 +86,7 @@
                 	</c:if>
                 </div>
                 <div class="width500 margin0 marginT30">
-                	<form action="<c:url value='/cs/notice/board.do'/>" method="post" class="overflowH">
+                	<form action="<c:url value='/cs/notice/noticeList.do'/>" method="post" class="overflowH">
                 		<select name="searchCondition" class="float-left form-control w-25">
                 			<option value="title"
                 				<c:if test="${param.searchCondition=='title' }">

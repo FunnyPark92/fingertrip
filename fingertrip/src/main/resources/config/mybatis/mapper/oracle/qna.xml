@@ -7,7 +7,7 @@
 		order by qna_no
 	</select>
 	
-	<select id="selectAllBoard" parameterType="SearchVo" resultType="BoardVo">
+	<select id="selectAllNotice" parameterType="SearchVo" resultType="NoticeVo">
 		select *
 		from (
 			select list.*, rownum as RNUM
@@ -38,7 +38,7 @@
 		where qna_no=#{qnaNo}
 	</update>
 	
-	<update id="countUpdateboard" parameterType="int">
+	<update id="countUpdateNotice" parameterType="int">
 		update notice 
 		set read_count=read_count+1
 		where notice_no=#{boardNo}

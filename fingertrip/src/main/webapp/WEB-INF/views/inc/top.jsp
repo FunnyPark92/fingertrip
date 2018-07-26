@@ -79,7 +79,7 @@
                             고객센터
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="<c:url value='/cs/notice/board.do'/>">공지사항</a>
+                            <a class="dropdown-item" href="<c:url value='/cs/notice/noticeList.do'/>">공지사항</a>
                             <a class="dropdown-item" href="<c:url value='/cs/QnA/qna.do'/>">Q&amp;A</a>
                             <a class="dropdown-item" href="<c:url value='/cs/faq/faq.do'/> ">FAQ</a>
                         </div>

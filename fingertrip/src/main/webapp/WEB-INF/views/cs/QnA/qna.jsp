@@ -10,7 +10,7 @@
             <div class="col-lg-3">
                 <h3>고객센터</h3>
                 <div class="list-group">
-                    <a href="<c:url value='/cs/notice/board.do'/> " class="list-group-item ">공지사항</a>
+                    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="list-group-item ">공지사항</a>
                     <a href="<c:url value='/cs/QnA/qna.do'/> " class="list-group-item active">Q&amp;A</a>
                     <a href="<c:url value='/cs/faq/faq.do'/> " class="list-group-item">FAQ</a>
                 </div>

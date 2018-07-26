@@ -1,4 +1,4 @@
-package com.ff.finger.cs.board.model;
+package com.ff.finger.cs.notice.model;
 
 import java.util.List;
 import java.util.Map;
@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import com.ff.finger.common.SearchVO;
 
 @Service
-public class BoardServiceImpl implements BoardService {
-	@Autowired BoardDAO boardDao;
+public class NoticeServiceImpl implements NoticeService {
+	@Autowired NoticeDAO boardDao;
 
 	@Override
-	public List<BoardVO> selectAllBoard(SearchVO searchVo) {
-		return boardDao.selectAllBoard(searchVo);
+	public List<NoticeVO> selectAllNotice(SearchVO searchVo) {
+		return boardDao.selectAllNotice(searchVo);
 	}
 
 	@Override
@@ -23,8 +23,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public int countUpdateboard(int boardNo) {
-		return boardDao.countUpdateboard(boardNo);
+	public int countUpdateNotice(int noticeNo) {
+		return boardDao.countUpdateNotice(noticeNo);
 	}
 
 	

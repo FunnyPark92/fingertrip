@@ -1,14 +1,15 @@
-package com.ff.finger.cs.board.model;
+package com.ff.finger.cs.notice.model;
 
 import java.sql.Timestamp;
 
-public class BoardVO {
+public class NoticeVO {
 	private int noticeNo;
 	private String title;
 	private String content;
 	private Timestamp regDate;
 	private int adminNo;
 	private int readCount;
+	
 	public int getNoticeNo() {
 		return noticeNo;
 	}
@@ -45,6 +46,7 @@ public class BoardVO {
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
 	}
+	
 	@Override
 	public String toString() {
 		return "BoardVO [noticeNo=" + noticeNo + ", title=" + title + ", content=" + content + ", regDate=" + regDate

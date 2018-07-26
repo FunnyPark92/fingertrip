@@ -1,4 +1,4 @@
-package com.ff.finger.cs.board.model;
+package com.ff.finger.cs.notice.model;
 
 import java.util.List;
 
@@ -9,15 +9,15 @@ import org.springframework.stereotype.Repository;
 import com.ff.finger.common.SearchVO;
 
 @Repository
-public class BoardDAOMybatis implements BoardDAO{
+public class NoticeDAOMybatis implements NoticeDAO{
 	private String namespace="config.mybatis.mapper.oracle.qna.";
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<BoardVO> selectAllBoard(SearchVO searchVO) {
-		return sqlSession.selectList(namespace+"selectAllBoard", searchVO);
+	public List<NoticeVO> selectAllNotice(SearchVO searchVO) {
+		return sqlSession.selectList(namespace+"selectAllNotice", searchVO);
 	}
 
 	@Override
@@ -26,11 +26,8 @@ public class BoardDAOMybatis implements BoardDAO{
 	}
 	
 	@Override
-	public int countUpdateboard(int boardNo) {
+	public int countUpdateNotice(int noticeNo) {
 		return 0;
 	}
-
-	
-	
 
 }
