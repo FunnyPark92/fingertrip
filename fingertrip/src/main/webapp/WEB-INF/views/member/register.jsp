@@ -7,7 +7,7 @@
  		   color: red;}
 }
 
-.divId{
+.divId{`
 	width: 600px;
 }
 </style>
@@ -16,31 +16,28 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#name').focus();
+	var result="";
 	
 	$("#btnJoin").click(function(){
 		var bool=true;
 		
 		$(".valid").each(function(idx, item){
 			if ($(this).val() == "etc") {
-				if ($("#email3").val().length < 1) {
+				if($("#email3").val().length < 1) {
 					$("#email3").focus();
 					$("#email3").siblings("div").text($("#email3").prev().text() + "을 입력해 주세요.");
-					
 					bool=false;
 					return false;
 				}
-			} else {
-				if ($(this).val().length < 1) {
-					/* if ($(this).css("visibility") == "hidden") {
-						continue;
-					} */
+			}else{
+				if($(this).val().length < 1) {
 					$(this).focus();
 					$(this).siblings("div").text($(this).prev().text() + "을 입력해 주세요.");
-					
 					bool=false;
 					return false;
-				}
 			}
+		}
+			
 		if(bool){
 				if(!validate_username($('#name').val())){
 					alert("이름은 한글 2~10글자만 입력가능합니다.")
@@ -58,6 +55,10 @@ $(document).ready(function(){
 		 	}
 			return bool;
 		}); //정규식 끝
+		if($('#checkId').val()=='N'){
+			bool=false;
+			alert(result);
+		}
 		return bool;
 	});  //Click 이벤트
 	
@@ -71,18 +72,23 @@ $(document).ready(function(){
 					if(res){
 						$('.message').html("사용 가능합니다.");
 						$('.message').show();
+						$('#checkId').val('Y');
 					}else{
 						$('.message').html("해당 아이디가 이미 존재합니다.");
 						$('.message').show();
+						$('#checkId').val('N');
+						result="해당 아이디가 이미 존재합니다.";
 					}
 				},
 				error:function(xhr,status,error){
 					alert("error : "+ error);
 				}
 			});
-		}else if($(this).val().length>=1){
+		}else if($(this).val().length<2){
 			$('.message').html("아이디는 2자리 이상!");
 			$('.message').show();
+			$('#checkId').val('N');
+			result ="아이디는 2자리 이상이여야 합니다.";
 		}
 		
 	});
@@ -100,14 +106,14 @@ $(document).ready(function(){
       <div class="form-group">
       	<span style="color: red">*</span>
         <label for="name">이름</label>
-        <input type="text" class="form-control valid" name="name" id="name" placeholder="이름을 입력해 주세요" autocomplete="off">
+        <input type="text" class="form-control valid" name="name" id="name" placeholder="한글 2~10 글자로 입력해주세요" autocomplete="off">
         <div class="mandatory"></div>
       </div>
      
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="id">회원ID</label>
-       <input type="text" class="form-control valid divId" name="id" id="id" placeholder="회원ID" autocomplete="off">
+       <input type="text" class="form-control valid divId" name="id" id="id" placeholder="영문 혹은 숫자로만 입력해주세요" autocomplete="off">
        <span class="message"></span>
        <div class="mandatory"></div>
      </div>
@@ -168,10 +174,10 @@ $(document).ready(function(){
   		 </select>
   		 &nbsp;-&nbsp;
   		 <label for="email3" hidden="">휴대폰 중간자리</label>
-         <input type="text" class="form-control valid" name="hp2" id="hp2">
+         <input type="text" class="form-control valid" name="hp2" id="hp2" maxlength="4">
          &nbsp;-&nbsp;
          <label for="email3" hidden="">휴대폰 뒷자리</label>
-         <input type="text" class="form-control valid" name="hp3" id="hp3">
+         <input type="text" class="form-control valid" name="hp3" id="hp3" maxlength="4" >
          <div class="mandatory"></div>
        </div>
      </div>
@@ -212,6 +218,7 @@ $(document).ready(function(){
      </div>
     </form>
   </div>
+  <input type="hidden" id="checkId">
 </article>
        
 <%@ include file="../inc/bottom.jsp"%>

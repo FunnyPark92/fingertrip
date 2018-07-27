@@ -60,3 +60,25 @@ function validate_userid(uid){
 	var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
 	return pattern.test(uid);
 }
+/*function validate_hp(hp2){
+	var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
+	return pattern.test(hp2);
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
