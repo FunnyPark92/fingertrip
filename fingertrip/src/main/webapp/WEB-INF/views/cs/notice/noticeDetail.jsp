@@ -24,13 +24,14 @@
                         <td>회원가입을 환영합니다</td>
                     </tr>
                     <tr>
-                        <th>작성자</th>
-                        <td>최고관리자</td>
-                    </tr>
-                    <tr>
                         <th>등록일</th>
                         <td>18.07.18</td>
                     </tr>
+                    <tr>
+                        <th>조회수</th>
+                        <td>10</td>
+                    </tr>
+                    
                     <tr>
                         <td colspan="2">
                             <div class="minheight300">
@@ -48,13 +49,11 @@
                 		<tr>
                 			<th><img class="prev" alt="이전글" src="${pageContext.request.contextPath }/img/up.png">이전글</th>
                 			<td><a href="">오늘의 공지사항 제목</a></td>
-                			<td>최고관리자</td>
                 			<td>2018. 07. 23</td>
                 		</tr>
                 		<tr>
                 			<th><img class="prev" alt="다음글" src="${pageContext.request.contextPath }/img/down.png">다음글</th>
                 			<td><a href="">어제의 공지사항 제목</a></td>
-                			<td>관리자</td>
                 			<td>2018. 07. 22</td>
                 		</tr>
                 	</table>
