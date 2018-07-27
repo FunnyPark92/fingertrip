@@ -26,7 +26,6 @@ $(document).ready(function(){
 });
 </script>
 
-
     <!-- Masthead -->
     <header class="masthead text-white text-center">
         <!--<div class="overlay"></div>-->

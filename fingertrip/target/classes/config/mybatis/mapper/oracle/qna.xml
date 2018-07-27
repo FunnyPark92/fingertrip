@@ -2,9 +2,21 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.qna">
-	<select id="selectAll" resultType="QnAVO">
-		select * from qna
-		order by qna_no
+	<select id="selectAll" parameterType="SearchVo" resultType="QnAVo">
+	 	select *
+		from (
+			select list.*, rownum as RNUM
+			from(
+				select * from qna 
+				<if test="searchKeyword!=null and searchKeyword!=''">
+					where ${searchCondition} like '%' || #{searchKeyword} || '%'
+				</if>
+				order by qna_no desc
+				)list
+			)
+		<![CDATA[
+		where RNUM>${firstRecordIndex} and RNUM<=${firstRecordIndex}+${recordCountPerPage}
+		]]>
 	</select>
 	
 	<select id="selectAllNotice" parameterType="SearchVo" resultType="NoticeVo">
@@ -47,6 +59,18 @@
 	<select id="selectByNo" parameterType="int" resultType="QnAVO">
 		select * from qna
 		where qna_no=#{qnaNo}
+	</select>
+	
+	<select id="passck" parameterType="int" resultType="string">
+		select password from qna
+		where qna_no=#{qnaNo}
+	</select>
+	
+	<select id="QnAtotalRecord" parameterType="SearchVo" resultType="int">
+		select count(*) from qna
+	<if test="searchKeyword!=null and searchKeyword!=''">
+		where ${searchCondition} like '%' || #{searchKeyword} || '%'
+	</if>
 	</select>
 </mapper>
 

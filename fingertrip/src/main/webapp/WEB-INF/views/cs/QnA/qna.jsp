@@ -4,23 +4,22 @@
 <%@ include file="../../inc/top.jsp"%>
 
 <script type="text/javascript">
+function pageFunc(currentPage){
+	frmHid.currentPage.value=currentPage;
+	frmHid.submit();
+}
+
   $(document).ready(function(){
 	  $(".hid").hide();
-	  var pass;
+	  var pass="";
 	    $(".pwck").click(function(){
-	    	     pass=$(".pass").val();
-	   	 		 alert(pass);
-	   	 	
-	   	 	if(pass!=""){	 
+	    	     pass=$(this).next().val();
+	   	 	if(pass!==""){	 
 	    	$(".hid").hide();
-	    	$(this).next().show();
+	    	$(this).next().next().show();
 	    	return false;
 	   	 	}
 	    });	 
-	    $(".ckpassword").click(function(){
-	    	var ch=$(".password").val();
-	    	alert(ch);
-	    });
 	  });
 </script>
 <style>
@@ -38,6 +37,15 @@
                     <a href="<c:url value='/cs/faq/faq.do'/> " class="list-group-item">FAQ</a>
                 </div>
             </div>
+           <!-- 페이징 처리를 위한 div -->
+            <div>
+            	<form name="frmHid" action="<c:url value='/cs/QnA/qna.do'/>" method="post">
+	            	<input type="hidden" name="currentPage">
+	            	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
+	            	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+            	</form>
+            </div>
+         
            <!-- 서브컨텐츠 -->
             <div class="col-lg-9">
                 <table class="table table-hover tableBorder">
@@ -64,40 +72,67 @@
                             <c:if test="${fn:length(vo.title)<=25}">
                             	${vo.title }
                             </c:if>
-                            </a></td>
+                            </a>
+                            </td>
                             <td>${vo.name }</td>
                             <td><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
                             <td>${vo.readCount}</td>
                         </tr>
+                        <!-- 비밀번호 유무 비교에 필요한 값들 -->
+	    				<input type="hidden" class="pass" name="pass" value="${vo.password}">
                         <tr class="hid">
                         	<td colspan="4">
-                        		<span>비밀글 입니다. 비밀번호 4자리를 입력해주세요.<br>
+                        	<form name="passck" method="post" action="<c:url value='/cs/QnA/passck.do'/>">
+                        		<span>비밀글 입니다. 비밀번호를 입력해주세요.<br>
                         		<input type="password" class="form-control" class="password" name="pwd" placeholder="4자리" style="width:100px; display:inline-block;" /> 
-                        		<input type="button" class="ckpassword" class="btn btn-success" style="margin-bottom:3px;" value="확인"/></span>
+                        		<input type="submit" class="ckpassword" class="btn btn-success" style="margin-bottom:3px;" value="확인"/></span>
+                        		<input type="hidden" name="qnaNo" value="${vo.qnaNo}">
+                        	</form>	
                         	<td>
                         </tr>   
-                        <!-- 비밀번호 비교에 필요한 값들 -->
-	    				<input type="hidden" class="pass" name="pass" value="${vo.password}">
                      </c:forEach>
                      </c:if>
                     </tbody>
                 </table>
-              
-                <div class="width500 marginT50 paddingL100">
-                   <form name="" action="<c:url value='/cs/QnA/board.do'/>" method="post" class="overflowH">
-                      <select class="float-left form-control w-25">
-                         <option value="title">제목</option>
-                         <option value="content">내용</option>
-                      </select>
-                      <input type="text" class="float-left form-control w-50">
-                      <input type="submit" value="검색" class="btn btn-info float-left marginL10">
-                   </form>
-                </div> 
+              	   	<c:if test="${pagingInfo.firstPage>1 }">
+                		<a href="#" class="decoN colorBlue" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+                	</c:if>
+                	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+						<c:choose>
+							<c:when test="${i==pagingInfo.currentPage }">
+								<span class="colorBlue font-weight-bold" >${i }</span>
+							</c:when>
+							<c:otherwise>
+								<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i }</a></span>
+							</c:otherwise>
+						</c:choose>
+                	</c:forEach>
+                	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+                		<a href="#" class="decoN colorBlue" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+                	</c:if>
+                </div>
+                 <div class="width500 margin0 marginT30">
+                	<form action="<c:url value='/cs//QnA/qna.do'/>" method="post" class="overflowH">
+                		<select name="searchCondition" class="float-left form-control w-25">
+                			<option value="title"
+                				<c:if test="${param.searchCondition=='title' }">
+                					selected="selected"
+                				</c:if>
+                			>제목</option>
+                			<option value="content"
+                				<c:if test="${param.searchCondition=='content' }">
+                					selected="selected"
+                				</c:if>
+                			>내용</option>
+                		</select>
+                		<input type="text" name="searchKeyword" class="float-left form-control w-50" value="${param.searchKeyword }">
+                		<input type="submit" value="검색" class="btn btn-info float-left marginL10">
+                	</form>
+                </div>
             </div>
-        </div>
-        <div class="form-group text-right">
+        		<div class="form-group text-right">
 	                <a class="btn btn-primary" style="color:#fff;" href="<c:url value='/cs/QnA/qnaWrite.do'/>">글쓰기</a>
-	    </div>
+	   			 </div>
     </section>
 
  <%@ include file="../../inc/bottom.jsp"%>
