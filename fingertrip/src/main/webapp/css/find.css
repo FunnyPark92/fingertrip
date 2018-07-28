@@ -1,10 +1,10 @@
 @charset "UTF-8";
-	.findId{
+	/* .findId{
 		margin-top: 80px;
-		border: 3px solid black;
+		 border: 2px solid black;
 		padding: 30px;
-		background: #faff07;
-	}
+		background: #ffffff;
+	} */
 	.dvFindId{
 		margin: 5px 0px;
 	}
@@ -133,4 +133,22 @@
 	}
 	a.decoN{
 		text-decoration: none;
+	}
+	.marginTB12{
+		margin: 12px 0;
+	}
+	.dvFindBack{
+		padding: 130px;
+    	background: #f3f9fd;
+	}
+	.findImg{
+	    width: 58%;
+	    height: 440px;
+	}
+	.findColor{
+		color: #0f5f5c;
+		background: white;
+	}
+	.findIpDv{
+		width: 42%;
 	}
