@@ -85,7 +85,7 @@ public class MemberController {
 		String msg = "", url = "";
 		if (cnt > 0) {
 			String email = memberVo.getEmail1()+"@"+memberVo.getEmail2();
-			msg="이메일 발송 완료, 이메일 인증 후 로그인 하세요!!";
+			/*msg="이메일 발송 완료, 이메일 인증 후 로그인 하세요!!";*/
 			url = "/member/emailAuth.do?id="+memberVo.getId()+"&email="+email;
 			
 		} else {

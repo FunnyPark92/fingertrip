@@ -2,89 +2,89 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
 
-<link href="${pageContext.request.contextPath}/css/jquery-ui.css" rel="stylesheet">
 
 <script>
 $(document).ready(function(){
-
-$("#tabs").tabs();
-$(".accordion").accordion({"heightStyle":"content"});
+	$(".accordion").accordion({"heightStyle":"content"});
+	
+	
+	
+	$(".faqTabNav>li").click(function(){
+		var a=$(this).val();
+		$("input[name=faqCategoryNo]").val(a);
+		$(".faqList").submit();
+	});
 
 });
 </script>
 
 
 <section class="container board marginTop80 marginBottom80 minheight600">
-        <div class="row">
+	<div class="row">
 
-           <!-- 서브메뉴 -->
-            <div class="col-lg-3">
-                <h3>고객센터</h3>
-                <div class="list-group">
-                    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="list-group-item ">공지사항</a>
-                    <a href="<c:url value='/cs/QnA/qna.do'/> " class="list-group-item">Q&amp;A</a>
-                    <a href="<c:url value='/cs/faq/faq.do'/> " class="list-group-item active">FAQ</a>
-                </div>
-            </div>
-    
-           <!-- 서브컨텐츠 -->
-            <div class="col-lg-9">
-            	<div id="tabs">
-					<ul>
-						<li><a href="#tabs-1">결제/환불</a></li>
-						<li><a href="#tabs-2">쿠폰</a></li>
-						<li><a href="#tabs-3">상품</a></li>
-						<li><a href="#tabs-4">기타</a></li>
-					</ul>
-					<div id="tabs-1">
-						<div class="accordion">
-							<c:forEach var="aa" begin="1" end="5">
-								<!-- <h3><span>제목</span></h3> -->
-								<p>제목</p>
-								<div>
-									<p>내용</p>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
-					<div id="tabs-2">
-						<div class="accordion">
-							<c:forEach var="aa" begin="1" end="5">
-								<h3>제목2</h3>
-								<div>
-									<p>내용2</p>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
-					<div id="tabs-3">
-						<div class="accordion">
-							<c:forEach var="aa" begin="1" end="5">
-								<h3>제목3</h3>
-								<div>
-									<p>내용3</p>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
-					<div id="tabs-4">
-						<div class="accordion">
-							<c:forEach var="aa" begin="1" end="5">
-								<h3>제목4</h3>
-								<div>
-									<p>내용4</p>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
+		<!-- 서브메뉴 -->
+		<div class="col-lg-3">
+			<h3>고객센터</h3>
+			<div class="list-group">
+				<a href="<c:url value='/cs/notice/noticeList.do'/>"
+					class="list-group-item ">공지사항</a> <a
+					href="<c:url value='/cs/QnA/qna.do'/> " class="list-group-item">Q&amp;A</a>
+				<a href="<c:url value='/cs/faq/faq.do'/> "
+					class="list-group-item active">FAQ</a>
+			</div>
+		</div>
+
+		<!-- 서브컨텐츠 -->
+		<div class="col-lg-9">
+
+			<form name="faqList" class="faqList" method="get"
+				action="<c:url value='/cs/faq/faq.do'/>">
+				<input name="faqCategoryNo" type="hidden">
+			</form>
+
+			<ul class="faqTabNav clearFix">
+				<li value="1"
+					<c:if test="${param.faqCategoryNo==1 }">
+						class="gray"
+					</c:if>
+				>결제/환불</li>
+				<li value="2"
+					<c:if test="${param.faqCategoryNo==2 }">
+						class="gray"
+					</c:if>
+				>쿠폰</li>
+				<li value="3"
+					<c:if test="${param.faqCategoryNo==3 }">
+						class="gray"
+					</c:if>
+				>상품</li>
+				<li value="4"
+					<c:if test="${param.faqCategoryNo==4 }">
+						class="gray"
+					</c:if>
+				>계정</li>
+				<li value="5"
+					<c:if test="${param.faqCategoryNo==5 }">
+						class="gray"
+					</c:if>
+				>기타</li>
+			</ul>
 			
-				            
-       
+			
+			
+			<div class="accordion">
+				<c:forEach var="faqCategoryNo1" items="${list}">
+					<p>${faqCategoryNo1.title}</p>
+					<div>
+						<p>${faqCategoryNo1.content}</p>
+					</div>
+				</c:forEach>
+			</div>
 
-            </div>
-        </div>
-    </section>
+		</div>
+
+	</div>
+</section>
 
 
 

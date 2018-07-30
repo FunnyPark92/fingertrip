@@ -17,6 +17,25 @@
 $(document).ready(function(){
 	var result="";
 	
+	$("#email3").blur(function(){
+		if ($(this).val().length < 1) {
+			$(this).siblings("div").text($("#email3").prev().text() + "을 입력해 주세요.");
+			
+			return false;
+		} else {
+			$(this).siblings("div").text("");
+		}
+	});
+	
+	$("input[name=gender]").click(function(){
+		$(this).siblings("input[type=hidden]").val($(this).val());
+	});
+	
+	$("input[name=gender]").blur(function(){
+		$(this).siblings("div").text("");
+	});
+	
+	
 	$("#btnJoin").click(function(){
 		var bool=true;
 		
@@ -51,7 +70,10 @@ $(document).ready(function(){
 					$('#password').focus();
 					bool=false;
 				}else if(!validate_userPwd($('#password').val())){
-					alert("비밀번호는 영문자로 시작하는 8~14자 영문,숫자 조합으로만 가능합니다.");
+					alert("비밀번호는 영문자로 시작하는 8~14자 영문,숫자 조합으로 입력해 주세요");
+					bool=false;
+				}else if(!validate_userHp($('#hp2').val()),!validate_userHp($('#hp3').val())){
+					alert("휴대폰 번호를 숫자로 입력해주세요");
 					bool=false;
 				}
 		 	}
@@ -64,7 +86,10 @@ $(document).ready(function(){
 		return bool;
 	});  //Click 이벤트
 	
+
+	
 	$('#id').keyup(function(){
+		
 		if(validate_userid($(this).val()) && $(this).val().length>=2){
 			$.ajax({
 				url:"<c:url value='/member/ajaxUserCheckId.do'/>",
@@ -123,14 +148,14 @@ $(document).ready(function(){
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="password">비밀번호</label>
-       <input type="password" class="form-control valid" name="password" id="password" placeholder="비밀번호" autocomplete="off">
+       <input type="password" class="form-control valid" name="password" id="password" placeholder="영문과 숫자 조합으로 입력" autocomplete="off">
        <div class="mandatory"></div>
      </div>
      
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="password2">비밀번호 확인</label>
-       <input type="password" class="form-control valid" name="password2" id="password2" placeholder="비밀번호 확인" autocomplete="off">
+       <input type="password" class="form-control valid" name="password2" id="password2" placeholder="영문과 숫자 조합으로 입력" autocomplete="off">
        <div class="mandatory"></div>
      </div>
      
