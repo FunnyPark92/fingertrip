@@ -11,5 +11,6 @@ public interface MemberDAO {
 	public int userCheckId(String id);
 	public int emailAuth(String id);
 	public int checkMail(String id);
+	public int memberEdit(MemberVO memberVo);
 	
 }

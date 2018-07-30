@@ -79,6 +79,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.emailAuth(id);
 	}
 
+	@Override
+	public int memberEdit(MemberVO memberVo) {
+		return memberDao.memberEdit(memberVo);
+	}
+
 
 
 }

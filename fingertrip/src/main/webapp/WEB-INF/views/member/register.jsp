@@ -51,6 +51,9 @@ $(document).ready(function(){
 					alert("비밀번호가 일치하지 않습니다.")
 					$('#password').focus();
 					bool=false;
+				}else if(!validate_userPwd($('#password').val())){
+					alert("비밀번호는 영문자로 시작하는 8~14자 영문,숫자 조합으로만 가능합니다.");
+					bool=false;
 				}
 		 	}
 			return bool;

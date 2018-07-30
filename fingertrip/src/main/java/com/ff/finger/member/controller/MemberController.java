@@ -14,10 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ff.finger.common.CommonConstants;
+import com.ff.finger.member.model.MemberDAO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
 
@@ -83,7 +85,7 @@ public class MemberController {
 		String msg = "", url = "";
 		if (cnt > 0) {
 			String email = memberVo.getEmail1()+"@"+memberVo.getEmail2();
-			msg="이메일 발송 완료, 이메일 인중 후 로그인 하세요!!";
+			msg="이메일 발송 완료, 이메일 인증 후 로그인 하세요!!";
 			url = "/member/emailAuth.do?id="+memberVo.getId()+"&email="+email;
 			
 		} else {
@@ -111,12 +113,13 @@ public class MemberController {
 		logger.info("회원수정 비밀번호 확인 화면 보여주기");
       
 		model.addAttribute("menu", "회원정보 수정");
-		model.addAttribute("url", "/member/memberEditOk.do");
+		model.addAttribute("url", "/member/checkPwd.do");
 		return "member/memberPwChk";
    }
 	
-	@RequestMapping("/memberEditOk.do")
-	public String memberEditOk(@ModelAttribute MemberVO vo, HttpSession session, Model model) {
+	
+	@RequestMapping("/checkPwd.do")
+	public String checkPwd(@ModelAttribute MemberVO vo, HttpSession session, Model model) {
 		String id = (String) session.getAttribute("userid");
 		logger.info("비밀번호 체크 파라미터 vo={},id={}",vo,id);
 		int result =memberService.processLogin(id, vo.getPassword());
@@ -136,6 +139,28 @@ public class MemberController {
 		
 		return "common/message";
 	}
+	
+    @RequestMapping("/memberEditOk.do")
+	public String memberEditOk(@ModelAttribute MemberVO memberVo, HttpSession session, Model model) {
+	  String id = (String) session.getAttribute("userid");
+	  memberVo.setId(id);
+	  logger.info("회원정보 수정 파라미터 vo={},id={}",memberVo,id);  
+	
+		 int cnt = memberService.memberEdit(memberVo);
+		 String msg ="", url="/index.do";
+		 if(cnt>0) {
+			 msg ="회원 정보 수정이 완료되었습니다.";
+		 }else {
+			 msg ="회원 정보 수정 실패";
+		 }
+		 model.addAttribute("msg", msg);
+		 model.addAttribute("url",url);
+		 
+		 return "common/message";
+		 
+	  
+	}
+	
 	
 	@RequestMapping("/memberOutReason.do")
 	public String memberOutReason(HttpSession session, @ModelAttribute MemberVO memberVo, Model model) {

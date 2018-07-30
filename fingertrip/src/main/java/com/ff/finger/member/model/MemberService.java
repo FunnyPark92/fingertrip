@@ -10,5 +10,6 @@ public interface MemberService {
 	public int memberLogOut(String id);
 	public boolean userCheckId(String id);
 	public int emailAuth(String id);
+	public int memberEdit(MemberVO memberVo);
 	
 }

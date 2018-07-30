@@ -17,7 +17,7 @@ public class MemberVO {
 	private String addressDetail; /* 상세주소 */
 	private String gender; /* 성별 */
 	private String mailAgreement; /* 메일수신동의여부 DEFAULT 'N' */
-	private String mailAuthen;
+	private String mailAuthen; /*이메일 인증 여부*/
 	private int heartCount; /* 보유하트수 DEFAULT 10 */
 	private Timestamp logoutDate; /* 로그아웃일자 */
 	private Timestamp joinDate; /* 가입일 DEFAULT SYSDATE */

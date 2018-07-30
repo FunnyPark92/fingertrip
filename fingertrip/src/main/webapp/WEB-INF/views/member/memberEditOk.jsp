@@ -6,8 +6,31 @@
   color: #6c757d; 
   font-size:1.3em;
   }
- 
 </style>
+<script>
+ $(document).ready(function(){
+	 
+	$('#btnEdit').click(function(){
+		var bool = true;
+		if($('#password').val()!=$('#password2').val()){
+			alert("비밀번호가 일치하지 않습니다.");
+			bool = false;
+		}else if(!validate_userPwd($('#password').val())){
+		alert("비밀번호는 영문자로 시작하는 8~14자 영문,숫자 조합으로만 가능합니다.");
+		bool = false;
+		}
+		return bool;
+	});
+ });
+ 
+ function validate_userPwd(uPwd){
+		var pattern = new RegExp(/^[a-zA-Z]+[a-zA-Z0-9]{8,14}$/g);
+		return pattern.test(uPwd)
+	}
+
+</script>
+
+
 	
     <br>
     <article class="container">
@@ -15,6 +38,7 @@
           <h2>회원정보수정</h2>
         </div><br>
     <div class="col-md-6 col-md-offset-3">
+     <form role="form" name="frmRegi" method="post" action="<c:url value='/member/memberEditOk.do'/>">
 	 	<div class="form-group">
             <label for="username">이름</label><br>
             <span class="spanGray">username</span>
@@ -68,15 +92,16 @@
           				<option value="019">019</option>
   					</select>
   		 			&nbsp;-&nbsp;
-         			<input type="text" class="form-control" name="hp2" id="hp2">
+         			<input type="text" class="form-control" name="hp2" id="hp2" maxlength="4">
          			&nbsp;-&nbsp;
-         			<input type="text" class="form-control" name="hp3" id="hp3">
+         			<input type="text" class="form-control" name="hp3" id="hp3" maxlength="4">
      		    </div>
         </div>
         <div class="form-group text-center">
-       		<button type="submit" class="btn btn-info">회원정보수정<i class="fa fa-check spaceLeft"></i></button>
+       		<button type="submit" class="btn btn-info" id="btnEdit" >회원정보수정<i class="fa fa-check spaceLeft"></i></button>
        		<button type="submit" class="btn btn-warning">취소하기<i class="fa fa-times spaceLeft"></i></button>
      	</div>
+     </form>
 	 </div>
 	 </article>
 <%@ include file="../inc/bottom.jsp"%>

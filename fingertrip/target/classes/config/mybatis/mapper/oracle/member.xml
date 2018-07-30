@@ -54,7 +54,11 @@
 	<select id="checkMail" parameterType="String" resultType="int">
 		select count(*) from member where id=#{id} and mail_authen ='N'
 	</select>
-
+   
+   <update id="memberEdit" parameterType="memberVo">
+   		update member set password = #{password}, hp1=#{hp1}, hp2=#{hp2},hp3=#{hp3}, zipcode = #{zipcode},address=#{address} ,address_detail = #{addressDetail} 
+   		where id= #{id}
+   </update>
 	
 </mapper>
 
