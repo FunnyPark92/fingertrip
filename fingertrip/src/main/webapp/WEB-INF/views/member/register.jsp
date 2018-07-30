@@ -15,7 +15,6 @@
 <script type="text/javascript" src="<c:url value='/js/member.js'/>"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#name').focus();
 	var result="";
 	
 	$("#btnJoin").click(function(){
