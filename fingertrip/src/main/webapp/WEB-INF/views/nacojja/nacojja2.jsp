@@ -290,7 +290,7 @@
         <div class="col-md-10">
             <div class="tab-content panels-faq">
                 <div class="tab-pane active" id="tab1">
-                    <form action="" name="nacojja" class="course">
+                    <form action="" name="frmNacojja2" class="course">
                         <input type="hidden" value="1">
                         <div class="courseDiv">
                             <label for="continent" class="courseLabel">대륙</label>
@@ -336,13 +336,13 @@
 
                         <div class="courseDiv">
                             <label for="place-name" class="courseLabel">여행지</label>
-                            <img id="place-icon" src="" height="16" width="16">
+                            <img id="place-icon" height="17" width="17">
                             <input type="text" id="place-name" readonly="readonly" style="border: none;">
                         </div>
                         
                         <div id="divRating" class="courseDiv">
                             <label for="place-rating" class="courseLabel">평점</label>
-                            <img id="rating-icon" src="" height="16" width="16">
+                            <img id="rating-icon" height="10" width="10">
                             <input type="text" id="place-rating" readonly="readonly" style="border: none;">
                         </div>
                         
