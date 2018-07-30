@@ -3,6 +3,8 @@ package com.ff.finger.cs.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ff.finger.common.CommonConstants;
@@ -50,6 +53,37 @@ public class NoticeController {
 		return "cs/notice/noticeList";
 	}
 	
+	@RequestMapping(value="/noticeWrite.do", method=RequestMethod.GET)
+	public String noticeWrite() {
+		logger.info("공지사항 글쓰기 화면");
+		
+		return "cs/notice/noticeWrite";
+	}
+	
+	@RequestMapping(value="/noticeWrite.do", method=RequestMethod.POST)
+	public String noticeWrite_post(@ModelAttribute NoticeVO noticeVo, HttpSession session, Model model ) {
+		logger.info("공지사항 글쓰기 처리, noticeVo={}", noticeVo);
+		
+		/*String adminId=(String) session.getAttribute("adminId");
+		logger.info("세션 조회 adminId={}", adminId);*/
+		
+		int adminNo=noticeService.getAdminNo("admin3");
+		noticeVo.setAdminNo(adminNo);
+		logger.info("관리자 번호 조회 결과, noticeVo={}", noticeVo);
+		
+		int cnt=noticeService.noticeInsert(noticeVo);
+		logger.info("글쓰기 처리 후, cnt={}", cnt);
+		
+		if(cnt>0) {
+			model.addAttribute("msg", "공지사항 등록이 완료되었습니다.");
+		}else {
+			model.addAttribute("msg", "공지사항 등록이 실패하였습니다.");
+		}
+		model.addAttribute("url", "/cs/notice/noticeList.do");
+		
+		return "common/message";
+	}
+	
 	@RequestMapping("/countUpdate.do")
 	public String countUpdate(@RequestParam int noticeNo, Model model) {
 		logger.info("공지사항 조회수 증가, 파라미터 noticeNo={}", noticeNo);
@@ -68,8 +102,20 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/noticeDetail.do")
-	public String noticeDetail(@RequestParam(defaultValue="0") int noticeNo) {
-		logger.info("공지사항 상세보기 화면");
+	public String noticeDetail(@RequestParam(defaultValue="0") int noticeNo, Model model) {
+		logger.info("공지사항 상세보기 화면, 파라미터 noticeNo={}", noticeNo);
+		
+		if(noticeNo==0) {
+			model.addAttribute("msg", "잘못된 url 입니다.");
+			model.addAttribute("url", "/cs/notice/noticeList.do");
+			
+			return "common/message";
+		}
+		NoticeVO vo=noticeService.noticeDetail(noticeNo);
+		logger.info("공지사항 상세보기 조회 결과, vo={}", vo);
+		
+		model.addAttribute("vo", vo);
+		
 		return "cs/notice/noticeDetail";
 	}
 }

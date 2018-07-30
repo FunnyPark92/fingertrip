@@ -3,12 +3,23 @@
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
-		<div class="subBg subBgNaco">
-			<p>나코짜 목록</p>
-			<div class="subBgBlack"></div>
-		</div>
-	<div class="container">
-			
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('select[name="search1"]').change(function(){
+			$('form[name=frmHid] input[name=searchCondition2]').val($('select[name=search1] option:selected').val());
+			$('form[name=frmHid]').submit();
+		});
+	});
+</script>
+
+	<div class="subBg subBgNaco">
+		<p>나코짜 목록</p>
+		<div class="subBgBlack"></div>
+	</div>
+	<div class="container marginBottom100">
+			<form name="frmHid" action="<c:url value='/nacojja/nacojjaList.do'/>" method="post">
+				<input type="hidden" name="searchCondition2">
+			</form>
 			<div class="marginBottom20 overflowH pad10">
 				<span class="colorGray float-left marginTop10">Showing 12 of 17 results</span>
 				<form action="" method="post" class="colorGray form-inline float-right pad10">
@@ -19,38 +30,62 @@
 						<option value="20" class="colorGray">20</option>
 					</select>
 				</form>
-				<form action="" method="post" class="colorGray form-inline float-right pad10">
-					<select name="searchCondition" class="form-control colorGray marginR10">
-						<option value="" class="colorGray">모든 나코짜 목록</option>
-						<option value="1" class="colorGray">하트 진행 중</option>
-						<option value="2" class="colorGray">입찰 진행 중</option>
-						<option value="3" class="colorGray">입찰 성공/결제 진행 중</option>
-						<option value="4" class="colorGray">입찰 실패</option>
-						<option value="5" class="colorGray">종료</option>
+				<form action="<c:url value='/nacojja/nacojjaList.do'/>" method="post" class="colorGray form-inline float-right pad10">
+					<select name="search1" class="form-control colorGray marginR10">
+						<option value="0" class="colorGray">모든 나코짜 목록</option>
+						<option value="1" class="colorGray" 
+							<c:if test="${param.searchCondition2==1}">
+								selected="selected"	
+							</c:if>
+						>하트 진행 중</option>
+						<option value="2" class="colorGray"
+							<c:if test="${param.searchCondition2==2}">
+								selected="selected"	
+							</c:if>
+						>입찰 진행 중</option>
+						<option value="3" class="colorGray"
+							<c:if test="${param.searchCondition2==3 }">
+								selected="selected"	
+							</c:if>
+						>입찰 성공/결제 진행 중</option>
+						<option value="4" class="colorGray"
+							<c:if test="${param.searchCondition2==4 }">
+								selected="selected"	
+							</c:if>
+						>입찰 실패</option>
+						<option value="5" class="colorGray"
+							<c:if test="${param.searchCondition2==5}">
+								selected="selected"	
+							</c:if>
+						>종료</option>
 					</select>
 				</form>
 			</div>
 			
-			<form name="frmPage" method="post" action="<c:url value='/myPage/nacojja/naccojjaList.do'/>">
-				<input type="hidden" name="currentPage" >
-				<input type="hidden" name="searchCondition" value="${param.searchCondition}">	
-			</form>
-			
-			<%-- <c:if test="${!empty list}"> --%>
-				<c:forEach begin="1" end="12"><%--  var="vo" items="${list }" --%>
+			<c:if test="${!empty list}">
+				<c:forEach var="map" items="${list }" >
 					<div class="listDv">
-						<a href="">
-							<img class="listImg" alt="" src="${pageContext.request.contextPath }/img/EiffelDay.jpg">
+						<a href="#" class="decoN">
+							<img class="listImg" alt="" src="${pageContext.request.contextPath }/img/${map['THUMB_IMG']}">
 							<div class="pad15 listSmDv">
-								<p class="listTitle"> [3색매력]알찬일정,동화같은 서유럽3국8일(프랑스/스위스/이탈리아)</p>
-								<span class="colorGreen">[6박 8일]</span><br>
-								<span class="colorOrange">출발일: 2018-08-11</span><br>
-								<span class="colorRed">하트 진행 중</span>
+								<p class="listTitle"> 
+									<c:if test="${fn:length(map['TITLE'])>28 }">
+										${fn:substring(map['TITLE'],0,28) }...
+									</c:if>
+									<c:if test="${fn:length(map['TITLE'])<=28 }">
+										${map['TITLE']}
+									</c:if>
+								</p>
+								<span>[${map['TERM'] }DAYS]</span><br>
+								<span>${map['COUNTRIES'] }</span><br>
+								<span>출발일: <fmt:formatDate value="${map['START_DAY']}" pattern="yyyy-MM-dd"/></span><br>
+								<span class="colorBlue font-weight-bold">${map['PROGRESS_STATUS'] }</span><br>
+								<span class="listTitle float-right"><img src="${pageContext.request.contextPath }/img/heart.png" class="qna">${map['HEART_COUNT'] }</span>
 							</div>
 						</a>
 					</div>
 				</c:forEach>
-			<%-- </c:if> --%>
+			</c:if>
 			
 			<div class="divPage clear text-center pad15 marginBottom40">
 				<!-- 페이지 번호 추가 -->		
@@ -84,7 +119,20 @@
 				<%-- </c:if> --%>
 				<!--  페이지 번호 끝 -->
 				<a href="#top" title="Back to top" class="float-right colorPink listTitle">▲TOP</a>
-			</div>				
+			</div>	
+			
+			<div class="margin0 width500">
+				<form action="<c:url value='/nacojja/nacojjaList.do'/>" method="post" class="colorGray form-inline pad10">
+					<input type="hidden" name="searchCondition2" value="${param.searchCondition2 }">
+					<select name="searchCondition" class="form-control colorGray marginR10">
+						<option value="title" class="colorGray">제목</option>
+						<option value="countries" class="colorGray">나라</option>
+						<option value="term" class="colorGray">기간</option>
+					</select>
+					<input type="text" class="form-control" name="searchKeyword">
+					<input type="submit" value="검색" class="btn btn-primary marginL10">
+				</form>
+			</div>			
 	</div>
 
 <%@ include file="../inc/bottom.jsp"%>

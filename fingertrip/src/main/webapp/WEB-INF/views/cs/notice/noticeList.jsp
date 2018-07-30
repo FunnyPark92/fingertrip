@@ -60,31 +60,35 @@
 		                            </a>
 	                            </td>
 	                            <td class="text-center">${vo.readCount }</td>
-	                            <td class="text-center"><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd hh:mm"/></td>
+	                            <td class="text-center"><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd"/></td>
 	                        </tr>
 	                     </c:forEach>
                      </c:if>
                     </tbody>
                 </table>
-                
-                <div class="margin0 width150 marginT30">
-                	<c:if test="${pagingInfo.firstPage>1 }">
-                		<a href="#" class="decoN colorBlue" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
-                	</c:if>
-                	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
-						<c:choose>
-							<c:when test="${i==pagingInfo.currentPage }">
-								<span class="colorBlue font-weight-bold" >${i }</span>
-							</c:when>
-							<c:otherwise>
-								<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i }</a></span>
-							</c:otherwise>
-						</c:choose>
-                	</c:forEach>
-                	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-                		<a href="#" class="decoN colorBlue" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
-                	</c:if>
-                </div>
+                <div class="float-right spanId">
+             		<a href="<c:url value='/cs/notice/noticeWrite.do'/>" class="btn btn-dark marginTop10">글쓰기</a>
+           		</div>
+                <div>
+	                <div class="margin0 width150 marginT30">
+	                	<c:if test="${pagingInfo.firstPage>1 }">
+	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+	                	</c:if>
+	                	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+							<c:choose>
+								<c:when test="${i==pagingInfo.currentPage }">
+									<span class="colorBlue font-weight-bold" >${i }</span>
+								</c:when>
+								<c:otherwise>
+									<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i }</a></span>
+								</c:otherwise>
+							</c:choose>
+	                	</c:forEach>
+	                	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+	                	</c:if>
+	                </div>
+	           	</div>
                 <div class="width500 margin0 marginT30">
                 	<form action="<c:url value='/cs/notice/noticeList.do'/>" method="post" class="overflowH">
                 		<select name="searchCondition" class="float-left form-control w-25">

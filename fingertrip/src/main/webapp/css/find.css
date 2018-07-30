@@ -65,6 +65,7 @@
 	    margin: 10px;
 	    float: left;
 	    width: 255px;
+	    height: 405px;
 	}
 	.listImg{
 		width: 100%;
@@ -77,11 +78,13 @@
 	}
 	.listTitle{
 	    font-size: 20px;
+	    height: 80px;
+    	margin: 0px;
+    	font-weight: bold;
 	}
 	.listSmDv{
 		font-size: 17px;
 	    color: black;
-	    font-weight: bold;
 	}
 	.colorGreen{
 		color: #00BCD4;

@@ -9,7 +9,8 @@ package com.ff.finger.common;
 public class SearchVO {
 	/** 검색조건 */
 	private String searchCondition = "";
-	
+	private int searchCondition2 = 0;
+
 	/** 검색키워드 */
 	private String searchKeyword = "";
     
@@ -55,6 +56,14 @@ public class SearchVO {
     public void setSearchCondition(String searchCondition) {
     	this.searchCondition = searchCondition;
     }
+
+    public int getSearchCondition2() {
+		return searchCondition2;
+	}
+
+    public void setSearchCondition2(int searchCondition2) {
+		this.searchCondition2 = searchCondition2;
+	}
 
     public String getSearchKeyword() {
     	return searchKeyword;
@@ -113,16 +122,16 @@ public class SearchVO {
 		this.recordCountPerPage = recordCountPerPage;
 	}
 
-
 	@Override
 	public String toString() {
-		return "SearchVO [searchCondition=" + searchCondition
-				+ ", searchKeyword=" + searchKeyword + ", searchUseYn="
-				+ searchUseYn + ", currentPage=" + currentPage
-				+ ", blockSize=" + blockSize + ", firstRecordIndex="
-				+ firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex
-				+ ", recordCountPerPage=" + recordCountPerPage + "]";
+		return "SearchVO [searchCondition=" + searchCondition + ", searchCondition2=" + searchCondition2
+				+ ", searchKeyword=" + searchKeyword + ", searchUseYn=" + searchUseYn + ", currentPage=" + currentPage
+				+ ", blockSize=" + blockSize + ", firstRecordIndex=" + firstRecordIndex + ", lastRecordIndex="
+				+ lastRecordIndex + ", recordCountPerPage=" + recordCountPerPage + "]";
 	}
+
+
+	
 
 	
 

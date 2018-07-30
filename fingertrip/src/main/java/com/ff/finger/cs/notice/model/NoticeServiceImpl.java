@@ -27,5 +27,23 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDao.countUpdateNotice(noticeNo);
 	}
 
+	@Override
+	public NoticeVO noticeDetail(int noticeNo) {
+		return noticeDao.noticeDetail(noticeNo);
+	}
+
+	@Override
+	public int getAdminNo(String id) {
+		return noticeDao.getAdminNo(id);
+	}
+
+	@Override
+	public int noticeInsert(NoticeVO noticeVo) {
+		return noticeDao.noticeInsert(noticeVo);
+	}
+
+
+	
+
 	
 }

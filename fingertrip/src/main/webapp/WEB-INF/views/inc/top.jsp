@@ -41,6 +41,10 @@
     <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script>
     
+    <!-- ckEditor -->
+    <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/decoupled-document/ckeditor.js"></script> -->
+    
     <script type="text/javascript">
     	$(document).ready(function(){
     		$("#btnLogout").click(function(){

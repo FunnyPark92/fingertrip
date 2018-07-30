@@ -21,21 +21,21 @@
                 <table class="table tableBorder">
                     <tr>
                         <th>제목</th>
-                        <td>회원가입을 환영합니다</td>
+                        <td>${vo.title }</td>
                     </tr>
                     <tr>
                         <th>등록일</th>
-                        <td>18.07.18</td>
+                        <td><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd"/> </td>
                     </tr>
                     <tr>
                         <th>조회수</th>
-                        <td>10</td>
+                        <td>${vo.readCount }</td>
                     </tr>
                     
                     <tr>
                         <td colspan="2">
                             <div class="minheight300">
-                                트립핑거에 오신 것을 환영하오. 낯선이여.
+                                ${vo.content }
                             </div>
                         </td>
                     </tr>

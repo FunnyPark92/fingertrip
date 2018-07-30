@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.course">
+	<select id="nacojjaList" resultType="map" parameterType="SearchVO">
+		select * 
+		from(
+		    select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, listagg(country, ',') within group (order by course_no) as countries
+		    from(
+		        select distinct course_no, country, title, start_day, end_day-start_day as term, thumb_img, heart_count, p.progress_status, p.progress_no
+		        from courseDayTravelCountryView c join progress p
+		        on c.progress_no=p.progress_no
+		        where country is not null
+		    )
+		    group by course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no
+		    order by course_no desc
+		)
+		<where>
+			<if test="searchCondition2!=0">
+				progress_no = #{searchCondition2}
+			</if>
+			<if test="searchKeyword!=null and searchKeyword!=''">
+				<if test="searchCondition=='term'">
+					term=#{searchKeyword}
+				</if>
+				<if test="searchCondition!='term'">
+					#{searchCondition} like '%'||#{searchKeyword}||'%'
+				</if>
+			</if>
+		</where>
+	</select>
+
+</mapper>
