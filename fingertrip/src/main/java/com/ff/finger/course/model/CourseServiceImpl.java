@@ -17,4 +17,9 @@ public class CourseServiceImpl implements CourseService{
 		return courseDao.nacojjaList(searchVo);
 	}
 
+	@Override
+	public int nacojja1Write(CourseVO courseVo) {
+		return courseDao.nacojja1Write(courseVo);
+	}
+
 }

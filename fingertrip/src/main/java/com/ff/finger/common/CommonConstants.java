@@ -7,11 +7,15 @@ public interface CommonConstants {
 	
 	//로그인 처리에서 사용
 	public static final int LOGIN_OK = 1;  //로그인 성공
-	public static final int PWD_MISMATCH = 2;  //비밀번호가 일치하지 않는다	
-	public static final int ID_NONE = 3;  //해당 아이디가 없다
+	public static final int PWD_MISMATCH = 2;  //비밀번호가 일치하지 않는다.	
+	public static final int ID_NONE = 3;  //해당 아이디가 없다.
 	public static final int EMAIL_AUTHENTICATION= 4;
 	
 	//공지사항 페이지 처리
 	public static final int BLOCK_SIZE=10;
 	public static final int RECORD_COUNT_PER_PAGE=10;
+	
+	//파일 업로드에 사용
+	public static final int PATH_FLAG_PDS = 1; //일반자료실
+	public static final int PATH_FLAG_IMAGE = 2; //코스등록 시-이미지 업로드	
 }

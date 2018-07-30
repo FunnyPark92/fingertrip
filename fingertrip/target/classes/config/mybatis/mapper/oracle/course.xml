@@ -29,5 +29,10 @@
 			</if>
 		</where>
 	</select>
+	
+	<insert id="nacojja1Write" parameterType="CourseVO">
+		INSERT INTO COURSE(COURSE_NO, TITLE, START_DAY, END_DAY, THUMB_IMG, CONTENT, MEMBER_NO)
+		VALUES(COURSE_SEQ.NEXTVAL, #{title}, #{startDay}, #{endDay}, #{thumbImg}, #{content}, 20)
+	</insert>
 
 </mapper>

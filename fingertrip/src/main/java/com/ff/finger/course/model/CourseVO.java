@@ -1,19 +1,20 @@
 package com.ff.finger.course.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class CourseVO {
-	private int courseNo;
-	private String title;
-	private Timestamp startDay;
-	private Timestamp endDay;
-	private String thumbImg;
-	private String content;
-	private int heartCount;
-	private Timestamp bidStartDay;
-	private Timestamp regDate;
-	private int memberNo;
-	private int progressNo;
+	private int courseNo; /* 코스번호 NOT NULL*/
+	private String title; /* 제목 NOT NULL*/
+	private Date startDay; /* 출발일 NOT NULL*/
+	private Date endDay; /* 도착일 NOT NULL*/
+	private String thumbImg; /* 대표이미지 NOT NULL*/
+	private String content; /* 설명 */
+	private int heartCount; /* 하트수 DEFAULT 0*/
+	private Timestamp bidStartDay; /* 입찰시작일 */
+	private Timestamp regDate; /* 등록일 DEFAULT SYSDATE*/
+	private int memberNo; /* 회원번호 NOT NULL*/
+	private int progressNo; /* 진행상태번호 DEFAULT 1*/
 	
 	public int getCourseNo() {
 		return courseNo;
@@ -27,16 +28,16 @@ public class CourseVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Timestamp getStartDay() {
+	public Date getStartDay() {
 		return startDay;
 	}
-	public void setStartDay(Timestamp startDay) {
+	public void setStartDay(Date startDay) {
 		this.startDay = startDay;
 	}
-	public Timestamp getEndDay() {
+	public Date getEndDay() {
 		return endDay;
 	}
-	public void setEndDay(Timestamp endDay) {
+	public void setEndDay(Date endDay) {
 		this.endDay = endDay;
 	}
 	public String getThumbImg() {
