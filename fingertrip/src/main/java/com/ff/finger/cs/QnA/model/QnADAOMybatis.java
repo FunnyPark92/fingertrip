@@ -27,9 +27,9 @@ public class QnADAOMybatis implements QnADAO {
 	}
 
 	@Override
-	public QnAVO selectByNo(int qnaNo) {
-		QnAVO vo=sqlSession.selectOne(namespace+"selectByNo", qnaNo);
-		return vo;
+	public List<QnAVO> selectByNo(int qnaNo) {
+		List<QnAVO> list=sqlSession.selectList(namespace+"selectByNo", qnaNo);
+		return list;
 	}
 
 	@Override
@@ -40,5 +40,20 @@ public class QnADAOMybatis implements QnADAO {
 	@Override
 	public int QnAtotalRecord(SearchVO searchVo) {
 		return sqlSession.selectOne(namespace+"QnAtotalRecord", searchVo);
+	}
+
+	@Override
+	public QnAVO selectByNoOne(int qnaNo) {
+		return sqlSession.selectOne(namespace+"selectByNoOne", qnaNo);
+	}
+
+	@Override
+	public int reply(QnAVO vo) {
+		return sqlSession.insert(namespace+"reply", vo);
+	}
+
+	@Override
+	public int updateSortNo(int qnaNo) {
+		return sqlSession.update(namespace+"updateSortNo", qnaNo);
 	}
 }
