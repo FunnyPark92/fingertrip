@@ -28,7 +28,7 @@ public class EmailAuthenticationController {
 	
 
 	@RequestMapping("/member/emailAuth.do") 
-	public String emailAuth(@RequestParam String id, String email) throws MessagingException, UnsupportedEncodingException {
+	public String emailAuth(@RequestParam String id, String email,Model model) throws MessagingException, UnsupportedEncodingException {
 		logger.info("이메일 전송 컨트롤러 id={} ,email={}",id,email);
 		
 		MailHandler sendMail = new MailHandler(mailSender);
@@ -44,9 +44,11 @@ public class EmailAuthenticationController {
 		sendMail.setTo(email);
 		sendMail.send();
 		
+		String msg="이메일 발송 완료, 인증 후 로그인하세요 !!", url="/index.do";
+		model.addAttribute("msg",msg);
+		model.addAttribute("url", url);
 		
-		
-		return "index";
+		return "common/message";
 		
 	}
 	

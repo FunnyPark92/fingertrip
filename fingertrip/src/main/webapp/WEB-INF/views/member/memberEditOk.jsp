@@ -7,26 +7,32 @@
   font-size:1.3em;
   }
 </style>
+<script type="text/javascript" src="<c:url value='/js/member.js'/>"></script>
 <script>
  $(document).ready(function(){
 	 
 	$('#btnEdit').click(function(){
 		var bool = true;
+		
 		if($('#password').val()!=$('#password2').val()){
 			alert("비밀번호가 일치하지 않습니다.");
 			bool = false;
 		}else if(!validate_userPwd($('#password').val())){
-		alert("비밀번호는 영문자로 시작하는 8~14자 영문,숫자 조합으로만 가능합니다.");
+		alert("비밀번호는 영문자로 시작하는 8~14자 영문,숫자 조합으로 입력해주세요");
 		bool = false;
+		}else if(!validate_userHp($('#hp2').val()),!validate_userHp($('#hp3').val())){
+			alert("휴대폰 번호를 숫자로 입력해주세요");
+			bool=false;
 		}
 		return bool;
 	});
+	
+	$('#btnCancel').click(function(){
+		history.back();
+	});
  });
  
- function validate_userPwd(uPwd){
-		var pattern = new RegExp(/^[a-zA-Z]+[a-zA-Z0-9]{8,14}$/g);
-		return pattern.test(uPwd)
-	}
+
 
 </script>
 
@@ -56,11 +62,11 @@
         
         <div class="form-group">
        		<label for="password">비밀번호</label>
-       		<input type="password" class="form-control" name="password" id="password">
+       		<input type="password" class="form-control valid" name="password" id="password" placeholder="영문과 숫자 조합으로 입력" autocomplete="off">
      	</div>
      	<div class="form-group">
        		<label for="password2">비밀번호 확인</label>
-       		<input type="password" class="form-control" name="password2" id="password2">
+       		<input type="password" class="form-control valid" name="password2" id="password2" placeholder="영문과 숫자 조합으로 입력" autocomplete="off">
         </div>
         
         <div class="form-group" style="margin-bottom:0px">
@@ -83,7 +89,7 @@
     	    <div class="form-group">
        			<label for="hp1">휴대폰 번호 입력</label>
        			<div class="input-group" style="width:525px">
-         			<select name="hp1" id="hp1" title="휴대폰 앞자리" class="form-control">
+         			<select name="hp1" id="hp1" title="휴대폰 앞자리" class="form-control" >
            				<option value="010">010</option>
            				<option value="011">011</option>
            				<option value="016">016</option>
@@ -92,14 +98,14 @@
           				<option value="019">019</option>
   					</select>
   		 			&nbsp;-&nbsp;
-         			<input type="text" class="form-control" name="hp2" id="hp2" maxlength="4">
+         			<input type="text" class="form-control valid" name="hp2" id="hp2" maxlength="4">
          			&nbsp;-&nbsp;
-         			<input type="text" class="form-control" name="hp3" id="hp3" maxlength="4">
+         			<input type="text" class="form-control valid" name="hp3" id="hp3" maxlength="4">
      		    </div>
         </div>
         <div class="form-group text-center">
        		<button type="submit" class="btn btn-info" id="btnEdit" >회원정보수정<i class="fa fa-check spaceLeft"></i></button>
-       		<button type="submit" class="btn btn-warning">취소하기<i class="fa fa-times spaceLeft"></i></button>
+       		<button type="button" class="btn btn-warning" id="btnCancel">취소하기<i class="fa fa-times spaceLeft"></i></button>
      	</div>
      </form>
 	 </div>

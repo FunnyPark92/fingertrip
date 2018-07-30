@@ -5,7 +5,6 @@ $(document).ready(function(){
 		$(this).blur(function(){
 			if ($(this).val().length < 1) {
 				$(this).siblings("div").text($(this).prev().text() + "을 입력해 주세요.");
-				
 				return false;
 			} else {
 				$(this).siblings("div").text("");
@@ -13,24 +12,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#email3").blur(function(){
-		if ($(this).val().length < 1) {
-			$(this).siblings("div").text($("#email3").prev().text() + "을 입력해 주세요.");
-			
-			return false;
-		} else {
-			$(this).siblings("div").text("");
-		}
-	});
-	
-	$("input[name=gender]").click(function(){
-		$(this).siblings("input[type=hidden]").val($(this).val());
-	});
-	
-	$("input[name=gender]").blur(function(){
-		$(this).siblings("div").text("");
-	});
-	
+
 	
 	$("#email2").change(function(){
 		if ($(this).val() == "etc") {
@@ -60,8 +42,12 @@ function validate_userid(uid){
 	return pattern.test(uid);
 }
 function validate_userPwd(uPwd){
-	var pattern = new RegExp(/^[a-zA-Z]+[a-zA-Z0-9]{8,14}$/g);
-	return pattern.test(uPwd)
+	var pattern = new RegExp(/^[a-zA-Z]+[a-zA-Z0-9]{7,13}$/g);
+	return pattern.test(uPwd);
+}
+function validate_userHp(hp){
+	var pattern = new RegExp(/^[0-9]+$/g);
+	return pattern.test(hp);
 }
 
 
