@@ -19,12 +19,17 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int processLogin(String id, String pwd) {
 		String dbPwd = memberDao.selectDbPwd(id);
+		int cnt = memberDao.checkMail(id);
 		
 		int result = 0;
 		if (dbPwd != null && !dbPwd.isEmpty()) {
 			if (dbPwd.equals(pwd)) {
-				result = CommonConstants.LOGIN_OK;
-			} else {
+				if(cnt == 1) {
+					result = CommonConstants.EMAIL_AUTHENTICATION;
+				}else {
+					result = CommonConstants.LOGIN_OK;
+				}
+			}else {
 				result = CommonConstants.PWD_MISMATCH;
 			}
 		} else {
@@ -67,6 +72,11 @@ public class MemberServiceImpl implements MemberService {
 		}else {
 			return true; // 사용 가능
 		}
+	}
+
+	@Override
+	public int emailAuth(String id) {
+		return memberDao.emailAuth(id);
 	}
 
 

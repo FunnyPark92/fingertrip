@@ -17,6 +17,7 @@ public class MemberVO {
 	private String addressDetail; /* 상세주소 */
 	private String gender; /* 성별 */
 	private String mailAgreement; /* 메일수신동의여부 DEFAULT 'N' */
+	private String mailAuthen;
 	private int heartCount; /* 보유하트수 DEFAULT 10 */
 	private Timestamp logoutDate; /* 로그아웃일자 */
 	private Timestamp joinDate; /* 가입일 DEFAULT SYSDATE */
@@ -137,14 +138,23 @@ public class MemberVO {
 	public void setOutReasonNo(int outReasonNo) {
 		this.outReasonNo = outReasonNo;
 	}
+	public String getMailAuthen() {
+		return mailAuthen;
+	}
+	public void setMailAuthen(String mailAuthen) {
+		this.mailAuthen = mailAuthen;
+	}
 	
 	@Override
 	public String toString() {
 		return "MemberVO [memberNo=" + memberNo + ", name=" + name + ", id=" + id + ", password=" + password
 				+ ", email1=" + email1 + ", email2=" + email2 + ", hp1=" + hp1 + ", hp2=" + hp2 + ", hp3=" + hp3
 				+ ", zipcode=" + zipcode + ", address=" + address + ", addressDetail=" + addressDetail + ", gender="
-				+ gender + ", mailAgreement=" + mailAgreement + ", heartCount=" + heartCount + ", logoutDate="
-				+ logoutDate + ", joinDate=" + joinDate + ", outDate=" + outDate + ", outReasonNo=" + outReasonNo + "]";
+				+ gender + ", mailAgreement=" + mailAgreement + ", mailAuthen=" + mailAuthen + ", heartCount="
+				+ heartCount + ", logoutDate=" + logoutDate + ", joinDate=" + joinDate + ", outDate=" + outDate
+				+ ", outReasonNo=" + outReasonNo + "]";
 	}
+	
+	
 	
 }

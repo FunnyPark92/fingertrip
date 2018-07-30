@@ -46,6 +46,16 @@
 	<select id="userCheckId" parameterType="String" resultType="int">
 		select count(*) from member where id =#{id}
 	</select>
+	
+	<update id="emailAuth" parameterType="String">
+		update member set mail_authen = 'Y' where id= #{id}
+	</update>
+	
+	<select id="checkMail" parameterType="String" resultType="int">
+		select count(*) from member where id=#{id} and mail_authen ='N'
+	</select>
+
+	
 </mapper>
 
 

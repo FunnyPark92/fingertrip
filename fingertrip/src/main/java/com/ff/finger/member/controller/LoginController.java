@@ -73,6 +73,8 @@ public class LoginController {
 			msg = "비밀번호 불일치!";
 		} else if (result == CommonConstants.ID_NONE) {
 			msg = "존재하지 않는 아이디임!";
+		} else if (result == CommonConstants.EMAIL_AUTHENTICATION){
+			msg = "이메일 인증 후 로그인 하셔야 합니다!";
 		} else {
 			msg = "로그인 처리 실패!";
 		}

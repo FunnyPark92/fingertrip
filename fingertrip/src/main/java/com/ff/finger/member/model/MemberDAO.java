@@ -9,4 +9,7 @@ public interface MemberDAO {
 	public int memberOut(MemberVO memberVo);
 	public int memberLogOut(String id);
 	public int userCheckId(String id);
+	public int emailAuth(String id);
+	public int checkMail(String id);
+	
 }

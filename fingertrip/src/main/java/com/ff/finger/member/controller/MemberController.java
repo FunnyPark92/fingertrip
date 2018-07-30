@@ -1,5 +1,8 @@
 package com.ff.finger.member.controller;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,6 +29,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+
 	@RequestMapping("/agreement.do")
 	public String agreement() {
 		logger.info("회원약관 화면 보여주기");
@@ -49,7 +53,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("/insertMember.do")
-	public String insertMember(@ModelAttribute MemberVO memberVo, @RequestParam String email3, Model model) {
+	public String insertMember(@ModelAttribute MemberVO memberVo, @RequestParam String email3, Model model) throws UnsupportedEncodingException, MessagingException {
 		logger.info("회원가입 처리 전 파라미터, memberVo={}", memberVo);
 		logger.info("회원가입 처리 전 파라미터, email3={}", email3);
 
@@ -65,6 +69,7 @@ public class MemberController {
 			memberVo.setHp2("");
 			memberVo.setHp3("");
 		}
+		
 		if (memberVo.getMailAgreement() == null || memberVo.getMailAgreement().isEmpty()) {
 			memberVo.setMailAgreement("N");
 		} else {
@@ -77,18 +82,19 @@ public class MemberController {
 		
 		String msg = "", url = "";
 		if (cnt > 0) {
-			msg = "회원가입 되았으~";
-			url = "/index.do";
+			String email = memberVo.getEmail1()+"@"+memberVo.getEmail2();
+			msg="이메일 발송 완료, 이메일 인중 후 로그인 하세요!!";
+			url = "/member/emailAuth.do?id="+memberVo.getId()+"&email="+email;
+			
 		} else {
 			msg = "회원가입 실패";
 			url = "/member/register.do";
 		}
-		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
-		
 		return "common/message";
 	}
+	
 
 	@RequestMapping("/memberOut.do")
 	public String memberOut(Model model) {
@@ -106,7 +112,6 @@ public class MemberController {
       
 		model.addAttribute("menu", "회원정보 수정");
 		model.addAttribute("url", "/member/memberEditOk.do");
-		
 		return "member/memberPwChk";
    }
 	

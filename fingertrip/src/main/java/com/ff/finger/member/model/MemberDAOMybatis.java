@@ -52,6 +52,16 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.selectOne(namespace+"userCheckId",id);
 	}
 
+	@Override
+	public int emailAuth(String id) {
+		return sqlSession.update(namespace+"emailAuth",id);
+	}
+
+	@Override
+	public int checkMail(String id) {
+		return sqlSession.selectOne(namespace+"checkMail",id);
+	}
+
 	
 	
 
