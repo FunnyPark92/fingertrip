@@ -148,7 +148,7 @@ $(document).ready(function(){
        <div class="input-group">
          <input type="text" class="form-control" name="address" id="address" placeholder="주소 입력" readonly="readonly" autocomplete="off">
          <span class="input-group-btn">
-	       <input type="button" value="우편번호 찾기" class="btn btn-primary" class="fa fa-mail-forward spaceLeft" id="btnZipcode" title="새창열림">
+	       <input type="button" value="주소 검색" class="btn btn-primary" class="fa fa-mail-forward spaceLeft" id="btnZipcode" title="새창열림">
          </span>
        </div>
      </div>
