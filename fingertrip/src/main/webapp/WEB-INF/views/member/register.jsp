@@ -7,7 +7,7 @@
  		   color: red;}
 }
 
-.divId{`
+.divId{
 	width: 600px;
 }
 </style>
@@ -69,7 +69,7 @@ $(document).ready(function(){
 			bool=false;
 			alert(result);
 		}
-		return false;
+		return bool;
 		
 	}); //Click 이벤트
 	
@@ -141,7 +141,7 @@ $(document).ready(function(){
 			$('.message').html("아이디는 2자리 이상!");
 			$('.message').show();
 			$('#checkId').val('N');
-			result ="아이디는 2자리 이상이여야 합니다.";
+			result ="아이디는 영문 혹은 숫자로 2자리 이상 입력하셔야 합니다.";
 		}
 		
 	});
@@ -166,7 +166,7 @@ $(document).ready(function(){
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="id">회원ID</label>
-       <input type="text" class="form-control valid bivId" name="id" id="id" placeholder="영문 혹은 숫자로만 입력해주세요" autocomplete="off">
+       <input type="text" class="form-control valid divId" name="id" id="id" placeholder="영문 혹은 숫자로만 입력해주세요" autocomplete="off">
        <span class="message"></span>
        <div class="mandatory"></div>
      </div>
