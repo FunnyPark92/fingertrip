@@ -7,22 +7,20 @@
 	$(document).ready(function(){
 		$('select[name="search2"]').change(function(){
 			$('form[name=frmSearch2] input[name=searchCondition2]').val($('select[name=search2] option:selected').val());
-			$('form[name=frmSearch2] input[name=recordCountPerPage]').val($('select[name=search1] option:selected').val());
+			$('form[name=frmSearch2] input[name=recordCountPerPage]').val($('select[name=recordCountPerPage] option:selected').val());
 			$('form[name=frmSearch2]').submit();
 		});
-		$('select[name="search1"]').change(function(){
+		$('select[name="recordCountPerPage"]').change(function(){
 			$('form[name=frmSearch2] input[name=searchCondition2]').val($('select[name=search2] option:selected').val());
-			$('form[name=frmSearch2] input[name=recordCountPerPage]').val($('select[name=search1] option:selected').val());
+			$('form[name=frmSearch2] input[name=recordCountPerPage]').val($('select[name=recordCountPerPage] option:selected').val());
 			$('form[name=frmSearch2]').submit();
 		});
 	});
 	
 	function pageFunc(currentPage){
 		frmPage.currentPage.value=currentPage;
+		frmPage.recordCountPerPage.value=frmSearch1.recordCountPerPage.value;
 		frmPage.submit();
-		/* $('form[name=frmPage] input[name=currentPage]').val(currentPage);
-		$('form[name=frmPage] input[name=readCountPerPage]').val($('select[name=search1] option:selected').val());
-		$('form[name=frmPage]').submit(); */
 	}
 </script>
 
@@ -34,7 +32,7 @@
 			<form name="frmPage" action="<c:url value='/nacojja/nacojjaList.do'/>" method="post">
 				<input type="hidden" name="currentPage">
 				<input type="hidden" name="searchCondition2" value=${param.searchCondition2 }>
-				<%-- <input type="text" name="recordCountPerPage" value=${param.recordCountPerPage }> --%>
+				<input type="hidden" name="recordCountPerPage" value=${param.recordCountPerPage }>
 				<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 				<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
 			</form>
@@ -60,7 +58,7 @@
 					of ${pagingInfo.totalRecord }
 				</span>
 				<form name="frmSearch1" class="colorGray form-inline float-right pad10">
-					<select id="search1" name="search1" class="form-control colorGray marginR10">
+					<select name="recordCountPerPage" class="form-control colorGray marginR10">
 						<option value="0" class="colorGray" selected="selected">LIST</option>
 						<option value="16" class="colorGray"
 							<c:if test="${param.recordCountPerPage==16}">
@@ -154,6 +152,7 @@
 			<div class="margin0 width500">
 				<form action="<c:url value='/nacojja/nacojjaList.do'/>" method="post" class="colorGray form-inline pad10">
 					<input type="hidden" value="${param.searchCondition2 }" name="searchCondition2">
+					<input type="hidden" value="${param.recordCountPerPage }" name="recordCountPerPage">
 					<select name="searchCondition" class="form-control colorGray marginR10">
 						<option value="title" class="colorGray" 
 							<c:if test="${param.searchCondition=='title' }">
