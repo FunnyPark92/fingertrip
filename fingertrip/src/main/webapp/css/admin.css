@@ -1,0 +1,91 @@
+@charset "utf-8";
+
+
+
+/* 공통 */
+.admCenter{width: 1500px; margin: 0 auto;}
+a{text-decoration: none; color: #333;}
+a:hover, a:active{color: #126dff;}
+.clearFix:after{
+    display: block;
+    content: '';
+    clear: both;
+}
+li{list-style: none;}
+.marginTop10{margin-top: 10px;}
+.marginTop20{margin-top: 50px;}
+.marginTop30{margin-top: 50px;}
+.marginTop40{margin-top: 50px;}
+.marginTop50{margin-top: 50px;}
+.marginTop60{margin-top: 60px;}
+.marginTop70{margin-top: 70px;}
+.marginTop80{margin-top: 80px;}
+.marginTop90{margin-top: 90px;}
+.marginTop100{margin-top: 100px;}
+.marginBottom10{margin-bottom: 10px;}
+.marginBottom20{margin-bottom: 20px;}
+.marginBottom30{margin-bottom: 30px;}
+.marginBottom40{margin-bottom: 40px;}
+.marginBottom50{margin-bottom: 50px;}
+.marginBottom60{margin-bottom: 60px;}
+.marginBottom70{margin-bottom: 70px;}
+.marginBottom80{margin-bottom: 80px;}
+.marginBottom90{margin-bottom: 90px;}
+.marginBottom100{margin-bottom: 100px;}
+.fRight{float: right;}
+.fLeft{float: left;}
+
+
+/* header */
+h1{
+    text-align: center;
+    font-size: 1.2em;
+    margin: 30px;
+}
+header{border-bottom: 3px solid #3198ff;}
+header li{float: left; padding: 10px;}
+
+
+
+/* 테이블 공통 */
+table{width: 100%;}
+.grayTh {
+    border-collapse: collapse;
+    border-spacing: 1px;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    margin : 20px 10px;
+}
+.grayTh th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+}
+.grayTh td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+
+/* 서브 메뉴의 메뉴 */
+.lineGnb{
+    
+}
+.lineGnb li{
+    float: left;
+    width: 25%;
+    box-sizing: border-box;
+    border: 1px solid #909090;
+    text-align: center;
+    border-left:none;
+    padding: 10px;
+}
+.lineGnb li:hover{background-color: #b9dcff;}
+.lineGnb li:first-child{border-left:1px solid #909090;}
+.lineGnb li a{display: block; width: 100%;}

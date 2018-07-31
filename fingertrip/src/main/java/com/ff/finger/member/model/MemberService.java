@@ -11,5 +11,6 @@ public interface MemberService {
 	public boolean userCheckId(String id);
 	public int emailAuth(String id);
 	public int memberEdit(MemberVO memberVo);
+	public MemberVO logingMember(String id);
 	
 }

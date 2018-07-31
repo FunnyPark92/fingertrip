@@ -130,7 +130,6 @@ public class MemberController {
 			url="/member/memberEdit.do";
 		}else {
 			logger.info("회원수정 화면 보여주기");
-			return "member/memberEditOk"; 
 		}
 		logger.info("체크여부={}",result);
 		
@@ -141,12 +140,25 @@ public class MemberController {
 	}
 	
     @RequestMapping("/memberEditOk.do")
-	public String memberEditOk(@ModelAttribute MemberVO memberVo, HttpSession session, Model model) {
-	  String id = (String) session.getAttribute("userid");
-	  memberVo.setId(id);
-	  logger.info("회원정보 수정 파라미터 vo={},id={}",memberVo,id);  
-	
-		 int cnt = memberService.memberEdit(memberVo);
+	public String memberEditOk_get( HttpSession session, Model model) {
+    	String id = (String) session.getAttribute("userid");
+    	logger.info("회원정보 화면 보여주기 id={}",id);
+    	
+    	MemberVO vo =memberService.logingMember(id);
+    	
+    	model.addAttribute("vo",vo);
+    	
+    	return "member/memberEditOk";
+    	
+	}
+    
+    @RequestMapping("/memberEditOk2.do")
+    public String memberEditOk_post(@ModelAttribute MemberVO memberVo, HttpSession session, Model model) {
+    	String id = (String) session.getAttribute("userid");
+    	memberVo.setId(id);
+    	logger.info("회원정보 처리 보여주기 vo={},id={}",memberVo,id);  
+    	
+    	 int cnt = memberService.memberEdit(memberVo);
 		 String msg ="", url="/index.do";
 		 if(cnt>0) {
 			 msg ="회원 정보 수정이 완료되었습니다.";
@@ -157,9 +169,8 @@ public class MemberController {
 		 model.addAttribute("url",url);
 		 
 		 return "common/message";
-		 
-	  
-	}
+    }
+    
 	
 	
 	@RequestMapping("/memberOutReason.do")
