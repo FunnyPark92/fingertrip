@@ -59,6 +59,13 @@
 			history.back();
 		}
 	});//취소 버튼
+	
+	$('#hp1').find().each(function(idx,items){
+		if($(this).val()==$(vo.hp1)){
+			alert($('#hp1').val());
+			$(this).props('selected','selected');
+		}
+	});
  });
  
 
@@ -100,17 +107,17 @@
         
         <div class="form-group" style="margin-bottom:0px">
        		<label for="address">주소를 입력하세요.</label>
-       	</div>
-       	<div class="input-group">
-        	<input type="text" class="form-control" name="address" id="address">
-         	<span class="input-group-btn">
-	        <input type="Button" value="우편번호 찾기" class="btn btn-primary" class="fa fa-mail-forward spaceLeft" id="btnZipcode" title="새창열림" >
-            </span>
+       		<div class="input-group">
+	        	<input type="text" class="form-control" name="address" id="address"  placeholder="주소입력" readonly="readonly" value="${vo.address }">
+	         	<span class="input-group-btn">
+		        	<input type="button" value="주소 검색" class="btn btn-primary" class="fa fa-mail-forward spaceLeft" id="btnZipcode" title="새창열림" >
+            	</span>
+            </div>
         </div>
         <div class="form-group">
        		<div class="input-group" style="width:525px" style="height:30px">
          		<label for="zipcode"></label>
-         		<input type="text" class="form-control" style="flex:0.3" name="zipcode" id="zipcode" value="${vo.zipcode}">
+         		<input type="text" class="form-control" style="flex:0.3" name="zipcode" id="zipcode" readonly="readonly" value="${vo.zipcode}">
          		<label for="addressDetail"></label>
          		<input type="text" class="form-control" name="addressDetail" id="addressDetail" value="${vo.addressDetail}">
        		</div>
@@ -119,12 +126,24 @@
        			<label for="hp1">휴대폰 번호 입력</label>
        			<div class="input-group" style="width:525px">
          			<select name="hp1" id="hp1" title="휴대폰 앞자리" class="form-control">
-           				<option value="010">010</option>
-           				<option value="011">011</option>
-           				<option value="016">016</option>
-           				<option value="017">017</option>
-           				<option value="018">018</option>
-          				<option value="019">019</option>
+           				<option value="010"
+           				<c:if test="${vo.hp1=='010' }">selected="selected"</c:if>
+           				>010</option>
+           				<option value="011"
+           				<c:if test="${vo.hp1=='011' }">selected="selected"</c:if>
+           				>011</option>
+           				<option value="016"
+           				<c:if test="${vo.hp1=='016' }">selected="selected"</c:if>
+           				>016</option>
+           				<option value="017"
+           				<c:if test="${vo.hp1=='017' }">selected="selected"</c:if>
+           				>017</option>
+           				<option value="018"
+           				<c:if test="${vo.hp1=='018' }">selected="selected"</c:if>
+           				>018</option>
+          				<option value="019" 
+          				<c:if test="${vo.hp1=='019' }">selected="selected"</c:if>
+          				>019</option>
   					</select>
   		 			&nbsp;-&nbsp;
          			<input type="text" class="form-control valid" name="hp2" id="hp2" maxlength="4" value="${vo.hp2}">

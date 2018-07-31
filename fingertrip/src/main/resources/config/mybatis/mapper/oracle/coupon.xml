@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.coupon">
+	
+	<select id="selectCouponView" parameterType="String" resultType="map">
+	
+		select * from coupon_heart_contentView where id = #{id}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

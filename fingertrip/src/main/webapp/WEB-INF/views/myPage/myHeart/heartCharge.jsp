@@ -36,7 +36,7 @@
 			<div class="area text-right">
 					<span>하트 <strong>1</strong>개</span><br>
 					<span class="price">1,100원</span>
-				</div>
+			</div>
 				<button type="button" class="btn btn-primary btnA btn-lg">구매하기</button>
 			 </div>
 			
@@ -47,7 +47,7 @@
 			<div class="area text-right">
 					<span>하트 <strong>3</strong>개</span><br>
 					<span class="price">3,200원</span>
-				</div>
+			</div>
 				<button type="button" class="btn btn-primary btnA btn-lg">구매하기</button>
 			 </div>
 			<div class="heartImg">
@@ -57,7 +57,7 @@
 			<div class="area text-right">
 					<span>하트 <strong>5</strong>개</span><br>
 					<span class="price">5,500원</span>
-				</div>
+			</div>
 				<button type="button" class="btn btn-primary btnA btn-lg">구매하기</button>
 			 </div>
 			<div class="heartImg">

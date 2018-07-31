@@ -122,9 +122,11 @@ public class MemberController {
 	public String checkPwd(@ModelAttribute MemberVO vo, HttpSession session, Model model) {
 		String id = (String) session.getAttribute("userid");
 		logger.info("비밀번호 체크 파라미터 vo={},id={}",vo,id);
-		int result =memberService.processLogin(id, vo.getPassword());
 		
 		String msg="", url="/member/memberEditOk.do";
+	
+		int result =memberService.processLogin(id, vo.getPassword());
+		
 		if(result == CommonConstants.PWD_MISMATCH) {
 			msg="비밀번호가 일치하지 않습니다.";
 			url="/member/memberEdit.do";
@@ -135,6 +137,7 @@ public class MemberController {
 		
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
+		
 		
 		return "common/message";
 	}

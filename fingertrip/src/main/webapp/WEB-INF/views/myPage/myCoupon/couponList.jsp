@@ -22,27 +22,23 @@
 
         <!-- 서브컨텐츠 -->
         <div class="col-lg-9">
-			<h2>쿠폰 내역</h2><br>
-			<table class="box2">
-				<caption>쿠폰 내역</caption>
+			<h3>쿠폰 내역</h3><br>
+			<table class="table" style="text-align: center">
+				
 				<colgroup>
-					<col style="width:9%" />
-					<col style="width:12%" />
-					<col style="width:40%" />
-					<col style="width:12%" />
-					<col style="width:12%" />	
-					<col style="width:14%" />
+					<col style="width:15%" />
+					<col style="width:20%" />
+					<col style="width:35%" />
+					<col style="width:20%" />
 				</colgroup>
 				<thead>
 				  <tr>
 				    <th scope="col">쿠폰번호</th>
 					<th scope="col">쿠폰이름</th>
-					<th scope="col">기한?</th>
-					<th scope="col">???</th>
-					<th scope="col">???</th>
-					<th scope="col">???</th>
+					<th scope="col">코스명</th>
+					<th scope="col">회원이름</th>
 				  </tr>
-				</thead> 
+				</thead>
 				<tbody>
 					<c:if test="${empty list }">
 						<tr>
@@ -51,7 +47,14 @@
 					</c:if>
 					<c:if test="${!empty list }">
 						<!-- 반복 시작 -->
-						
+						<c:forEach var="map" items="${list}">
+							<tr>
+								<td>${map['COUPON_NO'] }</td>
+								<td>${map['COUPON_NAME'] }</td>
+								<td style="text-align: center; "><a href="#" style="color:red">${map['TITLE'] }</a></td>
+								<td>${map['NAME'] }</td>
+							</tr>
+						</c:forEach>
 						<!-- 반복 끝 -->
 					</c:if>
 				</tbody>
