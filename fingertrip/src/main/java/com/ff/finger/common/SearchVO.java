@@ -1,12 +1,13 @@
 package com.ff.finger.common;
 
+import com.ff.finger.member.model.MemberVO;
 
 /**
  * 검색 정보를 담고있는 Bean
  * 페이징 처리 관련 변수 포함
 */
 
-public class SearchVO {
+public class SearchVO extends MemberVO{
 	/** 검색조건 */
 	private String searchCondition = "";
 	private int searchCondition2 = 0;
@@ -127,13 +128,9 @@ public class SearchVO {
 		return "SearchVO [searchCondition=" + searchCondition + ", searchCondition2=" + searchCondition2
 				+ ", searchKeyword=" + searchKeyword + ", searchUseYn=" + searchUseYn + ", currentPage=" + currentPage
 				+ ", blockSize=" + blockSize + ", firstRecordIndex=" + firstRecordIndex + ", lastRecordIndex="
-				+ lastRecordIndex + ", recordCountPerPage=" + recordCountPerPage + "]";
+				+ lastRecordIndex + ", recordCountPerPage=" + recordCountPerPage + ", toString()=" + super.toString()
+				+ "]";
 	}
-
-
-	
-
-	
 
 	
 }

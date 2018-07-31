@@ -1,6 +1,8 @@
 package com.ff.finger.heart.model;
 
-public class HeartVO {
+import com.ff.finger.common.SearchVO;
+
+public class HeartVO{
 	private int heartNo;
 	private int courseNo;
 	private int memberNo;

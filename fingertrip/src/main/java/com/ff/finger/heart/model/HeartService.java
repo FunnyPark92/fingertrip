@@ -1,5 +1,11 @@
 package com.ff.finger.heart.model;
 
-public interface HeartService {
+import java.util.List;
+import java.util.Map;
 
+import com.ff.finger.common.SearchVO;
+
+public interface HeartService {
+	public List<Map<String, Object>> myCourseList(SearchVO searchVo);
+	public int getTotalRecord(SearchVO searchVo);
 }

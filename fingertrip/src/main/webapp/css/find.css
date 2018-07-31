@@ -67,6 +67,13 @@
 	    width: 255px;
 	    height: 405px;
 	}
+	.myList{
+		border: 1px solid silver;
+	    margin: 10px;
+	    float: left;
+	    width: 245px;
+	    height: 405px;
+	}
 	.listImg{
 		width: 100%;
 	}

@@ -19,6 +19,9 @@ public interface CommonConstants {
 	public static final int NA_BLOCK_SIZE=5;
 	public static final int NA_RECORD_COUNT_PER_PAGE=12;
 
+	//내가 찜한 코스 페이지 처리
+	public static final int MY_NA_RECORD_COUNT_PER_PAGE=9;
+	
 	//파일 업로드에 사용
 	public static final int PATH_FLAG_PDS = 1; //일반자료실
 	public static final int PATH_FLAG_IMAGE = 2; //코스등록 시-이미지 업로드	
