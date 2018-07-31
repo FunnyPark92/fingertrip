@@ -58,7 +58,7 @@
 	
 	<select id="selectByNo" parameterType="int" resultType="QnAVO">
 		select * from qna
-		where qna_no=#{qnaNo}
+		where qna_no=#{qnaNo} or qna_no=#{qnaNo}+1 or qna_no=#{qnaNo}-1
 	</select>
 	
 	<select id="passck" parameterType="int" resultType="string">
@@ -73,6 +73,24 @@
 	</if>
 	</select>
 	
+	<select id="selectByNoOne" parameterType="int" resultType="QnAVO" >
+		select* from qna
+		where qna_no=#{qnaNo}
+	</select>
+	
+	<update id="updateSortNo" parameterType="int">
+		update qna
+		set sort_no=sort_no+1
+		where group_no=(select group_no from qna where qna_no=#{qnaNo}) and  sort_no>(select sort_no from qna where qna_no=#{qnaNo})
+	</update>
+	
+	<insert id="reply" parameterType="QnAVO">
+		insert into qna(qna_no,title,content,name,password,group_no,step,sort_no,travel_agency_no,admin_no,member_no)
+		values(qna_seq.nextval,#{title},#{content},#{name},#{password},(select group_no from qna where qna_no=#{qnaNo}),
+		(select step from qna where qna_no=#{qnaNo})+1,
+		(select sort_no from qna where qna_no=#{qnaNo}+1),#{travelAgencyNo},#{adminNo},#{memberNo}
+	</insert>
+		
 	<select id="noticeDetail" parameterType="int" resultType="noticeVo">
 		select * from notice
 		where notice_no=#{noticeNo}
@@ -86,6 +104,7 @@
 		insert into notice(notice_no,title,content,admin_no )
 		values(notice_seq.nextval, #{title},#{content},#{adminNo})
 	</insert>
+	
 </mapper>
 
 

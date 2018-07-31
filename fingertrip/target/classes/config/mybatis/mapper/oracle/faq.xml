@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="config.mybatis.mapper.oracle.faq">
+	<resultMap type="FaqVO" id="selResultMap">
+		<id column="faqNo" jdbcType="BIGINT" property="faqNo"/>
+		<result column="title" jdbcType="VARCHAR" property="title"/>
+		<result column="content" jdbcType="VARCHAR" property="content"/>
+		<result column="adminNo" jdbcType="BIGINT" property="adminNo"/>
+		<result column="faqCategoryNo" jdbcType="BIGINT" property="faqCategoryNo"/>
+	</resultMap>
+
+	<select id="selectFaqCategory" parameterType="int" resultType="FaqVO">
+		select * from faq where faq_category_no=#{faqCategoryNo}
+	</select>
+	
+</mapper>

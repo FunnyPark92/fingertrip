@@ -38,18 +38,18 @@
     <div class="subBgBlack"></div>
 </div>
 
-<section class="container marginBottom80 minheight400 ">
+<section class="container marginBottom80 minheight400">
 	<form name="frmNacojja1" method="post" action="<c:url value='/nacojja/nacojja1.do'/>"
  		enctype="multipart/form-data">
 	    <div class="plan1">
 	    	<h3>나만의 코스 짜기</h3>
 	    	<div>
-		        <input type="text" placeholder="제목을 작성해주세요. (예: 5박 6일 해리포터 투어)">
-		        <textarea rows="10" placeholder="일정에 대한 간단한 설명을 해주세요."></textarea>
+		        <input type="text" name="title" placeholder="제목을 작성해주세요. (예: 5박 6일 해리포터 투어)">
+		        <textarea rows="10" name="content" placeholder="일정에 대한 간단한 설명을 해주세요."></textarea>
 	    	</div>
 	    	<div>
-	        	<input type="text" class="datepicker" placeholder="시작일">
-	        	<input type="text" class="datepicker" placeholder="종료일">
+	        	<input type="text" name="startDay" class="datepicker" placeholder="시작일">
+	        	<input type="text" name="endDay" class="datepicker" placeholder="종료일">
 	    	</div>
 		    <div class="planImgWrap">
 		        <span>대표 이미지</span><br>

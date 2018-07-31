@@ -7,6 +7,11 @@
 }
 .disNone992{display: block;}
 .disBlock992{display: none;}
+.clearFix:after{
+	content: '';
+	display: block;
+	clear: both;
+}
 
 @media (max-width: 992px){
     .disNone992{display: none;}
@@ -460,3 +465,41 @@ li{list-style: none}
     width:100%; 
     height: 25em;
 }
+
+
+/* faq */
+.faqTabNav{
+	padding:0;
+	border: 1px solid #545454;
+}
+.faqTabNav>li{
+	width: 20%;
+    float: left;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align:center;
+ }
+.faqTabNav>li:hover, .faqTabNav>li:focus, .faqTabNav>li.gray{
+	background: #545454;
+	color: #fff;
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
