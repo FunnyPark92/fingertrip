@@ -5,7 +5,7 @@
 /* 공통 */
 .admCenter{width: 1500px; margin: 0 auto;}
 a{text-decoration: none; color: #333;}
-a:hover, a:active{color: #126dff;}
+a:hover, a:active{color: #848484;}
 .clearFix:after{
     display: block;
     content: '';
@@ -42,8 +42,13 @@ h1{
     font-size: 1.2em;
     margin: 30px;
 }
-header{border-bottom: 3px solid #3198ff;}
-header li{float: left; padding: 10px;}
+header{border-bottom: 3px solid #4c4c4c;}
+header li{
+	float: left;
+	width: 14%;
+	padding: 20px 0px;
+	text-align: center;
+}
 
 
 
@@ -55,7 +60,7 @@ table{width: 100%;}
     text-align: left;
     line-height: 1.5;
     border-top: 1px solid #ccc;
-    margin : 20px 10px;
+    margin : 20px 0px;
 }
 .grayTh th {
     width: 150px;
@@ -86,6 +91,25 @@ table{width: 100%;}
     border-left:none;
     padding: 10px;
 }
-.lineGnb li:hover{background-color: #b9dcff;}
+.lineGnb li:hover{background-color: #eee;}
 .lineGnb li:first-child{border-left:1px solid #909090;}
-.lineGnb li a{display: block; width: 100%;}
+.lineGnb li a{display: block; width: 100%; height: 100%;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

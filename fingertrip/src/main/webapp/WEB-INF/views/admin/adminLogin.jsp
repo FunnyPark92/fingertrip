@@ -9,20 +9,10 @@
 
 <style>
 @import url(http://weloveiconfonts.com/api/?family=fontawesome);
-
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 [class*="fontawesome-"]:before {
 	font-family: 'FontAwesome', sans-serif;
-}
-a {
-	color: #eee;
-	outline: 0;
-	text-decoration: none;
-}
-
-a:focus, a:hover {
-	text-decoration: underline;
 }
 
 input {
@@ -41,7 +31,7 @@ input {
 	-webkit-flex: 1;
 	-ms-flex: 1;
 	flex: 1;
-	padding: 3rem 0;
+	padding: 10rem 0;
 }
 
 .form input[type="password"], .form input[type="text"], .form input[type="submit"]
@@ -50,7 +40,7 @@ input {
 }
 
 .form--login {
-	color: #606468;
+	color: #555656;
 }
 
 .form--login label, .form--login input[type="text"], .form--login input[type="password"],
@@ -68,7 +58,7 @@ input {
 }
 
 .form--login input[type="text"], .form--login input[type="password"] {
-	background-color: #3b4148;
+	background-color: #a8abad;
 	border-bottom-left-radius: 0;
 	border-top-left-radius: 0;
 }
@@ -76,11 +66,11 @@ input {
 .form--login input[type="text"]:focus, .form--login input[type="text"]:hover,
 	.form--login input[type="password"]:focus, .form--login input[type="password"]:hover
 	{
-	background-color: #434A52;
+	background-color: #dadbdc;
 }
 
 .form--login input[type="submit"] {
-	background-color: #3d7ede;
+	background-color: #363b41;
 	color: #eee;
 	font-weight: bold;
 	text-transform: uppercase;
@@ -88,7 +78,7 @@ input {
 
 .form--login input[type="submit"]:focus, .form--login input[type="submit"]:hover
 	{
-	background-color: #1255b9;
+	background-color: #080808;
 }
 
 .form__field {
@@ -134,9 +124,16 @@ input {
 }
 
 .grid__container {
+	width: 510px;
 	margin: 0 auto;
-	max-width: 20rem;
-	width: 90%;
+     border: 1px solid #d4d4d4;
+    padding: 70px 65px 100px;
+}
+.pTitle{
+	text-align: center;
+	font-size: 1.3em;
+	font-weight: bold;
+	margin-bottom: 30px;
 }
 </style>
 </head>
@@ -146,7 +143,7 @@ input {
 	<div class="site__container">
 
 		<div class="grid__container">
-			<p>관리자 로그인</p>
+			<p class="pTitle">관리자 로그인</p>
 			<form action="" method="post" class="form form--login">
 
 				<div class="form__field">
@@ -165,6 +162,8 @@ input {
 				<div class="form__field">
 					<input type="submit" value="Log In">
 				</div>
+				
+				<a href="<c:url value='/admin/member/memberList.do'/>">로그인 후 화면(코딩완료시 삭제)</a>
 
 			</form>
 
