@@ -146,11 +146,11 @@
 	                	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
 	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
 	                	</c:if>
-				<a href="#top" title="Back to top" class="float-right colorPink listTitle">▲TOP</a>
+				
 			</div>	
 			
-			<div class="margin0 width500">
-				<form action="<c:url value='/nacojja/nacojjaList.do'/>" method="post" class="colorGray form-inline pad10">
+			<div class="margin0 width350">
+				<form action="<c:url value='/nacojja/nacojjaList.do'/>" method="post" class="colorGray form-inline">
 					<input type="hidden" value="${param.searchCondition2 }" name="searchCondition2">
 					<input type="hidden" value="${param.recordCountPerPage }" name="recordCountPerPage">
 					<select name="searchCondition" class="form-control colorGray marginR10">
@@ -173,7 +173,8 @@
 					<input type="text" class="form-control" name="searchKeyword" value="${param.searchKeyword }">
 					<input type="submit" value="검색" class="btn btn-primary marginL10">
 				</form>
-			</div>			
+			</div>
+			<a href="#top" title="Back to top" class="float-right colorPink listTitle">▲TOP</a>			
 	</div>
 
 <%@ include file="../inc/bottom.jsp"%>
