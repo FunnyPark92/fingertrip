@@ -84,6 +84,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.memberEdit(memberVo);
 	}
 
+	@Override
+	public MemberVO logingMember(String id) {
+		return memberDao.logingMember(id);
+	}
+
 
 
 }

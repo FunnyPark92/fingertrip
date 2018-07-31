@@ -1,28 +1,7 @@
 
 
 $(document).ready(function(){
-	$(".valid").each(function(idx, item){
-		$(this).blur(function(){
-			if ($(this).val().length < 1) {
-				$(this).siblings("div").text($(this).prev().text() + "을 입력해 주세요.");
-				return false;
-			} else {
-				$(this).siblings("div").text("");
-			}
-		});
-	});
 	
-
-	
-	$("#email2").change(function(){
-		if ($(this).val() == "etc") {
-			$("#email3").css("visibility", "visible");
-			$("#email3").val("");
-			$("#email3").focus();
-		} else {
-			$("#email3").css("visibility", "hidden");
-		}
-	});
 	
 	$("#btnZipcode").click(function(){
 		//우편번호 찾기
@@ -46,9 +25,14 @@ function validate_userPwd(uPwd){
 	return pattern.test(uPwd);
 }
 function validate_userHp(hp){
-	var pattern = new RegExp(/^[0-9]+$/g);
+	var pattern = new RegExp(/^[0-9]{3,4}$/g);
 	return pattern.test(hp);
 }
+function validate_userHp2(hp){
+	var pattern = new RegExp(/^[0-9]{4}$/g);
+	return pattern.test(hp);
+}
+
 
 
 

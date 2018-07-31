@@ -24,6 +24,7 @@ public class MemberVO {
 	private Timestamp outDate; /* 탈퇴일 */
 	private int outReasonNo; /* 탈퇴사유번호 */
 	
+	
 	public int getMemberNo() {
 		return memberNo;
 	}

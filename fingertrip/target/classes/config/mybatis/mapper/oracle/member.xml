@@ -60,6 +60,10 @@
    		where id= #{id}
    </update>
 	
+	<select id="logingMember" parameterType="String" resultType="MemberVo">
+		select * from member where id=#{id}
+	</select>
+	
 </mapper>
 
 

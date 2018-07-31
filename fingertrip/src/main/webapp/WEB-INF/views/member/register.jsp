@@ -17,6 +17,72 @@
 $(document).ready(function(){
 	var result="";
 	
+	$("#btnJoin").click(function(){
+		var bool=true;
+		
+		$(".valid").each(function(idx, item){
+			if ($(this).val() == "etc") {
+				if($("#email3").val().length < 1) {
+					$("#email3").focus();
+					$("#email3").siblings("div").text($("#email3").prev().text() + "을 입력해 주세요.");
+					bool=false;
+					return false;
+				}
+			}
+			
+			if($(this).val().length < 1) {
+				$(this).focus();
+				$(this).siblings("div").text($(this).prev().text() + "을 입력해 주세요.");
+				bool=false;
+				return false;
+			}
+		});
+			
+
+		 
+		  if(bool){
+				if(!validate_username($('#name').val())){
+					alert("이름은 한글 2~10글자만 입력가능합니다.");
+					$('#name').focus();
+					bool=false;
+				 }else if(!validate_userid($('#id').val())){
+					alert("아이디는 알파벳이나 숫자 또는 특수기호인_만 가능합니다.");
+					$('#id').focus();
+					bool=false;
+				}else if($('#password').val()!=$('#password2').val()){
+					alert("비밀번호가 일치하지 않습니다.")
+					$('#password').focus();
+					bool=false;
+				}else if(!validate_userPwd($('#password').val())){
+					alert("비밀번호는 영문자로 시작하는 8~14자 영문,숫자 조합으로 입력해 주세요");
+					bool=false;
+				}else if(!validate_userHp($('#hp2').val())){
+					alert("휴대폰 중간 번호를 숫자 3~4로 입력해주세요");
+					bool=false;
+				}else if(!validate_userHp2($('#hp3').val())){
+					alert("휴대폰 마지막 번호를 숫자 4개로 입력해주세요");
+					bool=false;
+				}
+		 	} //정규식 끝 */ 
+	
+		if($('#checkId').val()=='N'){
+			bool=false;
+			alert(result);
+		}
+		return false;
+		
+	}); //Click 이벤트
+	
+	$("#email2").change(function(){
+		if ($(this).val() == "etc") {
+			$("#email3").css("visibility", "visible");
+			$("#email3").val("");
+			$("#email3").focus();
+		} else {
+			$("#email3").css("visibility", "hidden");
+		}
+	});
+	
 	$("#email3").blur(function(){
 		if ($(this).val().length < 1) {
 			$(this).siblings("div").text($("#email3").prev().text() + "을 입력해 주세요.");
@@ -35,58 +101,18 @@ $(document).ready(function(){
 		$(this).siblings("div").text("");
 	});
 	
-	
-	$("#btnJoin").click(function(){
-		var bool=true;
-		
-		$(".valid").each(function(idx, item){
-			if ($(this).val() == "etc") {
-				if($("#email3").val().length < 1) {
-					$("#email3").focus();
-					$("#email3").siblings("div").text($("#email3").prev().text() + "을 입력해 주세요.");
-					bool=false;
-					return false;
-				}
-			}else{
-				if($(this).val().length < 1) {
-					$(this).focus();
-					$(this).siblings("div").text($(this).prev().text() + "을 입력해 주세요.");
-					bool=false;
-					return false;
+	$(".valid").each(function(idx, item){
+		$(this).blur(function(){
+			if ($(this).val().length < 1) {
+				$(this).siblings("div").text($(this).prev().text() + "을 입력해 주세요.");
+				return false;
+			} else {
+				$(this).siblings("div").text("");
 			}
-		}
-			
-		if(bool){
-				if(!validate_username($('#name').val())){
-					alert("이름은 한글 2~10글자만 입력가능합니다.")
-					$('#name').focus();
-					bool=false;
-				 }else if(!validate_userid($('#id').val())){
-					alert("아이디는 알파벳이나 숫자 또는 특수기호인_만 가능합니다.");
-					$('#id').focus();
-					bool=false;
-				}else if($('#password').val()!=$('#password2').val()){
-					alert("비밀번호가 일치하지 않습니다.")
-					$('#password').focus();
-					bool=false;
-				}else if(!validate_userPwd($('#password').val())){
-					alert("비밀번호는 영문자로 시작하는 8~14자 영문,숫자 조합으로 입력해 주세요");
-					bool=false;
-				}else if(!validate_userHp($('#hp2').val()),!validate_userHp($('#hp3').val())){
-					alert("휴대폰 번호를 숫자로 입력해주세요");
-					bool=false;
-				}
-		 	}
-			return bool;
-		}); //정규식 끝
-		if($('#checkId').val()=='N'){
-			bool=false;
-			alert(result);
-		}
-		return bool;
-	});  //Click 이벤트
+		});
+	});  
 	
-
+	
 	
 	$('#id').keyup(function(){
 		
@@ -140,7 +166,7 @@ $(document).ready(function(){
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="id">회원ID</label>
-       <input type="text" class="form-control valid divId" name="id" id="id" placeholder="영문 혹은 숫자로만 입력해주세요" autocomplete="off">
+       <input type="text" class="form-control valid bivId" name="id" id="id" placeholder="영문 혹은 숫자로만 입력해주세요" autocomplete="off">
        <span class="message"></span>
        <div class="mandatory"></div>
      </div>
