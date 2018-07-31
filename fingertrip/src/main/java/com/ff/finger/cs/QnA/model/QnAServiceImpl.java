@@ -23,7 +23,7 @@ public class QnAServiceImpl implements QnAService {
 	}
 
 	@Override
-	public QnAVO selectByNo(int qnaNo) {
+	public List<QnAVO> selectByNo(int qnaNo) {
 		return qnADao.selectByNo(qnaNo);
 	}
 
@@ -35,6 +35,18 @@ public class QnAServiceImpl implements QnAService {
 	@Override
 	public int QnAtotalRecord(SearchVO searchVo) {
 		return qnADao.QnAtotalRecord(searchVo);
+	}
+
+	@Override
+	public QnAVO selectByNoOne(int qnaNo) {
+		return qnADao.selectByNoOne(qnaNo);
+	}
+
+	@Override
+	public int reply(QnAVO vo) {
+		int cnt=qnADao.updateSortNo(vo.getQnaNo());
+		cnt=qnADao.reply(vo);
+		return cnt;
 	}
 	
 }

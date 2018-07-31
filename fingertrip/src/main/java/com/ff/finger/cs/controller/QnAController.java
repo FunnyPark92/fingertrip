@@ -78,10 +78,10 @@ public class QnAController {
 			return "common/message"; 
 		}
 		
-		QnAVO vo=qnAService.selectByNo(qnaNo);
-		logger.info("QnA 상세보기 결과, vo={}", vo);
+		List<QnAVO> list=qnAService.selectByNo(qnaNo);
+		logger.info("QnA 상세보기 결과, list={}", list);
 		
-		model.addAttribute("vo",vo);
+		model.addAttribute("list",list);
 		
 		return "cs/QnA/qnaDetail";
 	}
@@ -108,4 +108,34 @@ public class QnAController {
 			return "common/message"; 
 		}
 	}
+	
+	@RequestMapping(value="/QnA/reply.do", method=RequestMethod.GET)
+	public String reply(@RequestParam(defaultValue="0") int qnaNo, Model model) {
+		logger.info("QnA답변하기 화면, 파라미터 qnaNo={}", qnaNo);
+		
+		if(qnaNo==0) {
+			model.addAttribute("msg","잘못됫 url입니다.");
+			model.addAttribute("url","/cs/QnA/qna.do");
+			return "common/message"; 
+		}
+		
+		QnAVO vo=qnAService.selectByNoOne(qnaNo);
+		logger.info("QnA답변하기-조회결과, vo={}", vo);
+		
+		model.addAttribute("vo", vo);
+		
+		return "cs/QnA/reply";
+	}
+	
+	@RequestMapping(value="/QnA/reply.do", method=RequestMethod.POST)
+	public String reply_post(@ModelAttribute QnAVO vo) {
+		logger.info("QnA답변하기 처리, 파라미터 vo={}", vo);
+		
+		int cnt=qnAService.reply(vo);
+		logger.info("QnA답변 처리 결과, cnt={}", cnt);
+		
+		return "redirect:/cs/QnA/qna.do";
+	}
+	
+	
 }

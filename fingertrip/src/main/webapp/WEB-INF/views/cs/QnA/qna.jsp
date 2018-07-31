@@ -22,10 +22,6 @@ function pageFunc(currentPage){
 	    });	 
 	  });
 </script>
-<style>
-
-</style>
-
 <section class="container board marginTop80 marginBottom80 minheight600">
         <div class="row">
            <!-- 서브메뉴 -->
@@ -45,9 +41,9 @@ function pageFunc(currentPage){
 	            	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
             	</form>
             </div>
-         
            <!-- 서브컨텐츠 -->
             <div class="col-lg-9">
+                <H2>QnA게시판</H2>
                 <table class="table table-hover tableBorder">
                     <thead class="thead-dark">
                         <tr>
@@ -111,7 +107,7 @@ function pageFunc(currentPage){
                 		<a href="#" class="decoN colorBlue" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
                 	</c:if>
                 </div>
-                 <div class="width500 margin0 marginT30">
+                 <div class="width500 margin0 marginT30" style="margin-left:550px;">
                 	<form action="<c:url value='/cs//QnA/qna.do'/>" method="post" class="overflowH">
                 		<select name="searchCondition" class="float-left form-control w-25">
                 			<option value="title"
@@ -132,7 +128,7 @@ function pageFunc(currentPage){
             </div>
         		<div class="form-group text-right">
 	                <a class="btn btn-primary" style="color:#fff;" href="<c:url value='/cs/QnA/qnaWrite.do'/>">글쓰기</a>
-	   			 </div>
+	   			</div>
     </section>
 
  <%@ include file="../../inc/bottom.jsp"%>

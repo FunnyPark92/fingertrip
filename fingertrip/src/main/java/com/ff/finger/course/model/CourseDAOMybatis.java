@@ -12,11 +12,17 @@ import com.ff.finger.common.SearchVO;
 @Repository
 public class CourseDAOMybatis implements CourseDAO{
 	private String namespace="config.mybatis.mapper.oracle.course.";
+	
 	@Autowired private SqlSessionTemplate sqlSession;
 	
 	@Override
 	public List<Map<String, Object>> nacojjaList(SearchVO searchVo) {
 		return sqlSession.selectList(namespace+"nacojjaList", searchVo);
+	}
+
+	@Override
+	public int nacojja1Write(CourseVO courseVo) {
+		return sqlSession.insert(namespace + "nacojja1Write", courseVo);
 	}
 
 }
