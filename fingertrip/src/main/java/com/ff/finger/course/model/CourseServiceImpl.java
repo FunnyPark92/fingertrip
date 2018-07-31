@@ -18,6 +18,11 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
+	public int getTotalRecord(SearchVO searchVo) {
+		return courseDao.getTotalRecord(searchVo);
+	}
+	
+	@Override
 	public int nacojja1Write(CourseVO courseVo) {
 		return courseDao.nacojja1Write(courseVo);
 	}

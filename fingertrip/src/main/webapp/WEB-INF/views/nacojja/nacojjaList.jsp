@@ -5,11 +5,25 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		$('select[name="search2"]').change(function(){
+			$('form[name=frmSearch2] input[name=searchCondition2]').val($('select[name=search2] option:selected').val());
+			$('form[name=frmSearch2] input[name=recordCountPerPage]').val($('select[name=search1] option:selected').val());
+			$('form[name=frmSearch2]').submit();
+		});
 		$('select[name="search1"]').change(function(){
-			$('form[name=frmHid] input[name=searchCondition2]').val($('select[name=search1] option:selected').val());
-			$('form[name=frmHid]').submit();
+			$('form[name=frmSearch2] input[name=searchCondition2]').val($('select[name=search2] option:selected').val());
+			$('form[name=frmSearch2] input[name=recordCountPerPage]').val($('select[name=search1] option:selected').val());
+			$('form[name=frmSearch2]').submit();
 		});
 	});
+	
+	function pageFunc(currentPage){
+		frmPage.currentPage.value=currentPage;
+		frmPage.submit();
+		/* $('form[name=frmPage] input[name=currentPage]').val(currentPage);
+		$('form[name=frmPage] input[name=readCountPerPage]').val($('select[name=search1] option:selected').val());
+		$('form[name=frmPage]').submit(); */
+	}
 </script>
 
 	<div class="subBg subBgNaco">
@@ -17,21 +31,51 @@
 		<div class="subBgBlack"></div>
 	</div>
 	<div class="container marginBottom100">
-			<form name="frmHid" action="<c:url value='/nacojja/nacojjaList.do'/>" method="post">
-				<input type="hidden" name="searchCondition2">
+			<form name="frmPage" action="<c:url value='/nacojja/nacojjaList.do'/>" method="post">
+				<input type="hidden" name="currentPage">
+				<input type="hidden" name="searchCondition2" value=${param.searchCondition2 }>
+				<%-- <input type="text" name="recordCountPerPage" value=${param.recordCountPerPage }> --%>
+				<input type="hidden" name="searchCondition" value="${param.searchCondition }">
+				<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+			</form>
+			<form name="frmSearch2" action="<c:url value='/nacojja/nacojjaList.do'/>" method="post">
+				<input type="hidden" name="searchCondition2" value=${param.searchCondition2 }>
+				<input type="hidden" name="recordCountPerPage" value=${param.recordCountPerPage }>
+				<input type="hidden" name="searchCondition" value="${param.searchCondition }">
+				<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
 			</form>
 			<div class="marginBottom20 overflowH pad10">
-				<span class="colorGray float-left marginTop10">Showing 12 of 17 results</span>
-				<form action="" method="post" class="colorGray form-inline float-right pad10">
-					<select name="listCount" class="form-control colorGray marginR10">
-						<option value="" class="colorGray">LIST</option>
-						<option value="12" class="colorGray">12</option>
-						<option value="16" class="colorGray">16</option>
-						<option value="20" class="colorGray">20</option>
+				<span class="colorGray float-left marginTop10">
+					Showing
+					<c:set var="cnt" value="0"/>
+					<c:forEach var="vo" items="${list }">
+						<c:set var="cnt" value="${cnt+1 }"/>
+					</c:forEach>
+					<c:if test="${cnt<pagingInfo.recordCountPerPage }">
+						${cnt }
+					</c:if>
+					<c:if test="${cnt>=pagingInfo.recordCountPerPage }">
+						${pagingInfo.recordCountPerPage} 
+					</c:if>
+					of ${pagingInfo.totalRecord }
+				</span>
+				<form name="frmSearch1" class="colorGray form-inline float-right pad10">
+					<select id="search1" name="search1" class="form-control colorGray marginR10">
+						<option value="0" class="colorGray" selected="selected">LIST</option>
+						<option value="16" class="colorGray"
+							<c:if test="${param.recordCountPerPage==16}">
+								selected="selected"	
+							</c:if>
+						>16</option>
+						<option value="20" class="colorGray"
+							<c:if test="${param.recordCountPerPage==20}">
+								selected="selected"	
+							</c:if>
+						>20</option>
 					</select>
 				</form>
-				<form action="<c:url value='/nacojja/nacojjaList.do'/>" method="post" class="colorGray form-inline float-right pad10">
-					<select name="search1" class="form-control colorGray marginR10">
+				<div class="colorGray form-inline float-right pad10">
+					<select name="search2" class="form-control colorGray marginR10">
 						<option value="0" class="colorGray">모든 나코짜 목록</option>
 						<option value="1" class="colorGray" 
 							<c:if test="${param.searchCondition2==1}">
@@ -59,7 +103,7 @@
 							</c:if>
 						>종료</option>
 					</select>
-				</form>
+				</div>
 			</div>
 			
 			<c:if test="${!empty list}">
@@ -88,48 +132,46 @@
 			</c:if>
 			
 			<div class="divPage clear text-center pad15 marginBottom40">
-				<!-- 페이지 번호 추가 -->		
-				<!-- 이전 블럭으로 이동 -->
-				<%-- <c:if test="${pageVo.firstPage>1 }">
-					<a href="#" onclick="pageFunc(${pageVo.firstPage-1})"> --%>
-					<a href="">
-						<span class="colorGray">◀</span>
-					</a>		
-				<%-- </c:if> --%>
-				
-				<!-- [1][2][3][4][5][6][7][8][9][10] -->
-				<%-- <c:forEach var="i" begin="${pageVo.firstPage }" end="${pageVo.lastPage}"> --%>
-				<c:forEach var="i" begin="1" end="3">
-					<%-- <c:if test="${i==pageVo.currentPage }"> --%>
-					<c:if test="${i==1 }">
-						<span class="listSmDv">${i}</span>
-					</c:if>
-					<%-- <c:if test="${i!=pageVo.currentPage }"> --%>
-					<c:if test="${i!=1}">
-						<a href="#" class="colorGray">${i }</a>
-					</c:if>
-				</c:forEach>
-					
-				<!-- 다음 블럭으로 이동 -->
-			<%-- 	<c:if test="${pageVo.lastPage<pageVo.totalPage }">
-					<a href="#" onclick="pageFunc(${pageVo.lastPage+1})"> --%>
-					<a href="">
-						<span class="colorGray">▶</span>
-					</a>	
-				<%-- </c:if> --%>
-				<!--  페이지 번호 끝 -->
+	                	<c:if test="${pagingInfo.firstPage>1 }">
+	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+	                	</c:if>
+	                	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+							<c:choose>
+								<c:when test="${i==pagingInfo.currentPage }">
+									<span class="colorBlue font-weight-bold" >${i }</span>
+								</c:when>
+								<c:otherwise>
+									<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i }</a></span>
+								</c:otherwise>
+							</c:choose>
+	                	</c:forEach>
+	                	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+	                	</c:if>
 				<a href="#top" title="Back to top" class="float-right colorPink listTitle">▲TOP</a>
 			</div>	
 			
 			<div class="margin0 width500">
 				<form action="<c:url value='/nacojja/nacojjaList.do'/>" method="post" class="colorGray form-inline pad10">
-					<input type="hidden" name="searchCondition2" value="${param.searchCondition2 }">
+					<input type="hidden" value="${param.searchCondition2 }" name="searchCondition2">
 					<select name="searchCondition" class="form-control colorGray marginR10">
-						<option value="title" class="colorGray">제목</option>
-						<option value="countries" class="colorGray">나라</option>
-						<option value="term" class="colorGray">기간</option>
+						<option value="title" class="colorGray" 
+							<c:if test="${param.searchCondition=='title' }">
+								selected="selected"	
+							</c:if>
+						>제목</option>
+						<option value="countries" class="colorGray"
+							<c:if test="${param.searchCondition=='countries' }">
+								selected="selected"	
+							</c:if>
+						>나라</option>
+						<option value="term" class="colorGray"
+							<c:if test="${param.searchCondition=='term' }">
+								selected="selected"	
+							</c:if>
+						>기간</option>
 					</select>
-					<input type="text" class="form-control" name="searchKeyword">
+					<input type="text" class="form-control" name="searchKeyword" value="${param.searchKeyword }">
 					<input type="submit" value="검색" class="btn btn-primary marginL10">
 				</form>
 			</div>			

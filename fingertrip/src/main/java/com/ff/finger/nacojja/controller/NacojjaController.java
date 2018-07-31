@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ff.finger.common.CommonConstants;
+import com.ff.finger.common.PaginationInfo;
 import com.ff.finger.common.FileUploadUtil;
 import com.ff.finger.common.SearchVO;
 import com.ff.finger.country.model.CountryService;
@@ -40,10 +41,30 @@ public class NacojjaController {
 	public String nacojjaList(@ModelAttribute SearchVO searchVo, Model model) {
 		logger.info("나코짜 목록 보여주기, 파라미터 searchVo={}", searchVo);
 		
+		PaginationInfo pagingInfo=new PaginationInfo();
+		pagingInfo.setBlockSize(CommonConstants.NA_BLOCK_SIZE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		if(searchVo.getRecordCountPerPage()==0) {
+			pagingInfo.setRecordCountPerPage(CommonConstants.NA_RECORD_COUNT_PER_PAGE);
+			searchVo.setRecordCountPerPage(CommonConstants.NA_RECORD_COUNT_PER_PAGE);
+		}else {
+			pagingInfo.setRecordCountPerPage(searchVo.getRecordCountPerPage());
+		}
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
 		List<Map<String,Object>> list=courseService.nacojjaList(searchVo);
-		logger.info("나코짜 목록 조회 결과, list.size={}", list.size());
+		logger.info("나코짜 목록 조회 결과, list.size={}, searchVo={}", list.size(), searchVo);
+		
+		int totalRecord=courseService.getTotalRecord(searchVo);
+		logger.info("나코짜 목록 totalRecord={}", totalRecord);
+		
+		pagingInfo.setTotalRecord(totalRecord);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
 		return "nacojja/nacojjaList";
 	}
 	

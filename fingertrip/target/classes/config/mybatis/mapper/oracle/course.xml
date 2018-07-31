@@ -3,17 +3,49 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.course">
 	<select id="nacojjaList" resultType="map" parameterType="SearchVO">
-		select * 
+		select *
 		from(
-		    select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, listagg(country, ',') within group (order by course_no) as countries
-		    from(
-		        select distinct course_no, country, title, start_day, end_day-start_day as term, thumb_img, heart_count, p.progress_status, p.progress_no
-		        from courseDayTravelCountryView c join progress p
-		        on c.progress_no=p.progress_no
-		        where country is not null
-		    )
-		    group by course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no
-		    order by course_no desc
+            select list.*, rownum as rnum
+            from(
+                select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, listagg(country, ',') within group (order by course_no) as countries
+                from(
+                    select distinct course_no, country, title, start_day, to_char(end_day-start_day) as term, thumb_img, heart_count, p.progress_status, p.progress_no
+                    from courseDayTravelCountryView c join progress p
+                    on c.progress_no=p.progress_no
+                )
+                group by course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no
+                order by course_no desc
+            ) list
+             <where>
+					<if test="searchCondition2!=0">
+						progress_no = #{searchCondition2}
+					</if>
+					<if test="searchKeyword!=null and searchKeyword!=''">
+						<if test="searchCondition=='term'">
+							and term=#{searchKeyword}
+						</if>
+						<if test="searchCondition!='term'">
+							and ${searchCondition} like '%' || #{searchKeyword} || '%'
+						</if>
+					</if>
+				</where>
+		)
+		<![CDATA[
+			where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="getTotalRecord" resultType="int" parameterType="searchVo">
+		select count(*)
+		from(
+			select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, listagg(country, ',') within group (order by course_no) as countries
+			from(
+			    select distinct course_no, country, title, start_day, to_char(end_day-start_day) as term, thumb_img, heart_count, p.progress_status, p.progress_no
+			    from courseDayTravelCountryView c join progress p
+			    on c.progress_no=p.progress_no
+			)
+			group by course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no
+			order by course_no desc
 		)
 		<where>
 			<if test="searchCondition2!=0">
@@ -21,10 +53,10 @@
 			</if>
 			<if test="searchKeyword!=null and searchKeyword!=''">
 				<if test="searchCondition=='term'">
-					term=#{searchKeyword}
+					and term=#{searchKeyword}
 				</if>
 				<if test="searchCondition!='term'">
-					#{searchCondition} like '%'||#{searchKeyword}||'%'
+					and ${searchCondition} like '%' || #{searchKeyword} || '%'
 				</if>
 			</if>
 		</where>

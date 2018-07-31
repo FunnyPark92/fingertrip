@@ -15,6 +15,10 @@ public interface CommonConstants {
 	public static final int BLOCK_SIZE=10;
 	public static final int RECORD_COUNT_PER_PAGE=10;
 	
+	//나코짜 페이지 처리
+	public static final int NA_BLOCK_SIZE=5;
+	public static final int NA_RECORD_COUNT_PER_PAGE=12;
+
 	//파일 업로드에 사용
 	public static final int PATH_FLAG_PDS = 1; //일반자료실
 	public static final int PATH_FLAG_IMAGE = 2; //코스등록 시-이미지 업로드	
