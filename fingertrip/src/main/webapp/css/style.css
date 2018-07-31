@@ -403,7 +403,7 @@ table a:hover, table a:active{text-decoration: none;}
 
 
 /* 나코짜2 plan2 */
-li{list-style: none}
+/* li{list-style: none} */
 .faq-list .list-group-item.active {
     z-index: 2;
     color: #fff;
