@@ -32,11 +32,11 @@
 	</div>
 	<div class="container marginBottom100">
 			<form name="frmPage" action="<c:url value='/nacojja/nacojjaList.do'/>" method="post">
-				<input type="text" name="currentPage">
-				<input type="text" name="searchCondition2" value=${param.searchCondition2 }>
+				<input type="hidden" name="currentPage">
+				<input type="hidden" name="searchCondition2" value=${param.searchCondition2 }>
 				<%-- <input type="text" name="recordCountPerPage" value=${param.recordCountPerPage }> --%>
-				<input type="text" name="searchCondition" value="${param.searchCondition }">
-				<input type="text" name="searchKeyword" value="${param.searchKeyword }">
+				<input type="hidden" name="searchCondition" value="${param.searchCondition }">
+				<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
 			</form>
 			<form name="frmSearch2" action="<c:url value='/nacojja/nacojjaList.do'/>" method="post">
 				<input type="hidden" name="searchCondition2" value=${param.searchCondition2 }>
