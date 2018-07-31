@@ -18,6 +18,18 @@
         $(".datepicker").datepicker({
             dateFormat: "yy-mm-dd"
         });
+        
+        var fileTarget = $('.planImgWrap .upload-hidden'); 
+        fileTarget.on('change', function(){ // 값이 변경되면
+        	if(window.FileReader){ // modern browser 
+        		var filename = $(this)[0].files[0].name; 
+        	} else { // old IE 
+        		var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+        	} // 추출한 파일명 삽입
+        	$(this).siblings('.upload-name').val(filename); 
+        });
+
+        
     });
     
     $.datepicker.setDefaults({
@@ -54,7 +66,8 @@
 		    <div class="planImgWrap">
 		        <span>대표 이미지</span><br>
 		        <label for="imageUpload">사진첨부</label>
-		        <input type="file" name="imageUpload" id="imageUpload">
+		        <input type="file" name="imageUpload" id="imageUpload" class="upload-hidden">
+		        <input class="upload-name" value="파일선택" disabled="disabled">
 		    </div>
 	    	<input type="submit" class="btn btn-danger" id="btnNacojja1" value="나코짜 만들기">
 		</div>

@@ -394,6 +394,22 @@ table a:hover, table a:active{text-decoration: none;}
     clip:rect(0,0,0,0); 
     border: 0; 
 }
+.planImgWrap .upload-name { 
+	display: inline-block; 
+	padding: .4em .75em; 
+	font-size: inherit; 
+	font-family: inherit; 
+	line-height: normal; 
+	background-color: #fff; 
+	border:none;
+	border-bottom: 1px solid #ebebeb; 
+	border-radius: .25em; 
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+	-moz-appearance: none; 
+	appearance: none; 
+	width: 70%;
+}
+
 .plan1>.btn { 
     width: 80.5%;
     margin: 0 auto;
