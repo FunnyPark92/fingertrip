@@ -63,7 +63,6 @@ table{width: 100%;}
     margin : 20px 0px;
 }
 .grayTh th {
-    width: 150px;
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
@@ -71,7 +70,6 @@ table{width: 100%;}
     background: #eee;
 }
 .grayTh td {
-    width: 350px;
     padding: 10px;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
@@ -79,9 +77,6 @@ table{width: 100%;}
 
 
 /* 서브 메뉴의 메뉴 */
-.lineGnb{
-    
-}
 .lineGnb li{
     float: left;
     width: 25%;
@@ -91,9 +86,15 @@ table{width: 100%;}
     border-left:none;
     padding: 10px;
 }
-.lineGnb li:hover{background-color: #eee;}
+.lineGnb li:hover, .lineGnb li:active, .lineGnb li:focus, .lineGnb li.on{
+	background-color: #eee;
+	font-weight: bold;
+}
 .lineGnb li:first-child{border-left:1px solid #909090;}
 .lineGnb li a{display: block; width: 100%; height: 100%;}
+.lineGnb li a:hover, .lineGnb li a:active, .lineGnb li a:focus{
+	color:#333; 
+}
 
 
 /* 기업회원 가입 */

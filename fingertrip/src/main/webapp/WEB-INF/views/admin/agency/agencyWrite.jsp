@@ -3,10 +3,9 @@
 <%@ include file="../inc/adminTop.jsp"%>
 <section class="admCenter marginTop40">
         <ul class="clearFix marginBottom40 lineGnb">
-            <li><a href="<c:url value='/admin/agency/agencyList.do'/>">관리자회원조회</a></li>
-            <li><a href="<c:url value='/admin/agency/agencyWrite.do'/>">관리자회원가입</a></li>
+            <li><a href="<c:url value='/admin/agency/agencyList.do'/>">기업회원조회</a></li>
+            <li class="on"><a href="<c:url value='/admin/agency/agencyWrite.do'/>">기업회원가입</a></li>
         </ul>
-        <h2>관리자 회원 가입</h2>
 
 
 	 <form name="frm1" method="post" action="<c:url value='/admin/agency/agencyWrite.do'/>" class="agencyWrite">
