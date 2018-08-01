@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class AgencyWriteController {
-	private static final Logger logger = LoggerFactory.getLogger(AgencyWriteController.class); 
+public class TravelAgencyController {
+	private static final Logger logger = LoggerFactory.getLogger(TravelAgencyController.class); 
 	
 	@RequestMapping("/admin/agency/agencyWrite.do")
 	public String agencyWrite() {
@@ -23,6 +23,19 @@ public class AgencyWriteController {
 		return "admin/agency/agencyList";
 	}
 	
+	@RequestMapping("/admin/agency/agencyEdit.do")
+	public String agencyEdit() {
+		logger.info("여행사 수정");
+		
+		return "admin/agency/agencyEdit";
+	}
+	
+	@RequestMapping("/admin/agency/agencyDetail.do")
+	public String agencyDetail() {
+		logger.info("여행사 자세히보기");
+		
+		return "admin/agency/agencyDetail";
+	}
 	
 	
 }
