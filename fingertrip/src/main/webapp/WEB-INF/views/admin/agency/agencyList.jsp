@@ -6,7 +6,7 @@
             <li class="on"><a href="<c:url value='/admin/agency/agencyList.do'/>">기업회원조회</a></li>
             <li><a href="<c:url value='/admin/agency/agencyWrite.do'/>">기업회원가입</a></li>
         </ul>
-        <h2>회원 조회</h2>
+        <h2>기업 회원 조회</h2>
         <div class="clearFix">
            <div class="fRight">
                <input type="search">
@@ -27,13 +27,17 @@
             <tr>
                 <td><input type="checkbox" /></td>
                 <td>1</td>
-                <td>하나투어</td>
+                <td><a href="<c:url value='/admin/agency/agencyDetail.do'/>">하나투어</a></td>
                 <td>hana</td>
                 <td>qwe123</td>
                 <td>02-1111-1111</td>
                 <td>201-94-71716</td>
             </tr>
         </table>
+        <div class="aWrap fRight">
+        	<input type="submit" class="darkBorder" value="삭제"/>
+        </div>
+        
     </section>
 
 

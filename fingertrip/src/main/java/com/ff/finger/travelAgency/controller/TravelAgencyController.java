@@ -4,33 +4,42 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+
+
 
 @Controller
-@RequestMapping("/admin")
 public class TravelAgencyController {
 	private static final Logger logger = LoggerFactory.getLogger(TravelAgencyController.class); 
 	
-	@RequestMapping("/agency/agencyWrite.do")
+	@RequestMapping("/admin/agency/agencyWrite.do")
 	public String agencyWrite() {
-		logger.info("여행사 회원 가입 화면");
+		logger.info("여행사 회원 가입");
 		
 		return "admin/agency/agencyWrite";
 	}
-	/*@RequestMapping(value="/agency/agencyWrite.do", method=RequestMethod.POST)
-	public String agencyWrite_post() {
-		logger.info("여행사 회원 가입 처리");
-		
-		return "admin/agency/agencyWrite";
-	}*/
 	
-	@RequestMapping("/agency/agencyList.do")
+	@RequestMapping("/admin/agency/agencyList.do")
 	public String agencyList() {
 		logger.info("여행사 리스트");
 		
 		return "admin/agency/agencyList";
 	}
 	
+	@RequestMapping("/admin/agency/agencyEdit.do")
+	public String agencyEdit() {
+		logger.info("여행사 수정");
+		
+		return "admin/agency/agencyEdit";
+	}
+	
+	@RequestMapping("/admin/agency/agencyDetail.do")
+	public String agencyDetail() {
+		logger.info("여행사 자세히보기");
+		
+		return "admin/agency/agencyDetail";
+	}
+
 	
 	
 }

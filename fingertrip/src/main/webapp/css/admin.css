@@ -52,7 +52,7 @@ header li{
 
 
 
-/* 테이블 공통 */
+/* 목록 테이블 공통 */
 table{width: 100%;}
 .grayTh {
     border-collapse: collapse;
@@ -70,6 +70,30 @@ table{width: 100%;}
     background: #eee;
 }
 .grayTh td {
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+/* 상세 테이블 공통 */
+.grayBor {
+    border-collapse: collapse;
+    border-spacing: 1px;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 3px solid #969696;
+    margin : 20px 0px;
+}
+.grayBor th {
+    padding: 15px 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+    width:200px;
+    color: #6d6d6d;
+}
+.grayBor td {
     padding: 10px;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
@@ -95,6 +119,29 @@ table{width: 100%;}
 .lineGnb li a:hover, .lineGnb li a:active, .lineGnb li a:focus{
 	color:#333; 
 }
+
+/* 버튼 div */
+.aWrap a, .aWrap input{
+	margin-left: 10px;
+	border: none;
+    padding:15px 30px;
+    border-radius: 5px;
+    display: inline-block;
+}
+.darkGray{
+	background: #4b4b4b;
+    color: #fff;
+}
+.lightGray{
+	background: #808080;
+    color: #fff;
+}
+.darkGray:hover, .darkGray:focus,
+.lightGray:hover, .lightGray:focus{
+	color:#dcdcdc;
+}
+a.darkBorder{border:1px solid #4b4b4b;}
+input.darkBorder{border:1px solid #4b4b4b;}
 
 
 /* 기업회원 가입 */
@@ -123,6 +170,7 @@ div.divLast{
     border-radius: 5px;
     background: #4b4b4b;
     color: #fff;
+    margin-top:-4px;
 }
 .agencyWrite div>label{
     background: #eee;
