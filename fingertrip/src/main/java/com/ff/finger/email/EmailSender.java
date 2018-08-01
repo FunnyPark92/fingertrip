@@ -21,7 +21,7 @@ public class EmailSender {
 		mimeMsg.setText(content);
 		mimeMsg.setRecipient(RecipientType.TO, new InternetAddress(to));
 		mimeMsg.setFrom(new InternetAddress(from));
-		
 		mailSender.send(mimeMsg);
 	}
+	
 }
