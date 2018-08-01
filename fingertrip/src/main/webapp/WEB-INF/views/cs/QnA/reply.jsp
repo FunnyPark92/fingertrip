@@ -30,7 +30,7 @@
             <div class="col-lg-3">
                 <h3>고객센터</h3>
                 <div class="list-group">
-                    <a href="<c:url value='/cs/notice/board.do'/> " class="list-group-item ">공지사항</a>
+                    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="list-group-item ">공지사항</a>
                     <a href="<c:url value='/cs/QnA/qna.do'/> " class="list-group-item active">Q&amp;A</a>
                     <a href="<c:url value='/cs/faq/faq.do'/> " class="list-group-item">FAQ</a>
                 </div>
@@ -51,6 +51,7 @@
                 <p style="margin-bottom:0px;">제  목:${vo.title}</p>
                 <p style="margin-bottom:0px;">내  용:${vo.content}</p>
             </div>
+            <!-- 기업로그인이 완성되면 답변자 div는 지운다.-->
             <div>
             	<label for="title">답변자</label>
             	<input type="text" class="form-control" id="name" name="name"  />

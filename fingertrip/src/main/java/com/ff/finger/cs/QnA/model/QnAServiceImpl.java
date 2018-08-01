@@ -48,5 +48,10 @@ public class QnAServiceImpl implements QnAService {
 		cnt=qnADao.reply(vo);
 		return cnt;
 	}
+
+	@Override
+	public int serchGroupNo(int qnaNo) {
+		return qnADao.serchGroupNo(qnaNo);
+	}
 	
 }

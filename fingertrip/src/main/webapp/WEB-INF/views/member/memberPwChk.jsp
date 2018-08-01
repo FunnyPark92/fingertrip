@@ -28,7 +28,7 @@ $(document).ready(function(){
                 <a href="<c:url value='/member/memberOut.do'/>" class="list-group-item 
                 	<c:if test="${menu=='회원탈퇴' }"> active</c:if>
                ">회원 탈퇴</a>
-                <a href="#" class="list-group-item
+                <a href="<c:url value='/myPage/myWrite/myWriteList.do'/>" class="list-group-item
                 	<c:if test="${menu=='내가 쓴 글' }"> active</c:if>
                 ">내가 쓴 글</a>
                 <a href="<c:url value='/myPage/myCourse/myCourseList.do'/>" class="list-group-item

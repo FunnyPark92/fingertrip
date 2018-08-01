@@ -65,12 +65,17 @@ public class QnAController {
 		int cnt=qnAService.countUpdate(qnaNo);
 		logger.info("조회수 증가 후 cnt={}", cnt);
 		
+		/*
+		int groupNo=qnAService.serchGroupNo(qnaNo);
+		logger.info("group넘버 찾기 결과값 int groupNo=", groupNo);
+		*/
 		return "redirect:/cs/QnA/qnaDetail.do?qnaNo="+qnaNo;
+	
 	}
 	
 	@RequestMapping("/QnA/qnaDetail.do")
 	public String qnaDetail(@RequestParam(defaultValue="0") int qnaNo, HttpServletRequest request, Model model) {
-		logger.info("QnA 상세보기 파라미터 qnaNo={}", qnaNo);
+		logger.info("QnA 상세보기 파라미터 groupNo={}", qnaNo);
 		
 		if(qnaNo==0) {
 			model.addAttribute("msg","잘못됫 url입니다.");
@@ -130,12 +135,12 @@ public class QnAController {
 	@RequestMapping(value="/QnA/reply.do", method=RequestMethod.POST)
 	public String reply_post(@ModelAttribute QnAVO vo) {
 		logger.info("QnA답변하기 처리, 파라미터 vo={}", vo);
+		//기업 로그인이 완성되면 여기다가 session으로 name을 받아서 (session저장할때 name 있어야함) QnAVO에 getter로 세팅
+		//이후에 xml문서 가서 name에 내가 세팅한 name으로 insert하면 된다. 
 		
 		int cnt=qnAService.reply(vo);
 		logger.info("QnA답변 처리 결과, cnt={}", cnt);
 		
 		return "redirect:/cs/QnA/qna.do";
 	}
-	
-	
 }

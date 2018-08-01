@@ -101,4 +101,15 @@ public class MyPageController {
 		return "myPage/myCourse/myCourseList";
 	}
 	
+	@RequestMapping("/myWrite/myWriteList.do")
+	public String myWriteList(HttpSession session) {
+		logger.info("내가 쓴 글 화면 보여주기");
+		String userid=(String)session.getAttribute("userid");
+		
+		
+		
+		
+		
+		return "myPage/myWrite/myWriteList";
+	}
 }

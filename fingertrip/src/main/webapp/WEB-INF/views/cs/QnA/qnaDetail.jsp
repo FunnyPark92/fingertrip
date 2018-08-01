@@ -35,7 +35,7 @@
             <div class="col-lg-3">
                 <h3>고객센터</h3>
                 <div class="list-group">
-                    <a href="<c:url value='/cs/notice/board.do'/> " class="list-group-item ">공지사항</a>
+                    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="list-group-item ">공지사항</a>
                     <a href="<c:url value='/cs/QnA/qna.do'/> " class="list-group-item active">Q&amp;A</a>
                     <a href="<c:url value='/cs/faq/faq.do'/> " class="list-group-item">FAQ</a>
                 </div>
@@ -90,13 +90,13 @@
                         		<span>비밀글 입니다. 비밀번호를 입력해주세요.<br>
                         		<input type="password" class="form-control" class="password" name="pwd" placeholder="4자리" style="width:100px; display:inline-block;" /> 
                         		<input type="submit" class="ckpassword" class="btn btn-success" style="margin-bottom:3px;" value="확인"/></span>
-                        		<input type="hidden" name="qnaNo" value="${vo.qnaNo+1}">
+                        		<input type="hidden" name="qnaNo" value="${vo.groupNo+1}">
                         	</form>	
                         	<td>
                         </tr>   
                 		<tr class="pwck2">
                 			<th><img class="prev" alt="다음글" src="${pageContext.request.contextPath }/img/down.png">다음글</th>
-                			<td><a href='<c:url value="/cs/QnA/countUpdate.do?qnaNo=${vo.qnaNo-1}"/>'>${list[0]['title']}</a></td>
+                			<td><a href='<c:url value="/cs/QnA/countUpdate.do?qnaNo=${vo.groupNo-1}"/>'>${list[0]['title']}</a></td>
                 			<td>${list[0]['name']}</td>
                 			<td>${list[0]['regDate']}</td>
                 		</tr>
