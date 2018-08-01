@@ -96,6 +96,42 @@ table{width: 100%;}
 .lineGnb li a{display: block; width: 100%; height: 100%;}
 
 
+/* 기업회원 가입 */
+.agencyWrite div{border-bottom: 1px solid #b5b5b5;}
+.agencyWrite legend{
+    font-weight: 600;
+    font-size: 1.2em;
+}
+.agencyWrite input[type=text],.agencyWrite input[type=password]{
+    border: 1px solid #b7b7b7;
+    padding: 5px;
+}
+.div3 input{width:100px; }
+.div1st{
+    border-top: 3px solid #969696;
+    margin-top: 20px;
+}
+div.divLast{
+    border-bottom: none;
+    margin-top: 30px;
+    text-align: center;
+}
+.divLast input{
+    border: none;
+    padding:15px 30px;
+    border-radius: 5px;
+    background: #4b4b4b;
+    color: #fff;
+}
+.agencyWrite div>label{
+    background: #eee;
+    display: inline-block;
+    width: 200px;
+    padding: 15px 10px;
+    margin-right: 10px;
+    font-weight: bold;
+    color: #6d6d6d;
+}
 
 
 
