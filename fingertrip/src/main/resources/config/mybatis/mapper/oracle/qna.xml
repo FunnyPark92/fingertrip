@@ -11,7 +11,7 @@
 				<if test="searchKeyword!=null and searchKeyword!=''">
 					where ${searchCondition} like '%' || #{searchKeyword} || '%'
 				</if>
-				order by group_no, sort_no
+				order by group_no desc, sort_no
 				)list
 			)
 		<![CDATA[
@@ -59,7 +59,8 @@
 	
 	<select id="selectByNo" parameterType="int" resultType="QnAVO">
 		select * from qna
-		where qna_no=#{qnaNo} or qna_no=#{qnaNo}+1 or qna_no=#{qnaNo}-1
+		where (group_no=#{groupNo}+1 or group_no=#{groupNo}-1) and step=0
+		order by qna_no
 	</select>
 	
 	<select id="passck" parameterType="int" resultType="string">
@@ -89,7 +90,7 @@
 		insert into qna(qna_no,title,content,name,password,group_no,step,sort_no,travel_agency_no,admin_no,member_no)
 		values(qna_seq.nextval,#{title},#{content},#{name},#{password},(select group_no from qna where qna_no=#{qnaNo}),
 		(select step from qna where qna_no=#{qnaNo})+1,
-		(select sort_no from qna where qna_no=#{qnaNo}+1),#{travelAgencyNo},#{adminNo},#{memberNo})
+		(select sort_no from qna where qna_no=#{qnaNo})+1,#{travelAgencyNo},#{adminNo},#{memberNo})
 	</insert>
 		
 	<select id="noticeDetail" parameterType="int" resultType="noticeVo">
@@ -109,6 +110,24 @@
 	<select id="serchGroupNo" parameterType="int" resultType="int">
 		select group_no from qna
 		where qna_no=#{qnaNo}
+	</select>
+	
+	<select id="myWriteSelectAll" parameterType="SearchVo" resultType="QnAVo">
+		select * from(
+			select list.*, rownum as RNUM from(
+				select * from qna
+				where member_no=#{memberNo}
+				order by qna_no desc
+			)list
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="myWriteQnAtotalRecord" parameterType="SearchVo" resultType="int">
+		select count(*) from qna
+		where member_no=#{memberNo}
 	</select>
 </mapper>
 

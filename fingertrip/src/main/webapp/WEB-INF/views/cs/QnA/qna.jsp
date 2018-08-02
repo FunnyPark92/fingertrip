@@ -5,8 +5,8 @@
 
 <script type="text/javascript">
 function pageFunc(currentPage){
-	frmHid.currentPage.value=currentPage;
-	frmHid.submit();
+	page.currentPage.value=currentPage;
+	page.submit();
 }
 
   $(document).ready(function(){
@@ -35,7 +35,7 @@ function pageFunc(currentPage){
             </div>
            <!-- 페이징 처리를 위한 div -->
             <div>
-            	<form name="frmHid" action="<c:url value='/cs/QnA/qna.do'/>" method="post">
+            	<form name="page" action="<c:url value='/cs/QnA/qna.do'/>" method="post">
 	            	<input type="hidden" name="currentPage">
 	            	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 	            	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
@@ -43,15 +43,15 @@ function pageFunc(currentPage){
             </div>
            <!-- 서브컨텐츠 -->
             <div class="col-lg-9">
-                <h3>QnA게시판</h3>
+                <h4>QnA게시판</h4>
                 <table class="table table-hover tableBorder">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col" style="width:5%"></th>
-                            <th scope="col" style="width:45%">제목</th>
-                            <th scope="col" style="width:15%">작성자</th>
-                            <th scope="col" style="width:26%">등록일</th>
-                            <th scope="col" style="width:9%">조회수</th>
+                            <th scope="col" style="width:10%"  class="text-left">번호</th>
+                            <th scope="col" style="width:40%" class="text-center">제목</th>
+                            <th scope="col" style="width:15%" class="text-left">작성자</th>
+                            <th scope="col" style="width:25%" class="text-left">등록일</th>
+                            <th scope="col" style="width:10%"  class="text-center">조회수</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,7 +93,7 @@ function pageFunc(currentPage){
                             </td>
                             <td>${vo.name }</td>
                             <td><fmt:formatDate value="${vo.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
-                            <td>${vo.readCount}</td>
+                            <td class="text-center">${vo.readCount}</td>
                         </tr>
                         <!-- 비밀번호 유무 비교에 필요한 값들 -->
 	    				<input type="hidden" class="pass" name="pass" value="${vo.password}">

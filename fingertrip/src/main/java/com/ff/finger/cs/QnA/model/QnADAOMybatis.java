@@ -27,8 +27,8 @@ public class QnADAOMybatis implements QnADAO {
 	}
 
 	@Override
-	public List<QnAVO> selectByNo(int qnaNo) {
-		List<QnAVO> list=sqlSession.selectList(namespace+"selectByNo", qnaNo);
+	public List<QnAVO> selectByNo(int groupNo) {
+		List<QnAVO> list=sqlSession.selectList(namespace+"selectByNo", groupNo);
 		return list;
 	}
 
@@ -60,5 +60,16 @@ public class QnADAOMybatis implements QnADAO {
 	@Override
 	public int serchGroupNo(int qnaNo) {
 		return sqlSession.selectOne(namespace+"serchGroupNo", qnaNo);
+	}
+
+	@Override
+	public List<QnAVO> myWriteSelectAll(SearchVO searchVo) {
+		List<QnAVO> list=sqlSession.selectList(namespace+"myWriteSelectAll",searchVo);
+		return list;
+	}
+
+	@Override
+	public int myWriteQnAtotalRecord(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"myWriteQnAtotalRecord", searchVo);
 	}
 }
