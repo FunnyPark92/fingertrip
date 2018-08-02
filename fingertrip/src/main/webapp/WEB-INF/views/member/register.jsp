@@ -148,14 +148,14 @@ $(document).ready(function(){
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="password">비밀번호</label>
-       <input type="password" class="form-control valid" name="password" id="password" placeholder="영문과 숫자 조합으로 입력" autocomplete="off">
+       <input type="password" class="form-control valid" name="password" id="password" placeholder="영문자로 시작하는 8~14자 영문,숫자 조합으로 입력" autocomplete="off">
        <div class="mandatory"></div>
      </div>
      
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="password2">비밀번호 확인</label>
-       <input type="password" class="form-control valid" name="password2" id="password2" placeholder="영문과 숫자 조합으로 입력" autocomplete="off">
+       <input type="password" class="form-control valid" name="password2" id="password2" placeholder="영문자로 시작하는 8~14자 영문,숫자 조합으로 입력" autocomplete="off">
        <div class="mandatory"></div>
      </div>
      

@@ -481,6 +481,10 @@ table a:hover, table a:active{text-decoration: none;}
     width:100%; 
     height: 25em;
 }
+#mapFinal{
+	width:100%; 
+    height: 25em;
+}
 
 
 /* faq */

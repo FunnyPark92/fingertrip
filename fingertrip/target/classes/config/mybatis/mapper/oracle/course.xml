@@ -61,9 +61,17 @@
 		</where>
 	</select>
 	
-	<insert id="nacojja1Write" parameterType="CourseVO">
+	<insert id="nacojjaCourseWrite" parameterType="travelSpotVo">
+		<selectKey keyProperty="courseNo" order="BEFORE" resultType="int">
+			SELECT COURSE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO COURSE(COURSE_NO, TITLE, START_DAY, END_DAY, THUMB_IMG, CONTENT, MEMBER_NO)
-		VALUES(COURSE_SEQ.NEXTVAL, #{title}, #{startDay}, #{endDay}, #{thumbImg}, #{content}, 20)
+		VALUES(#{courseNo}, #{title}, #{startDay}, #{endDay}, #{thumbImg}, #{content}, #{memberNo})
+	</insert>
+	
+	<insert id="nacojjaTravelSpotWrite" parameterType="travelSpotVo">
+		INSERT INTO TRAVEL_SPOT(TRAVEL_SPOT_NO, DAY, CITY, TRAVEL_SPOT, IMG, TRAVEL_CONTENT, COUNTRY_CODE, COURSE_NO)
+		VALUES(TRAVEL_SPOT_SEQ.NEXTVAL, #{day}, #{city}, #{travelSpot}, #{img, jdbcType=VARCHAR}, #{travelContent}, 'CN', #{courseNo})
 	</insert>
 
 </mapper>

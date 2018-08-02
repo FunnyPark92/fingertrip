@@ -8,5 +8,6 @@ import com.ff.finger.common.SearchVO;
 public interface CourseDAO {
 	public List<Map<String, Object>> nacojjaList(SearchVO searchVo);
 	public int getTotalRecord(SearchVO searchVo);
-	public int nacojja1Write(CourseVO courseVo);
+	public int nacojjaCourseWrite(CourseVO travelSpotVo);
+	public int nacojjaTravelSpotWrite(CourseVO travelSpotVo);
 }
