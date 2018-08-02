@@ -56,10 +56,10 @@ $(document).ready(function(){
 				}else if(!validate_userPwd($('#password').val())){
 					alert("비밀번호는 영문자로 시작하는 8~14자 영문,숫자 조합으로 입력해 주세요");
 					bool=false;
-				}else if(!validate_userHp($('#hp2').val())){
+				}else if(!validate_userHp2($('#hp2').val())){
 					alert("휴대폰 중간 번호를 숫자 3~4로 입력해주세요");
 					bool=false;
-				}else if(!validate_userHp2($('#hp3').val())){
+				}else if(!validate_userHp3($('#hp3').val())){
 					alert("휴대폰 마지막 번호를 숫자 4개로 입력해주세요");
 					bool=false;
 				}
