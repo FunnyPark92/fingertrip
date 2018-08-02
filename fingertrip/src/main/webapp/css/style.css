@@ -19,6 +19,12 @@
 }
 
 footer{border-top: 1px solid #d8d8d8;}
+.admBtn{
+	cursor: inherit;
+	text-decoration: none;
+	color:#6c757d;
+}
+.admBtn:hover, .admBtn:focus, .admBtn:active{text-decoration:none;}
 
 /* margin */
 .paddingL100{padding-left: 100px;}

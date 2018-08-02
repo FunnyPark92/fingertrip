@@ -108,5 +108,4 @@ public class QnAVO {
 				+ step + ", sortNo=" + sortNo + ", delFlag=" + delFlag + ", travelAgencyNo=" + travelAgencyNo
 				+ ", adminNo=" + adminNo + ", memberNo=" + memberNo + "]";
 	}
-   
 }

@@ -52,7 +52,7 @@ header li{
 
 
 
-/* 테이블 공통 */
+/* 목록 테이블 공통 */
 table{width: 100%;}
 .grayTh {
     border-collapse: collapse;
@@ -63,7 +63,6 @@ table{width: 100%;}
     margin : 20px 0px;
 }
 .grayTh th {
-    width: 150px;
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
@@ -71,7 +70,30 @@ table{width: 100%;}
     background: #eee;
 }
 .grayTh td {
-    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+/* 상세 테이블 공통 */
+.grayBor {
+    border-collapse: collapse;
+    border-spacing: 1px;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 3px solid #969696;
+    margin : 20px 0px;
+}
+.grayBor th {
+    padding: 15px 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+    width:200px;
+    color: #6d6d6d;
+}
+.grayBor td {
     padding: 10px;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
@@ -79,9 +101,6 @@ table{width: 100%;}
 
 
 /* 서브 메뉴의 메뉴 */
-.lineGnb{
-    
-}
 .lineGnb li{
     float: left;
     width: 25%;
@@ -91,11 +110,77 @@ table{width: 100%;}
     border-left:none;
     padding: 10px;
 }
-.lineGnb li:hover{background-color: #eee;}
+.lineGnb li:hover, .lineGnb li:active, .lineGnb li:focus, .lineGnb li.on{
+	background-color: #eee;
+	font-weight: bold;
+}
 .lineGnb li:first-child{border-left:1px solid #909090;}
 .lineGnb li a{display: block; width: 100%; height: 100%;}
+.lineGnb li a:hover, .lineGnb li a:active, .lineGnb li a:focus{
+	color:#333; 
+}
+
+/* 버튼 div */
+.aWrap a, .aWrap input{
+	margin-left: 10px;
+	border: none;
+    padding:15px 30px;
+    border-radius: 5px;
+    display: inline-block;
+}
+.darkGray{
+	background: #4b4b4b;
+    color: #fff;
+}
+.lightGray{
+	background: #808080;
+    color: #fff;
+}
+.darkGray:hover, .darkGray:focus,
+.lightGray:hover, .lightGray:focus{
+	color:#dcdcdc;
+}
+a.darkBorder{border:1px solid #4b4b4b;}
+input.darkBorder{border:1px solid #4b4b4b;}
 
 
+/* 기업회원 가입 */
+.agencyWrite div{border-bottom: 1px solid #b5b5b5;}
+.agencyWrite legend{
+    font-weight: 600;
+    font-size: 1.2em;
+}
+.agencyWrite input[type=text],.agencyWrite input[type=password]{
+    border: 1px solid #b7b7b7;
+    padding: 5px;
+}
+.div3 input{width:100px; }
+.div1st{
+    border-top: 3px solid #969696;
+    margin-top: 20px;
+}
+div.divLast{
+    border-bottom: none;
+    margin-top: 30px;
+    text-align: center;
+}
+.divLast input{
+    border: none;
+    padding:15px 30px;
+    border-radius: 5px;
+    background: #4b4b4b;
+    color: #fff;
+    margin-top:-4px;
+}
+.agencyWrite div>label{
+    background: #eee;
+    display: inline-block;
+    width: 200px;
+    padding: 15px 10px;
+    margin-right: 10px;
+    font-weight: bold;
+    color: #6d6d6d;
+}
 
 
 

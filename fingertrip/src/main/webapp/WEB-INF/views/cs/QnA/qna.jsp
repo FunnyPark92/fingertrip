@@ -43,7 +43,7 @@ function pageFunc(currentPage){
             </div>
            <!-- 서브컨텐츠 -->
             <div class="col-lg-9">
-                <H2>QnA게시판</H2>
+                <h3>QnA게시판</h3>
                 <table class="table table-hover tableBorder">
                     <thead class="thead-dark">
                         <tr>
@@ -59,15 +59,36 @@ function pageFunc(currentPage){
                     <!-- QnA리스트 내용 반목분 시작 -->
                     <c:forEach var="vo" items="${list}">
                         <tr class="pwck" >
-                            <th scope="row">${vo.qnaNo }</th>
+                            <th scope="row">
+                            	<c:if test="${vo.step==0}">
+                            ${vo.qnaNo }
+                            	</c:if>
+                            </th>
                             <td><a href="<c:url value='/cs/QnA/countUpdate.do?qnaNo=${vo.qnaNo }'/>">
+                            <!-- 삭제 원본글인 경우 삭제된 글로 처리하기 -->
+                            <c:choose>
+                            	<c:when test="${vo.delFlag=='Y'}">
+                            		<span style="color:gray; font-size:1.0em">
+                            		삭제된 글입니다.
+                            		</span>   
+                         		</c:when>
+                            <c:otherwise>
+                            <!-- 답변글인 경우 re이미지 표시하기 -->
+                            	<c:if test="${vo.step>0 }">
+                            		<c:forEach var="i" begin="1" end="${vo.step }">
+                            			&nbsp;
+                            		</c:forEach>
+                            		<img src="${pageContext.request.contextPath }/img/re.gif">
+                            	</c:if>
                             <!--제목이 긴 경우 일부만 보여주기 -->
-                            <c:if test="${fn:length(vo.title)>25}">
-                            	${fn:substring(vo.title,0,20) }...
-                            </c:if>
-                            <c:if test="${fn:length(vo.title)<=25}">
-                            	${vo.title }
-                            </c:if>
+                           	    <c:if test="${fn:length(vo.title)>25}">
+                            	    ${fn:substring(vo.title,0,20) }...
+                                </c:if>
+                                   <c:if test="${fn:length(vo.title)<=25}">
+                            	    ${vo.title }
+                                </c:if>
+                                </c:otherwise>
+                                </c:choose>
                             </a>
                             </td>
                             <td>${vo.name }</td>

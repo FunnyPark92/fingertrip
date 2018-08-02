@@ -5,17 +5,18 @@
 	<select id="selectAll" parameterType="SearchVo" resultType="QnAVo">
 	 	select *
 		from (
-			select list.*, rownum as RNUM
+			select rownum as RNUM, list.*
 			from(
 				select * from qna 
 				<if test="searchKeyword!=null and searchKeyword!=''">
 					where ${searchCondition} like '%' || #{searchKeyword} || '%'
 				</if>
-				order by qna_no desc
+				order by group_no, sort_no
 				)list
 			)
 		<![CDATA[
-		where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+		where RNUM>#{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
 		]]>
 	</select>
 	
@@ -88,7 +89,7 @@
 		insert into qna(qna_no,title,content,name,password,group_no,step,sort_no,travel_agency_no,admin_no,member_no)
 		values(qna_seq.nextval,#{title},#{content},#{name},#{password},(select group_no from qna where qna_no=#{qnaNo}),
 		(select step from qna where qna_no=#{qnaNo})+1,
-		(select sort_no from qna where qna_no=#{qnaNo}+1),#{travelAgencyNo},#{adminNo},#{memberNo}
+		(select sort_no from qna where qna_no=#{qnaNo}+1),#{travelAgencyNo},#{adminNo},#{memberNo})
 	</insert>
 		
 	<select id="noticeDetail" parameterType="int" resultType="noticeVo">
@@ -105,6 +106,10 @@
 		values(notice_seq.nextval, #{title},#{content},#{adminNo})
 	</insert>
 	
+	<select id="serchGroupNo" parameterType="int" resultType="int">
+		select group_no from qna
+		where qna_no=#{qnaNo}
+	</select>
 </mapper>
 
 

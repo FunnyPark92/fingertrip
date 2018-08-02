@@ -56,4 +56,9 @@ public class QnADAOMybatis implements QnADAO {
 	public int updateSortNo(int qnaNo) {
 		return sqlSession.update(namespace+"updateSortNo", qnaNo);
 	}
+
+	@Override
+	public int serchGroupNo(int qnaNo) {
+		return sqlSession.selectOne(namespace+"serchGroupNo", qnaNo);
+	}
 }
