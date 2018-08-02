@@ -14,9 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ff.finger.coupon.model.CouponService;
-
+import com.ff.finger.course.model.CourseService;
+import com.ff.finger.course.model.CourseVO;
+import com.ff.finger.cs.QnA.model.QnAService;
+import com.ff.finger.cs.QnA.model.QnAVO;
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.PaginationInfo;
 import com.ff.finger.common.SearchVO;
@@ -33,8 +37,13 @@ public class MyPageController {
 	private MemberService memberService;
 	@Autowired
 	private HeartService heartService;
-	
-	@Autowired CouponService couponService;
+	@Autowired 
+	private CouponService couponService;
+	@Autowired
+	private QnAService qnAService;
+	@Autowired
+	private CourseService courseService;
+
 	
 	@RequestMapping("/myPayment/paymentList.do")
 	public String myPayment() {
@@ -49,8 +58,6 @@ public class MyPageController {
 		
 		return "myPage/myHeart/heartList";
 	}
-	
-	
 	
 	@RequestMapping("/myHeart/heartCharge.do")
 	public String heartCharge() {
@@ -102,13 +109,60 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/myWrite/myWriteList.do")
-	public String myWriteList(HttpSession session) {
-		logger.info("내가 쓴 글 화면 보여주기");
+	public String myWriteList(@ModelAttribute SearchVO searchVo, @RequestParam(defaultValue="1") int currentPageforCourse, HttpSession session, Model model) {
+		//로그인때 session에 저장된 userid로 회원정보를 가져오기+memberNo를 getter로 받아오기
 		String userid=(String)session.getAttribute("userid");
+		MemberVO memberVo=memberService.logingMember(userid); 
+		int memberNo=memberVo.getMemberNo();  
+		searchVo.setMemberNo(memberNo); //member를 상속받은 searchVo에 저장해둔 memberNo셋팅
 		
+		//QnA페이징
+		PaginationInfo pagingInfoQnA=new PaginationInfo();
+		pagingInfoQnA.setBlockSize(CommonConstants.BLOCK_SIZE);
+		pagingInfoQnA.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfoQnA.setRecordCountPerPage(5);
+		searchVo.setFirstRecordIndex(pagingInfoQnA.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(5);
+		//따로 페이지를 처리하기 위한 변수 선언
+		int QnAcur=searchVo.getCurrentPage();
 		
+		//내가쓴 QnA를 처리 하기 위한 공간
+		logger.info("내가 쓴 QnA 목록 파라미터, searchVo={}", searchVo);
+		logger.info("내가 쓴 코스 목록 파아미터 currentPageforCourse={}", currentPageforCourse);
+
+		List<QnAVO> list=qnAService.myWriteSelectAll(searchVo);
+		logger.info("내가 쓴 QnA 화면 목록 조회 결과, list.size={}",list.size());
 		
+		int myWriteQnAtotalRecord=qnAService.myWriteQnAtotalRecord(searchVo);
+		logger.info("myWriteQnAtotalRecord={}", myWriteQnAtotalRecord);
+		pagingInfoQnA.setTotalRecord(myWriteQnAtotalRecord);
 		
+		//여행코스 페이징
+		PaginationInfo pagingInfoCourse=new PaginationInfo();
+		pagingInfoCourse.setBlockSize(CommonConstants.BLOCK_SIZE);
+		pagingInfoCourse.setCurrentPage(currentPageforCourse);
+		pagingInfoCourse.setRecordCountPerPage(5);
+		searchVo.setFirstRecordIndex(pagingInfoCourse.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(5);
+		
+		//내가 쓴 여행코스를 처리 하기 위한 공간
+		logger.info("내가 쓴 QnA 목록 파라미터, searchVo={}", searchVo);
+		logger.info("내가 쓴 코스 목록 파아미터 currentPageforCourse={}", currentPageforCourse);
+		searchVo.setCurrentPage(currentPageforCourse);
+		
+		List<CourseVO> listC=courseService.myWriteSelectAll(searchVo);
+		logger.info("내가 쓴 Course 화면 목록 조회 결과, listC.size={}", listC.size());
+		
+		int myWriteCoursetotalRecord=courseService.myWriteCoursetotalRecord(searchVo);
+		logger.info("myWriteCoursetotalRecord={}", myWriteCoursetotalRecord );
+		pagingInfoCourse.setTotalRecord(myWriteCoursetotalRecord);
+		
+	    //myWriteList.jsp로 포워딩 
+		model.addAttribute("QnAcur", QnAcur);
+		model.addAttribute("QnAlist", list);
+		model.addAttribute("pagingInfoQnA", pagingInfoQnA);
+		model.addAttribute("CourseList", listC);
+		model.addAttribute("pagingInfoCourse", pagingInfoCourse);
 		
 		return "myPage/myWrite/myWriteList";
 	}

@@ -36,4 +36,14 @@ public class CourseDAOMybatis implements CourseDAO{
 		return sqlSession.insert(namespace + "nacojjaTravelSpotWrite", travelSpotVo);
 	}
 
+	@Override
+	public List<CourseVO> myWriteSelectAll(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"myWriteSelectAll", searchVo);
+	}
+
+	@Override
+	public int myWriteCoursetotalRecord(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"myWriteCoursetotalRecord", searchVo);
+	}
+
 }

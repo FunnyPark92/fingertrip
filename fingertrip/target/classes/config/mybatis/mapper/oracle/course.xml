@@ -73,5 +73,23 @@
 		INSERT INTO TRAVEL_SPOT(TRAVEL_SPOT_NO, DAY, CITY, TRAVEL_SPOT, IMG, TRAVEL_CONTENT, COUNTRY_CODE, COURSE_NO)
 		VALUES(TRAVEL_SPOT_SEQ.NEXTVAL, #{day}, #{city}, #{travelSpot}, #{img, jdbcType=VARCHAR}, #{travelContent}, 'CN', #{courseNo})
 	</insert>
-
+	
+	<select id="myWriteSelectAll" parameterType="SearchVo" resultType="courseVo">
+		select * from(
+			select list.*, rownum as RNUM from(
+				select * from course
+				where member_no=#{memberNo}
+				order by course_no desc
+			)list
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="myWriteCoursetotalRecord" parameterType="SearchVo" resultType="int">
+		select count(*) from course
+		where member_no=#{memberNo}
+	</select>
+	
 </mapper>

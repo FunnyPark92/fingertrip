@@ -10,4 +10,7 @@ public interface CourseDAO {
 	public int getTotalRecord(SearchVO searchVo);
 	public int nacojjaCourseWrite(CourseVO travelSpotVo);
 	public int nacojjaTravelSpotWrite(CourseVO travelSpotVo);
+	public List<CourseVO> myWriteSelectAll(SearchVO searchVo);
+	public int myWriteCoursetotalRecord(SearchVO searchVo);
+	
 }

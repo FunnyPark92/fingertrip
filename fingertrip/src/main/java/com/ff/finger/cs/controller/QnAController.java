@@ -25,7 +25,8 @@ import com.ff.finger.cs.QnA.model.QnAVO;
 public class QnAController {
 	private static final Logger logger = LoggerFactory.getLogger(QnAController.class);
 	
-	@Autowired private QnAService qnAService;
+	@Autowired
+	private QnAService qnAService;
 	
 	@RequestMapping("/QnA/qna.do")
 	public String qna(@ModelAttribute SearchVO searchVo, Model model) {
@@ -48,7 +49,7 @@ public class QnAController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
-	
+		
 		return "cs/QnA/qna";
 	}
 	
@@ -75,7 +76,7 @@ public class QnAController {
 	
 	@RequestMapping("/QnA/qnaDetail.do")
 	public String qnaDetail(@RequestParam(defaultValue="0") int qnaNo, HttpServletRequest request, Model model) {
-		logger.info("QnA 상세보기 파라미터 groupNo={}", qnaNo);
+		logger.info("QnA 상세보기 파라미터 qnaNo={}", qnaNo);
 		
 		if(qnaNo==0) {
 			model.addAttribute("msg","잘못됫 url입니다.");
@@ -83,9 +84,20 @@ public class QnAController {
 			return "common/message"; 
 		}
 		
-		List<QnAVO> list=qnAService.selectByNo(qnaNo);
-		logger.info("QnA 상세보기 결과, list={}", list);
+		//특정 qnaNo에 GroupNo가져오기
+		int groupNo=(int)qnAService.serchGroupNo(qnaNo);
+		logger.info("QnA 그룹넘버 가져오기 groupNo={}", groupNo);
+	
 		
+		//Detail에 뿌려줄 한개의 QnAVO가져오기
+		QnAVO vo=qnAService.selectByNoOne(qnaNo);
+		logger.info("QnA 상세보기, vo={}", vo);
+		
+		//리스트로 GroupNo +1, -1 가져오기 
+		List<QnAVO> list=qnAService.selectByNo(groupNo);
+		logger.info("QnA 상세보기 결과, list={} ", list);
+		
+		model.addAttribute("vo",vo);
 		model.addAttribute("list",list);
 		
 		return "cs/QnA/qnaDetail";

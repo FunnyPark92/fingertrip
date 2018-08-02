@@ -10,4 +10,6 @@ public interface CourseService {
 	public List<Map<String, Object>> nacojjaList(SearchVO searchVo);
 	public int getTotalRecord(SearchVO searchVo);
 	public int nacojjaWrite(CourseVO travelSpotVo, List<TravelSpotVO> travelSpotList);
+	public List<CourseVO> myWriteSelectAll(SearchVO searchVo);
+	public int myWriteCoursetotalRecord(SearchVO searchVo);
 }

@@ -42,6 +42,16 @@ public class CourseServiceImpl implements CourseService {
 		
 		return cnt;
 	}
+
+	@Override
+	public List<CourseVO> myWriteSelectAll(SearchVO searchVo) {
+		return courseDao.myWriteSelectAll(searchVo);
+	}
+
+	@Override
+	public int myWriteCoursetotalRecord(SearchVO searchVo) {
+		return courseDao.myWriteCoursetotalRecord(searchVo);
+	}
 	
 
 }

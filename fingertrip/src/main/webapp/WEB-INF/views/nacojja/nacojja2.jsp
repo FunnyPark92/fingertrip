@@ -134,7 +134,8 @@
  	        getPlaceInformation(event.placeId);
         } else {
         	$("#place-icon").hide();
-        	$("#rating-icon").hide();
+        	//$("#rating-icon").hide();
+        	$("#divRating").find("img").remove();
         	//$("#place-icon").prop("src", "");
         	//$("#rating-icon").prop("src", "");
         	$("#place-rating").val("");
@@ -175,7 +176,6 @@
 			        address = results[0].formatted_address.split(",");
 			        
 			        var city;
-			        alert(address[0].split(" ")[0]);
 			        if (address[0].split(" ")[0] == "일본") { //일본 주소 체계중 국가부터 나올때
 			        	city = address[1];
 			        } else { //국가가 뒤에 나오는 나머지 나라들
@@ -205,21 +205,24 @@
     function getPlaceInformation(placeId) {
     	placesService.getDetails({placeId: placeId}, function(place, status) {
         	if (status === 'OK') {
-        		//$("#divRating").find("img").remove();
+        		$("#divRating").find("img").remove();
+        		//$("#divRating").find("#rating-icon").remove();
 
         		$("#place-icon").show();
 	        	$("#rating-icon").show();
         		$("#place-icon").prop("src", place.icon);
-	        	$("#rating-icon").prop("src", "<c:url value='/img/star.png'/>");
 	        	$("#place-name").val(place.name);
+	        	//$("#rating-icon").prop("src", "<c:url value='/img/star.png'/>");
 	        	$("#place-rating").val(place.rating);
 	        	
-	        	/* for (var i=2; i<place.rating; i++) {
+	        	for (var i=1; i<=place.rating; i++) {
 	        		//$("#rating-icon").append("<img src='<c:url value="/img/star.png"/>' height='17' width='17'>");
 	        		//$("#rating-icon").append("#place-rating");
 	        		//$("#place-rating").after("#rating-icon");
-	        		$("#rating-icon").after("<img src='<c:url value="/img/star.png"/>' height='17' width='17'>");
-	        	} */
+	        		//$("#rating-icon").after("<img src='<c:url value="/img/star.png"/>' height='17' width='17'>");
+	        		
+	        		$("#divRating label").after("<img id='rating-icon' src='<c:url value="/img/star.png"/>' height='17' width='17'>");
+	        	}
 	        	//this.infowindowContent.children['place-id'].textContent = place.place_id;
 	        	//this.infowindowContent.children['place-address'].textContent = place.formatted_address;
         	}
@@ -474,7 +477,6 @@
                         
                         <div id="divRating" class="courseDiv">
                             <label for="place-rating" class="courseLabel">평점</label>
-                            <img id="rating-icon" height="17" width="17">
                             <input type="text" id="place-rating" readonly="readonly" style="border: none;">
                         </div>
                         
