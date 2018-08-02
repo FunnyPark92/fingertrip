@@ -101,9 +101,13 @@ public class NacojjaController {
 		}
 		logger.info("나코짜1 파일 업로드 처리 후, travelSpotVo={}", travelSpotVo);
 		
-		//int cnt = courseService.nacojja1Write(courseVo);
-		//logger.info("나코짜1 DB 등록 결과, cnt={}", cnt);
+		//여행 기간 구하기
+		long endDayMillis = travelSpotVo.getEndDay().getTime();
+		long startDayMillis = travelSpotVo.getStartDay().getTime();
+		long travelDay = (endDayMillis - startDayMillis) / (1000*60*60*24) + 1;
+		logger.info("나코짜1 여행기간 구하기 결과, 여행기간={}", travelDay);
 		
+		model.addAttribute("travelDay", travelDay);
 		model.addAttribute("travelSpotVo", travelSpotVo);
 		
 		return "nacojja/nacojja2";
