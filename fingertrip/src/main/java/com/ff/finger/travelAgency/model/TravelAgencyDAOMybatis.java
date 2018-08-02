@@ -1,5 +1,7 @@
 package com.ff.finger.travelAgency.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,6 +30,11 @@ public class TravelAgencyDAOMybatis implements TravelAgencyDAO{
 	@Override
 	public int checkLicenseNo(String licenseNo) {
 		return sqlSession.selectOne(namespace+"checkLicenseNo",licenseNo);
+	}
+
+	@Override
+	public List<TravelAgencyVO> selectAgency() {
+		return sqlSession.selectList(namespace+"selectAgency");
 	}
 
 }

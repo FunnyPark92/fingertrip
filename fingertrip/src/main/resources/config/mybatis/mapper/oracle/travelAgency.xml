@@ -23,5 +23,8 @@
 			select count(*) from travel_agency where license_no = #{licenseNo}
 		</select>
 		
+		<select id="selectAgency" resultType="TravelAgencyVo">
+			select * from travel_agency
+		</select>
 	
 </mapper>

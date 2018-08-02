@@ -1,5 +1,7 @@
 package com.ff.finger.travelAgency.model;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +48,11 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 			return true;
 		}
 	
+	}
+
+	@Override
+	public List<TravelAgencyVO> selectAgency() {
+		return travelAgencyDao.selectAgency();
 	}
 
 	

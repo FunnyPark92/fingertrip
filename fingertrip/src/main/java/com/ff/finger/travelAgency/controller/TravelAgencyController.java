@@ -1,5 +1,7 @@
 package com.ff.finger.travelAgency.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,10 +78,16 @@ public class TravelAgencyController {
 	
 	
 	@RequestMapping("/agency/agencyList.do")
-	public String agencyList() {
+	public String agencyList(Model model) {
 		logger.info("여행사 리스트");
 		
+		List<TravelAgencyVO> list = travelAgencyServise.selectAgency();
+		logger.info("여행사 리스트 list={}",list);
+		
+		model.addAttribute("list",list);
+		
 		return "admin/agency/agencyList";
+		
 	}
 	
 	@RequestMapping("/agency/agencyEdit.do")

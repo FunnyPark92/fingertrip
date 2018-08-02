@@ -24,15 +24,17 @@
                 <th>전화번호</th>
                 <th>사업자등록번호</th>
             </tr>
-            <tr>
-                <td><input type="checkbox" /></td>
-                <td>1</td>
-                <td><a href="<c:url value='/admin/agency/agencyDetail.do'/>">하나투어</a></td>
-                <td>hana</td>
-                <td>qwe123</td>
-                <td>02-1111-1111</td>
-                <td>201-94-71716</td>
-            </tr>
+            <c:forEach var="vo" items="${list}">
+	            <tr>
+	                <td><input type="checkbox" /></td>
+	                <td>${vo.travelAgencyNo }</td>
+	                <td><a href="<c:url value='/admin/agency/agencyDetail.do'/>">${vo.name }</a></td>
+	                <td>${vo.id }</td>
+	                <td>${vo.password }</td>
+	                <td>${vo.hp }</td>
+	                <td>${vo.licenseNo}</td>
+	            </tr>
+            </c:forEach>
         </table>
         <div class="aWrap fRight">
         	<input type="submit" class="darkBorder" value="삭제"/>

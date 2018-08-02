@@ -1,5 +1,7 @@
 package com.ff.finger.travelAgency.model;
 
+import java.util.List;
+
 public interface TravelAgencyService {
 	
 	
@@ -7,4 +9,5 @@ public interface TravelAgencyService {
 	public boolean idDuplicate(String id);
 	public boolean nameDuplicate(String name);
 	public boolean checkLicenseNoDupl(String licenseNo);
+	public List<TravelAgencyVO> selectAgency();
 }
