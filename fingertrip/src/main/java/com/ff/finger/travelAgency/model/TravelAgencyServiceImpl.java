@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ff.finger.common.SearchVO;
+
 @Service
 public class TravelAgencyServiceImpl implements TravelAgencyService {
 
@@ -51,8 +53,18 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 	}
 
 	@Override
-	public List<TravelAgencyVO> selectAgency() {
-		return travelAgencyDao.selectAgency();
+	public List<TravelAgencyVO> selectAgency(SearchVO vo) {
+		return travelAgencyDao.selectAgency(vo);
+	}
+
+	@Override
+	public int totalRecord(SearchVO vo) {
+		return travelAgencyDao.totalRecord(vo);
+	}
+
+	@Override
+	public TravelAgencyVO selectOneAgency(String name) {
+		return travelAgencyDao.selectOneAgency(name);
 	}
 
 	

@@ -22,6 +22,9 @@ public interface CommonConstants {
 	//내가 찜한 코스 페이지 처리
 	public static final int MY_NA_RECORD_COUNT_PER_PAGE=9;
 	
+	//관리자 - 기업 조회
+	public static final int AGENCY_PER_PAGE=5;
+	
 	//파일 업로드에 사용
 	public static final int PATH_FLAG_PDS = 1; //일반자료실
 	public static final int PATH_FLAG_IMAGE = 2; //코스등록 시-이미지 업로드	

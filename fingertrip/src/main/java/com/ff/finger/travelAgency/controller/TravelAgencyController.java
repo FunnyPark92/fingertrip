@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ff.finger.common.CommonConstants;
+import com.ff.finger.common.PaginationInfo;
+import com.ff.finger.common.SearchVO;
 import com.ff.finger.travelAgency.model.TravelAgencyService;
 import com.ff.finger.travelAgency.model.TravelAgencyVO;
 
@@ -78,13 +81,27 @@ public class TravelAgencyController {
 	
 	
 	@RequestMapping("/agency/agencyList.do")
-	public String agencyList(Model model) {
-		logger.info("여행사 리스트");
+	public String agencyList(@ModelAttribute SearchVO searchVo, Model model) {
+		logger.info("여행사 리스트 searchVo={}", searchVo);
 		
-		List<TravelAgencyVO> list = travelAgencyServise.selectAgency();
-		logger.info("여행사 리스트 list={}",list);
+		PaginationInfo pagingInfo=new PaginationInfo();
+		pagingInfo.setBlockSize(CommonConstants.BLOCK_SIZE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setRecordCountPerPage(CommonConstants.AGENCY_PER_PAGE);
+		
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(CommonConstants.AGENCY_PER_PAGE);
+		
+		
+		List<TravelAgencyVO> list = travelAgencyServise.selectAgency(searchVo);
+		logger.info("여행사 리스트 list={}",list.size());
+		
+		int agencyTotalRecode=travelAgencyServise.totalRecord(searchVo);
+		logger.info("agency totalRecord={}", agencyTotalRecode);
+		pagingInfo.setTotalRecord(agencyTotalRecode);
 		
 		model.addAttribute("list",list);
+		model.addAttribute("pagingInfo",pagingInfo);
 		
 		return "admin/agency/agencyList";
 		
@@ -98,8 +115,15 @@ public class TravelAgencyController {
 	}
 	
 	@RequestMapping("/agency/agencyDetail.do")
-	public String agencyDetail() {
-		logger.info("여행사 자세히보기");
+	public String agencyDetail(@RequestParam String name,Model model) {
+		logger.info("여행사 자세히보기 name ={}",name);
+		TravelAgencyVO vo = travelAgencyServise.selectOneAgency(name);
+		logger.info("여행사 자세히보기 name ={}",vo);
+		
+		
+		model.addAttribute("vo",vo);
+		
+		
 		
 		return "admin/agency/agencyDetail";
 	}

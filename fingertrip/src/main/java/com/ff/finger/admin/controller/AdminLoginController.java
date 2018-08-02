@@ -40,7 +40,7 @@ public class AdminLoginController {
 		if(result==CommonConstants.LOGIN_OK) {
 			msg="로그인 되었습니다.";
 			request.getSession().setAttribute("adminId", adminVo.getId());
-			url="agency/agencyWrite.do";
+			url="/admin/agency/agencyList.do";
 		}else if(result==CommonConstants.PWD_MISMATCH){
 			msg="비밀번호가 일치하지 않습니다.";
 		}else {

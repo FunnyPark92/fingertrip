@@ -23,8 +23,47 @@
 			select count(*) from travel_agency where license_no = #{licenseNo}
 		</select>
 		
-		<select id="selectAgency" resultType="TravelAgencyVo">
-			select * from travel_agency
+		<select id="selectAgency" parameterType="SearchVo" resultType="TravelAgencyVo">
+			select *
+			from(   
+			    select list.* , rownum as RNUM
+			    from(
+			         select * from travel_agency
+			         <if test="searchKeyword!=null and searchKeyword!=''">
+				         	where ${searchCondition} like '%' || #{searchKeyword} || '%'
+			         </if> 
+			         order by travel_agency_no desc
+			         ) list
+			    )
+			 <![CDATA[
+			where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+			]]> 
 		</select>
+		
+		<select id="totalRecord" resultType="int" parameterType="SearchVo">
+			select count(*)
+			from travel_agency
+			<if test="searchKeyword!=null and searchKeyword!=''">
+				where ${searchCondition} like '%' || #{searchKeyword} || '%'
+			</if>
+		</select>
+		<select id="selectOneAgency" parameterType="String" resultType="TravelAgencyVO">
+			select * from travel_agency where name =#{name}
+		</select>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 </mapper>

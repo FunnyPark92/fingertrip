@@ -11,27 +11,27 @@
 	 	<table class="grayBor">
 	 		<tr>
 	 			<th>번호</th>
-	 			<td>1</td>
+	 			<td>${vo.travelAgencyNo }</td>
 	 		</tr>
 	 		<tr>
 	 			<th>상호명</th>
-	 			<td>하나투어</td>
+	 			<td>${vo.name }</td>
 	 		</tr>
 	 		<tr>
 	 			<th>ID</th>
-	 			<td>hana</td>
+	 			<td>${vo.id }</td>
 	 		</tr>
 	 		<tr>
 	 			<th>비밀번호</th>
-	 			<td>qwe1234</td>
+	 			<td>${vo.password }</td>
 	 		</tr>
 	 		<tr>
 	 			<th>전화번호</th>
-	 			<td>02-111-1111</td>
+	 			<td>${vo.hp }</td>
 	 		</tr>
 	 		<tr>
 	 			<th>사업자 등록번호</th>
-	 			<td>123-12-12345</td>
+	 			<td>${vo.licenseNo}</td>
 	 		</tr>
 	 	</table>
 	 	

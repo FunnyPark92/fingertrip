@@ -1,6 +1,6 @@
 package com.ff.finger.travelAgency.model;
 
-public class TravelAgencyVO {
+public class TravelAgencyVO{
 	
 	private int travelAgencyNo;
 	private String name;
