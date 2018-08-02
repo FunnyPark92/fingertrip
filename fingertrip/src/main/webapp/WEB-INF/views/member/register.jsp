@@ -5,7 +5,7 @@
  .message{ display: none;
  		   font-size: 12px;
  		   color: red;}
-}
+
 
 .divId{
 	width: 600px;

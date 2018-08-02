@@ -60,12 +60,7 @@
 		}
 	});//취소 버튼
 	
-	$('#hp1').find().each(function(idx,items){
-		if($(this).val()==$(vo.hp1)){
-			alert($('#hp1').val());
-			$(this).props('selected','selected');
-		}
-	});
+
  });
  
 

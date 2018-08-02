@@ -73,7 +73,10 @@ function validate_license3(lc3){
 	var pattern = new RegExp(/^[0-9]{5}$/g);
 	return pattern.test(lc3);
 }
-
+/*function validate_agencyName(name){
+	var pattern = new RegExp(/^[a-zA-Z0-9가-힣]+$/g);
+	return pattern.test(name);
+}*/
 
 
 
