@@ -108,7 +108,7 @@
 				<c:forEach var="map" items="${list }" >
 					<div class="listDv">
 						<a href="#" class="decoN">
-							<img class="listImg" alt="" src="${pageContext.request.contextPath }/img/${map['THUMB_IMG']}">
+							<img class="listImg listH" alt="" src="${pageContext.request.contextPath }/img/${map['THUMB_IMG']}">
 							<div class="pad15 listSmDv">
 								<p class="listTitle"> 
 									<c:if test="${fn:length(map['TITLE'])>28 }">
