@@ -52,43 +52,6 @@
 							</c:if>
 						</td>
 					</tr>
-		             <%-- <c:if test="${param.noticeNo==list[1].noticeNo }">
-		             	<c:set value="${fn:toLowerCase(list[1].fileName )}" var="fileName"/>
-		             </c:if>
-		             <c:if test="${param.noticeNo==list[0].noticeNo }">
-		             	<c:set value="${fn:toLowerCase(list[0].fileName )}" var="fileName"/>
-		             </c:if>
-		             
-		             <c:set value="${fn:substringAfter(fileName,'.' )}" var="fileName"/>
-		            	<c:if test="${fileName!='jpg'&&fileName!='png'&&fileName!='gif'}">
-		              <tr>
-		              	<th class="width30">첨부파일</th>
-		               <td class="width70">
-		               	<img src="${pageContext.request.contextPath }/img/save.png">
-		              		<c:if test="${param.noticeNo==list[1].noticeNo }">
-		               		<a href="<c:url value='/cs/notice/download.do?fileName=${list[1].fileName }'/>"> 
-		                 	<c:if test="${fn:length(list[1].fileName)>35}">
-		                       			${fn:substring(list[1].fileName,0,35) }...
-		                        </c:if>
-		                        <c:if test="${fn:length(list[1].fileName)<=35}">
-		                        	${list[1].fileName }
-		                        </c:if>
-		                       </a>
-		                      </c:if>
-		              		<c:if test="${param.noticeNo==list[0].noticeNo }">
-		              			<a href="<c:url value='/cs/notice/download.do?fileName=${list[0].fileName }'/>">
-		                 	<c:if test="${fn:length(list[0].fileName)>35}">
-		                       			${fn:substring(list[0].fileName,0,35) }...
-		                        </c:if>
-		                        <c:if test="${fn:length(list[0].fileName)<=35}">
-		                        	${list[0].fileName }
-		                        </c:if>
-		                       </a>
-		                      </c:if>
-			
-		               </td>
-		              </tr>
-		            	</c:if> --%>
 					<c:if test="${!empty list3 }">
 						<tr>
 							<th class="width30">첨부파일</th>
@@ -110,26 +73,6 @@
 							 </td>
 						</tr>
 					</c:if>
-		<%--                     <tr>
-		                        <td colspan="2">
-		                            <div class="minheight300">
-			                            <c:if test="${param.noticeNo==list[1].noticeNo }">
-			                                ${list[1].content }
-		                                </c:if>
-			                            <c:if test="${param.noticeNo==list[0].noticeNo }">
-			                                ${list[0].content }
-		                                </c:if>
-		                                <c:if test="${fileName=='jpg'||fileName=='png'||fileName=='gif'}">
-		                                	<c:if test="${param.noticeNo==list[1].noticeNo }">
-		                                		<img alt="" src="${pageContext.request.contextPath }/upload_pds/${list[1].fileName }" class="maxW100">
-		                                	</c:if>
-		                                	<c:if test="${param.noticeNo==list[0].noticeNo }">
-		                                		<img alt="" src="${pageContext.request.contextPath }/upload_pds/${list[0].fileName }" class="maxW100">
-		                                	</c:if>
-		                                </c:if>
-		                            </div>
-		                        </td>
-		                    </tr> --%>
 					<tr>
 				    	<td colspan="2">
 				        	<div class="minheight300">
