@@ -213,4 +213,13 @@ public class NoticeController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="/noticeEdit.do", method=RequestMethod.GET)
+	public String noticeEdit(@RequestParam int noticeNo) {
+		logger.info("공지사항 수정 화면, 파라미터 noticeNo={}", noticeNo);
+
+		
+		return "";
+	
+	}
 }

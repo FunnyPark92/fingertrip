@@ -10,7 +10,7 @@ import com.ff.finger.common.SearchVO;
 
 @Repository
 public class NoticeDAOMybatis implements NoticeDAO{
-	private String namespace="config.mybatis.mapper.oracle.qna.";
+	private String namespace="config.mybatis.mapper.oracle.notice.";
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;

@@ -94,7 +94,16 @@
 					</tr>
 				</table>
 				<div class="fRight">
-				    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="btn btn btn-warning">목록</a>
+				    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="btn btn-outline-info">목록</a>
+				    <c:if test="${param.noticeNo==list[1].noticeNo }">
+					    <a href="<c:url value='/cs/notice/noticeEdit.do?noticeNo=${list[1].noticeNo }'/>" class="btn btn-outline-warning btnColor">수정</a>
+					    <a href="<c:url value='/cs/notice/noticeDelete.do?noticeNo=${list[1].noticeNo }'/>" class="btn btn-outline-danger">삭제</a>
+				    </c:if>
+				    <c:if test="${param.noticeNo==list[0].noticeNo }">
+				    	<a href="<c:url value='/cs/notice/noticeEdit.do?noticeNo=${list[1].noticeNo }'/>" class="btn btn-outline-warning btnColor">수정</a>
+					    <a href="<c:url value='/cs/notice/noticeDelete.do?noticeNo=${list[1].noticeNo }'/>" class="btn btn-outline-danger">삭제</a>
+				    </c:if>
+				   
 				</div>
 		         
 		   		<c:set value="${fn:length(list) }" var="listLeng"/> 
