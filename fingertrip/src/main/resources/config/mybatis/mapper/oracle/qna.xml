@@ -93,17 +93,18 @@
 		(select sort_no from qna where qna_no=#{qnaNo})+1,#{travelAgencyNo},#{adminNo},#{memberNo})
 	</insert>
 		
-	<!--<select id="noticeDetail" parameterType="int" resultType="noticeVo">
-		 <selectKey keyProperty="rnum" order="BEFORE" resultType="int">
-			select rnum 
-			from
-				(select list.*, rownum as rnum
-				from(
-				    select * from notice order by notice_no desc
-				    )list
-				)
-			where notice_no=#{noticeNo}
-		</selectKey>
+	<select id="getNoticeRnum" parameterType="int" resultType="int">
+		select rnum 
+		from
+		    (select list.*, rownum as rnum
+		    from(
+		        select * from notice order by notice_no desc
+		        )list
+		    )
+		where notice_no=#{noticeNo}
+	</select>
+	
+	<select id="noticeDetail" parameterType="int" resultType="noticeVo">
 		select * 
 		from(
 			select list.*, rownum as rnum
@@ -114,7 +115,7 @@
 	    <![CDATA[
 		where rnum>=#{rnum}-1 and rnum<=#{rnum}+1
 		]]>
-	</select> -->
+	</select>
 	
 	<select id="getAdminNo" parameterType="string" resultType="int">
 		select admin_no from admin where id=#{id}

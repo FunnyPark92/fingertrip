@@ -89,7 +89,7 @@ public class NoticeController {
 		String originalFileName="", fileName="";
 		
 		MultipartFile[] mf=new MultipartFile[list.size()];
-		
+
 		for(int i=0; i<list.size();i++) {
 			mf[i]=list.get(i);
 			
@@ -160,7 +160,6 @@ public class NoticeController {
 			return "common/message";
 		}
 		
-		
 		List<NoticeVO> list=noticeService.noticeDetail(noticeNo);
 		logger.info("공지사항 상세보기 조회 결과, list.size={}", list.size());
 		
@@ -174,26 +173,28 @@ public class NoticeController {
 		}
 		logger.info("공지사항 fileName={}", fileName);
 		
-		String[] fileN=fileName.split(", ");
-		for(int i=0;i<fileN.length;i++) {
-			String subFileN=fileN[i].substring(fileN[i].lastIndexOf(".")+1).toLowerCase();
-			logger.info("공지사항 subFileN={}", subFileN);
-			if(subFileN.equals("jpg")||subFileN.equals("png")||subFileN.equals("gif")){
-/*				uploadPath=fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS)+"\\"+fileN[i];
-*/				imgFileN=fileN[i];
-				list2.add(imgFileN);
-				logger.info("imgFileN={}", imgFileN);
-			}else {
-				listFileN=fileN[i];
-				list3.add(listFileN);
-				logger.info("listFileN={}", listFileN);
+		if(fileName!=null && !fileName.isEmpty()) {
+			String[] fileN=fileName.split(", ");
+			for(int i=0;i<fileN.length;i++) {
+				String subFileN=fileN[i].substring(fileN[i].lastIndexOf(".")+1).toLowerCase();
+				logger.info("공지사항 subFileN={}", subFileN);
+				if(subFileN.equals("jpg")||subFileN.equals("png")||subFileN.equals("gif")){
+	/*				uploadPath=fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS)+"\\"+fileN[i];
+	*/				imgFileN=fileN[i];
+					list2.add(imgFileN);
+					logger.info("imgFileN={}", imgFileN);
+				}else {
+					listFileN=fileN[i];
+					list3.add(listFileN);
+					logger.info("listFileN={}", listFileN);
+				}
 			}
+			
+			logger.info("이미지, 파일 구분 후 list2.size={}, list3.size={}", list2.size(), list3.size());
+			model.addAttribute("list2", list2);
+			model.addAttribute("list3", list3);
 		}
-		
-		logger.info("이미지, 파일 구분 후 list2.size={}, list3.size={}", list2.size(), list3.size());
 		model.addAttribute("list", list);
-		model.addAttribute("list2", list2);
-		model.addAttribute("list3", list3);
 
 		return "cs/notice/noticeDetail";
 	}

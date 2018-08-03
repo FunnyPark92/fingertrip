@@ -31,6 +31,11 @@ public class NoticeDAOMybatis implements NoticeDAO{
 	}
 
 	@Override
+	public int getNoticeRnum(int noticeNo) {
+		return sqlSession.selectOne(namespace+"getNoticeRnum", noticeNo);
+	}
+	
+	@Override
 	public List<NoticeVO> noticeDetail(int noticeNo) {
 		return sqlSession.selectList(namespace+"noticeDetail", noticeNo);
 	}
@@ -44,5 +49,7 @@ public class NoticeDAOMybatis implements NoticeDAO{
 	public int noticeInsert(NoticeVO noticeVo) {
 		return sqlSession.insert(namespace+"noticeInsert",noticeVo);
 	}
+
+	
 
 }
