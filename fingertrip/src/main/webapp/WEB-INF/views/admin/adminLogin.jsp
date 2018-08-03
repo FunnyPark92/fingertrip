@@ -155,7 +155,7 @@ input {
 				<div class="form__field">
 					<label class="fontawesome-user" for="login__username"><span
 						class="hidden">Username</span></label> <input id="login__username" name="id"
-						type="text" class="form__input" placeholder="Username" required>
+						type="text" class="form__input" placeholder="Username" required value="${cookie.ck_adminid.value }">
 				</div>
 
 				<div class="form__field">
@@ -167,6 +167,14 @@ input {
 
 				<div class="form__field">
 					<input type="submit" value="Log In">
+				</div>
+				<div class="form_field" style="text-align: right;">
+					<input type="checkbox" name="saveid" id="saveid"
+						<c:if test="${!empty cookie.ck_adminid }">
+							checked="checked"
+						</c:if>
+					>
+					<span>아이디 저장</span> 
 				</div>
 				
 

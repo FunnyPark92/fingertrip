@@ -49,7 +49,6 @@ function pageFunc(currentPage){
                 <th scope="col" style="width:7%; text-align: center">번호</th>
                 <th scope="col" style="width:20%; text-align: center">상호명</th>
                 <th scope="col" style="width:15%; text-align: center">아이디</th>
-                <th scope="col" style="width:10%; text-align: center">비밀번호</th>
                 <th scope="col" style="width:15%; text-align: center">전화번호</th>
                 <th scope="col" style="width:15%; text-align: center">사업자등록번호</th>
             </tr>
@@ -61,7 +60,6 @@ function pageFunc(currentPage){
 	                <td>${vo.travelAgencyNo }</td>
 	                <td><a href="<c:url value='/admin/agency/agencyDetail.do?name=${vo.name}'/>">${vo.name }</a></td>
 	                <td>${vo.id }</td>
-	                <td>${vo.password }</td>
 	                <td>${vo.hp }</td>
 	                <td>${vo.licenseNo}</td>
 	            </tr>
