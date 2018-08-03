@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -215,11 +214,20 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/noticeEdit.do", method=RequestMethod.GET)
-	public String noticeEdit(@RequestParam int noticeNo) {
+	public String noticeEdit(@RequestParam int noticeNo, Model model) {
 		logger.info("공지사항 수정 화면, 파라미터 noticeNo={}", noticeNo);
 
+		if(noticeNo==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/cs/notice/noticeList.do");
+			
+			return "common/message";
+		}
 		
-		return "";
+		NoticeVO vo=noticeService.noticeSelectByNo(noticeNo);
+		
+		model.addAttribute("vo", vo);
+		return "cs/notice/noticeEdit";
 	
 	}
 }

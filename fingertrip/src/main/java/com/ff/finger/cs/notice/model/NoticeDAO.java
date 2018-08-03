@@ -12,4 +12,5 @@ public interface NoticeDAO {
 	public List<NoticeVO> noticeDetail(int noticeNo);
 	public int getAdminNo(String id);
 	public int noticeInsert(NoticeVO noticeVo);
+	public NoticeVO noticeSelectByNo(int noticeNo);
 }

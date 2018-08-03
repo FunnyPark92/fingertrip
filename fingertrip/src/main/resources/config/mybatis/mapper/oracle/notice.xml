@@ -67,8 +67,8 @@
 		values(notice_seq.nextval, #{title},#{content},#{fileName},#{originalFileName},#{adminNo})
 	</insert>
 	
-	<select id="noticeSelectByNo">
-		select * from notice where notice_no=#{}
+	<select id="noticeSelectByNo" parameterType="int" resultType="noticeVo">
+		select * from notice where notice_no=#{noticeNo}
 	</select>
 </mapper>
 

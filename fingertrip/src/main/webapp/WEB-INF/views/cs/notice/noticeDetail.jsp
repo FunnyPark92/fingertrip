@@ -100,8 +100,8 @@
 					    <a href="<c:url value='/cs/notice/noticeDelete.do?noticeNo=${list[1].noticeNo }'/>" class="btn btn-outline-danger">삭제</a>
 				    </c:if>
 				    <c:if test="${param.noticeNo==list[0].noticeNo }">
-				    	<a href="<c:url value='/cs/notice/noticeEdit.do?noticeNo=${list[1].noticeNo }'/>" class="btn btn-outline-warning btnColor">수정</a>
-					    <a href="<c:url value='/cs/notice/noticeDelete.do?noticeNo=${list[1].noticeNo }'/>" class="btn btn-outline-danger">삭제</a>
+				    	<a href="<c:url value='/cs/notice/noticeEdit.do?noticeNo=${list[0].noticeNo }'/>" class="btn btn-outline-warning btnColor">수정</a>
+					    <a href="<c:url value='/cs/notice/noticeDelete.do?noticeNo=${list[0].noticeNo }'/>" class="btn btn-outline-danger">삭제</a>
 				    </c:if>
 				   
 				</div>

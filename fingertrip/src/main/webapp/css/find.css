@@ -48,6 +48,9 @@
 		font-weight: bold;
 		font-size: 25px;
 	}
+	.marginL10{
+		margin-left: 10px;
+	}
 	.marginTB{
 		margin: 50px 0;
 	}
@@ -135,9 +138,6 @@
 	.marginT30{
     	margin-top: 30px;
 	}
-	.marginL10{
-		margin-left: 10px;
-	}
 	.width150{
 		width: 150px;
 	}
@@ -186,3 +186,4 @@
 	.btnColor{
 		color: #fd8730;
 	}
+	.

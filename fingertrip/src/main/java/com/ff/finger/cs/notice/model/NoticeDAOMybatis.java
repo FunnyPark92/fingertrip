@@ -50,6 +50,11 @@ public class NoticeDAOMybatis implements NoticeDAO{
 		return sqlSession.insert(namespace+"noticeInsert",noticeVo);
 	}
 
+	@Override
+	public NoticeVO noticeSelectByNo(int noticeNo) {
+		return sqlSession.selectOne(namespace+"noticeSelectByNo", noticeNo);
+	}
+
 	
 
 }
