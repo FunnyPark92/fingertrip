@@ -6,7 +6,7 @@
 
 		<insert id="insertAgency" parameterType="travelAgencyVO" >
 			<selectKey keyProperty="travelAgencyNo" order="BEFORE" resultType="int">
-				select travel_agency_no_seq.nextval from dual
+				select travel_agency_seq.nextval from dual
 			</selectKey>
 				insert into travel_agency
 			values(#{travelAgencyNo},#{name},#{id},#{password},#{hp},#{licenseNo})

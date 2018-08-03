@@ -79,7 +79,7 @@ public class NoticeController {
 		/*String adminId=(String) session.getAttribute("adminId");
 		logger.info("세션 조회 adminId={}", adminId);*/
 		
-		int adminNo=noticeService.getAdminNo("admin3");
+		int adminNo=noticeService.getAdminNo("admin");
 		noticeVo.setAdminNo(adminNo);
 		logger.info("관리자 번호 조회 결과, noticeVo={}", noticeVo);
 		
