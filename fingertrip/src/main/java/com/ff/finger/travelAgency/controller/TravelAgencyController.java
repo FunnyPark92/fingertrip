@@ -118,7 +118,6 @@ public class TravelAgencyController {
 	public String agencyDetail(@RequestParam String name,Model model) {
 		logger.info("여행사 자세히보기 name ={}",name);
 		TravelAgencyVO vo = travelAgencyServise.selectOneAgency(name);
-		logger.info("여행사 자세히보기 name ={}",vo);
 		
 		
 		model.addAttribute("vo",vo);

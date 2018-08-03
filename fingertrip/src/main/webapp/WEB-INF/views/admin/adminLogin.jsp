@@ -165,7 +165,6 @@ input {
 					<input type="submit" value="Log In">
 				</div>
 				
-				<a href="<c:url value='/admin/agency/agencyList.do'/>">로그인 후 화면(코딩완료시 삭제)</a>
 
 			</form>
 
