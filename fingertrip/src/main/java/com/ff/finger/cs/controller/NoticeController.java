@@ -159,6 +159,8 @@ public class NoticeController {
 			
 			return "common/message";
 		}
+		
+		
 		List<NoticeVO> list=noticeService.noticeDetail(noticeNo);
 		logger.info("공지사항 상세보기 조회 결과, list.size={}", list.size());
 		

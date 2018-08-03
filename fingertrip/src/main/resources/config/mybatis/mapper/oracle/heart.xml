@@ -9,8 +9,8 @@
             from(
                 select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, member_no, listagg(country, ',') within group (order by course_no) as countries
                 from(
-                    select distinct c.course_no, country, title, start_day, to_char(end_day-start_day) as term, thumb_img, heart_count, progress_status, progress_no, h.member_no
-                    from crsDayTrvelCntryPrgsView c join heart h
+                    select distinct c.course_no, country, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, h.member_no
+                    from corsTrvlCntryCntnentPrgrsView c join heart h
                     on c.course_no=h.course_no
                 )
 				where member_no=#{memberNo}
@@ -41,8 +41,8 @@
         from(
                 select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, member_no, listagg(country, ',') within group (order by course_no) as countries
                 from(
-                    select distinct c.course_no, country, title, start_day, to_char(end_day-start_day) as term, thumb_img, heart_count, progress_status, progress_no, h.member_no
-                    from crsDayTrvelCntryPrgsView c join heart h
+                    select distinct c.course_no, country, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, h.member_no
+                    from corsTrvlCntryCntnentPrgrsView c join heart h
                     on c.course_no=h.course_no
                 )
 				where member_no=#{memberNo}
