@@ -23,8 +23,8 @@ public class QnAServiceImpl implements QnAService {
 	}
 
 	@Override
-	public List<QnAVO> selectByNo(int qnaNo) {
-		return qnADao.selectByNo(qnaNo);
+	public List<QnAVO> selectByNo(int groupNo) {
+		return qnADao.selectByNo(groupNo);
 	}
 
 	@Override
@@ -53,5 +53,14 @@ public class QnAServiceImpl implements QnAService {
 	public int serchGroupNo(int qnaNo) {
 		return qnADao.serchGroupNo(qnaNo);
 	}
-	
+
+	@Override
+	public List<QnAVO> myWriteSelectAll(SearchVO searchVo) {
+		return qnADao.myWriteSelectAll(searchVo);
+	}
+
+	@Override
+	public int myWriteQnAtotalRecord(SearchVO searchVo) {
+		return qnADao.myWriteQnAtotalRecord(searchVo);
+	}
 }

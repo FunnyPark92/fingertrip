@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<link rel="stylesheet" href="css/datepicker.css">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
 <style>
@@ -28,7 +27,6 @@
         	} // 추출한 파일명 삽입
         	$(this).siblings('.upload-name').val(filename); 
         });
-
         
     });
     

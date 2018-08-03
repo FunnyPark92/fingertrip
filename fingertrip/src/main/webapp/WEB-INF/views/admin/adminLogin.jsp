@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -144,17 +146,17 @@ input {
 
 		<div class="grid__container">
 			<p class="pTitle">관리자 로그인</p>
-			<form action="" method="post" class="form form--login">
+			<form action="<c:url value='/admin/adminLogin.do'/>" method="post" class="form form--login">
 
 				<div class="form__field">
 					<label class="fontawesome-user" for="login__username"><span
-						class="hidden">Username</span></label> <input id="login__username"
+						class="hidden">Username</span></label> <input id="login__username" name="id"
 						type="text" class="form__input" placeholder="Username" required>
 				</div>
 
 				<div class="form__field">
 					<label class="fontawesome-lock" for="login__password"><span
-						class="hidden">Password</span></label> <input id="login__password"
+						class="hidden">Password</span></label> <input id="login__password" name="password"
 						type="password" class="form__input" placeholder="Password"
 						required>
 				</div>
@@ -163,7 +165,7 @@ input {
 					<input type="submit" value="Log In">
 				</div>
 				
-				<a href="<c:url value='/admin/member/memberList.do'/>">로그인 후 화면(코딩완료시 삭제)</a>
+				<a href="<c:url value='/admin/agency/agencyList.do'/>">로그인 후 화면(코딩완료시 삭제)</a>
 
 			</form>
 

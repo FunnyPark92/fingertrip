@@ -1,10 +1,12 @@
 package com.ff.finger.nacojja.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,28 +16,32 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ff.finger.common.CommonConstants;
-import com.ff.finger.common.PaginationInfo;
 import com.ff.finger.common.FileUploadUtil;
+import com.ff.finger.common.PaginationInfo;
 import com.ff.finger.common.SearchVO;
-import com.ff.finger.country.model.CountryService;
 import com.ff.finger.course.model.CourseService;
 import com.ff.finger.course.model.CourseVO;
+import com.ff.finger.member.model.MemberService;
+import com.ff.finger.member.model.MemberVO;
+import com.ff.finger.travelspot.model.TravelSpotVO;
 
 @Controller
 @RequestMapping("/nacojja")
 public class NacojjaController {
 	private static final Logger logger = LoggerFactory.getLogger(NacojjaController.class);
+	private List<TravelSpotVO> travelSpotList = new ArrayList<>();
 	
 	@Autowired 
 	private CourseService courseService;
 	
 	@Autowired
-	private CountryService countryService;
+	private FileUploadUtil fileUploadUtil;
 	
 	@Autowired
-	private FileUploadUtil fileUploadUtil;
+	private MemberService memberService;
 	
 	@RequestMapping("/nacojjaList.do")
 	public String nacojjaList(@ModelAttribute SearchVO searchVo, Model model) {
@@ -76,8 +82,8 @@ public class NacojjaController {
 	}
 	
 	@RequestMapping(value = "/nacojja1.do", method = RequestMethod.POST)
-	public String nacojja1Write_post(@ModelAttribute CourseVO courseVo, HttpServletRequest request) {
-		logger.info("나코짜1 DB 처리하기, 파라미터 courseVo={}", courseVo);
+	public String nacojja1Write_post(@ModelAttribute CourseVO travelSpotVo, HttpServletRequest request, Model model) {
+		logger.info("나코짜1 DB 처리하기, 파라미터 travelSpotVo={}", travelSpotVo);
 		
 		//파일 업로드 처리
 		String fileName = "";
@@ -87,30 +93,63 @@ public class NacojjaController {
 			for (Map<String, Object> map : fileList) {
 				fileName = (String) map.get("fileName");
 			}
-			courseVo.setThumbImg(fileName);
+			travelSpotVo.setThumbImg(fileName);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		logger.info("나코짜1 파일 업로드 처리 후, courseVo={}", courseVo);
+		logger.info("나코짜1 파일 업로드 처리 후, travelSpotVo={}", travelSpotVo);
 		
-		int cnt = courseService.nacojja1Write(courseVo);
-		logger.info("나코짜1 DB 등록 결과, cnt={}", cnt);
+		//여행 기간 구하기
+		long endDayMillis = travelSpotVo.getEndDay().getTime();
+		long startDayMillis = travelSpotVo.getStartDay().getTime();
+		long travelDay = (endDayMillis - startDayMillis) / (1000*60*60*24) + 1;
+		logger.info("나코짜1 여행기간 구하기 결과, 여행기간={}", travelDay);
+		
+		model.addAttribute("travelDay", travelDay);
+		model.addAttribute("travelSpotVo", travelSpotVo);
 		
 		return "nacojja/nacojja2";
 	}
 	
 	@RequestMapping(value = "/nacojja2.do", method = RequestMethod.GET)
-	public String nacojja2Write_get(Model model) {
+	public String nacojja2Write_get() {
 		logger.info("나코짜2 작성화면 보여주기");
 		
-		/*List<CountryVO> list = countryService.selectAllCountry();
-		logger.info("국가 리스트 조회 결과, list.size()={}", list.size());
-		
-		model.addAttribute("list", list);*/
-		
 		return "nacojja/nacojja2";
+	}
+	
+	@RequestMapping(value = "/nacojja2.do", method = RequestMethod.POST)
+	public String nacojja2Write_post(@ModelAttribute TravelSpotVO travelSpotVo, HttpSession session) {
+		logger.info("나코짜2 DB 처리하기, 파라미터 travelSpotVo={}", travelSpotVo);
+		
+		String userid = (String) session.getAttribute("userid");
+		MemberVO memberVo = memberService.logingMember(userid);
+		logger.info("로그인 한 회원의 정보, memberVo={}", memberVo);
+		
+		travelSpotVo.setMemberNo(memberVo.getMemberNo());
+		logger.info("나코짜2 DB 처리하기, 세팅 후 파라미터 travelSpotVo={}", travelSpotVo);
+		
+		int cnt = courseService.nacojjaWrite(travelSpotVo, travelSpotList);
+		logger.info("나코짜2 DB 처리하기 결과, cnt={}", cnt);
+		
+		
+		return "index"; //TO-DO: 나중에 상세 목록으로 가도록 변경
+	}
+	
+	@RequestMapping("/addClearPlace.do")
+	public void addClearPlace(@ModelAttribute TravelSpotVO travelSpotVo, @RequestParam(required=false) boolean clearFlag) {
+		logger.info("나코짜2 여행지 담거나 지우거나, 파라미터 travelSpotVo={}", travelSpotVo);
+		logger.info("나코짜2 여행지 리스트 쓸어버릴까? clearFlag={}", clearFlag);
+		
+		if (clearFlag == true) {
+			travelSpotList.clear();
+			logger.info("나코짜2 여행지 삭제 결과, list.size={}", travelSpotList.size());
+		} else {
+			travelSpotList.add(travelSpotVo);			
+			logger.info("나코짜2 여행지 담은 결과, list.size={}", travelSpotList.size());
+		}
 	}
 	
 }

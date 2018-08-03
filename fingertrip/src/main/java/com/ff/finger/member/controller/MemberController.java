@@ -143,7 +143,7 @@ public class MemberController {
 	}
 	
     @RequestMapping("/memberEditOk.do")
-	public String memberEditOk_get( HttpSession session, Model model) {
+	public String memberEditOk_get(HttpSession session, Model model) {
     	String id = (String) session.getAttribute("userid");
     	logger.info("회원정보 화면 보여주기 id={}",id);
     	

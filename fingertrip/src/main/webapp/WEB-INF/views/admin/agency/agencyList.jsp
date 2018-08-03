@@ -1,17 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/adminTop.jsp"%>
-<section class="admCenter marginTop40">
+<script type="text/javascript">
+function pageFunc(currentPage){
+	page.currentPage.value=currentPage;
+	page.submit();
+}
+
+</script>
+
+<section class="admCenter marginTop40" style="text-align: center">
         <ul class="clearFix marginBottom40 lineGnb">
             <li class="on"><a href="<c:url value='/admin/agency/agencyList.do'/>">기업회원조회</a></li>
             <li><a href="<c:url value='/admin/agency/agencyWrite.do'/>">기업회원가입</a></li>
         </ul>
+        <!-- 페이징 처리를 위한 div -->
+        <form name="page" action="#" method="post">
+			<input type="hidden" name="currentPage">
+	        <input type="hidden" name="searchCondition" value="${param.searchCondition }">
+	        <input type="hidden" name="searchKeyword" value="${param.searchKeyword }"> 
+        </form>
         <h2>기업 회원 조회</h2>
         <div class="clearFix">
+        	<form action="<c:url value='/admin/agency/agencyList.do'/>" method="post">
            <div class="fRight">
-               <input type="search">
-                <input type="button" value="검색">
+           		<select name="searchCondition">
+           			<option value="name"
+           				<c:if test="${param.searchCondition=='name' }">
+                					selected="selected"
+                		</c:if>
+           			>상호명</option>
+           			<option value="license_No"
+           				<c:if test="${param.searchCondition=='licenseNo'}">
+                					selected="selected"
+                		</c:if>
+           			>사업자 번호</option>
+           			
+           		</select>
+               <input type="text" name="searchKeyword" value="${param.searchKeyword}">
+                <input type="submit" value="검색">
            </div>
+           </form>
         </div>
         
         <table class="grayTh">
@@ -24,16 +53,40 @@
                 <th>전화번호</th>
                 <th>사업자등록번호</th>
             </tr>
-            <tr>
-                <td><input type="checkbox" /></td>
-                <td>1</td>
-                <td><a href="<c:url value='/admin/agency/agencyDetail.do'/>">하나투어</a></td>
-                <td>hana</td>
-                <td>qwe123</td>
-                <td>02-1111-1111</td>
-                <td>201-94-71716</td>
-            </tr>
+            
+            <!-- 기업 반복 시작 -->
+            <c:forEach var="vo" items="${list}">
+	            <tr>
+	                <td><input type="checkbox" /></td>
+	                <td>${vo.travelAgencyNo }</td>
+	                <td><a href="<c:url value='/admin/agency/agencyDetail.do?name=${vo.name}'/>">${vo.name }</a></td>
+	                <td>${vo.id }</td>
+	                <td>${vo.password }</td>
+	                <td>${vo.hp }</td>
+	                <td>${vo.licenseNo}</td>
+	            </tr>
+            </c:forEach>
+            <!-- 기업 반복 끝 -->
         </table>
+        <!-- paging 시작 -->
+        <c:if test="${pagingInfo.firstPage>1 }">
+        <a href="#" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+        </c:if>
+        <c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+        		
+				<c:choose>
+					<c:when test="${i==pagingInfo.currentPage }">
+						<span>${i }</span>
+					</c:when>
+					<c:otherwise>
+						<span><a href="#" onclick="pageFunc(${i})">${i }</a></span>
+					</c:otherwise>
+				</c:choose>
+				
+         </c:forEach>
+         <c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+            <a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+         </c:if>
         <div class="aWrap fRight">
         	<input type="submit" class="darkBorder" value="삭제"/>
         </div>

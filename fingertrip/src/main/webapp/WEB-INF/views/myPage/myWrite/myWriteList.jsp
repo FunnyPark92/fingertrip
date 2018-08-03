@@ -5,13 +5,18 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
 <script type="text/javascript">
-function pageFunc(currentPage){
+
+function pageFunc1(currentPage){
 	page.currentPage.value=currentPage;
 	page.submit();
     }
 
+function pageFunc2(currentPage){
+	page.currentPageforCourse.value=currentPage;
+	
+	page.submit();
+    }
 </script>
-
 
 <section class="container board marginTop80 marginBottom80 minheight600">
 	<div class="container margin80">
@@ -29,19 +34,13 @@ function pageFunc(currentPage){
 	                <a href="<c:url value='/myPage/myHeart/heartList.do'/>" class="list-group-item">하트</a>
 	            </div>
 	        </div>
-	        <!-- 서브컨텐츠1 -->
-	         <div class="col-lg-9">
-	        	<div>
-            		<form name="page" action="<c:url value='/myPage/myWrite/myWriteList.do'/>" method="post">
-	            		<input type="hidden" name="currentPage">
-            		</form>
-            	</div>
-	         	<h3>QnA쓴글</h3>
+	         <!-- 서브컨텐츠1 내가 쓴 QnA -->
+            <div class="col-lg-9">
+                <h5>내가 작성한 QnA</h5>
             	<div>
-            		<form name="frmHid" action="<c:url value='/cs/notice/noticeList.do'/>" method="post">
-	            		<input type="hidden" name="currentPage">
-	            		<input type="hidden" name="searchCondition" value="${param.searchCondition }">
-	            		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+            		<form name="page" action="<c:url value='/myPage/myWrite/myWriteList.do'/>" method="post">
+	            		<input type="hidden" name="currentPage" value="${QnAcur}">
+	            	    <input type="hidden" name="currentPageforCourse" value="${param.currentPageforCourse }">
             		</form>
             	</div>
                 <table class="table table-hover tableBorder">
@@ -54,13 +53,13 @@ function pageFunc(currentPage){
                         </tr>
                     </thead>
                     <tbody>
-                    <c:if test="${!empty list}">
-	                    <!-- 공지사항 반복문 시작 -->
-	                    <c:forEach var="vo" items="${list}">
+                      <c:if test="${!empty QnAlist}">
+	                    <!-- 내가 쓴 QnA 반복문 시작 -->
+	                    <c:forEach var="vo" items="${QnAlist}">
 	                        <tr>
-	                            <td scope="row" class="text-center">${vo.noticeNo }</td>
+	                            <td scope="row" class="text-center">${vo.qnaNo }</td>
 	                            <td>
-		                            <a href="<c:url value='/cs/notice/countUpdate.do?noticeNo=${vo.noticeNo }'/>">
+		                            <a href="<c:url value='/cs/QnA/countUpdate.do?qnaNo=${vo.qnaNo }'/>">
 			                            <!--제목이 긴 경우 일부만 보여주기 -->
 			                            <c:if test="${fn:length(vo.title)>25}">
 			                            	${fn:substring(vo.title,0,25) }...
@@ -71,54 +70,53 @@ function pageFunc(currentPage){
 		                            </a>
 	                            </td>
 	                            <td class="text-center">${vo.readCount }</td>
-	                            <td class="text-center"><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd"/></td>
+	                            <td class="text-center"><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd hh:mm"/></td>
 	                        </tr>
 	                     </c:forEach>
                      </c:if>
-                    </tbody>
+                   </tbody>
                 </table>
                 <div>
 	                <div class="margin0 width150 marginT30">
-	                	<c:if test="${pagingInfo.firstPage>1 }">
-	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+	                	<c:if test="${pagingInfoQnA.firstPage>1 }">
+	                	<a href="#" class="decoN colorGray" onclick="pageFunc1(${pagingInfoQnA.firstPage-1})">◀</a>
 	                	</c:if>
-	                	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+	                	<c:forEach var="i" begin="${pagingInfoQnA.firstPage }" end="${pagingInfoQnA.lastPage }">
 							<c:choose>
-								<c:when test="${i==pagingInfo.currentPage }">
+								<c:when test="${i==pagingInfoQnA.currentPage }">
 									<span class="colorBlue font-weight-bold" >${i }</span>
 								</c:when>
 								<c:otherwise>
-									<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i }</a></span>
+									<span><a href="#" class="decoN colorGray" onclick="pageFunc1(${i})">${i }</a></span>
 								</c:otherwise>
 							</c:choose>
 	                	</c:forEach>
-	                	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+	                	<c:if test="${pagingInfoQnA.lastPage<pagingInfoQnA.totalPage }">
+	                	<a href="#" class="decoN colorGray" onclick="pageFunc1(${pagingInfoQnA.lastPage+1})">▶</a>
 	                	</c:if>
 	                </div>
-	           	</div>
-            </div>   
-            
-         <!-- 서브컨텐츠2 -->
-	         <div class="col-lg-9" style="margin-left:277px;">
-	         <h3>나코짜쓴글</h3>
+	           </div> 
+	           <!-- 컨텐츠1 -->
+	            
+	           <!-- 서브컨텐츠2 내가 쓴 나코짜코스 -->
+	            <h5>내가 작성한 여행코스</h5>
                 <table class="table table-hover tableBorder">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col" style="width:10%" class="text-center">번호</th>
                             <th scope="col" style="width:55%" class="text-center">제목</th>
-                            <th scope="col" style="width:10%" class="text-center">조회수</th>
+                            <th scope="col" style="width:10%" class="text-center">하트수</th>
                             <th scope="col" style="width:25%" class="text-center">등록일</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:if test="${!empty list}">
-	                    <!-- 공지사항 반복문 시작 -->
-	                    <c:forEach var="vo" items="${list}">
+                      <c:if test="${!empty CourseList}">
+	                    <!-- 내가 쓴 Course 반복문 시작 -->
+	                    <c:forEach var="vo" items="${CourseList}">
 	                        <tr>
-	                            <td scope="row" class="text-center">${vo.noticeNo }</td>
+	                            <td scope="row" class="text-center">${vo.courseNo }</td>
 	                            <td>
-		                            <a href="<c:url value='/cs/notice/countUpdate.do?noticeNo=${vo.noticeNo }'/>">
+		                            <a href="<c:url value='미정 나코자게시판이 완성되면 디테일페이지로 연결=${vo.courseNo }'/>">
 			                            <!--제목이 긴 경우 일부만 보여주기 -->
 			                            <c:if test="${fn:length(vo.title)>25}">
 			                            	${fn:substring(vo.title,0,25) }...
@@ -128,36 +126,36 @@ function pageFunc(currentPage){
 			                            </c:if>
 		                            </a>
 	                            </td>
-	                            <td class="text-center">${vo.readCount }</td>
-	                            <td class="text-center"><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd"/></td>
+	                            <td class="text-center">${vo.heartCount }</td>
+	                            <td class="text-center"><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd hh:mm"/></td>
 	                        </tr>
 	                     </c:forEach>
                      </c:if>
-                    </tbody>
+                   </tbody>
                 </table>
-    
                 <div>
 	                <div class="margin0 width150 marginT30">
-	                	<c:if test="${pagingInfo.firstPage>1 }">
-	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+	                	<c:if test="${pagingInfoCourse.firstPage>1 }">
+	                	<a href="#" class="decoN colorGray" onclick="pageFunc2(${pagingInfoCourse.firstPage-1})">◀</a>
 	                	</c:if>
-	                	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+	                	<c:forEach var="i" begin="${pagingInfoCourse.firstPage }" end="${pagingInfoCourse.lastPage }">
 							<c:choose>
-								<c:when test="${i==pagingInfo.currentPage }">
+								<c:when test="${i==pagingInfoCourse.currentPage }">
 									<span class="colorBlue font-weight-bold" >${i }</span>
 								</c:when>
 								<c:otherwise>
-									<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i }</a></span>
+									<span><a href="#" class="decoN colorGray" onclick="pageFunc2(${i})">${i }</a></span>
 								</c:otherwise>
 							</c:choose>
 	                	</c:forEach>
-	                	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+	                	<c:if test="${pagingInfoCourse.lastPage<pagingInfoCourse.totalPage }">
+	                	<a href="#" class="decoN colorGray" onclick="pageFunc2(${pagingInfoCourse.lastPage+1})">▶</a>
 	                	</c:if>
 	                </div>
-	           	</div>
-            </div>       
-		</div>      
+	           </div>
+	      <!-- 컨텐츠2 --> 
+         </div> 
+	    </div>
 	</div>
 </section>
 

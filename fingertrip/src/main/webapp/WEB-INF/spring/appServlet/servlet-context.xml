@@ -43,6 +43,8 @@
 		<interceptor>
 		<mapping path="/myPage/*" />
 		<mapping path="/myPage/*/*" />
+		<mapping path="/nacojja/nacojja1.do" />
+		<mapping path="/nacojja/nacojja2.do" />
 	    <!-- <exclude-mapping path="/member/login/**"/> -->
 		<beans:ref bean ="loginInterceptor" />
 		</interceptor>

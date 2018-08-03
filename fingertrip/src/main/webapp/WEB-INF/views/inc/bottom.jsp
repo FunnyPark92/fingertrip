@@ -19,7 +19,7 @@
                             <a href="<c:url value='/footer/advertise.do'/>">제휴/광고 문의</a>
                         </li>
                     </ul>
-                    <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2018. All Rights Reserved.</p>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; FiveFingers<a href="<c:url value='/admin/adminLogin.do'/>" class="admBtn" target="blank">:D</a> 2018. All Rights Reserved.</p>
                 </div>
                 <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
                     <ul class="list-inline mb-0">

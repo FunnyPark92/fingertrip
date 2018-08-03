@@ -39,6 +39,7 @@ public class SearchVO extends MemberVO{
      * @param bean 검색조건
      */
     
+    
 	public void setSearchVO(SearchVO bean){
     	this.currentPage = bean.currentPage;
     	this.searchCondition = bean.getSearchCondition();
@@ -49,8 +50,12 @@ public class SearchVO extends MemberVO{
     	this.lastRecordIndex = bean.lastRecordIndex;
     	this.recordCountPerPage = bean.recordCountPerPage;
     }
+    
+    public SearchVO() {
+	super();
+}
 
-    public String getSearchCondition() {
+	public String getSearchCondition() {
     	return searchCondition;
     }
 

@@ -15,6 +15,11 @@
     
     <link href="${pageContext.request.contextPath}/css/normalize.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin.css">
+    
+    <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css"> --%>
+  <%--   <script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script> --%>
+     <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
+     
 </head>
 
 <body>

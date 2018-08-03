@@ -20,17 +20,17 @@
             <div class="info">
               <div>
                 <i class="ion-ios-location-outline"></i>
-                <p>git</p>
+                <p>trip finger</p>
               </div>
 
               <div>
                 <i class="ion-ios-email-outline"></i>
-                <p>info@example.com</p>
+                <p>fingertrip2018@gmail.com</p>
               </div>
 
               <div>
                 <i class="ion-ios-telephone-outline"></i>
-                <p>1253-8353</p>
+                <p>1253-8253</p>
               </div>
 
             </div>
