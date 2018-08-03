@@ -15,12 +15,16 @@
 				alert('내용을 입력하세요');
 				$('div[name=content]').focus();
 				return false;
+			}else if($('input[type=file]').val()<1){
+				alert("파일을 등록해주세요");
+				$('input[type=file]').focus();
+				return false;
 			}else{
 				var confrm=confirm("이 내용을 입력하시겠습니까?");
 				if(!confrm) {
 					$('div[name=content]').focus();
 					return false;
-				}
+				} 
 			}
 			$('input[name=content]').val($('#editor').html());
 		});

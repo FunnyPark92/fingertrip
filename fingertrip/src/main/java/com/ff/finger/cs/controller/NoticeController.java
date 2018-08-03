@@ -79,7 +79,9 @@ public class NoticeController {
 		/*String adminId=(String) session.getAttribute("adminId");
 		logger.info("세션 조회 adminId={}", adminId);*/
 		
-		int adminNo=noticeService.getAdminNo("admin");
+
+		//아직 관리자 페이지에 공지사항 등록 없어서 admin3 아이디 없으면 500error! 존재하는 아이디로 사용하세요
+		int adminNo=noticeService.getAdminNo("admin3");
 		noticeVo.setAdminNo(adminNo);
 		logger.info("관리자 번호 조회 결과, noticeVo={}", noticeVo);
 		
