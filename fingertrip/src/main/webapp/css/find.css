@@ -165,3 +165,19 @@
 	.width350{
 	    width: 350px;
 	}
+	.width70{
+		width:70%;
+	}
+	.width30{
+		width:30%;
+	}
+	.maxW100{
+		max-width: 100%;
+	}
+	.width20{
+		width: 20%;
+	}
+	.width60{
+		width: 60%;
+	}
+	

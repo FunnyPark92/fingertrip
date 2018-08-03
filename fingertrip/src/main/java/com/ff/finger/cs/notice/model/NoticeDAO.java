@@ -8,7 +8,7 @@ public interface NoticeDAO {
 	public List<NoticeVO> selectAllNotice(SearchVO searchVO);
 	public int countUpdateNotice(int noticeNo);
 	public int totalRecord(SearchVO searchVo);
-	public NoticeVO noticeDetail(int noticeNo);
+	public List<NoticeVO> noticeDetail(int noticeNo);
 	public int getAdminNo(String id);
 	public int noticeInsert(NoticeVO noticeVo);
 }

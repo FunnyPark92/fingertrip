@@ -39,9 +39,8 @@
 		from(
 			select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, listagg(country, ',') within group (order by course_no) as countries
 			from(
-			    select distinct course_no, country, title, start_day, to_char(end_day-start_day) as term, thumb_img, heart_count, p.progress_status, p.progress_no
-			    from courseDayTravelCountryView c join progress p
-			    on c.progress_no=p.progress_no
+			    select distinct course_no, country, title, start_day, to_char(end_day-start_day) as term, thumb_img, heart_count, progress_status, progress_no
+                from crsDayTrvelCntryPrgsView
 			)
 			group by course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no
 			order by course_no desc

@@ -4,27 +4,24 @@
 <%@ include file="../../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
-<style type="text/css">
-	.hidden{
-		visibility:hidden;
-		margin: 15px 0;
-	}
-</style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#editor').click(function(){
- 			 $(this).find('p').html("");
-		})
-		
 		$('form[name=frmCk]').submit(function(){
 			if($('input[name=title]').val()<1){
 				alert('제목을 입력하세요');
+				$('input[name=title]').focus();
 				return false;
-			}else if($('input[name=content]').val()<1){
+			}else if($('div[name=content]').text().length<1){
 				alert('내용을 입력하세요');
+				$('div[name=content]').focus();
 				return false;
+			}else{
+				var confrm=confirm("이 내용을 입력하시겠습니까?");
+				if(!confrm) {
+					$('div[name=content]').focus();
+					return false;
+				}
 			}
-			
 			$('input[name=content]').val($('#editor').html());
 		});
 	});
@@ -43,7 +40,7 @@
     
      		<!-- 서브컨텐츠 -->
             <div class="col-lg-9">
-            	<form name="frmCk" action="<c:url value='/cs/notice/noticeWrite.do'/>" method="post">
+            	<form name="frmCk" action="<c:url value='/cs/notice/noticeWrite.do'/>" method="post" enctype="multipart/form-data">
             		<hr>
             		<div class="row">
             			<label class="col-md-3 font-weight-bold marginTB12 text-center">제목</label>
@@ -56,13 +53,16 @@
     				<div id="toolbar-container"></div>
 
 				    <!-- This container will become the editable. -->
-				    <div id="editor">
-				        <p>This is the initial editor content.</p>
+				    <div id="editor" name="content">
+				        <p>공지사항을 입력하세요.</p>
 				    </div>
 
 				    <script>
 				        DecoupledEditor
-				            .create( document.querySelector( '#editor' ) )
+				            .create( document.querySelector( '#editor' ),{
+				            	removePlugins: ['Insert image'],
+				                toolbar: [ 'Heading','|','fontSize', 'fontFamily','|', 'bold', 'italic', 'Underline', 'Strikethrough', 'Highlight', '|', 'alignment', '|', 'numberedList', 'bulletedList', '|', 'Link', 'blockQuote', '|', 'Undo', 'Redo' ]
+				            } )
 				            .then( editor => {
 				                const toolbarContainer = document.querySelector( '#toolbar-container' );
 				
@@ -71,8 +71,13 @@
 				            .catch( error => {
 				                console.error( error );
 				            } );
+				        
 				    </script>
 			        <input type="hidden" name="content">
+			        <hr>
+			        <div>
+			            <input type="file" name="upfile" multiple="multiple" class="btn btn-outline-secondary">
+			        </div>
             		<hr>
             		<div class="margin0 marginT30 overflowH width150">
 	                    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="btn btn btn-warning float-right marginL10">목록</a>

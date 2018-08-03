@@ -28,7 +28,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public NoticeVO noticeDetail(int noticeNo) {
+	public List<NoticeVO> noticeDetail(int noticeNo) {
 		return noticeDao.noticeDetail(noticeNo);
 	}
 

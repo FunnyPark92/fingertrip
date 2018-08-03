@@ -36,7 +36,9 @@
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 	     <beans:property name="order" value="0" />
 	</beans:bean>
-	
+
+	<beans:bean id="downloadView" class="com.ff.finger.common.DownloadView" /> 
+
 	<interceptors>
 		<interceptor>
 		<mapping path="/myPage/*" />
