@@ -48,6 +48,9 @@
 		font-weight: bold;
 		font-size: 25px;
 	}
+	.marginL10{
+		margin-left: 10px;
+	}
 	.marginTB{
 		margin: 50px 0;
 	}
@@ -135,9 +138,6 @@
 	.marginT30{
     	margin-top: 30px;
 	}
-	.marginL10{
-		margin-left: 10px;
-	}
 	.width150{
 		width: 150px;
 	}
@@ -165,3 +165,25 @@
 	.width350{
 	    width: 350px;
 	}
+	.width70{
+		width:70%;
+	}
+	.width30{
+		width:30%;
+	}
+	.maxW100{
+		max-width: 100%;
+	}
+	.width20{
+		width: 20%;
+	}
+	.width60{
+		width: 60%;
+	}
+	.listH{
+		height: 169px;
+	}
+	.btnColor{
+		color: #fd8730;
+	}
+	.

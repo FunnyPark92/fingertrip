@@ -6,6 +6,8 @@ public class NoticeVO {
 	private int noticeNo;
 	private String title;
 	private String content;
+	private String fileName;
+	private String originalFileName;
 	private Timestamp regDate;
 	private int adminNo;
 	private int readCount;
@@ -28,6 +30,18 @@ public class NoticeVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
 	public Timestamp getRegDate() {
 		return regDate;
 	}
@@ -46,11 +60,11 @@ public class NoticeVO {
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "BoardVO [noticeNo=" + noticeNo + ", title=" + title + ", content=" + content + ", regDate=" + regDate
-				+ ", adminNo=" + adminNo + ", readCount=" + readCount + "]";
+		return "NoticeVO [noticeNo=" + noticeNo + ", title=" + title + ", content=" + content + ", fileName=" + fileName
+				+ ", originalFileName=" + originalFileName + ", regDate=" + regDate + ", adminNo=" + adminNo
+				+ ", readCount=" + readCount + "]";
 	}
-	
 }

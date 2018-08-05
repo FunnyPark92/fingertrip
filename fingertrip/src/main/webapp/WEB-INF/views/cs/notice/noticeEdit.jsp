@@ -48,7 +48,7 @@
             		<hr>
             		<div class="row">
             			<label class="col-md-3 font-weight-bold marginTB12 text-center">제목</label>
-            			<input type="text" class="form-control col-md-8" name="title">
+            			<input type="text" class="form-control col-md-8" name="title" value="${vo.title }">
             			<div class="col-md-1"></div>
             		</div>
             		<hr>
@@ -58,7 +58,7 @@
 
 				    <!-- This container will become the editable. -->
 				    <div id="editor" name="content">
-				        <p>공지사항을 입력하세요.</p>
+				        <p>${vo.content }</p>
 				    </div>
 
 				    <script>
@@ -82,6 +82,14 @@
 			        <div>
 			            <input type="file" name="upfile" multiple="multiple" class="btn btn-outline-secondary">
 			        </div>
+			        <div class="row">
+            			<span class="col-md-3 font-weight-bold margin15">첨부파일 목록</span>
+            			<c:if test="${!empty vo.fileName }">
+            				<span class="col-md-8">${vo.fileName }</span>
+            				<p>첨부파일을 새로 지정할 경우 기존 파일은 삭제됩니다.</p>
+            			</c:if>
+            			<div class="col-md-1"></div>
+            		</div>
             		<hr>
             		<div class="margin0 marginT30 overflowH width150">
 	                    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="btn btn btn-warning float-right marginL10">목록</a>

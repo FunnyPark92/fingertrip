@@ -28,8 +28,10 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public NoticeVO noticeDetail(int noticeNo) {
-		return noticeDao.noticeDetail(noticeNo);
+	public List<NoticeVO> noticeDetail(int noticeNo) {
+		int rnum=noticeDao.getNoticeRnum(noticeNo);
+		System.out.println("공지사항 rnum="+rnum);
+		return noticeDao.noticeDetail(rnum);
 	}
 
 	@Override
@@ -41,6 +43,13 @@ public class NoticeServiceImpl implements NoticeService {
 	public int noticeInsert(NoticeVO noticeVo) {
 		return noticeDao.noticeInsert(noticeVo);
 	}
+
+	@Override
+	public NoticeVO noticeSelectByNo(int noticeNo) {
+		return noticeDao.noticeSelectByNo(noticeNo);
+	}
+
+	
 
 
 	

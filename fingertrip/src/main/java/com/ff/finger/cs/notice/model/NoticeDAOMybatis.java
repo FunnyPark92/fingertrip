@@ -10,7 +10,7 @@ import com.ff.finger.common.SearchVO;
 
 @Repository
 public class NoticeDAOMybatis implements NoticeDAO{
-	private String namespace="config.mybatis.mapper.oracle.qna.";
+	private String namespace="config.mybatis.mapper.oracle.notice.";
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -31,8 +31,13 @@ public class NoticeDAOMybatis implements NoticeDAO{
 	}
 
 	@Override
-	public NoticeVO noticeDetail(int noticeNo) {
-		return sqlSession.selectOne(namespace+"noticeDetail", noticeNo);
+	public int getNoticeRnum(int noticeNo) {
+		return sqlSession.selectOne(namespace+"getNoticeRnum", noticeNo);
+	}
+	
+	@Override
+	public List<NoticeVO> noticeDetail(int noticeNo) {
+		return sqlSession.selectList(namespace+"noticeDetail", noticeNo);
 	}
 
 	@Override
@@ -44,5 +49,12 @@ public class NoticeDAOMybatis implements NoticeDAO{
 	public int noticeInsert(NoticeVO noticeVo) {
 		return sqlSession.insert(namespace+"noticeInsert",noticeVo);
 	}
+
+	@Override
+	public NoticeVO noticeSelectByNo(int noticeNo) {
+		return sqlSession.selectOne(namespace+"noticeSelectByNo", noticeNo);
+	}
+
+	
 
 }

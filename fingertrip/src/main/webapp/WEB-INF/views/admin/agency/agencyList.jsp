@@ -45,23 +45,21 @@ function pageFunc(currentPage){
         
         <table class="grayTh">
             <tr>
-                <th><input type="checkbox" /></th>
-                <th>번호</th>
-                <th>상호명</th>
-                <th>아이디</th>
-                <th>비밀번호</th>
-                <th>전화번호</th>
-                <th>사업자등록번호</th>
+                <th scope="col" style="width:5%; text-align: center"><input type="checkbox" /></th>
+                <th scope="col" style="width:7%; text-align: center">번호</th>
+                <th scope="col" style="width:20%; text-align: center">상호명</th>
+                <th scope="col" style="width:15%; text-align: center">아이디</th>
+                <th scope="col" style="width:15%; text-align: center">전화번호</th>
+                <th scope="col" style="width:15%; text-align: center">사업자등록번호</th>
             </tr>
             
             <!-- 기업 반복 시작 -->
             <c:forEach var="vo" items="${list}">
-	            <tr>
+	            <tr style="text-align: center">
 	                <td><input type="checkbox" /></td>
 	                <td>${vo.travelAgencyNo }</td>
 	                <td><a href="<c:url value='/admin/agency/agencyDetail.do?name=${vo.name}'/>">${vo.name }</a></td>
 	                <td>${vo.id }</td>
-	                <td>${vo.password }</td>
 	                <td>${vo.hp }</td>
 	                <td>${vo.licenseNo}</td>
 	            </tr>

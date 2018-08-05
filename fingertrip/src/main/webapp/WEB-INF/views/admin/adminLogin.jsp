@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>   
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -151,7 +155,7 @@ input {
 				<div class="form__field">
 					<label class="fontawesome-user" for="login__username"><span
 						class="hidden">Username</span></label> <input id="login__username" name="id"
-						type="text" class="form__input" placeholder="Username" required>
+						type="text" class="form__input" placeholder="Username" required value="${cookie.ck_adminid.value }">
 				</div>
 
 				<div class="form__field">
@@ -164,8 +168,15 @@ input {
 				<div class="form__field">
 					<input type="submit" value="Log In">
 				</div>
+				<div class="form_field" style="text-align: right;">
+					<input type="checkbox" name="saveid" id="saveid"
+						<c:if test="${!empty cookie.ck_adminid }">
+							checked="checked"
+						</c:if>
+					>
+					<span>아이디 저장</span> 
+				</div>
 				
-				<a href="<c:url value='/admin/agency/agencyList.do'/>">로그인 후 화면(코딩완료시 삭제)</a>
 
 			</form>
 

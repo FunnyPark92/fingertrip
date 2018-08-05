@@ -1,4 +1,4 @@
-package com.ff.finger.travelAgency.controller;
+package com.ff.finger.admin.controller;
 
 import java.util.List;
 
@@ -18,13 +18,10 @@ import com.ff.finger.common.SearchVO;
 import com.ff.finger.travelAgency.model.TravelAgencyService;
 import com.ff.finger.travelAgency.model.TravelAgencyVO;
 
-
-
-
 @Controller
 @RequestMapping("/admin")
 public class TravelAgencyController {
-	private static final Logger logger = LoggerFactory.getLogger(TravelAgencyController.class); 
+private static final Logger logger = LoggerFactory.getLogger(TravelAgencyController.class); 
 	
 	@Autowired
 	TravelAgencyService travelAgencyServise;
@@ -108,7 +105,7 @@ public class TravelAgencyController {
 	}
 	
 	@RequestMapping("/agency/agencyEdit.do")
-	public String agencyEdit() {
+public String agencyEdit() {
 		logger.info("여행사 수정");
 		
 		return "admin/agency/agencyEdit";
@@ -118,7 +115,6 @@ public class TravelAgencyController {
 	public String agencyDetail(@RequestParam String name,Model model) {
 		logger.info("여행사 자세히보기 name ={}",name);
 		TravelAgencyVO vo = travelAgencyServise.selectOneAgency(name);
-		logger.info("여행사 자세히보기 name ={}",vo);
 		
 		
 		model.addAttribute("vo",vo);
@@ -143,6 +139,4 @@ public class TravelAgencyController {
 		logger.info("중복확인 결과 result={}",result);
 		return result;
 	}
-	
-	
 }
