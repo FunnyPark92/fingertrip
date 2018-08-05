@@ -11,6 +11,7 @@ public class TravelSpotVO extends CourseVO {
 	private String travelContent; /* 설명 */
 	private int dayNo; /* 일차번호 NOT NULL*/
 	private String countryCode; /* 국가코드 NOT NULL*/
+	private String latLng; /* 위도경도 NOT NULL*/
 	
 	public int getTravelSpotNo() {
 		return travelSpotNo;
@@ -60,12 +61,18 @@ public class TravelSpotVO extends CourseVO {
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
+	public String getLatLng() {
+		return latLng;
+	}
+	public void setLatLng(String latLng) {
+		this.latLng = latLng;
+	}
 	
 	@Override
 	public String toString() {
 		return "TravelSpotVO [travelSpotNo=" + travelSpotNo + ", day=" + day + ", city=" + city + ", travelSpot="
 				+ travelSpot + ", img=" + img + ", travelContent=" + travelContent + ", dayNo=" + dayNo
-				+ ", countryCode=" + countryCode + ", toString()=" + super.toString() + "]";
+				+ ", countryCode=" + countryCode + ", latLng=" + latLng + ", toString()=" + super.toString() + "]";
 	}
 		
 }
