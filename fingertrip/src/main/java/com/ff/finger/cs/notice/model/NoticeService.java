@@ -6,7 +6,7 @@ import java.util.Map;
 import com.ff.finger.common.SearchVO;
 
 public interface NoticeService {
-	public List<NoticeVO> selectAllNotice(SearchVO searchVo);
+	public List<Map<String, Object>> selectAllNotice(SearchVO searchVo);
 	public int countUpdateNotice(int noticeNo);
 	public int totalRecord(SearchVO searchVo);
 	public List<NoticeVO> noticeDetail(int noticeNo);

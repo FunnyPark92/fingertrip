@@ -15,7 +15,12 @@ public class AdminDAOMybatis implements AdminDAO {
 	public String dbPwd(String id) {
 		return sqlSession.selectOne(namespace+"dbPwd",id);
 	}
-	
+
+	@Override
+	public AdminVO getAdmin(int adminNo) {
+		return sqlSession.selectOne(namespace+"getAdmin",adminNo);
+	}
+
 	
 
 }

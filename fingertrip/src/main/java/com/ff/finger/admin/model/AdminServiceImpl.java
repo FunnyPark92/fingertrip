@@ -33,4 +33,10 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 
+	@Override
+	public AdminVO getAdmin(int adminNo) {
+		return adminDao.getAdmin(adminNo);
+	}
+
+
 }

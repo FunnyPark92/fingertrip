@@ -6,6 +6,10 @@
 	<select id="dbPwd" parameterType="string" resultType="string">
 		select password from admin where id = #{id}
 	</select>
+	
+	<select id="getAdmin" parameterType="int" resultType="adminVo">
+		select * from admin where admin_no=#{adminNo}
+	</select>
 </mapper>
 
 

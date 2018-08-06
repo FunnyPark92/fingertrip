@@ -3,12 +3,13 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.notice">
 	
-	<select id="selectAllNotice" parameterType="SearchVo" resultType="NoticeVo">
+	<select id="selectAllNotice" parameterType="SearchVo" resultType="map">
 		select *
 		from (
 			select list.*, rownum as RNUM
 			from(
-				select * from notice 
+				select * from notice n join admin a
+				on n.admin_no=a.admin_no
 				<if test="searchKeyword!=null and searchKeyword!=''">
 					where ${searchCondition} like '%' || #{searchKeyword} || '%'
 				</if>
@@ -95,6 +96,7 @@
 	<select id="selectFileName" parameterType="string" resultType="string">
 		select file_name from notice where notice_no=#{noticeNo}
 	</select>
+	
 </mapper>
 
 

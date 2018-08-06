@@ -20,6 +20,11 @@
   <%--   <script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script> --%>
      <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
      
+     <!-- ckEditor -->
+    <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+     
+     
+     
 </head>
 
 <body>
@@ -33,7 +38,7 @@
                 <li><a href="<c:url value='/admin/member/memberList.do'/>">개인회원관리</a></li>
                 <li><a href="<c:url value='/admin/agency/agencyList.do'/>">기업회원관리</a></li>
                 <li><a href="<c:url value='/admin/admin/adminList.do'/>">관리자회원관리</a></li>
-                <li><a href="<c:url value='/admin/cs/faq/faqList.do'/>">공지사항</a></li>
+                <li><a href="<c:url value='/admin/cs/notice/noticeList.do'/>">공지사항</a></li>
                 <li><a href="<c:url value='/admin/cs/qna/qnaList.do'/>">Q&amp;A</a></li>
                 <li><a href="<c:url value='/admin/cs/faq/faqList.do'/>">FAQ</a></li>
             </ul>

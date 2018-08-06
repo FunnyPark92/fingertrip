@@ -4,5 +4,5 @@ public interface AdminService {
 	
 	
 	public int loginAdmin(String id,String pwd);
-
+	public AdminVO getAdmin(int adminNo);
 }

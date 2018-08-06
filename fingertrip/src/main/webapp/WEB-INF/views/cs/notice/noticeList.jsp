@@ -9,26 +9,6 @@
 		frmHid.currentPage.value=currentPage;
 		frmHid.submit();
 	}
-	$(document).ready(function(){
-		$('a[name=del]').click(function(){
-			var count=0;
-			$('input[name=chk]').each(function(){
-				if($(this).is(':checked')){
-					count++;
-				}
-			});
-			if(count==0){
-				alert('삭제할 공지사항을 선택해주세요');
-				return false;
-			}else{
-				$('form[name=frmDel]').submit();
-			}
-		});
-	});
-	
-	function allChecked(bool){
-		$('input[name=chk]').prop('checked',bool);
-	}
 </script>
 
 <section class="container board marginTop80 marginBottom80 minheight600">
@@ -57,63 +37,55 @@
                 <table class="table table-hover tableBorder">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col" style="width:5%" ><input type="checkbox" name="chkAll" onclick="allChecked(this.checked)"></th>
                             <th scope="col" style="width:10%" class="text-center">번호</th>
                             <th scope="col" style="width:50%" class="text-center">제목</th>
                             <th scope="col" style="width:10%" class="text-center">조회수</th>
-                            <th scope="col" style="width:25%" class="text-center">등록일</th>
+                            <th scope="col" style="width:30%" class="text-center">등록일</th>
                         </tr>
                     </thead>
                     <tbody>
                     <c:if test="${!empty list}">
                     	<form name="frmDel" action="<c:url value='/cs/notice/deleteMulti.do'/>" method="post">
 	                    	<!-- 공지사항 반복문 시작 -->
-		                    <c:forEach var="vo" items="${list}">
+		                    <c:forEach var="map" items="${list}">
 		                        <tr>
-		                        	<td><input type="checkbox" name="chk" value="${vo.noticeNo }"></td>
-		                            <td scope="row" class="text-center">${vo.noticeNo }</td>
+		                            <td scope="row" class="text-center">${map['NOTICE_NO']}</td>
 		                            <td>
-			                            <a href="<c:url value='/cs/notice/countUpdate.do?noticeNo=${vo.noticeNo }'/>">
+			                            <a href="<c:url value='/cs/notice/countUpdate.do?noticeNo=${map["NOTICE_NO"]}'/>">
 				                            <!--제목이 긴 경우 일부만 보여주기 -->
-				                            <c:if test="${fn:length(vo.title)>25}">
-				                            	${fn:substring(vo.title,0,25) }...
+				                            <c:if test="${fn:length(map['TITLE'])>25}">
+				                            	${fn:substring(map['TITLE'],0,25) }...
 				                            </c:if>
-				                            <c:if test="${fn:length(vo.title)<=25}">
-				                            	${vo.title }
+				                            <c:if test="${fn:length(map['TITLE'])<=25}">
+				                            	${map['TITLE']}
 				                            </c:if>
 			                            </a>
 		                            </td>
-		                            <td class="text-center">${vo.readCount }</td>
-		                            <td class="text-center"><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd"/></td>
+		                            <td class="text-center">${map['READ_COUNT'] }</td>
+		                            <td class="text-center"><fmt:formatDate value="${map['REG_DATE']  }" pattern="yyyy-MM-dd"/></td>
 		                        </tr>
 		                     </c:forEach>
 	                     </form>
                      </c:if>
                     </tbody>
                 </table>
-                <div class="float-right spanId">
-             		<a href="<c:url value='/cs/notice/noticeWrite.do'/>" class="btn btn-dark marginTop10">글쓰기</a>
-             		<a href="#" class="btn btn-dark marginTop10" name="del">삭제</a>
-           		</div>
-                <div>
-	                <div class="margin0 width150 marginT30">
-	                	<c:if test="${pagingInfo.firstPage>1 }">
-	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
-	                	</c:if>
-	                	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
-							<c:choose>
-								<c:when test="${i==pagingInfo.currentPage }">
-									<span class="colorBlue font-weight-bold" >${i }</span>
-								</c:when>
-								<c:otherwise>
-									<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i }</a></span>
-								</c:otherwise>
-							</c:choose>
-	                	</c:forEach>
-	                	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
-	                	</c:if>
-	                </div>
+                <div class="margin0 width150 marginT30">
+                	<c:if test="${pagingInfo.firstPage>1 }">
+                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+                	</c:if>
+                	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+						<c:choose>
+							<c:when test="${i==pagingInfo.currentPage }">
+								<span class="colorBlue font-weight-bold" >${i }</span>
+							</c:when>
+							<c:otherwise>
+								<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i }</a></span>
+							</c:otherwise>
+						</c:choose>
+                	</c:forEach>
+                	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+                	</c:if>
 	           	</div>
                 <div class="width500 margin0 marginT30">
                 	<form action="<c:url value='/cs/notice/noticeList.do'/>" method="post" class="overflowH">

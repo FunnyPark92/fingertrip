@@ -17,7 +17,7 @@ public class NoticeDAOMybatis implements NoticeDAO{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<NoticeVO> selectAllNotice(SearchVO searchVO) {
+	public List<Map<String, Object>> selectAllNotice(SearchVO searchVO) {
 		return sqlSession.selectList(namespace+"selectAllNotice", searchVO);
 	}
 
@@ -75,6 +75,7 @@ public class NoticeDAOMybatis implements NoticeDAO{
 	public String selectFileName(String noticeNo) {
 		return sqlSession.selectOne(namespace+"selectFileName", noticeNo);
 	}
+
 
 	
 

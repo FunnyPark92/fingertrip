@@ -4,16 +4,6 @@
 <%@ include file="../../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#del').click(function(){
-			var confrm=confirm("삭제하시겠습니까?");
-			if(confrm){
-				$('form[name=frmDel]').submit();
-			}
-		});
-	});
-</script>
 	<section class="container board marginTop80 marginBottom80 minheight600">
 		<div class="row">
 	
@@ -106,24 +96,6 @@
 				</table>
 				<div class="fRight">
 				    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="btn btn-outline-info">목록</a>
-				    <c:if test="${param.noticeNo==list[1].noticeNo }">
-					    <a href="<c:url value='/cs/notice/noticeEdit.do?noticeNo=${list[1].noticeNo }'/>" class="btn btn-outline-warning btnColor">수정</a>
-				    </c:if>
-				    <c:if test="${param.noticeNo==list[0].noticeNo }">
-			    		<a href="<c:url value='/cs/notice/noticeEdit.do?noticeNo=${list[0].noticeNo }'/>" class="btn btn-outline-warning btnColor">수정</a>
-				    </c:if>
-				   	<a id="del" class="btn btn-outline-danger" onclick="go()">삭제</a>
-				   
-					<form name="frmDel" method="post" action="<c:url value='/cs/notice/noticeDelete.do'/>">
-						<c:if test="${param.noticeNo==list[1].noticeNo }">
-					   		<input type="hidden" name="noticeNo" value="${list[1].noticeNo }">
-					   		<input type="hidden" name="fileName" value="${list[1].fileName}">
-						</c:if>
-						<c:if test="${param.noticeNo==list[0].noticeNo }">
-					   		<input type="hidden" name="noticeNo" value="${list[0].noticeNo }">
-					   		<input type="hidden" name="fileName" value="${list[0].fileName }">
-						</c:if>
-				    </form>
 				</div>
 		         
 		   		<c:set value="${fn:length(list) }" var="listLeng"/> 
