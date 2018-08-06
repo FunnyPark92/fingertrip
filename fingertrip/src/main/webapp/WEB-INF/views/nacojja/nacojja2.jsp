@@ -81,8 +81,8 @@
           scale: 5, //두께
           strokeColor: '#ffff00'
         };
-		
-		poly = new google.maps.Polyline({
+    	
+    	poly = new google.maps.Polyline({
 			icons: [{
 	            icon: lineSymbol,
 	            offset: '100%'
@@ -92,7 +92,7 @@
 		    strokeWeight: 5
 		});
 		poly.setMap(mapFinal);
-		animate(poly);
+		//animate(poly);
 		
 		geocoder = new google.maps.Geocoder();
         placesService = new google.maps.places.PlacesService(map);
@@ -100,7 +100,7 @@
 		map.addListener('click', handleClick); // 클릭 이벤트에 대한 리스너 추가
 	} //initialize()
 	
-	function animate(line) {
+	/* function animate(line) {
           var count = 0;
           window.setInterval(function() {
             count = (count + 1) % 200;
@@ -109,7 +109,7 @@
             icons[0].offset = (count / 2) + '%';
             line.set('icons', icons);
         }, 10);
-    }
+    } */
 	
  	// 실제 클릭이 발생 했을 시 모든 처리를 여기서 해결(클릭핸들러 개념)
     function handleClick(event) {
@@ -286,7 +286,7 @@
     
     function addPlace() {
     	//To-Do: 유효성 체크
-    	
+
     	
     	//이전에 선택한 여행지를 중복으로 추가못하게 막기
     	if (latLngs[latLngs.length-1] == latLng) {
@@ -296,6 +296,7 @@
     	latLngs.push(latLng);
     	
      	// 맵 클릭시 새로운 경로 라인 정보 추가
+     	//alert("여행지 추가 누를시 파라미터 : " + latLng);
 		addLatLng(latLng);
     
     	// 위도,경도 정보 DB에 넣기 위해 세팅
@@ -324,14 +325,20 @@
 	}
 
     function addLatLng(location) {
+    	//alert("addLatLng함수");
+    	
 	  	path = poly.getPath(); //path 정보 담을 배열 객체 가져옴
 	  	path.push(location);
    	  	
 	  	polys.push(location); //위도, 경도를 배열에 담기..
    		polyIndex++;
+	  	
+   		//alert("path:" + path);
+   		//alert("polys:" + polys);
+   		//alert("polyIndex:" + polyIndex);
     }
     
-    function undoPlace() {
+    function undoPlace(flag) {
     	for (var i=markersFinal.length-1; i<markersFinal.length; i++) {
         	markersFinal[i].setMap(null);
       	}
@@ -341,6 +348,13 @@
 	 	polyIndex--;
 	  	//poly.getPath().setAt(polyIndex, polys[polys.length - 1]);
 	  	poly.getPath().removeAt(polyIndex);
+	  	
+	  	if (flag) { //여행지 취소 버튼을 누를때만 실행
+		  	$.ajax({
+				url: "<c:url value='/nacojja/delPrevPlace.do?day=" + $("#day").val() + "'/>",
+				type:"POST",
+			});
+	  	}
 	}
     
     function deletePolys() {
@@ -359,6 +373,12 @@
       	markers = [];
     }
     
+    function setMapOnAll(map) {
+      	for (var i=0; i<markers.length; i++) {
+        	markers[i].setMap(map);
+      	}
+    }
+    
     function deleteMarkersFinal() {
     	for (var i=0; i<markersFinal.length; i++) {
         	markersFinal[i].setMap(null);
@@ -372,12 +392,6 @@
 
     function showMarkers() {
       	setMapOnAll(map);
-    }
-    
-    function setMapOnAll(map) {
-      	for (var i=0; i<markers.length; i++) {
-        	markers[i].setMap(map);
-      	}
     }
 	
 	function findPlace(zoomValue) {
@@ -399,6 +413,12 @@
 	
 	$(document).ready(function() {
 		$('#dayTab1').addClass("active");
+		
+		//이전에 지난간 일정도 수정할수 있게 구현중.. 잠시 주석처리
+		/* $('.dayTab').eq(1)
+			.siblings().attr("disabled", "disabled")
+			.end()
+			.nextAll().attr("style", "text-align: left; background-color: #e9e9e9"); */
 
 		$('.country').hide();
         $("#place-icon").hide();
@@ -456,7 +476,7 @@
             }
         });
         
-        $('#country').change(function() {
+        $('#country').change(function(){
         	if ($('#country').val() != null && $('#country').val() != "") {
 	        	$("#address").val($("#country").val().substring($("#country").val().indexOf(" ")));
 	        	findPlace(7);
@@ -465,7 +485,8 @@
         });
         
         $('.dayTab').click(function(){
-        	if (confirm("다음 일정으로 넘어가면 이전 일정은 수정할 수 없습니다. 넘어가시겠습니까?")) {
+        	//이전에 지난간 일정도 수정할수 있게 구현중.. 잠시 주석처리
+        	//if (confirm("다음 일정으로 넘어가면 이전 일정은 수정할 수 없습니다. 넘어가시겠습니까?")) {
         		$("#day").val($(this).val());
             	
             	$("#continent").val("");
@@ -487,14 +508,68 @@
         			undoPlace();
           		}
             	
-        		$('.dayTab').removeClass("active");
-        		$(this).addClass("active");
+            	//일정을 다시 되돌아가면 그 정보를 맵에 뿌려주고 수정할 수 있도록 구현..
+        		$.ajax({
+					url: "<c:url value='/nacojja/getTravelList.do'/>",
+					type:"POST",
+					//data: {continent: $('.continent').val()},
+					success: function(list) {
+						if (list.length > 0) {
+							//initialize();
+							$.each(list, function(idx, travelSpotVO){
+								if (travelSpotVO.day == $("#day").val()) {
+									//alert(idx + "위도,경도:" + travelSpotVO.latLng);
+									//alert(idx + "위도:" + travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")));
+									//alert(idx + "위도:" + travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1));
+									var someDayLatLng = new google.maps.LatLng(
+											travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")),
+											travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1)
+									);
+									
+									// 맵 클릭시 새로운 경로 라인 정보 추가
+									//addLatLng(travelSpotVO.latLng);
+									addLatLng(someDayLatLng);
+									
+									/* path = poly.getPath(); //path 정보 담을 배열 객체 가져옴
+								  	path.push(someDayLatLng);
+							   	  	
+								  	polys.push(someDayLatLng); //위도, 경도를 배열에 담기..
+							   		polyIndex++; */
+									
+									marker = new google.maps.Marker({
+							        	position: someDayLatLng,
+							        	map: mapFinal,
+							        	//title: '#' + path.getLength(),
+							        	animation: google.maps.Animation.BOUNCE
+							      	});
+							      	markersFinal.push(marker);
+							      	
+							      	mapFinal.setCenter(someDayLatLng);
+							      	mapFinal.setZoom(17);
+									
+								}
+								
+							});
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("error:" + error + ", status=" + status);
+					}
+				});
+            	
+            	
+            	
+        		//이전에 지난간 일정도 수정할수 있게 구현중.. 잠시 주석처리
+            	/* 
+        		//$('.dayTab').removeClass("active");
+        		$(this).prev().removeClass("active").attr({"disabled" : "disabled", 
+        													"style" : "text-align: left; background-color: #e9e9e9"
+        													});
+        		$(this).addClass("active").attr({"disabled" : "disabled"});
         		
-        		$(this).prev().attr("disabled", "disabled");
-        		//$("#dayTab' + '"$(this).val()" + '"' )
-        		//$("#dayTab + + ")
-        	} else {
-        	}
+        		$(this).next().attr("style", "text-align: left; background-color: #fff; color: #777");
+        		$(this).next().removeAttr("disabled", "disabled"); */
+        	//}
         	
         });
         
@@ -506,7 +581,6 @@
         
 	});
 </script>
-
 
 <div class="subBg subBgTerm">
 	<p>나만의 코스 짜기</p>
@@ -521,7 +595,7 @@
                     <%-- <c:forEach var="i" begin="1" end="${travelDay}"> --%>
                     <c:set var="i" value="1"></c:set>
                     <c:forEach var="travelDate" items="${tdList}">
-                    	<button id="dayTab${i}" class="list-group-item dayTab" value="${i}" style="text-align: left;">
+                    	<button id="dayTab${i}" class="list-group-item dayTab" value="${i}" style="text-align: left;" role="tab" data-toggle="tab">
                     		Day${i}
                     		<small><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/> </small>
                    		</button>
@@ -606,7 +680,7 @@
 					      <input onclick="clearMarkers();" type=button value="마커 숨기기">
 					      <input onclick="showMarkers();" type=button value="모든 마커 표시">
 					      <input onclick="deleteMarkers();" type=button value="모든 마커 제거">
-					      <input onclick="undoPlace();" type=button value="여행지 취소">
+					      <input onclick="undoPlace(true);" type=button value="여행지 취소">
 						</div>
                         
                         <%-- <div id="map${i}" class="map"></div> --%>
