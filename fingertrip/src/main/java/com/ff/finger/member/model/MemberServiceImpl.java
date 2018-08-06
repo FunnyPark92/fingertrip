@@ -89,6 +89,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.logingMember(id);
 	}
 
-
+	@Override
+	public int minusHeart(int memberNo) {
+		return memberDao.minusHeart(memberNo);
+	}
 
 }

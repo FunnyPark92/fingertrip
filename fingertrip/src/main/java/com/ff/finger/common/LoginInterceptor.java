@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-
 @Component
 public class LoginInterceptor extends HandlerInterceptorAdapter  {
 	public static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
@@ -18,7 +17,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter  {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		logger.info("intercepter!");
+		logger.info("LoginInterceptor!");
+		
 		String userid = (String) request.getSession().getAttribute("userid");
 		if(userid==null || userid.isEmpty()) {
 			response.setContentType("text/html;charset=utf-8");
@@ -33,10 +33,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter  {
 		
 		return true;
 	}
-
-
-		
-	}
+}
 
 
 

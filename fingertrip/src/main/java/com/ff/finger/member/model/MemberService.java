@@ -12,5 +12,5 @@ public interface MemberService {
 	public int emailAuth(String id);
 	public int memberEdit(MemberVO memberVo);
 	public MemberVO logingMember(String id);
-	
+	public int minusHeart(int memberNo);
 }

@@ -123,12 +123,12 @@ public class NacojjaController {
 		return "nacojja/nacojja2";
 	}
 	
-	@RequestMapping(value = "/nacojja2.do", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/nacojja2.do", method = RequestMethod.GET)
 	public String nacojja2Write_get() {
 		logger.info("나코짜2 작성화면 보여주기");
 		
 		return "nacojja/nacojja2";
-	}
+	}*/
 	
 	@RequestMapping(value = "/nacojja2.do", method = RequestMethod.POST)
 	public String nacojja2Write_post(@ModelAttribute TravelSpotVO travelSpotVo, HttpSession session) {
@@ -144,6 +144,8 @@ public class NacojjaController {
 		int cnt = courseService.nacojjaWrite(travelSpotVo, travelSpotList);
 		logger.info("나코짜2 DB 처리하기 결과, cnt={}", cnt);
 		
+		cnt = memberService.minusHeart(memberVo.getMemberNo());
+		logger.info("나코짜2 DB 처리 후 작성한 회원의 하트 차감 결과, cnt={}", cnt);
 		
 		return "index"; //TO-DO: 나중에 상세 목록으로 가도록 변경
 	}
