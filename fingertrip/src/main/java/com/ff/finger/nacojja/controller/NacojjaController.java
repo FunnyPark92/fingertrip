@@ -162,4 +162,11 @@ public class NacojjaController {
 		}
 	}
 	
+	@RequestMapping("/nacojjaDetail.do")
+	public String howto() {   
+		logger.info("나코짜 내용보기");
+		
+		return "nacojja/nacojjaDetail";
+	}
+	
 }

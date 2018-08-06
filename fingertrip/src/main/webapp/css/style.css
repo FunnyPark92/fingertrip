@@ -507,25 +507,90 @@ table a:hover, table a:active{text-decoration: none;}
     text-align:center;
  }
 .faqTabNav>li:hover, .faqTabNav>li:focus, .faqTabNav>li.gray{
-	background: #545454;
+	background: #2f2f2f;
 	color: #fff;
 }
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+.faq li {
+	list-style: none;
+}
+
+.faq .ui-state-default {
+	border: none;
+	border-top: 1px solid #c5c5c5;
+	background: #fff;
+	padding: 10px;
+}
+
+.faq .ui-state-active {
+	border-left: none;
+	border-right: none;
+	background: #2f2f2f;
+}
+
+.faq .ui-widget-content {
+	border: none;
+}
+
+.faq .ui-widget {
+	border-bottom: 1px solid #c5c5c5;
+}
+
+.faq .ui-accordion .ui-accordion-header {
+	padding: 17px;
+}
+
+/* 나코짜보기 */
+.ncjP{
+    border-top: 2px solid #ffc68b;
+}
+.ncjP span{
+    display: inline-block;
+}
+.ncjP span:first-child{
+    width: 13%;
+    background: #ff9c38;
+    color: #fff;
+    box-sizing: border-box;
+    padding:1%;
+    font-size: 1.1em;
+}
+.ncjP span:last-child{
+    width: 86%;
+    padding-left: 10px;
+}
+.ncjD p{
+    margin: 0;
+}
+.spot{
+   background-image:url(../img/spotIcon.png);
+    background-repeat: no-repeat;
+    background-position:0px;
+    padding-left: 25px;
+    font-weight: 600;
+    font-size: 1.05em;
+}
+p.spotExp{
+    padding-left: 10px;
+    margin-left: 11px;
+    border-left: 2px solid #ffdab4;
+    padding-bottom: 30px;
+}
+.spotDiv p:last-child{
+    border-left: none;
+}
+.spotImg{
+    margin: -1%;
+    margin-top: 50px;
+}
+.spotImg img{
+    width: 32%;
+    padding: 1%;
+}
+p.explain{
+    font-weight: 600;
+    font-weight: 1.05em;
+    margin-bottom: 5px;
+    background-image: url(../img/spotExpIcon.png);
+    background-repeat: no-repeat;
+    padding-left: 30px;
+}
