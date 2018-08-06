@@ -71,9 +71,9 @@
                    에펠탑 - 프랑스의 대표 건축물인 이 탑은 격자 구조로 이루어져 파리에서 가장 높은 건축물이다.
                 </div>
                 <div class="spotImg">
-                    <img src="${pageContext.request.contextPath }img/spot1.jpg" alt="루브르박물관">
-                    <img src="${pageContext.request.contextPath }img/spot2.jpg" alt="노트르담대성당">
-                    <img src="${pageContext.request.contextPath }img/spot3.jpg" alt="에펠탑">
+                    <img src="${pageContext.request.contextPath }/img/spot1.jpg" alt="루브르박물관">
+                    <img src="${pageContext.request.contextPath }/img/spot2.jpg" alt="노트르담대성당">
+                    <img src="${pageContext.request.contextPath }/img/spot3.jpg" alt="에펠탑">
                 </div>
 
             </div>
