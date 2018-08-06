@@ -35,7 +35,7 @@
 			if (filename != null && filename != "") {
 				var fNameExt = filename.substring(filename.lastIndexOf(".") + 1);
 				var lowfNameExt = fNameExt.toLowerCase();
-				if (lowfNameExt != "jpeg" && lowfNameExt && "jpg" 
+				if (lowfNameExt != "jpeg" && lowfNameExt != "jpg" 
 						&& lowfNameExt != "png" && lowfNameExt != "gif") {
 					alert("이미지 파일이 아닙니다. 다시 선택해 주세요!");
 					bool = false;
