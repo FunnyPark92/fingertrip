@@ -42,34 +42,33 @@
 				}
 			}
 			
-			if ($("input[name=startDay]").val() != null && $("input[name=startDay]").val() != "" 
-					&& $("input[name=endDay]").val() != null && $("input[name=endDay]").val() != "") {
-				
-				var todayMillis = new Date().getTime();
-				var startDayMillis = new Date($("input[name=startDay]").val()).getTime();
-				var endDayMillis = new Date($("input[name=endDay]").val()).getTime();
-				var travelDay = (endDayMillis - startDayMillis) / (1000*60*60*24) + 1; //여행기간 구하기
-				
-				if (todayMillis - startDayMillis > 24*60*60*1000) { //출발일을 당일 날짜까지 설정 가능하도록
-					alert("출발일이 오늘 날짜보다 더 이전일 수는 없습니다!!!");
-					bool = false;
-				} else if (travelDay < 1) {
-					alert("출발일보다 도착일이 더 빠를순 없습니다!!!");
-					bool = false;
-				} else if (travelDay > 10) {
-					alert("여행기간은 10일을 초과할 수 없습니다!!!");
-					bool = false;
-				} else {
-					$("#travelDay").val(travelDay);
-				}
-			}
-			
 			return bool;
 		});
     	
-        $(".datepicker").datepicker({
-            dateFormat: "yy-mm-dd"
-        });
+   		//날짜에 대한 유효성 체크
+    	$('.datepicker').change(function() {
+    		var todayMillis = new Date().getTime();
+			var startDayMillis = new Date($("input[name=startDay]").val()).getTime();
+			var endDayMillis = new Date($("input[name=endDay]").val()).getTime();
+			var travelDay = (endDayMillis - startDayMillis) / (1000*60*60*24) + 1; 
+			
+    		if (todayMillis - startDayMillis > 24*60*60*1000) { //출발일을 당일 날짜까지 설정 가능하도록
+				alert("출발일이 오늘 날짜보다 더 이전일 수는 없습니다!!!");
+				$(this).val("");
+				$(this).focus();
+			} else if (travelDay < 1) {
+				alert("출발일보다 도착일이 더 빠를순 없습니다!!!");
+				$(this).val("");
+				$(this).focus();
+			} else if (travelDay > 10) {
+				alert("여행기간은 10일을 초과할 수 없습니다!!!");
+				$(this).val("");
+				$(this).focus();
+			} else {
+				//여행기간 계산
+				$("#travelDay").val(travelDay);
+			}
+    	});
         
         var fileTarget = $('.planImgWrap .upload-hidden'); 
         fileTarget.on('change', function(){ // 값이 변경되면
@@ -77,9 +76,13 @@
         		filename = $(this)[0].files[0].name; 
         	} else { // old IE
         		filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
-        	} 
+        	}
         
         	$(this).siblings('.upload-name').val(filename); // 추출한 파일명 삽입
+        });
+        
+        $(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd"
         });
         
     });
@@ -94,7 +97,8 @@
         dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
         showMonthAfterYear: true,
         yearSuffix: '년'
-    });  
+    });
+
 </script>
 
 <div class="subBg subBgTerm">
@@ -114,9 +118,9 @@
 	    	</div>
 	    	<div>
 	    		<label for="startDay" hidden="">출발일</label>
-	        	<input type="text" name="startDay" placeholder="출발일" class="datepicker valid">
+	        	<input type="text" name="startDay" placeholder="출발일" class="datepicker valid" readonly="readonly">
 	    		<label for="endDay" hidden="">도착일</label>
-	        	<input type="text" name="endDay" placeholder="도착일" class="datepicker valid">
+	        	<input type="text" name="endDay" placeholder="도착일" class="datepicker valid" readonly="readonly">
 	    	</div>
 		    <div class="planImgWrap">
 		        <span style="display: block;">대표 이미지</span>
