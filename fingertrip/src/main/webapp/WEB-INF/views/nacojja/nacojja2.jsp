@@ -92,7 +92,7 @@
 		    strokeWeight: 5
 		});
 		poly.setMap(mapFinal);
-		//animate(poly);
+		animate(poly);
 		
 		geocoder = new google.maps.Geocoder();
         placesService = new google.maps.places.PlacesService(map);
@@ -100,7 +100,7 @@
 		map.addListener('click', handleClick); // 클릭 이벤트에 대한 리스너 추가
 	} //initialize()
 	
-	/* function animate(line) {
+	function animate(line) {
           var count = 0;
           window.setInterval(function() {
             count = (count + 1) % 200;
@@ -109,7 +109,7 @@
             icons[0].offset = (count / 2) + '%';
             line.set('icons', icons);
         }, 10);
-    } */
+    }
 	
  	// 실제 클릭이 발생 했을 시 모든 처리를 여기서 해결(클릭핸들러 개념)
     function handleClick(event) {
@@ -401,8 +401,8 @@
 				map.setCenter(results[0].geometry.location);
 				map.setZoom(zoomValue);
 				
-				var lat = results[0].geometry.location.lat(); //위도 
-				var lng = results[0].geometry.location.lng(); //경도
+				var lat = results[0].geometry.location.lat(); 
+				var lng = results[0].geometry.location.lng();
 				
 				console.log(lat, lng);
 			} else {
@@ -599,7 +599,7 @@
                     		Day${i}
                     		<small><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/> </small>
                    		</button>
-                   		<c:set var="i" value="${i+1 }"></c:set>
+                   		<c:set var="i" value="${i+1}"></c:set>
                     </c:forEach>
                 </div>
             </ul>
@@ -607,59 +607,57 @@
         
         <div class="col-md-10">
             <div class="tab-content panels-faq">
-            	<%-- <c:forEach var="i" begin="1" end="${travelDay}">
-            		<div class="tab-pane" id="tab${i}"> --%>
-            		<div class="tab-pane active" id="tab1">
+           		<div class="tab-pane active" id="tab1">
                     <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>"   >
                         <div class="courseDiv">
                             <label for="continent" class="courseLabel">대륙</label>
                             <select name="continent" class="continent" id="continent">
-                              <option value="">== 대륙 선택 ==</option>
-                              <option value="asia"
-                              	<c:if test="${param.continent == 'asia'}">
-                              		selected
-                              	</c:if>
-                              >아시아</option>
-                              <option value="middleEast"
-                              	<c:if test="${param.continent == 'middleEast'}">
-                              		selected
-                              	</c:if>
-                              >중동</option>
-                              <option value="europe"
-                              	<c:if test="${param.continent == 'europe'}">
-                              		selected
-                              	</c:if>
-                              >유럽</option>
-                              <option value="northAmerica"
-                              	<c:if test="${param.continent == 'northAmerica'}">
-                              		selected
-                              	</c:if>
-                              >북미</option>
-                              <option value="latinAmerica"
-                              	<c:if test="${param.continent == 'latinAmerica'}">
-                              		selected
-                              	</c:if>
-                              >중남미</option>
-                              <option value="africa"
-                              	<c:if test="${param.continent == 'africa'}">
-                              		selected
-                              	</c:if>
-                              >아프리카</option>
-                              <option value="oceania"
-                              	<c:if test="${param.continent == 'oceania'}">
-                              		selected
-                              	</c:if>
-                              >대양주</option>
-                            </select>
+                            	<option value="">== 대륙 선택 ==</option>
+                            	<option value="asia"
+                             		<c:if test="${param.continent == 'asia'}">
+                             			selected
+                            		</c:if>
+	                            >아시아</option>
+	                            <option value="middleEast"
+	                            	<c:if test="${param.continent == 'middleEast'}">
+	                             		selected
+	                            	</c:if>
+	                            >중동</option>
+	                            <option value="europe"
+	                            	<c:if test="${param.continent == 'europe'}">
+	                            		selected
+	                            	</c:if>
+	                            >유럽</option>
+	                            <option value="northAmerica"
+	                            	<c:if test="${param.continent == 'northAmerica'}">
+	                            		selected
+	                            	</c:if>
+	                            >북미</option>
+	                            <option value="latinAmerica"
+	                            	<c:if test="${param.continent == 'latinAmerica'}">
+	                            		selected
+	                            	</c:if>
+	                            >중남미</option>
+	                            <option value="africa"
+	                            	<c:if test="${param.continent == 'africa'}">
+	                            		selected
+	                            	</c:if>
+	                            >아프리카</option>
+	                            <option value="oceania"
+	                            	<c:if test="${param.continent == 'oceania'}">
+	                            		selected
+	                            	</c:if>
+	                            >대양주</option>
+	                        </select>
                             <select name="country" class="country" id="country">
-                            	<!-- 국가 리스트 반복 시작 -->
-                            	<%-- <c:forEach var="countryVo" items="${list}">
-                                	<option value="${countryVo.countryCode}">${countryVo.country}</option>
-                            	</c:forEach> --%>
-                            	<!-- 국가 리스트 반복 끝 -->
+	                           	<!-- 국가 리스트 반복 시작 -->
+	                           	<%-- <c:forEach var="countryVo" items="${list}">
+	                               	<option value="${countryVo.countryCode}">${countryVo.country}</option>
+	                           	</c:forEach> --%>
+	                           	<!-- 국가 리스트 반복 끝 -->
                             </select>
                         </div>
-                        
+                       
                         <div class="courseDiv">
                             <label for="city" class="courseLabel">도시</label>
                             <input type="text" id="city" name="city" readonly="readonly" style="border: none; width: 70%">
@@ -670,53 +668,50 @@
                             <img id="place-icon" height="17" width="17">
                             <input type="text" id="place-name" name="travelSpot" readonly="readonly" style="border: none; width: 70%">
                         </div>
-                        
+                       
                         <div id="divRating" class="courseDiv">
                             <label for="place-rating" class="courseLabel">평점</label>
                             <input type="text" id="place-rating" readonly="readonly" style="border: none;">
                         </div>
-                        
+                       
                         <div id="floating-panel">
-					      <input onclick="clearMarkers();" type=button value="마커 숨기기">
-					      <input onclick="showMarkers();" type=button value="모든 마커 표시">
-					      <input onclick="deleteMarkers();" type=button value="모든 마커 제거">
-					      <input onclick="undoPlace(true);" type=button value="여행지 취소">
-						</div>
-                        
-                        <%-- <div id="map${i}" class="map"></div> --%>
+						    <input onclick="clearMarkers();" type=button value="마커 숨기기">
+						    <input onclick="showMarkers();" type=button value="모든 마커 표시">
+						    <input onclick="deleteMarkers();" type=button value="모든 마커 제거">
+						    <input onclick="undoPlace(true);" type=button value="여행지 취소">
+					    </div>
+                       
                         <div id="map" class="map"></div>
-                        
+                       
                         <div class="mapSearch">
                             <input id="address" type="textbox" placeholder="지도에 표시될 여행지를 검색해주세요" 
-                            	onkeypress="if (event.keyCode==13) {return false;}"> <!-- 엔터키로 submit 되어버리는 현상 막음 -->
+                        		onkeypress="if (event.keyCode==13) {return false;}"> <!-- 엔터키로 submit 되어버리는 현상 막음 -->
                             <input type="button" value="장소검색" onclick="findPlace(18)" class="btn btn-warning">
                         </div>
-                        
+                       
                         <textarea name="travelContent" rows="5" class="textCK" placeholder="여행지에 대한 설명을 작성해주세요"></textarea>
                         <input type="button" value="여행지로 추가" onclick="addPlace()" class="btn btn-warning">
-                        
-                        <%-- <div id="mapFinal${i}" class="mapFinal"></div> --%>
+                       
                         <div id="mapFinal" class="mapFinal"></div>
-                        
+                       
                         <input type="submit" id="btnFinalAdd" value="나코짜 최종 등록" class="btn btn-warning">
-                        
+                       
                         <input type="hidden" name="title" value="${travelSpotVo.title }">
 		        		<input type="hidden" name="content" value="${travelSpotVo.content }">
 			        	<input type="hidden" name="startDay" value="${travelSpotVo.startDay }">
 	    		    	<input type="hidden" name="endDay" value="${travelSpotVo.endDay }">
 					    <input type="hidden" name="thumbImg" value="${travelSpotVo.thumbImg }">
 					    
-					    <%-- <input type="hidden" name="day" value="${i}"> --%>
 					    <input type="hidden" id="day" name="day" value="1">
 					    
 					    <input type="hidden" id="countryCode" name="countryCode">
 					    <input type="hidden" id="latLng" name="latLng">
                     </form>
-                	</div>
-            	<%-- </c:forEach> --%>
+               	</div>
             </div>
         </div>
     </div>
 </section>
 
 <%@ include file="../inc/bottom.jsp"%>
+
