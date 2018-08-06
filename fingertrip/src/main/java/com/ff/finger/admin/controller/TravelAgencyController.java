@@ -23,7 +23,7 @@ import com.ff.finger.travelAgency.model.TravelAgencyVO;
 @Controller
 @RequestMapping("/admin")
 public class TravelAgencyController {
-private static final Logger logger = LoggerFactory.getLogger(TravelAgencyController.class); 
+	private static final Logger logger = LoggerFactory.getLogger(TravelAgencyController.class); 
 	
 	@Autowired
 	TravelAgencyService travelAgencyServise;
@@ -107,6 +107,7 @@ private static final Logger logger = LoggerFactory.getLogger(TravelAgencyControl
 		
 	}
 	
+
 	@RequestMapping(value="/agency/agencyEdit.do", method=RequestMethod.GET)
 	public String agencyEdit(@RequestParam String name,Model model) {
 		logger.info("여행사 수정 name={}", name);
@@ -117,6 +118,7 @@ private static final Logger logger = LoggerFactory.getLogger(TravelAgencyControl
 			
 		}
 		model.addAttribute("vo",vo);
+
 		
 		return "admin/agency/agencyEdit";
 	}
@@ -148,10 +150,7 @@ private static final Logger logger = LoggerFactory.getLogger(TravelAgencyControl
 		logger.info("여행사 자세히보기 name ={}",name);
 		TravelAgencyVO vo = travelAgencyServise.selectOneAgency(name);
 		
-		
 		model.addAttribute("vo",vo);
-		
-		
 		
 		return "admin/agency/agencyDetail";
 	}
@@ -159,6 +158,7 @@ private static final Logger logger = LoggerFactory.getLogger(TravelAgencyControl
 /*	@RequestMapping("/agency/licenseCheck.do")
 	public String licenseCheck(){
 		logger.info("중복찾기 화면");
+		
 		return "admin/agency/licenseCheck";
 	}*/
 	
@@ -166,9 +166,12 @@ private static final Logger logger = LoggerFactory.getLogger(TravelAgencyControl
 	@RequestMapping("/agency/checkLc.do")
 	public boolean licenseCheck_post(@RequestParam String licenseNo,Model model) {
 		logger.info("중복확인 처리 licenseNo={}",licenseNo);
-		String msg="", url="/admin/agency/licenseCheck.do";
+		
+		//String msg="", url="/admin/agency/licenseCheck.do";
+		
 		boolean result =travelAgencyServise.checkLicenseNoDupl(licenseNo);
 		logger.info("중복확인 결과 result={}",result);
+		
 		return result;
 	}
 	

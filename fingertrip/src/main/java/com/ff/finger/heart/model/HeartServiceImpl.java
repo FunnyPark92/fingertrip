@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ff.finger.common.SearchVO;
-import com.ff.finger.member.model.MemberDAO;
 
 @Service
 public class HeartServiceImpl implements HeartService{

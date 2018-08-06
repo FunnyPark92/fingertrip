@@ -13,5 +13,5 @@ public interface MemberDAO {
 	public int checkMail(String id);
 	public int memberEdit(MemberVO memberVo);
 	public MemberVO logingMember(String id);
-	
+	public int minusHeart(int memberNo);
 }

@@ -13,7 +13,7 @@ public class NoticeServiceImpl implements NoticeService {
 	@Autowired NoticeDAO noticeDao;
 
 	@Override
-	public List<NoticeVO> selectAllNotice(SearchVO searchVo) {
+	public List<Map<String, Object>> selectAllNotice(SearchVO searchVo) {
 		return noticeDao.selectAllNotice(searchVo);
 	}
 
@@ -43,6 +43,32 @@ public class NoticeServiceImpl implements NoticeService {
 	public int noticeInsert(NoticeVO noticeVo) {
 		return noticeDao.noticeInsert(noticeVo);
 	}
+
+	@Override
+	public NoticeVO noticeSelectByNo(int noticeNo) {
+		return noticeDao.noticeSelectByNo(noticeNo);
+	}
+
+	@Override
+	public int noticeUpdate(NoticeVO noticeVo) {
+		return noticeDao.noticeUpdate(noticeVo);
+	}
+
+	@Override
+	public int noticeDelete(int noticeNo) {
+		return noticeDao.noticeDelete(noticeNo);
+	}
+
+	@Override
+	public int deleteMulti(Map<String, String[]> map) {
+		return noticeDao.deleteMulti(map);
+	}
+
+	@Override
+	public String selectFileName(String noticeNo) {
+		return noticeDao.selectFileName(noticeNo);
+	}
+
 
 	
 

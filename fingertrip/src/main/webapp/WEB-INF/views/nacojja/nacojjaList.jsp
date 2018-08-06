@@ -108,7 +108,7 @@
 				<c:forEach var="map" items="${list }" >
 					<div class="listDv">
 						<a href="#" class="decoN">
-							<img class="listImg listH" alt="" src="${pageContext.request.contextPath }/img/${map['THUMB_IMG']}">
+							<img class="listImg listH" alt="" src="${pageContext.request.contextPath }/upload_images/${map['THUMB_IMG']}">
 							<div class="pad15 listSmDv">
 								<p class="listTitle"> 
 									<c:if test="${fn:length(map['TITLE'])>28 }">
@@ -130,23 +130,22 @@
 			</c:if>
 			
 			<div class="divPage clear text-center pad15 marginBottom40">
-	                	<c:if test="${pagingInfo.firstPage>1 }">
-	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
-	                	</c:if>
-	                	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
-							<c:choose>
-								<c:when test="${i==pagingInfo.currentPage }">
-									<span class="colorBlue font-weight-bold" >${i }</span>
-								</c:when>
-								<c:otherwise>
-									<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i }</a></span>
-								</c:otherwise>
-							</c:choose>
-	                	</c:forEach>
-	                	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-	                		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
-	                	</c:if>
-				
+               	<c:if test="${pagingInfo.firstPage>1 }">
+               		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+               	</c:if>
+               	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+					<c:choose>
+						<c:when test="${i==pagingInfo.currentPage }">
+							<span class="colorBlue font-weight-bold" >${i }</span>
+						</c:when>
+						<c:otherwise>
+							<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i }</a></span>
+						</c:otherwise>
+					</c:choose>
+               	</c:forEach>
+               	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+               		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+               	</c:if>
 			</div>	
 			
 			<div class="margin0 width350">

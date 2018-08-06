@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.notice">
+	
+	<select id="selectAllNotice" parameterType="SearchVo" resultType="map">
+		select *
+		from (
+			select list.*, rownum as RNUM
+			from(
+				select * from notice n join admin a
+				on n.admin_no=a.admin_no
+				<if test="searchKeyword!=null and searchKeyword!=''">
+					where ${searchCondition} like '%' || #{searchKeyword} || '%'
+				</if>
+				order by notice_no desc
+				)list
+			)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="totalRecord" resultType="int" parameterType="SearchVo">
+		select count(*)
+		from notice
+		<if test="searchKeyword!=null and searchKeyword!=''">
+			where ${searchCondition} like '%' || #{searchKeyword} || '%'
+		</if>
+	</select>
+	
+	<update id="countUpdateNotice" parameterType="int">
+		update notice 
+		set read_count=read_count+1
+		where notice_no=#{noticeNo}
+	</update>
+	
+	<select id="getNoticeRnum" parameterType="int" resultType="int">
+		select rnum 
+		from
+		    (select list.*, rownum as rnum
+		    from(
+		        select * from notice order by notice_no desc
+		        )list
+		    )
+		where notice_no=#{noticeNo}
+	</select>
+	
+	<select id="noticeDetail" parameterType="int" resultType="noticeVo">
+		select * 
+		from(
+			select list.*, rownum as rnum
+			from(
+		    	select * from notice order by notice_no desc
+		    	)list
+	    	)
+	    <![CDATA[
+		where rnum>=#{rnum}-1 and rnum<=#{rnum}+1
+		]]>
+	</select>
+	
+	<select id="getAdminNo" parameterType="string" resultType="int">
+		select admin_no from admin where id=#{id}
+	</select>
+	
+	<insert id="noticeInsert" parameterType="noticeVo">
+		insert into notice(notice_no,title,content,file_name, original_file_name, admin_no )
+		values(notice_seq.nextval, #{title},#{content},#{fileName, jdbcType=VARCHAR},#{originalFileName, jdbcType=VARCHAR},#{adminNo})
+	</insert>
+	
+	<select id="noticeSelectByNo" parameterType="int" resultType="noticeVo">
+		select * from notice where notice_no=#{noticeNo}
+	</select>
+	
+	<update id="noticeUpdate" parameterType="noticeVo">
+		update notice
+		set title=#{title}, content=#{content}
+			<if test="fileName!=null and fileName!=''">
+				, file_name=#{fileName}, original_file_name=#{originalFileName}
+			</if>
+		where notice_no=#{noticeNo}
+	</update>
+	
+	<delete id="noticeDelete" parameterType="int">
+		delete from notice where notice_no=#{noticeNo}
+	</delete>
+	
+	<delete id="deleteMulti" parameterType="map">
+		delete from notice
+		where notice_no in
+		<foreach collection="nos" item="no" open="(" close=")" separator="," >
+			#{no}
+		</foreach>
+	</delete>
+	
+	<select id="selectFileName" parameterType="string" resultType="string">
+		select file_name from notice where notice_no=#{noticeNo}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

@@ -2,6 +2,8 @@ package com.ff.finger.nacojja.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -75,15 +77,25 @@ public class NacojjaController {
 	}
 	
 	@RequestMapping(value = "/nacojja1.do", method = RequestMethod.GET)
-	public String nacojja1Write_get() {
+	public String nacojja1Write_get(Model model) {
 		logger.info("나코짜1 작성화면 보여주기");
+		
+		//출발 가능일 계산
+		Calendar cal = Calendar.getInstance();
+		Date today = new Date();
+		cal.setTime(today);
+		cal.add(Calendar.DATE, 14);
+		
+		model.addAttribute("availableStartDay", cal.getTime());
 		
 		return "nacojja/nacojja1";
 	}
 	
 	@RequestMapping(value = "/nacojja1.do", method = RequestMethod.POST)
-	public String nacojja1Write_post(@ModelAttribute CourseVO travelSpotVo, HttpServletRequest request, Model model) {
+	public String nacojja1Write_post(@ModelAttribute CourseVO travelSpotVo, @RequestParam int travelDay, 
+			HttpServletRequest request, Model model) {
 		logger.info("나코짜1 DB 처리하기, 파라미터 travelSpotVo={}", travelSpotVo);
+		logger.info("나코짜1 DB 처리하기, 여행기간 travelDay={}", travelDay);
 		
 		//파일 업로드 처리
 		String fileName = "";
@@ -101,24 +113,30 @@ public class NacojjaController {
 		}
 		logger.info("나코짜1 파일 업로드 처리 후, travelSpotVo={}", travelSpotVo);
 		
-		//여행 기간 구하기
-		long endDayMillis = travelSpotVo.getEndDay().getTime();
-		long startDayMillis = travelSpotVo.getStartDay().getTime();
-		long travelDay = (endDayMillis - startDayMillis) / (1000*60*60*24) + 1;
-		logger.info("나코짜1 여행기간 구하기 결과, 여행기간={}", travelDay);
+		//출발일부터 날짜 계산
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(travelSpotVo.getStartDay());
 		
+		List<Date> travelDateList = new ArrayList<>();
+		travelDateList.add(cal.getTime());
+		for (int i=1; i<travelDay; i++) {
+			cal.add(Calendar.DATE, 1);
+			travelDateList.add(cal.getTime());
+		}
+		
+		model.addAttribute("tdList", travelDateList);
 		model.addAttribute("travelDay", travelDay);
 		model.addAttribute("travelSpotVo", travelSpotVo);
 		
 		return "nacojja/nacojja2";
 	}
 	
-	@RequestMapping(value = "/nacojja2.do", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/nacojja2.do", method = RequestMethod.GET)
 	public String nacojja2Write_get() {
 		logger.info("나코짜2 작성화면 보여주기");
 		
 		return "nacojja/nacojja2";
-	}
+	}*/
 	
 	@RequestMapping(value = "/nacojja2.do", method = RequestMethod.POST)
 	public String nacojja2Write_post(@ModelAttribute TravelSpotVO travelSpotVo, HttpSession session) {
@@ -134,6 +152,8 @@ public class NacojjaController {
 		int cnt = courseService.nacojjaWrite(travelSpotVo, travelSpotList);
 		logger.info("나코짜2 DB 처리하기 결과, cnt={}", cnt);
 		
+		cnt = memberService.minusHeart(memberVo.getMemberNo());
+		logger.info("나코짜2 DB 처리 후 작성한 회원의 하트 차감 결과, cnt={}", cnt);
 		
 		return "index"; //TO-DO: 나중에 상세 목록으로 가도록 변경
 	}
@@ -150,6 +170,13 @@ public class NacojjaController {
 			travelSpotList.add(travelSpotVo);			
 			logger.info("나코짜2 여행지 담은 결과, list.size={}", travelSpotList.size());
 		}
+	}
+	
+	@RequestMapping("/nacojjaDetail.do")
+	public String howto() {   
+		logger.info("나코짜 내용보기");
+		
+		return "nacojja/nacojjaDetail";
 	}
 	
 }

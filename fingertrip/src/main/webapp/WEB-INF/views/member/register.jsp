@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-<style type="text/css">
- .message{ display: none;
- 		   font-size: 12px;
- 		   color: red;}
 
+<style type="text/css">
+ .message{ 
+ 	display: none;
+ 	font-size: 12px;
+}
 
 .divId{
 	width: 600px;
@@ -37,8 +38,6 @@ $(document).ready(function(){
 				return false;
 			}
 		});
-			
-
 		 
 		  if(bool){
 				if(!validate_username($('#name').val())){
@@ -69,11 +68,9 @@ $(document).ready(function(){
 			bool=false;
 			alert(result);
 		}
+		 	
 		return bool;
-		
 	}); //Click 이벤트
-	
-	
 	
 	$(".valid").each(function(idx, item){
 		$(this).blur(function(){
@@ -86,10 +83,7 @@ $(document).ready(function(){
 		});
 	});  
 	
-	
-	
 	$('#id').keyup(function(){
-		
 		if(validate_userid($(this).val()) && $(this).val().length>=2){
 			$.ajax({
 				url:"<c:url value='/member/ajaxUserCheckId.do'/>",
@@ -97,10 +91,12 @@ $(document).ready(function(){
 				data:{id:$(this).val()},
 				success:function(res){
 					if(res){
-						$('.message').html("사용 가능합니다.");
+						$('.message').prop("style", "color: green");
+						$('.message').html("멋진 아이디네요!");
 						$('.message').show();
 						$('#checkId').val('Y');
 					}else{
+						$('.message').prop("style", "color: red");
 						$('.message').html("해당 아이디가 이미 존재합니다.");
 						$('.message').show();
 						$('#checkId').val('N');
@@ -112,15 +108,13 @@ $(document).ready(function(){
 				}
 			});
 		}else if($(this).val().length<2){
+			$('.message').prop("style", "color: red");
 			$('.message').html("아이디는 2자리 이상!");
 			$('.message').show();
 			$('#checkId').val('N');
 			result ="아이디는 영문 혹은 숫자로 2자리 이상 입력하셔야 합니다.";
 		}
-		
 	});
-	
-	
 });
 </script>
 

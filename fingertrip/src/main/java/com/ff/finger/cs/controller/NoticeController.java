@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +50,7 @@ public class NoticeController {
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		searchVo.setRecordCountPerPage(CommonConstants.RECORD_COUNT_PER_PAGE);
 		
-		List<NoticeVO> list=noticeService.selectAllNotice(searchVo);
+		List<Map<String, Object>> list=noticeService.selectAllNotice(searchVo);
 		logger.info("공지사항 목록 조회 결과, list.size={}",list.size());
 	
 		int totalRecord=noticeService.totalRecord(searchVo);
@@ -62,76 +61,6 @@ public class NoticeController {
 		model.addAttribute("pagingInfo", pagingInfo);
 	
 		return "cs/notice/noticeList";
-	}
-	
-	@RequestMapping(value="/noticeWrite.do", method=RequestMethod.GET)
-	public String noticeWrite() {
-		logger.info("공지사항 글쓰기 화면");
-		
-		return "cs/notice/noticeWrite";
-	}
-	
-	@RequestMapping(value="/noticeWrite.do", method=RequestMethod.POST)
-	public String noticeWrite_post(@ModelAttribute NoticeVO noticeVo, HttpServletRequest request, 
-			MultipartHttpServletRequest fRequest, HttpSession session, Model model ) {
-		logger.info("공지사항 글쓰기 처리, noticeVo={}", noticeVo);
-		
-		/*String adminId=(String) session.getAttribute("adminId");
-		logger.info("세션 조회 adminId={}", adminId);*/
-		
-
-		//아직 관리자 페이지에 공지사항 등록 없어서 admin3 아이디 없으면 500error! 존재하는 아이디로 사용하세요
-		int adminNo=noticeService.getAdminNo("admin3");
-		noticeVo.setAdminNo(adminNo);
-		logger.info("관리자 번호 조회 결과, noticeVo={}", noticeVo);
-		
-		List<MultipartFile> list=fRequest.getFiles("upfile");
-		logger.info("공지사항 파일업로드 list.size={}", list.size());
-		
-		String originalFileName="", fileName="";
-		
-		MultipartFile[] mf=new MultipartFile[list.size()];
-
-		for(int i=0; i<list.size();i++) {
-			mf[i]=list.get(i);
-			
-			String getOriginalFileName=mf[i].getOriginalFilename();
-			String getFileName=fileUploadUtil.getUniqueFileName(getOriginalFileName);
-			logger.info("공지사항 파일, getOriginalFileName={}, getFileName={}", getOriginalFileName, getFileName);
-			
-			if(i!=0) {
-				originalFileName+=", ";
-				fileName+=", ";
-			}
-			originalFileName+=getOriginalFileName;
-			fileName+=getFileName;
-			
-			File file=new File(fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS), getFileName);
-			
-			try {
-				mf[i].transferTo(file);
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		noticeVo.setOriginalFileName(originalFileName);
-		noticeVo.setFileName(fileName);
-		logger.info("공지사항 파일 업로드, noticeVo={}", noticeVo);
-		
-		int cnt=noticeService.noticeInsert(noticeVo);
-		logger.info("글쓰기 처리 후, cnt={}", cnt);
-		
-		if(cnt>0) {
-			model.addAttribute("msg", "공지사항 등록이 완료되었습니다.");
-		}else {
-			model.addAttribute("msg", "공지사항 등록이 실패하였습니다.");
-		}
-		model.addAttribute("url", "/cs/notice/noticeList.do");
-		
-		return "common/message";
 	}
 	
 	@RequestMapping("/countUpdate.do")
@@ -213,4 +142,5 @@ public class NoticeController {
 		
 		return mav;
 	}
+	
 }

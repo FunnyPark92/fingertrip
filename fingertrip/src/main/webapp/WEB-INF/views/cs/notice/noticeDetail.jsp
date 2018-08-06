@@ -3,6 +3,7 @@
 
 <%@ include file="../../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
+
 	<section class="container board marginTop80 marginBottom80 minheight600">
 		<div class="row">
 	
@@ -94,7 +95,7 @@
 					</tr>
 				</table>
 				<div class="fRight">
-				    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="btn btn btn-warning">목록</a>
+				    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="btn btn-outline-info">목록</a>
 				</div>
 		         
 		   		<c:set value="${fn:length(list) }" var="listLeng"/> 
