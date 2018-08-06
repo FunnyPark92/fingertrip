@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -135,6 +136,17 @@ public class AdminNoticeController {
 		return "common/message";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/noticeFSize.do")
+	public int noticeFSize( MultipartHttpServletRequest fRequest) {
+		logger.info("파일 사이즈 확인");
+		
+		List<MultipartFile> list=fRequest.getFiles("upfile");
+		logger.info("공지사항 파일업로드 list.size={}", list.size());
+		
+		return list.size();
+	}
+	
 	@RequestMapping("/noticeDetail.do")
 	public String noticeDetail(@RequestParam(defaultValue="0") int noticeNo, HttpServletRequest request, Model model) {
 		logger.info("공지사항 상세보기 화면, 파라미터 noticeNo={}", noticeNo);
@@ -171,7 +183,7 @@ public class AdminNoticeController {
 			for(int i=0;i<fileN.length;i++) {
 				String subFileN=fileN[i].substring(fileN[i].lastIndexOf(".")+1).toLowerCase();
 				logger.info("공지사항 subFileN={}", subFileN);
-				if(subFileN.equals("jpg")||subFileN.equals("png")||subFileN.equals("gif")){
+				if(subFileN.equals("jpg")||subFileN.equals("jpeg")||subFileN.equals("png")||subFileN.equals("gif")){
 	/*				uploadPath=fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS)+"\\"+fileN[i];
 	*/				imgFileN=fileN[i];
 					list2.add(imgFileN);

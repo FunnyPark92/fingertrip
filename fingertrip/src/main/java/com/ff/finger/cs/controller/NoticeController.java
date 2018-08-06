@@ -109,7 +109,7 @@ public class NoticeController {
 			for(int i=0;i<fileN.length;i++) {
 				String subFileN=fileN[i].substring(fileN[i].lastIndexOf(".")+1).toLowerCase();
 				logger.info("공지사항 subFileN={}", subFileN);
-				if(subFileN.equals("jpg")||subFileN.equals("png")||subFileN.equals("gif")){
+				if(subFileN.equals("jpg")||subFileN.equals("jpeg")||subFileN.equals("png")||subFileN.equals("gif")){
 	/*				uploadPath=fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS)+"\\"+fileN[i];
 	*/				imgFileN=fileN[i];
 					list2.add(imgFileN);

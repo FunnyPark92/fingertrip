@@ -23,6 +23,9 @@
 				alert('내용을 입력하세요');
 				$('div[name=content]').focus();
 				return false;
+			}else if($('input[name=fileCnt]').val()!="Y"){
+				alert('파일 개수를 확인하세요');
+				return false;
 			}else{
 				var confrm=confirm("공지사항을 수정하시겠습니까?");
 				if(!confrm) {
@@ -34,6 +37,29 @@
 			if($('input[type=file]').val()<1){
 				$('#hidFile').val("N");
 			}
+		});
+		
+		$('input[type=file]').on("change", function(){
+			var form = $('form')[0];
+        	var formData = new FormData(form);
+            $.ajax({
+	            url: "<c:url value='/admin/cs/notice/noticeFSize.do'/>",
+            	processData: false,
+                contentType: false,
+	            data: formData,
+	            type: 'POST',
+	            success: function(result){
+	                if(result>5){
+	                	$('input[name=fileCnt]').val("N");
+	           			alert("파일은 최대 5개까지 등록 가능합니다.");
+	                }else{
+	                	$('input[name=fileCnt]').val("Y");
+	                }
+	            },
+	            error:function(xhr, status, error){
+	 				alert("error: "+error);
+	 			} 
+           	});
 		});
 	});
 </script>
@@ -54,7 +80,7 @@
        				<th>내용</th>
        				<td>
       					<div id="toolbar-container"></div>
-	      				<div id="editor" name="content" class="padL30">
+	      				<div id="editor" name="content" class="">
 					        <p>${vo.content }</p>
 					    </div>
        				</td>
@@ -63,30 +89,22 @@
      				<th>파일</th>
      				<td>
      					<input type="file" name="upfile" multiple="multiple" class="btn btn-outline-secondary">
+     					<br>
+     					<span class="warn">※ 파일은 최대 5개까지 등록 가능합니다.</span>
         				<input type="hidden" id="hidFile" name="hidFile">
         				<input type="hidden" name="oldFileName" value="${vo.fileName }">
+        				<input type="hidden" id="fileCnt" name="fileCnt">
      				</td>
      			</tr>
-            		<c:if test="${!empty vo.fileName }">
-            		
+           		<c:if test="${!empty vo.fileName }">
             		<tr>
 	     				<th>첨부파일 목록</th>
 	     				<td>${vo.fileName}
 	     					<br>
 	     					<span class="warn">※ 첨부파일을 새로 지정할 경우 기존 파일은 삭제됩니다.</span>
-	     					<br>
-	     					<span class="warn">※ 파일은 최대 5개까지 등록 가능합니다.</span>
 	     				</td>
      				</tr>
-<%-- 		        <div>
-			        <div class="row marginTop10">
-            			<span class="col-md-2 font-weight-bold">첨부파일 목록</span>
-           				<span class="col-md-9">${vo.fileName}</span>
-            			<span class="col-md-1"></span>
-            		</div>
-          				<p class="warn">※ 첨부파일을 새로 지정할 경우 기존 파일은 삭제됩니다.</p>
-           		</div> --%>
-       		</c:if>		
+       			</c:if>		
          	</table>
 	     	<script>
 		        DecoupledEditor
