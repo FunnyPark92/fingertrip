@@ -522,10 +522,14 @@
         <div class="col-md-2">
             <ul class="list-group help-group">
                 <div class="faq-list list-group nav">
-                    <c:forEach var="i" begin="1" end="${travelDay}">
-                    	<button id="dayTab${i}" class="list-group-item dayTab" value="${i}">
-                    		Day${i}<small>${travelSpotVo.startDay.getMonth()+1}.${travelSpotVo.startDay.getDate()+i-1}</small>
+                    <%-- <c:forEach var="i" begin="1" end="${travelDay}"> --%>
+                    <c:set var="i" value="1"></c:set>
+                    <c:forEach var="travelDate" items="${tdList}">
+                    	<button id="dayTab${i}" class="list-group-item dayTab" value="${i}" style="text-align: left;">
+                    		Day${i}
+                    		<small><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/> </small>
                    		</button>
+                   		<c:set var="i" value="${i+1 }"></c:set>
                     </c:forEach>
                 </div>
             </ul>

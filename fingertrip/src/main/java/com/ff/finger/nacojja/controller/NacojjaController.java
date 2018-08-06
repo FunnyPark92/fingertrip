@@ -2,6 +2,8 @@ package com.ff.finger.nacojja.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -103,6 +105,18 @@ public class NacojjaController {
 		}
 		logger.info("나코짜1 파일 업로드 처리 후, travelSpotVo={}", travelSpotVo);
 		
+		//출발일부터 날짜 계산
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(travelSpotVo.getStartDay());
+		
+		List<Date> travelDateList = new ArrayList<>();
+		travelDateList.add(cal.getTime());
+		for (int i=1; i<travelDay; i++) {
+			cal.add(Calendar.DATE, 1);
+			travelDateList.add(cal.getTime());
+		}
+		
+		model.addAttribute("tdList", travelDateList);
 		model.addAttribute("travelDay", travelDay);
 		model.addAttribute("travelSpotVo", travelSpotVo);
 		
