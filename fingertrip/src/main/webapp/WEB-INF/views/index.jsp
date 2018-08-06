@@ -50,7 +50,6 @@ $(document).ready(function(){
             </div>
         </div>
     </header>
-
     <!-- Testimonials -->
     <section class="testimonials text-center bg-light">
         <div class="container">

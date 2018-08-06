@@ -1,8 +1,13 @@
 package com.ff.finger.member.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.ff.finger.common.SearchVO;
 
 @Repository
 public class MemberDAOMybatis implements MemberDAO {
@@ -72,8 +77,41 @@ public class MemberDAOMybatis implements MemberDAO {
 	}
 
 	@Override
+	public List<MemberVO> selectAll(SearchVO searchVo) {
+		List<MemberVO> list=sqlSession.selectList(namespace+"selectAll",searchVo);
+		return list;
+	}
+
+	@Override
+	public int memberTotalRecord() {
+		return sqlSession.selectOne(namespace+"memberTotalRecord");
+	}
+
+	@Override
+	public List<MemberVO> deleteSelectAll(SearchVO searchVo) {
+		List<MemberVO> list=sqlSession.selectList(namespace+"deleteSelectAll",searchVo);
+		return list;
+	}
+
+	@Override
+	public int deleteMemberTotalRecord() {
+		return sqlSession.selectOne(namespace+"deleteMemberTotalRecord");
+	}
+
+	@Override
+	public List<Map<String, Object>> outLeason(int memberNo) {
+		return sqlSession.selectList(namespace+"outLeason", memberNo);
+	}
+
+	@Override
+	public int adminDeleteMember(int memberNo) {
+		return sqlSession.update(namespace+"adminDeleteMember", memberNo);
+	}
+
+	@Override
 	public int minusHeart(int memberNo) {
 		return sqlSession.update(namespace + "minusHeart", memberNo);
 	}
+
 
 }

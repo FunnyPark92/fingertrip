@@ -68,6 +68,67 @@
 		select * from member where id=#{id}
 	</select>
 	
+	<select id="selectAll" parameterType="SearchVo" resultType="MemberVo">
+		select *
+			from (
+				select rownum as RNUM, list.*
+				from(
+					select * from member
+					where
+					<if test="searchKeyword!=null and searchKeyword!=''">
+						${searchCondition} like '%' || #{searchKeyword} || '%' and
+					</if>
+						out_date is null
+					order by member_no desc
+					)list
+				)
+			<![CDATA[
+			where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage} 
+			]]>
+	</select>
+	
+	<select id="memberTotalRecord" resultType="int">
+		select count(*) from member
+		where out_date is null
+	</select>
+	
+	<select id="deleteSelectAll" parameterType="SearchVo" resultType="MemberVo">
+		select *
+			from (
+				select rownum as RNUM, list.*
+				from(
+					select * from member
+					where
+					<if test="searchKeyword!=null and searchKeyword!=''">
+						${searchCondition} like '%' || #{searchKeyword} || '%' and
+					</if>
+						out_date is not null
+					order by member_no desc
+					)list
+				)
+			<![CDATA[
+			where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage} 
+			]]>
+	</select>
+
+	<select id="deleteMemberTotalRecord" resultType="int">
+		select count(*) from member
+		where out_date is not null
+	</select>
+	
+	<select id="outLeason" parameterType="int" resultType="map">
+		select o.out_reason from
+		member m join out_reason o
+		on m.OUT_REASON_NO=o.OUT_REASON_NO
+		where member_no=#{memberNo}
+	</select>
+	
+	<update id="adminDeleteMember" parameterType="int">
+		update member
+		set out_date=sysdate, out_reason_no=100
+		where member_no=#{memberNo}
+    </update>
+    
 	<update id="minusHeart" parameterType="int">
 		UPDATE MEMBER 
 		SET HEART_COUNT=HEART_COUNT-1

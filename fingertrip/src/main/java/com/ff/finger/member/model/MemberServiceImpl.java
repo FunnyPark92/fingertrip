@@ -1,9 +1,13 @@
 package com.ff.finger.member.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ff.finger.common.CommonConstants;
+import com.ff.finger.common.SearchVO;
 
 
 @Service
@@ -90,8 +94,36 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public List<MemberVO> selectAll(SearchVO searchVo) {
+		return memberDao.selectAll(searchVo);
+	}
+
+	@Override
+	public int memberTotalRecord() {
+		return memberDao.memberTotalRecord();
+	}
+
+	@Override
+	public List<MemberVO> deleteSelectAll(SearchVO searchVo) {
+		return  memberDao.deleteSelectAll(searchVo);
+	}
+
+	@Override
+	public int deleteMemberTotalRecord() {
+		return memberDao.deleteMemberTotalRecord();
+	}
+
+	@Override
+	public List<Map<String, Object>> outLeason(int memberNo) {
+		return memberDao.outLeason(memberNo);
+	}
+
+	@Override
+	public int adminDeleteMember(int memberNo) {
+		return memberDao.adminDeleteMember(memberNo);
+	
+	@Override
 	public int minusHeart(int memberNo) {
 		return memberDao.minusHeart(memberNo);
 	}
-
 }
