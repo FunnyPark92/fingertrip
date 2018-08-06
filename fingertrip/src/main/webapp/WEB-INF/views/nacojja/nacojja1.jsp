@@ -121,6 +121,9 @@
 	        	<input type="text" name="startDay" placeholder="출발일" class="datepicker valid" readonly="readonly">
 	    		<label for="endDay" hidden="">도착일</label>
 	        	<input type="text" name="endDay" placeholder="도착일" class="datepicker valid" readonly="readonly">
+		    	<span style="display: block; text-align: left; font-size: 12px; color: gray; padding-left: 10%;">
+		    		출발 가능일: <fmt:formatDate value="${availableStartDay}" pattern="yyyy-MM-dd"/>
+		    	</span>
 	    	</div>
 		    <div class="planImgWrap">
 		        <span style="display: block;">대표 이미지</span>

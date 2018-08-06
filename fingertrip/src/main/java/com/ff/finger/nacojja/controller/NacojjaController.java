@@ -77,8 +77,16 @@ public class NacojjaController {
 	}
 	
 	@RequestMapping(value = "/nacojja1.do", method = RequestMethod.GET)
-	public String nacojja1Write_get() {
+	public String nacojja1Write_get(Model model) {
 		logger.info("나코짜1 작성화면 보여주기");
+		
+		//출발 가능일 계산
+		Calendar cal = Calendar.getInstance();
+		Date today = new Date();
+		cal.setTime(today);
+		cal.add(Calendar.DATE, 14);
+		
+		model.addAttribute("availableStartDay", cal.getTime());
 		
 		return "nacojja/nacojja1";
 	}
