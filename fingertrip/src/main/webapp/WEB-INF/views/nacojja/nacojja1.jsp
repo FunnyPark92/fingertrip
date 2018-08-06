@@ -52,8 +52,8 @@
 			var endDayMillis = new Date($("input[name=endDay]").val()).getTime();
 			var travelDay = (endDayMillis - startDayMillis) / (1000*60*60*24) + 1;
 			
-    		if (startDayMillis - todayMillis < 24*60*60*1000 * 13) { //출발일을 2주후부터 설정 가능하도록 계산
-				alert("출발일은 오늘 날짜 기준 최소 2주후부터 선택 가능합니다!!!");
+    		if (startDayMillis - todayMillis < 24*60*60*1000 * 13) { //출발일을 2주 후부터 설정 가능하도록 계산
+				alert("출발일은 오늘 날짜 기준 최소 2주 후부터 선택 가능합니다!!!");
 				$(this).val("");
 				$(this).focus();
 			} else if (travelDay < 1) {

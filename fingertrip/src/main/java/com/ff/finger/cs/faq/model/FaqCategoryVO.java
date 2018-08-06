@@ -1,5 +1,4 @@
 package com.ff.finger.cs.faq.model;
-import com.ff.finger.common.SearchVO;
 
 public class FaqCategoryVO /*extends SearchVO*/ {
 	private int faqCategoryNo;
