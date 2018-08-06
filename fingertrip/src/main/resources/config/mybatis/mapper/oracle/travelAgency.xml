@@ -19,6 +19,7 @@
 			select count(*) from travel_agency where name=#{Name}
 		</select>
 		
+		
 		<select id="checkLicenseNo" parameterType="String" resultType="int">
 			select count(*) from travel_agency where license_no = #{licenseNo}
 		</select>
@@ -51,7 +52,17 @@
 			select * from travel_agency where name =#{name}
 		</select>
 		
+		<delete id="deleteAgency" parameterType="int">
+			delete from travel_agency where travel_agency_no = #{travelAgencyNo}
+		</delete>
 		
+		<update id="updateAgency" parameterType="TravelAgencyVO" >
+			update travel_agency set name = #{name}, 
+			<if test="password !=null and password !='' ">
+			password = #{password},
+			</if>
+			hp= #{hp} , license_no = #{licenseNo} where travel_agency_no = #{travelAgencyNo}
+		</update>
 		
 		
 		

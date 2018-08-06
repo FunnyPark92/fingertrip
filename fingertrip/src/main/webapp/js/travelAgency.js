@@ -29,6 +29,19 @@
 					bool=false;
 				}
 			}
+			
+			$(".pwd").each(function(idx, item){
+				if($(this).val().length > 1){
+					if(!validate_userPwd($('#password').val())){
+						alert("비밀번호는 영문자로 시작하는 8~14자 영문,숫자 조합으로 입력해 주세요");
+						bool=false;
+						return false;
+					}else if($('#password').val() != $('#password2').val()){
+						alert("비밀번호가 일치하지 않습니다.");
+					}
+				}
+			});
+			
 			if(bool){
 				if(!validate_userHp1($('#licenseNo1').val()) || !validate_license2($('#licenseNo2').val()) || !validate_license3($('#licenseNo3').val())){
 					alert("사업자 등록번호는  000-00-00000 형식을 숫자로 입력해주세요");
@@ -55,6 +68,5 @@
 			return bool;
 		});// click 이벤트
 		
-		
-		
+
 	});

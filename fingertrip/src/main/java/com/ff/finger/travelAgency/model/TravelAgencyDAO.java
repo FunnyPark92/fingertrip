@@ -13,4 +13,6 @@ public interface TravelAgencyDAO {
 	public List<TravelAgencyVO> selectAgency(SearchVO vo);
 	public int totalRecord(SearchVO vo);
 	public TravelAgencyVO selectOneAgency(String name);
+	public int deleteAgency(int travelAgencyNo);
+	public int updateAgency(TravelAgencyVO vo);
 }
