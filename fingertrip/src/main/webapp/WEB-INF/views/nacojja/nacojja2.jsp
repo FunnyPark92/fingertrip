@@ -88,7 +88,7 @@
 	            offset: '100%'
 	        }],
 		    strokeColor: "#0000ff",
-		    strokeOpacity: 0.5,
+		    strokeOpacity: 0.6,
 		    strokeWeight: 5
 		});
 		poly.setMap(mapFinal);
@@ -420,9 +420,10 @@
 					data: {continent: $('.continent').val()},
 					success: function(list) {
 						if (list.length > 0) {
-							$('.country').show();
+							$(".country").show();
 							$(".country").empty();
 							
+							$("<option value=''>=== 국가 선택 ===</option>").appendTo(".country");
 							$.each(list, function(idx, countryVo){ //국가 리스트 가져온거 반복으로 뿌려주기
 								$("<option value='" + countryVo.countryCode + " " + countryVo.country + "'></option>")
 									.html(countryVo.country)
@@ -430,25 +431,18 @@
 							});
 							
 							if ($('.continent').val() == 'asia') {
-								alert("아시아로 이동");
 								map.setCenter(new google.maps.LatLng(34.047863, 100.61965529999998));
 					        } else if ($('.continent').val() == 'middleEast') {
-								alert("중동으로 이동");
 					        	map.setCenter(new google.maps.LatLng(29.2985278, 42.55096030000004));
 					        } else if ($('.continent').val() == 'europe') {
-								alert("유럽으로 이동");
 					        	map.setCenter(new google.maps.LatLng(54.5259614, 15.255118700000025));
 					        }  else if ($('.continent').val() == 'northAmerica') {
-					        	alert("북미로 이동");
 					        	map.setCenter(new google.maps.LatLng(48.67212160577449, -101.79580880540192));
 					        } else if ($('.continent').val() == 'latinAmerica') {
-					        	alert("중남미로 이동");
 					        	map.setCenter(new google.maps.LatLng(7.214281738343903, -81.51370573497422));
 					        } else if ($('.continent').val() == 'africa') {
-					        	alert("애프리카로 이동");
 					        	map.setCenter(new google.maps.LatLng(4.533162102579155, 15.085477354232808));
 					        } else if ($('.continent').val() == 'oceania') {
-					        	alert("대양주로 이동");
 					        	map.setCenter(new google.maps.LatLng(-22.7359095, 140.01876530000004));
 					        }
 							map.setZoom(4);
@@ -463,9 +457,11 @@
         });
         
         $('#country').change(function() {
-        	$("#address").val($("#country").val().substring($("#country").val().indexOf(" ")));
-        	findPlace(7);
-        	$("#address").val("");
+        	if ($('#country').val() != null && $('#country').val() != "") {
+	        	$("#address").val($("#country").val().substring($("#country").val().indexOf(" ")));
+	        	findPlace(7);
+	        	$("#address").val("");
+        	}
         });
         
         $('.dayTab').click(function(){
