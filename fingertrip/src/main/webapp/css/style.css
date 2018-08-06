@@ -585,6 +585,7 @@ p.spotExp{
 .spotImg img{
     width: 32%;
     padding: 1%;
+    max-height: 207px;
 }
 p.explain{
     font-weight: 600;
