@@ -1,6 +1,7 @@
 package com.ff.finger.cs.notice.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,26 @@ public class NoticeDAOMybatis implements NoticeDAO{
 	@Override
 	public NoticeVO noticeSelectByNo(int noticeNo) {
 		return sqlSession.selectOne(namespace+"noticeSelectByNo", noticeNo);
+	}
+
+	@Override
+	public int noticeUpdate(NoticeVO noticeVo) {
+		return sqlSession.update(namespace+"noticeUpdate", noticeVo);
+	}
+
+	@Override
+	public int noticeDelete(int noticeNo) {
+		return sqlSession.delete(namespace+"noticeDelete", noticeNo);
+	}
+
+	@Override
+	public int deleteMulti(Map<String, String[]> map) {
+		return sqlSession.delete(namespace+"deleteMulti", map);
+	}
+
+	@Override
+	public String selectFileName(String noticeNo) {
+		return sqlSession.selectOne(namespace+"selectFileName", noticeNo);
 	}
 
 	

@@ -64,11 +64,36 @@
 	
 	<insert id="noticeInsert" parameterType="noticeVo">
 		insert into notice(notice_no,title,content,file_name, original_file_name, admin_no )
-		values(notice_seq.nextval, #{title},#{content},#{fileName},#{originalFileName},#{adminNo})
+		values(notice_seq.nextval, #{title},#{content},#{fileName, jdbcType=VARCHAR},#{originalFileName, jdbcType=VARCHAR},#{adminNo})
 	</insert>
 	
 	<select id="noticeSelectByNo" parameterType="int" resultType="noticeVo">
 		select * from notice where notice_no=#{noticeNo}
+	</select>
+	
+	<update id="noticeUpdate" parameterType="noticeVo">
+		update notice
+		set title=#{title}, content=#{content}
+			<if test="fileName!=null and fileName!=''">
+				, file_name=#{fileName}, original_file_name=#{originalFileName}
+			</if>
+		where notice_no=#{noticeNo}
+	</update>
+	
+	<delete id="noticeDelete" parameterType="int">
+		delete from notice where notice_no=#{noticeNo}
+	</delete>
+	
+	<delete id="deleteMulti" parameterType="map">
+		delete from notice
+		where notice_no in
+		<foreach collection="nos" item="no" open="(" close=")" separator="," >
+			#{no}
+		</foreach>
+	</delete>
+	
+	<select id="selectFileName" parameterType="string" resultType="string">
+		select file_name from notice where notice_no=#{noticeNo}
 	</select>
 </mapper>
 

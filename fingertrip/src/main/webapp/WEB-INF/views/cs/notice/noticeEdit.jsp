@@ -15,18 +15,17 @@
 				alert('내용을 입력하세요');
 				$('div[name=content]').focus();
 				return false;
-			}else if($('input[type=file]').val()<1){
-				alert("파일을 등록해주세요");
-				$('input[type=file]').focus();
-				return false;
 			}else{
-				var confrm=confirm("이 내용을 입력하시겠습니까?");
+				var confrm=confirm("공지사항을 수정하시겠습니까?");
 				if(!confrm) {
 					$('div[name=content]').focus();
 					return false;
 				} 
 			}
 			$('input[name=content]').val($('#editor').html());
+			if($('input[type=file]').val()<1){
+				$('#hidFile').val("N");
+			}
 		});
 	});
 </script>
@@ -44,8 +43,9 @@
     
      		<!-- 서브컨텐츠 -->
             <div class="col-lg-9">
-            	<form name="frmCk" action="<c:url value='/cs/notice/noticeWrite.do'/>" method="post" enctype="multipart/form-data">
+            	<form name="frmCk" action="<c:url value='/cs/notice/noticeEdit.do'/>" method="post" enctype="multipart/form-data">
             		<hr>
+            		<input type="hidden" name="noticeNo" value="${vo.noticeNo }">
             		<div class="row">
             			<label class="col-md-3 font-weight-bold marginTB12 text-center">제목</label>
             			<input type="text" class="form-control col-md-8" name="title" value="${vo.title }">
@@ -81,15 +81,19 @@
 			        <hr>
 			        <div>
 			            <input type="file" name="upfile" multiple="multiple" class="btn btn-outline-secondary">
+			            <input type="hidden" name="hidFile" id="hidFile">
+			            <input type="hidden" name="oldFileName" value="${vo.fileName }">
 			        </div>
-			        <div class="row">
-            			<span class="col-md-3 font-weight-bold margin15">첨부파일 목록</span>
-            			<c:if test="${!empty vo.fileName }">
-            				<span class="col-md-8">${vo.fileName }</span>
-            				<p>첨부파일을 새로 지정할 경우 기존 파일은 삭제됩니다.</p>
-            			</c:if>
-            			<div class="col-md-1"></div>
-            		</div>
+			        <c:if test="${!empty vo.fileName }">
+				        <div>
+					        <div class="row marginTop10">
+		            			<span class="col-md-2 font-weight-bold">첨부파일 목록</span>
+	            				<span class="col-md-9">${vo.fileName}</span>
+		            			<span class="col-md-1"></span>
+		            		</div>
+	           				<p class="warn">※ 첨부파일을 새로 지정할 경우 기존 파일은 삭제됩니다.</p>
+	            		</div>
+            		</c:if>
             		<hr>
             		<div class="margin0 marginT30 overflowH width150">
 	                    <a href="<c:url value='/cs/notice/noticeList.do'/>" class="btn btn btn-warning float-right marginL10">목록</a>

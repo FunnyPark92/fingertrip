@@ -186,4 +186,8 @@
 	.btnColor{
 		color: #fd8730;
 	}
-	.
+	.warn{
+		margin: 5px 0px;
+	    color: red;
+	    font-size: 12px;
+	}

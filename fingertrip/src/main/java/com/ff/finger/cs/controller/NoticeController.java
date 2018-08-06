@@ -71,9 +71,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/noticeWrite.do", method=RequestMethod.POST)
-	public String noticeWrite_post(@ModelAttribute NoticeVO noticeVo, HttpServletRequest request, 
-			MultipartHttpServletRequest fRequest, HttpSession session, Model model ) {
-		logger.info("공지사항 글쓰기 처리, noticeVo={}", noticeVo);
+	public String noticeWrite_post(@ModelAttribute NoticeVO noticeVo, @RequestParam String hidFile, 
+			HttpServletRequest request, MultipartHttpServletRequest fRequest, HttpSession session, Model model ) {
+		logger.info("공지사항 글쓰기 처리, noticeVo={}, hidFile={}", noticeVo, hidFile);
 		
 		/*String adminId=(String) session.getAttribute("adminId");
 		logger.info("세션 조회 adminId={}", adminId);*/
@@ -84,41 +84,43 @@ public class NoticeController {
 		noticeVo.setAdminNo(adminNo);
 		logger.info("관리자 번호 조회 결과, noticeVo={}", noticeVo);
 		
-		List<MultipartFile> list=fRequest.getFiles("upfile");
-		logger.info("공지사항 파일업로드 list.size={}", list.size());
-		
-		String originalFileName="", fileName="";
-		
-		MultipartFile[] mf=new MultipartFile[list.size()];
-
-		for(int i=0; i<list.size();i++) {
-			mf[i]=list.get(i);
+		if(!hidFile.equals("N")) {
+			List<MultipartFile> list=fRequest.getFiles("upfile");
+			logger.info("공지사항 파일업로드 list.size={}", list.size());
 			
-			String getOriginalFileName=mf[i].getOriginalFilename();
-			String getFileName=fileUploadUtil.getUniqueFileName(getOriginalFileName);
-			logger.info("공지사항 파일, getOriginalFileName={}, getFileName={}", getOriginalFileName, getFileName);
+			String originalFileName="", fileName="";
 			
-			if(i!=0) {
-				originalFileName+=", ";
-				fileName+=", ";
+			MultipartFile[] mf=new MultipartFile[list.size()];
+	
+			for(int i=0; i<list.size();i++) {
+				mf[i]=list.get(i);
+				
+				String getOriginalFileName=mf[i].getOriginalFilename();
+				String getFileName=fileUploadUtil.getUniqueFileName(getOriginalFileName);
+				logger.info("공지사항 파일, getOriginalFileName={}, getFileName={}", getOriginalFileName, getFileName);
+				
+				if(i!=0) {
+					originalFileName+=", ";
+					fileName+=", ";
+				}
+				originalFileName+=getOriginalFileName;
+				fileName+=getFileName;
+				
+				File file=new File(fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS), getFileName);
+				
+				try {
+					mf[i].transferTo(file);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-			originalFileName+=getOriginalFileName;
-			fileName+=getFileName;
 			
-			File file=new File(fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS), getFileName);
-			
-			try {
-				mf[i].transferTo(file);
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			noticeVo.setOriginalFileName(originalFileName);
+			noticeVo.setFileName(fileName);
+			logger.info("공지사항 파일 업로드, noticeVo={}", noticeVo);
 		}
-		
-		noticeVo.setOriginalFileName(originalFileName);
-		noticeVo.setFileName(fileName);
-		logger.info("공지사항 파일 업로드, noticeVo={}", noticeVo);
 		
 		int cnt=noticeService.noticeInsert(noticeVo);
 		logger.info("글쓰기 처리 후, cnt={}", cnt);
@@ -229,5 +231,152 @@ public class NoticeController {
 		model.addAttribute("vo", vo);
 		return "cs/notice/noticeEdit";
 	
+	}
+	
+	@RequestMapping(value="/noticeEdit.do", method=RequestMethod.POST)
+	public String noticeEdit_post(@ModelAttribute NoticeVO noticeVo, @RequestParam String hidFile, 
+			@RequestParam String oldFileName, HttpServletRequest request, 
+			MultipartHttpServletRequest fRequest, HttpSession session, Model model ) {
+		logger.info("공지사항 수정 처리, 파라미터 noticeVo={}", noticeVo);
+		logger.info("공지사항 수정 처리, 파라미터  hidFile={}, oldFileName={}", hidFile, oldFileName);
+		
+		if(!hidFile.equals("N")) {
+			List<MultipartFile> list=fRequest.getFiles("upfile");
+			logger.info("공지사항 수정 파일 업로드 list.size={}", list.size());
+			
+			String originalFileName="", fileName="";
+			
+			MultipartFile[] mf=new MultipartFile[list.size()];
+	
+			for(int i=0; i<list.size();i++) {
+				mf[i]=list.get(i);
+				
+				String getOriginalFileName=mf[i].getOriginalFilename();
+				String getFileName=fileUploadUtil.getUniqueFileName(getOriginalFileName);
+				logger.info("공지사항 수정 파일, getOriginalFileName={}, getFileName={}", getOriginalFileName, getFileName);
+				
+				if(i!=0) {
+					originalFileName+=", ";
+					fileName+=", ";
+				}
+				originalFileName+=getOriginalFileName;
+				fileName+=getFileName;
+				
+				File file=new File(fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS), getFileName);
+				
+				try {
+					mf[i].transferTo(file);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			String[] fileN=oldFileName.split(", ");
+			logger.info("oldFileName, fileN.length={}", oldFileName, fileN.length);
+			
+			for(int i=0;i<fileN.length;i++) {
+				logger.info("공지사항 fileN={}", fileN[i]);
+				File oldFile=new File(fileUploadUtil.getUploadPath(request,CommonConstants.PATH_FLAG_PDS), fileN[i]);
+				if(oldFile.exists()) {
+					boolean bool=oldFile.delete();
+					logger.info("기존파일 삭제 여부: {}", bool);
+				}
+			}
+			
+			noticeVo.setOriginalFileName(originalFileName);
+			noticeVo.setFileName(fileName);
+			logger.info("공지사항 수정 파일 업로드, noticeVo={}", noticeVo);
+			
+		}
+		
+		int cnt=noticeService.noticeUpdate(noticeVo);
+		logger.info("공지사항 수정 처리 후, cnt={}", cnt);
+		
+		if(cnt>0) {
+			model.addAttribute("msg", "공지사항 수정이 완료되었습니다.");
+		}else {
+			model.addAttribute("msg", "공지사항 수정이 실패하였습니다.");
+		}
+		model.addAttribute("url", "/cs/notice/noticeList.do");
+		
+		return "common/message";
+	}
+	
+	@RequestMapping("/noticeDelete.do")
+	public String noticeDelete(@ModelAttribute NoticeVO noticeVo, HttpServletRequest request, Model model) {
+		logger.info("공지사항 삭제, 파라미터 noticeVo={}", noticeVo);
+		
+		String msg="", url="/cs/notice/noticeList.do";
+		if(noticeVo.getNoticeNo()==0) {
+			msg="잘못된 url입니다.";
+		}else {
+			int cnt=noticeService.noticeDelete(noticeVo.getNoticeNo());
+			logger.info("공지사항 삭제 cnt={}", cnt);
+			
+			if(cnt>0) {
+				String[] fileN=noticeVo.getFileName().split(", ");
+				logger.info("noticeVo.getFileName(), fileN.length={}", noticeVo.getFileName(), fileN.length);
+				
+				for(int i=0;i<fileN.length;i++) {
+					logger.info("공지사항 fileN={}", fileN[i]);
+					File oldFile=new File(fileUploadUtil.getUploadPath(request,CommonConstants.PATH_FLAG_PDS), fileN[i]);
+					if(oldFile.exists()) {
+						boolean bool=oldFile.delete();
+						logger.info("기존파일 삭제 여부: {}", bool);
+					}
+				}
+				msg="공지사항 삭제를 성공하였습니다.";
+			}else {
+				msg="공지사항 삭제를 실패하였습니다.";
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping("/deleteMulti.do")
+	public String deleteMulti(@RequestParam String chk[], HttpServletRequest request,Model model) {
+		for(int i=0;i<chk.length;i++) {
+			logger.info("공지사항 다중 삭제, 파라미터 chk={}", chk[i]);
+
+			String fileName=noticeService.selectFileName(chk[i]);
+			
+			if(fileName!=null && !fileName.isEmpty()) {
+				String[] fileN=fileName.split(", ");
+				logger.info("fileName, fileN.length={}", fileName, fileN.length);
+				
+				for(int j=0;j<fileN.length;j++) {
+					logger.info("공지사항 fileN={}", fileN[j]);
+					File oldFile=new File(fileUploadUtil.getUploadPath(request,CommonConstants.PATH_FLAG_PDS), fileN[j]);
+					if(oldFile.exists()) {
+						boolean bool=oldFile.delete();
+						logger.info("기존파일 삭제 여부: {}", bool);
+					}
+				}
+			}
+		}
+		
+		Map<String, String[]> map=new HashMap<>();
+		map.put("nos", chk);
+		
+		int cnt=noticeService.deleteMulti(map);
+		logger.info("다중 삭제, cnt={}", cnt);
+		
+		String msg="", url="/cs/notice/noticeList.do";
+		if(cnt>0) {
+			msg="공지사항 삭제를 성공하였습니다.";
+		}else {
+			msg="공지사항 삭제를 실패하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 }

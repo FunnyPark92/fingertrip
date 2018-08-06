@@ -1,6 +1,7 @@
 package com.ff.finger.cs.notice.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ff.finger.common.SearchVO;
 
@@ -13,4 +14,8 @@ public interface NoticeDAO {
 	public int getAdminNo(String id);
 	public int noticeInsert(NoticeVO noticeVo);
 	public NoticeVO noticeSelectByNo(int noticeNo);
+	public int noticeUpdate(NoticeVO noticeVo);
+	public int noticeDelete(int noticeNo);
+	public int deleteMulti(Map<String, String[]> map);
+	public String selectFileName(String noticeNo);
 }

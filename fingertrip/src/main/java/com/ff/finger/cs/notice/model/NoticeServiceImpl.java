@@ -49,6 +49,26 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDao.noticeSelectByNo(noticeNo);
 	}
 
+	@Override
+	public int noticeUpdate(NoticeVO noticeVo) {
+		return noticeDao.noticeUpdate(noticeVo);
+	}
+
+	@Override
+	public int noticeDelete(int noticeNo) {
+		return noticeDao.noticeDelete(noticeNo);
+	}
+
+	@Override
+	public int deleteMulti(Map<String, String[]> map) {
+		return noticeDao.deleteMulti(map);
+	}
+
+	@Override
+	public String selectFileName(String noticeNo) {
+		return noticeDao.selectFileName(noticeNo);
+	}
+
 	
 
 

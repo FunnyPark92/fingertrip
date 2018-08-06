@@ -9,6 +9,26 @@
 		frmHid.currentPage.value=currentPage;
 		frmHid.submit();
 	}
+	$(document).ready(function(){
+		$('a[name=del]').click(function(){
+			var count=0;
+			$('input[name=chk]').each(function(){
+				if($(this).is(':checked')){
+					count++;
+				}
+			});
+			if(count==0){
+				alert('삭제할 공지사항을 선택해주세요');
+				return false;
+			}else{
+				$('form[name=frmDel]').submit();
+			}
+		});
+	});
+	
+	function allChecked(bool){
+		$('input[name=chk]').prop('checked',bool);
+	}
 </script>
 
 <section class="container board marginTop80 marginBottom80 minheight600">
@@ -33,41 +53,47 @@
 	            		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
             		</form>
             	</div>
+            	
                 <table class="table table-hover tableBorder">
                     <thead class="thead-dark">
                         <tr>
+                            <th scope="col" style="width:5%" ><input type="checkbox" name="chkAll" onclick="allChecked(this.checked)"></th>
                             <th scope="col" style="width:10%" class="text-center">번호</th>
-                            <th scope="col" style="width:55%" class="text-center">제목</th>
+                            <th scope="col" style="width:50%" class="text-center">제목</th>
                             <th scope="col" style="width:10%" class="text-center">조회수</th>
                             <th scope="col" style="width:25%" class="text-center">등록일</th>
                         </tr>
                     </thead>
                     <tbody>
                     <c:if test="${!empty list}">
-	                    <!-- 공지사항 반복문 시작 -->
-	                    <c:forEach var="vo" items="${list}">
-	                        <tr>
-	                            <td scope="row" class="text-center">${vo.noticeNo }</td>
-	                            <td>
-		                            <a href="<c:url value='/cs/notice/countUpdate.do?noticeNo=${vo.noticeNo }'/>">
-			                            <!--제목이 긴 경우 일부만 보여주기 -->
-			                            <c:if test="${fn:length(vo.title)>25}">
-			                            	${fn:substring(vo.title,0,25) }...
-			                            </c:if>
-			                            <c:if test="${fn:length(vo.title)<=25}">
-			                            	${vo.title }
-			                            </c:if>
-		                            </a>
-	                            </td>
-	                            <td class="text-center">${vo.readCount }</td>
-	                            <td class="text-center"><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd"/></td>
-	                        </tr>
-	                     </c:forEach>
+                    	<form name="frmDel" action="<c:url value='/cs/notice/deleteMulti.do'/>" method="post">
+	                    	<!-- 공지사항 반복문 시작 -->
+		                    <c:forEach var="vo" items="${list}">
+		                        <tr>
+		                        	<td><input type="checkbox" name="chk" value="${vo.noticeNo }"></td>
+		                            <td scope="row" class="text-center">${vo.noticeNo }</td>
+		                            <td>
+			                            <a href="<c:url value='/cs/notice/countUpdate.do?noticeNo=${vo.noticeNo }'/>">
+				                            <!--제목이 긴 경우 일부만 보여주기 -->
+				                            <c:if test="${fn:length(vo.title)>25}">
+				                            	${fn:substring(vo.title,0,25) }...
+				                            </c:if>
+				                            <c:if test="${fn:length(vo.title)<=25}">
+				                            	${vo.title }
+				                            </c:if>
+			                            </a>
+		                            </td>
+		                            <td class="text-center">${vo.readCount }</td>
+		                            <td class="text-center"><fmt:formatDate value="${vo.regDate }" pattern="yyyy-MM-dd"/></td>
+		                        </tr>
+		                     </c:forEach>
+	                     </form>
                      </c:if>
                     </tbody>
                 </table>
                 <div class="float-right spanId">
              		<a href="<c:url value='/cs/notice/noticeWrite.do'/>" class="btn btn-dark marginTop10">글쓰기</a>
+             		<a href="#" class="btn btn-dark marginTop10" name="del">삭제</a>
            		</div>
                 <div>
 	                <div class="margin0 width150 marginT30">
