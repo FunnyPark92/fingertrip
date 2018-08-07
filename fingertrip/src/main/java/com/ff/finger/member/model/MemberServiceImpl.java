@@ -121,7 +121,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int adminDeleteMember(int memberNo) {
 		return memberDao.adminDeleteMember(memberNo);
-	
+	}
 	@Override
 	public int minusHeart(int memberNo) {
 		return memberDao.minusHeart(memberNo);
