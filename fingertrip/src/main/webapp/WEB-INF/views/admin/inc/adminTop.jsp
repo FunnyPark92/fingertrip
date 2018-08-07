@@ -35,7 +35,7 @@
     <header>
         <nav class="admCenter">
             <ul class="clearFix">
-                <li><a href="<c:url value='/admin/nacojja/nacojjaList.do'/>">나코짜관리</a></li>
+                <li><a href="<c:url value='/admin/nacojja/bid/bidList.do'/>">나코짜관리</a></li>
                 <li><a href="<c:url value='/admin/member/memberList.do'/>">개인회원관리</a></li>
                 <li><a href="<c:url value='/admin/agency/agencyList.do'/>">기업회원관리</a></li>
                 <li><a href="<c:url value='/admin/admin/adminList.do'/>">관리자회원관리</a></li>

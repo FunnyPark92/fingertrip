@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.bid">
+	
+	<select id="selectBidList" parameterType="SearchVo" resultType="map">
+		select *
+		from (
+			select list.*, rownum as RNUM
+			from(
+				select c.*, c.bid_start_day+14 as bid_end_day, p.progress_status
+				from course c join progress p
+				on c.progress_no = p.progress_no
+				where c.progress_no in (2,3,4)
+				<if test="searchCondition!=0">
+					and c.progress_no=#{searchCondition}
+				</if>
+				order by c.bid_start_day
+				)list
+			)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="totalRecord" resultType="int" parameterType="SearchVo">
+		select count(*)
+		from course c join progress p
+		on c.progress_no = p.progress_no
+		where c.progress_no in (2,3,4)
+		<if test="searchCondition!=0">
+			and c.progress_no=#{searchCondition}
+		</if>
+	</select>
+	
+	<select id="selectByNo" parameterType="int" resultType="map">
+		select * 
+		from bid b join travel_agency t
+		on b.travel_agency_no=t.travel_agency_no
+		left join win_bid w
+		on b.bid_no=w.bid_no
+		where course_no=#{courseNo}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
