@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ import com.ff.finger.travelspot.model.TravelSpotVO;
 public class NacojjaController {
 	private static final Logger logger = LoggerFactory.getLogger(NacojjaController.class);
 	private List<TravelSpotVO> travelSpotList = new ArrayList<>();
+	private int totalTravelDay;
 	
 	@Autowired 
 	private CourseService courseService;
@@ -113,6 +115,9 @@ public class NacojjaController {
 			e.printStackTrace();
 		}
 		logger.info("나코짜1 파일 업로드 처리 후, travelSpotVo={}", travelSpotVo);
+		
+		//일차별 데이터 유효성 검사를 위해 미리 변수 세팅
+		totalTravelDay = travelDay;
 		
 		//출발일부터 날짜 계산
 		Calendar cal = Calendar.getInstance();
@@ -197,6 +202,35 @@ public class NacojjaController {
 		logger.info("나코짜2 여행지 리스트 가져오기, 전체 List.size={}", travelSpotList.size());
 		
 		return travelSpotList;
+	}
+	
+	@RequestMapping("/checkDataValid.do")
+	@ResponseBody
+	public Map<String, Object> checkDataValid() {   
+		logger.info("나코짜2 일차별 데이터 유효성 체크, totalTravelDay={}", totalTravelDay);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("bool", true);
+		int cnt = 0;
+		for (int i=1; i<=totalTravelDay; i++) {
+			for (int j=0; j<travelSpotList.size(); j++) {
+				//System.out.println("i,j=" + i + "," + j);
+				if (travelSpotList.get(j).getDay() == i) {
+					cnt++;
+				}
+			}
+			
+			//System.out.println("cnt=" + cnt);
+			if (cnt < 1) {
+				map.put("bool", false);
+				map.put("day", i);
+				break;
+			}
+			cnt = 0;
+		}
+		//System.out.println("map = " + map);
+		
+		return map;
 	}
 	
 	@RequestMapping("/nacojjaDetail.do")

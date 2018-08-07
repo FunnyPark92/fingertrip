@@ -288,7 +288,7 @@
     
     function addPlace() {
     	//To-Do: 유효성 체크
-
+    	
     	
     	//맵을 클릭하여 위도,경도 정보가 존재할때만 여행지 추가 로직 진행
     	if (latLng != null && latLng != "") {
@@ -327,6 +327,26 @@
 			
 			//여행지 설명 클리어
 			$("textarea[name=travelContent]").val("");
+			
+			//빠진 일정 없는지 체크하여 submit을 막는 로직
+			setTimeout(function(){
+		    	$.ajax({
+					url: "<c:url value='/nacojja/checkDataValid.do'/>",
+					type:"POST",
+					success: function(map) {
+			        	alert("빠진 일정 체크 결과: " + map["bool"] + ", 몇일차? " + map["day"]);
+						if (map["bool"] == false) {
+							$("#checkDataValidDay").val(map["day"]);
+						} else {
+							$("#checkDataValid").val("Y");
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("error:" + error + ", status=" + status);
+					}
+				});
+       		}, 10);
+			
     	} else {
     		alert("가고싶은 여행지를 먼저 선택하세요~ !" + "(\'(\")\')!");
     	}
@@ -347,6 +367,9 @@
     }
     
     function undoPlace(flag) {
+    	//여행지 추가 후 바로 취소 누른뒤 다시 같은곳을 추가하려고 할때 가능하도록 latLng배열에서 
+    	latLngs.pop();
+    	
     	for (var i=markersFinal.length-1; i<markersFinal.length; i++) {
         	markersFinal[i].setMap(null);
       	}
@@ -362,6 +385,24 @@
 				url: "<c:url value='/nacojja/delPrevPlace.do?day=" + $("#day").val() + "'/>",
 				type:"POST",
 			});
+	  	
+		  	//빠진 일정 없는지 체크하여 submit을 막는 로직
+			setTimeout(function(){
+		    	$.ajax({
+					url: "<c:url value='/nacojja/checkDataValid.do'/>",
+					type:"POST",
+					success: function(map) {
+			        	alert("빠진 일정 체크 결과: " + map["bool"] + ", 몇일차? " + map["day"]);
+						if (map["bool"] == false) {
+							$("#checkDataValidDay").val(map["day"]);
+							$("#checkDataValid").val("N");
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("error:" + error + ", status=" + status);
+					}
+				});
+       		}, 10);
 	  	}
 	}
     
@@ -571,10 +612,35 @@
         	
         });
         
+        //나코짜 최종 등록 버튼 누를 시 예외처리 할것들 그리고 데이터 유효성 검사 
         $("#btnFinalAdd").click(function(){
         	checkUnload = false;
         	
+        	if ($("#checkDataValid").val() == "N") {
+        		alert($("#checkDataValidDay").val() + "일차 일정이 빠져있습니다!");
+        		return false;
+        	}
         	
+        	//var bool = true;
+        	//비동기 방식으로 유효성 체크시 bool 값이 세팅 되기도 전에 submit 되어버린다.. setTimeout을 써도 마찬가지..
+        	/* $.ajax({
+				url: "<c:url value='/nacojja/checkDataValid.do'/>",
+				type:"POST",
+				success: function(result) {
+		        	alert("1불값: " + result);
+					if (result == false) {
+						bool = false;
+					}
+				},
+				error: function(xhr, status, error) {
+					alert("error:" + error + ", status=" + status);
+				}
+			});
+        	
+       		setTimeout(function(){
+	        	alert("2불값: " + bool);
+	        	return bool;
+       		}, 6); */
         });
         
 	});
@@ -606,7 +672,8 @@
         <div class="col-md-10">
             <div class="tab-content panels-faq">
            		<div class="tab-pane active" id="tab1">
-                    <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>"   >
+                    <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>">
+                    <%-- <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>" onsubmit="return checkDataValid()"> --%>
                         <div class="courseDiv">
                             <label for="continent" class="courseLabel">대륙</label>
                             <select name="continent" class="continent" id="continent">
@@ -704,6 +771,9 @@
 					    
 					    <input type="hidden" id="countryCode" name="countryCode">
 					    <input type="hidden" id="latLng" name="latLng">
+					    
+					    <input type="hidden" id="checkDataValid" name="checkDataValid" value="N">
+					    <input type="hidden" id="checkDataValidDay" name="checkDataValidDay" value="1">
                     </form>
                	</div>
             </div>
