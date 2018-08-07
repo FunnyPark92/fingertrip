@@ -12,5 +12,7 @@ public interface CourseDAO {
 	public int nacojjaTravelSpotWrite(CourseVO travelSpotVo);
 	public List<CourseVO> myWriteSelectAll(SearchVO searchVo);
 	public int myWriteCoursetotalRecord(SearchVO searchVo);
+	public CourseVO selectOneCourse(int courseNo);
+	public int selectMaxDay(int courseNo);
 	
 }

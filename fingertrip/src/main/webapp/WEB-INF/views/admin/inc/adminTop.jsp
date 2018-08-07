@@ -22,15 +22,16 @@
      
      <!-- ckEditor -->
     <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
-     
+<style type="text/css">
+
+</style>
      
      
 </head>
 
 <body>
-
+	
  <h1>핑거트립 관리자 페이지</h1>
-
     <header>
         <nav class="admCenter">
             <ul class="clearFix">

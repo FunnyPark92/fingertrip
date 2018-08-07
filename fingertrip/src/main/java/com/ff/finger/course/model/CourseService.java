@@ -12,4 +12,6 @@ public interface CourseService {
 	public int nacojjaWrite(CourseVO travelSpotVo, List<TravelSpotVO> travelSpotList);
 	public List<CourseVO> myWriteSelectAll(SearchVO searchVo);
 	public int myWriteCoursetotalRecord(SearchVO searchVo);
+	public CourseVO selectOneCourse(int courseNo);
+	public int selectMaxDay(int courseNo);
 }

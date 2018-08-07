@@ -46,22 +46,14 @@
         <div class="col-md-2">
             <ul class="list-group help-group">
                     <div class="faq-list list-group nav">
+                    <c:set var="i" value="1"/>
+                    <c:forEach var="travelDate" items="${tdList}">
                         <a class="list-group-item active">
-                            Day1
-                            <small>09.11</small>
+                            Day${i}
+                            <small><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/></small>
                         </a>
-                        <a class="list-group-item">
-                            Day2
-                            <small>09.12</small>
-                        </a>
-                        <a class="list-group-item">
-                            Day3
-                            <small>09.13</small>
-                        </a>
-                        <a class="list-group-item">
-                            Day4
-                            <small>09.14</small>
-                        </a>
+                        <c:set var="i" value="${i+1}"/>
+                     </c:forEach>   
                     </div>
                 </ul>
             </div>

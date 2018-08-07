@@ -52,6 +52,16 @@ public class CourseServiceImpl implements CourseService {
 	public int myWriteCoursetotalRecord(SearchVO searchVo) {
 		return courseDao.myWriteCoursetotalRecord(searchVo);
 	}
+
+	@Override
+	public CourseVO selectOneCourse(int courseNo) {
+		return courseDao.selectOneCourse(courseNo);
+	}
+
+	@Override
+	public int selectMaxDay(int courseNo) {
+		return courseDao.selectMaxDay(courseNo);
+	}
 	
 
 }

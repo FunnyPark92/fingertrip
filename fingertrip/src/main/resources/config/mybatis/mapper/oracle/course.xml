@@ -91,4 +91,19 @@
 		where member_no=#{memberNo}
 	</select>
 	
+	<select id="selectOneCourse" parameterType="int" resultType="CourseVO">
+		select * from course where course_no = #{courseNo}
+	</select>
+	
+	<select id="selectMaxDay" parameterType="int" resultType="int">
+		select max(day) as day from travel_spot where course_no = #{courseNo}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

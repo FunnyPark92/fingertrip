@@ -46,4 +46,14 @@ public class CourseDAOMybatis implements CourseDAO{
 		return sqlSession.selectOne(namespace+"myWriteCoursetotalRecord", searchVo);
 	}
 
+	@Override
+	public CourseVO selectOneCourse(int courseNo) {
+		return sqlSession.selectOne(namespace+"selectOneCourse",courseNo);
+	}
+
+	@Override
+	public int selectMaxDay(int courseNo) {
+		return sqlSession.selectOne(namespace+"selectMaxDay", courseNo);
+	}
+
 }
