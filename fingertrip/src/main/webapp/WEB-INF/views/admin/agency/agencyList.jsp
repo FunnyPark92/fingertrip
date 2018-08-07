@@ -7,6 +7,29 @@ function pageFunc(currentPage){
 	page.submit();
 }
 
+$(document).ready(function(){
+	$('input[name=chkAll]').click(function(){
+		$('input[type=checkbox]').prop("checked",this.checked);
+	});
+	
+	$('#delete').click(function(){
+		var checked = $('input[type=checkbox]:checked').length;
+		if(checked==0){
+			alert("삭제 할 기업을 선택해 주세요");
+			return false;
+		}else{
+			if(confirm("정말 삭제하시겠습니까?")){
+				return true;
+			}else{
+				return false;
+			}
+			
+		}
+		
+	});
+	
+});
+
 </script>
 
 <section class="admCenter marginTop40" style="text-align: center">
@@ -21,6 +44,7 @@ function pageFunc(currentPage){
 	        <input type="hidden" name="searchKeyword" value="${param.searchKeyword }"> 
         </form>
         <h2>기업 회원 조회</h2>
+      
         <div class="clearFix">
         	<form action="<c:url value='/admin/agency/agencyList.do'/>" method="post">
            <div class="fRight">
@@ -43,28 +67,31 @@ function pageFunc(currentPage){
            </form>
         </div>
         
+        <form name="frmList" method="post" action="<c:url value='/admin/agency/deleteAgency.do'/>" >
         <table class="grayTh">
             <tr>
-                <th scope="col" style="width:5%; text-align: center"><input type="checkbox" /></th>
+                <th scope="col" style="width:5%; text-align: center"><input type="checkbox" name="chkAll"/></th>
                 <th scope="col" style="width:7%; text-align: center">번호</th>
                 <th scope="col" style="width:20%; text-align: center">상호명</th>
                 <th scope="col" style="width:15%; text-align: center">아이디</th>
                 <th scope="col" style="width:15%; text-align: center">전화번호</th>
                 <th scope="col" style="width:15%; text-align: center">사업자등록번호</th>
             </tr>
-            
             <!-- 기업 반복 시작 -->
+            <c:set var="idx" value="0"/>
             <c:forEach var="vo" items="${list}">
 	            <tr style="text-align: center">
-	                <td><input type="checkbox" /></td>
+	                <td><input type="checkbox" name="agencyItems[${idx}].travelAgencyNo" value="${vo.travelAgencyNo }"></td>
 	                <td>${vo.travelAgencyNo }</td>
 	                <td><a href="<c:url value='/admin/agency/agencyDetail.do?name=${vo.name}'/>">${vo.name }</a></td>
 	                <td>${vo.id }</td>
 	                <td>${vo.hp }</td>
 	                <td>${vo.licenseNo}</td>
 	            </tr>
+	            <c:set var="idx" value="${idx+1 }"/>
             </c:forEach>
             <!-- 기업 반복 끝 -->
+            
         </table>
         <!-- paging 시작 -->
         <c:if test="${pagingInfo.firstPage>1 }">
@@ -86,9 +113,9 @@ function pageFunc(currentPage){
             <a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
          </c:if>
         <div class="aWrap fRight">
-        	<input type="submit" class="darkBorder" value="삭제"/>
+        	<input type="submit" class="darkBorder" id="delete" value="삭제"/>
         </div>
-        
+        </form>
     </section>
 
 

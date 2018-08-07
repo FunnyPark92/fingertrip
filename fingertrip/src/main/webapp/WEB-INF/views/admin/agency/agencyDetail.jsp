@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/adminTop.jsp"%>
+<script type="text/javascript">
+	
+	function delAgency(event){
+		if(confirm("정말삭제하시겠습니까?")){
+			location.href="<c:url value='/admin/agency/agencyDelete.do?travelAgencyNo=${vo.travelAgencyNo}'/>"
+			return true;
+		}else{
+			return false;
+		}
+	} 
+	
+</script>
 <section class="admCenter marginTop40">
         <ul class="clearFix marginBottom40 lineGnb">
             <li class="on"><a href="<c:url value='/admin/agency/agencyList.do'/>">기업회원조회</a></li>
@@ -37,9 +49,9 @@
 	 	
 	 	<div class="fRight aWrap">
 	 		<a class="darkBorder" href="<c:url value='/admin/agency/agencyList.do'/>">목록</a>
-	 		<a class="lightGray" href="<c:url value='/admin/agency/agencyEdit.do'/>">수정</a>
-	 		<a class="darkGray" href="">삭제</a>
-	 	</div>
+	 		<a class="lightGray" href="<c:url value='/admin/agency/agencyEdit.do?name=${vo.name}'/>">수정</a>
+	 		<a class="darkGray" onclick="delAgency()" href="#">삭제</a>
+	 	</div> 
 </section>
 
 

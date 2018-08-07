@@ -70,15 +70,19 @@
 		});
 		
 		$('#check').click(function(){
-			/* window.open("<c:url value='/admin/agency/licenseCheck.do'/>","licenseCheck",'width=400, height=400, left=0, top=0, location=yes, resizable=yes'); */
 			$.ajax({
 				url:"<c:url value='/admin/agency/checkLc.do'/>",
 				type:"post",
 				data:{licenseNo:$('#licenseNo1').val()+ "-" + $('#licenseNo2').val() + "-" + $('#licenseNo3').val()},
 				success:function(res){
 					if(res){
-						$('#check').val("사용가능");
-						$('#checkId3').val("Y");
+						if(!validate_userHp1($('#licenseNo1').val()) || !validate_license2($('#licenseNo2').val()) || !validate_license3($('#licenseNo3').val())){
+							alert("형식에 맞춰 입력해주세요 ex) 123-12-12345");
+							$('#checkId3').val("N");
+						}else{
+							$('#check').val("사용가능");
+							$('#checkId3').val("Y");
+						}
 					}else{
 						alert("이미 해당 사업자 번호가 존재합니다.")
 						$('#check').val("중복검사");

@@ -14,4 +14,8 @@ public interface TravelAgencyService {
 	public List<TravelAgencyVO> selectAgency(SearchVO vo);
 	public int totalRecord(SearchVO vo);
 	public TravelAgencyVO selectOneAgency(String name);
+	public int deleteAgency(int travelAgencyNo);
+	public int multiDelete(List<TravelAgencyVO> list);
+	public int updateAgency(TravelAgencyVO vo);
+	
 }

@@ -4,6 +4,15 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYa_utcbQs1RLoVuJguMaQzuX4yxvQyrs&libraries=places"></script>
 
+<script>
+    $(function(){
+        $('.reply').click(function(){
+            $(this).closest('.threaded-comments').children('.recomments-wrap').toggle();
+        });
+    });
+</script>
+
+
 <div class="subBg subBgTerm">
 	<p>나만의 코스 짜기</p>
 	<div class="subBgBlack"></div>
@@ -33,6 +42,9 @@
                     </div>
                 </ul>
             </div>
+            
+            
+            
             <div class="col-md-10 ncjD">
                 <div class="ncjP">
                     <span>Day1</span>
@@ -74,6 +86,71 @@
                     <img src="${pageContext.request.contextPath }/img/spot1.jpg" alt="루브르박물관">
                     <img src="${pageContext.request.contextPath }/img/spot2.jpg" alt="노트르담대성당">
                     <img src="${pageContext.request.contextPath }/img/spot3.jpg" alt="에펠탑">
+                </div>
+                
+                
+                <div class="comments-list">
+                    <p class="replyTitle">댓글</p>
+                    <ul>
+                        <li class="threaded-comments">
+                            <div class="comments-content-wrap marginBottom20">
+                                <span class="marginBottom10">
+                                    <b>작성자</b> ㅣ
+                                    <span class="post-time">2018.08.06 12:20</span>
+                                </span>
+                                <p>
+                                    정말 잘 짜셨네요 꼭 실행됐으면 좋겠습니다
+                                </p>
+                                <small class="reply">답글 <span>1개</span></small>
+                            </div>
+                            
+                            <div class="recomments-wrap">
+                                <div class="recomments-content-wrap">
+                                    <span class="marginBottom10">
+                                        <b>작성자</b> ㅣ
+                                        <span class="post-time">2018.08.06 12:20</span>
+                                    </span>
+                                    <p>
+                                        정말 잘 짜셨네요 꼭 실행됐으면 좋겠습니다
+                                    </p>
+                                </div>
+
+                                <form action="" class="rereply">
+                                    <textarea name="" id="" rows="10" placeholder="댓글을 작성해주세요"></textarea>
+                                    <div class="clearFix">
+                                        <button class="fRight">등록</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="threaded-comments">
+                            <div class="comments-content-wrap marginBottom20">
+                                <span class="marginBottom10">
+                                    <b>작성자</b> ㅣ
+                                    <span class="post-time">2018.08.06 12:20</span>
+                                </span>
+                                <p>
+                                    진행은 언제 시작하나요?
+                                </p>
+                                <small class="reply">답글</small>
+                            </div>
+                            
+                            <div class="recomments-wrap">
+                                <form action="" class="rereply">
+                                    <textarea name="" id="" rows="10" placeholder="댓글을 작성해주세요"></textarea>
+                                    <div class="clearFix">
+                                        <button class="fRight">등록</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                    <form action="" class="replyText marginTop10">
+                        <textarea name="" id="" rows="10" placeholder="댓글을 작성해주세요"></textarea>
+                        <div class="clearFix">
+                            <button class="fRight btn-outline-secondary">등록</button>
+                        </div>
+                    </form>
                 </div>
 
             </div>

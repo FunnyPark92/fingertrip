@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.FileUploadUtil;
@@ -159,6 +160,7 @@ public class NacojjaController {
 	}
 	
 	@RequestMapping("/addClearPlace.do")
+	@ResponseBody
 	public void addClearPlace(@ModelAttribute TravelSpotVO travelSpotVo, @RequestParam(required=false) boolean clearFlag) {
 		logger.info("나코짜2 여행지 담거나 지우거나, 파라미터 travelSpotVo={}", travelSpotVo);
 		logger.info("나코짜2 여행지 리스트 쓸어버릴까? clearFlag={}", clearFlag);
@@ -170,6 +172,31 @@ public class NacojjaController {
 			travelSpotList.add(travelSpotVo);			
 			logger.info("나코짜2 여행지 담은 결과, list.size={}", travelSpotList.size());
 		}
+	}
+	
+	@RequestMapping("/delPrevPlace.do")
+	@ResponseBody
+	public void delPrevPlace(@RequestParam(required=false) int day) {
+		logger.info("나코짜2 여행지 취소시 리스트에서 삭제, 파라미터 day={}", day);
+		
+		int delIndex = 0;
+		for (int i=0; i<travelSpotList.size(); i++) {
+			if (travelSpotList.get(i).getDay() == day) {
+				delIndex = i;
+			}
+		}
+		
+		logger.info("삭제할 인덱스, delIndex={}", delIndex);
+		travelSpotList.remove(delIndex);
+		logger.info("일차별 이전 여행지 1개 삭제 결과, list.size={}", travelSpotList.size());
+	}
+	
+	@RequestMapping("/getTravelList.do")
+	@ResponseBody
+	public List<TravelSpotVO> getTravelList() {   
+		logger.info("나코짜2 여행지 리스트 가져오기");
+		
+		return travelSpotList;
 	}
 	
 	@RequestMapping("/nacojjaDetail.do")

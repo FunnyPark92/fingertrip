@@ -49,4 +49,14 @@ public class TravelAgencyDAOMybatis implements TravelAgencyDAO{
 		return sqlSession.selectOne(namespace+"selectOneAgency",name);
 	}
 
+	@Override
+	public int deleteAgency(int travelAgencyNo) {
+		return sqlSession.delete(namespace+"deleteAgency",travelAgencyNo);
+	}
+
+	@Override
+	public int updateAgency(TravelAgencyVO vo) {
+		return sqlSession.update(namespace+"updateAgency",vo);
+	}
+
 }
