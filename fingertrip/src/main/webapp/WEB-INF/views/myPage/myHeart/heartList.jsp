@@ -1,23 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <%@ include file="../../inc/top.jsp" %>
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-	
 		$('#btn1').click(function(){
 			//location.href="<c:url value='/myPage/myHeart/heartCharge.do'/>";  
-			window.open("<c:url value='/myPage/myHeart/heartCharge.do'/>","heartCharge",'width=1000, height=1024, left=0, top=0, location=yes, resizable=yes');
+			window.open("<c:url value='/myPage/myHeart/heartCharge.do'/>", "heartCharge",
+					"width=1000, height=1024, left=0, top=0, location=yes, resizable=yes");
 		});
 	}); 
 </script>
 	
 <div class="container margin80">
 	<div class="row">
-				
 		<!-- 서브메뉴 -->
         <div class="col-lg-3">
             <h3>마이페이지</h3>
@@ -72,7 +71,7 @@
 			</div>
 				<button type="button" class="btn btn-warning text-center" id="btn1">하트 충전하기</button> 
 			</div>
-</div>
+	</div>
 </div>
 
 <%@ include file="../../inc/bottom.jsp" %>

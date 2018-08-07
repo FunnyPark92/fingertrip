@@ -380,7 +380,7 @@
     }
     
     function undoPlace(flag) {
-    	//여행지 추가 후 바로 취소 누른뒤 다시 같은곳을 추가하려고 할때 가능하도록 latLng배열에서 
+    	//여행지 추가 후 바로 취소 누른뒤 다시 같은곳을 추가하려고 할때 가능하도록 latLng배열에서 이전에 기록된 위도경도 제거
     	latLngs.pop();
     	
     	for (var i=markersFinal.length-1; i<markersFinal.length; i++) {
