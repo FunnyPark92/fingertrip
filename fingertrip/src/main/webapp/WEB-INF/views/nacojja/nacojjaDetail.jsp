@@ -20,6 +20,29 @@
 
 <section class="container marginBottom80 minheight400 plan2">
     <div class="row">
+    	
+    	<div class="col-md-6 naThumImg marginBottom50">
+               <img src="img/spot1.jpg" alt="썸네일">
+           </div>
+           <div class="col-md-6 naThumHeart marginBottom50">
+              <div>
+                  	하트받는중
+              </div>
+              <h3>
+                  	낭만이 있는 4일간의 유럽 여행
+              </h3>
+              <h5>
+                  2018.09.11 ~ 2018.09.16
+              </h5>
+              <div>
+                  	파리의 명소를 딥하게 여행해보는 일정
+              </div>
+              <div>
+                  <small>등록일</small> 2018.08.07
+              </div>
+               <input type="button" class="heartBtn btn btn-block btn-danger" value="하트 누르기">
+           </div>
+    
         <div class="col-md-2">
             <ul class="list-group help-group">
                     <div class="faq-list list-group nav">

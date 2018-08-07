@@ -540,6 +540,21 @@ table a:hover, table a:active{text-decoration: none;}
 }
 
 /* 나코짜보기 */
+.naThumImg img{
+    max-width: 100%;
+    max-height: 500px;
+}
+.naThumHeart{
+    position: relative;
+}
+.heartBtn{
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    background-image: url(../img/heartIcon.png);
+    background-repeat: no-repeat;
+    background-position: 60% 50%;
+}
 .ncjP{
     border-top: 2px solid #ffc68b;
 }
@@ -561,6 +576,7 @@ table a:hover, table a:active{text-decoration: none;}
 .ncjD p{
     margin: 0;
 }
+.ncjD li{list-style: none;}
 .spot{
    background-image:url(../img/spotIcon.png);
     background-repeat: no-repeat;
