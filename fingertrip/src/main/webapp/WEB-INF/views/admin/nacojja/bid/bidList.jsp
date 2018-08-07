@@ -57,12 +57,13 @@ $(document).ready(function(){
     <form name="frmList" method="post" action="<c:url value='/admin/nacojja/bid/bidList.do'/>" >
         <table class="grayTh">
             <tr>
-                <th scope="col" style="width:4%; text-align: center"><input type="checkbox" name="chkAll"/></th>
+                <th scope="col" style="width:5%; text-align: center"><input type="checkbox" name="chkAll"/></th>
                 <th scope="col" style="width:10%; text-align: center">나코짜번호</th>
                 <th scope="col" style="width:40%; text-align: center">제목</th>
-                <th scope="col" style="width:15%; text-align: center">입찰 시작일</th>
-                <th scope="col" style="width:15%; text-align: center">입찰 종료일</th>
+                <th scope="col" style="width:12%; text-align: center">입찰 시작일</th>
+                <th scope="col" style="width:12%; text-align: center">입찰 종료일</th>
                 <th scope="col" style="width:16%; text-align: center">진행상태</th>
+                <th scope="col" style="width:5%; text-align: center">알림</th>
             </tr>
             <!-- 반복 시작 -->
             <c:forEach var="map" items="${list}">
@@ -80,28 +81,36 @@ $(document).ready(function(){
 	                <td><fmt:formatDate value="${map['BID_START_DAY']}" pattern="yyyy-MM-dd"/></td>
 	                <td><fmt:formatDate value="${map['BID_END_DAY']}" pattern="yyyy-MM-dd"/></td>
 	                <td>${map['PROGRESS_STATUS']}</td>
+	                <td>
+	                	<jsp:useBean id="today" class="java.util.Date" />
+						<c:if test="${map['PROGRESS_NO']==2&&today>map['BID_END_DAY']}">
+							★
+						</c:if>
+					</td>
 	            </tr>
             </c:forEach>
             <!-- 반복 끝 -->
         </table>
         
         <!-- paging 시작 -->
-        <c:if test="${pagingInfo.firstPage>1 }">
-        	<a href="#" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
-        </c:if>
-        <c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
-			<c:choose>
-				<c:when test="${i==pagingInfo.currentPage }">
-					<span>${i }</span>
-				</c:when>
-				<c:otherwise>
-					<span><a href="#" onclick="pageFunc(${i})">${i }</a></span>
-				</c:otherwise>
-			</c:choose>
-        </c:forEach>
-        <c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-           <a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
-        </c:if>
+        <div class="marginBottom50">
+	        <c:if test="${pagingInfo.firstPage>1 }">
+	        	<a href="#" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+	        </c:if>
+	        <c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+				<c:choose>
+					<c:when test="${i==pagingInfo.currentPage }">
+						<span>${i }</span>
+					</c:when>
+					<c:otherwise>
+						<span><a href="#" onclick="pageFunc(${i})">${i }</a></span>
+					</c:otherwise>
+				</c:choose>
+	        </c:forEach>
+	        <c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+	           <a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+	        </c:if>
+        </div>
         <!-- <div class="aWrap fRight">
         	<input type="submit" class="darkBorder" id="delete" value="삭제"/>
         </div> -->

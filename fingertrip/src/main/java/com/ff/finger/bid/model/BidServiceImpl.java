@@ -32,4 +32,9 @@ public class BidServiceImpl implements BidService{
 	public List<Map<String, Object>> selectByNo(int courseNo) {
 		return bidDao.selectByNo(courseNo);
 	}
+
+	@Override
+	public BidVO selectWin(int courseNo) {
+		return bidDao.selectWin(courseNo);
+	}
 }

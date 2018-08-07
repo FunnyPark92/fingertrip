@@ -41,6 +41,14 @@
 		on b.bid_no=w.bid_no
 		where course_no=#{courseNo}
 	</select>
+	
+	<select id="selectWin" parameterType="int" resultType="bidVo">
+		select * from bid 
+		where bid_day=(select min(bid_day) from bid where course_no=#{courseNo} 
+			and bid_price=(select min(bid_price) from bid where course_no=#{courseNo}))
+	</select>
+	
+	
 </mapper>
 
 

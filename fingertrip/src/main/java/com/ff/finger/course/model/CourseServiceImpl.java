@@ -67,6 +67,11 @@ public class CourseServiceImpl implements CourseService {
 	public int selectMaxDay(int courseNo) {
 		return courseDao.selectMaxDay(courseNo);
 	}
+
+	@Override
+	public int updateProgress(Map<String, Object> map) {
+		return courseDao.updateProgress(map);
+	}
 	
 
 }
