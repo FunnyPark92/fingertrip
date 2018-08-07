@@ -546,6 +546,7 @@ table a:hover, table a:active{text-decoration: none;}
 }
 .naThumHeart{
     position: relative;
+    display: none;
 }
 .heartBtn{
     position: absolute;
@@ -553,14 +554,30 @@ table a:hover, table a:active{text-decoration: none;}
     color: #fff;
     background-image: url(../img/heartIcon.png);
     background-repeat: no-repeat;
-    background-position: 60% 50%;
+    background-position: 62% 50%;
+    width: 95%;
 }
-.ncjP{
-    border-top: 2px solid #ffc68b;
+.prog{color: #909090; font-size: 0.85em;}
+.heartBox img{width: 15px;}
+.progress-bar{background: #ff4c4c;}
+.thumPay{
+    padding: 7px 0px;
 }
-.ncjP span{
+.leftSpan{
+    width: 100px;
     display: inline-block;
+    color: #7b7b7b;
+    font-size: 0.9em;
 }
+.payBtn{
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    width: 95%;
+}
+
+.ncjP{border-top: 2px solid #ffc68b;}
+.ncjP span{display: inline-block;}
 .ncjP span:first-child{
     width: 13%;
     background: #ff9c38;
@@ -576,7 +593,6 @@ table a:hover, table a:active{text-decoration: none;}
 .ncjD p{
     margin: 0;
 }
-.ncjD li{list-style: none;}
 .spot{
    background-image:url(../img/spotIcon.png);
     background-repeat: no-repeat;
@@ -601,7 +617,6 @@ p.spotExp{
 .spotImg img{
     width: 32%;
     padding: 1%;
-    max-height: 207px;
 }
 p.explain{
     font-weight: 600;
@@ -611,6 +626,7 @@ p.explain{
     background-repeat: no-repeat;
     padding-left: 30px;
 }
+
 
 
 .comments-list ul{padding:0; margin: 0;}

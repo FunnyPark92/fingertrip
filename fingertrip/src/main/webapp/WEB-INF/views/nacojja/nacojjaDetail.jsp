@@ -24,6 +24,8 @@
     	<div class="col-md-6 naThumImg marginBottom50">
                <img src="img/spot1.jpg" alt="썸네일">
            </div>
+           
+           <!-- 하트받읗때 -->
            <div class="col-md-6 naThumHeart marginBottom50">
               <div>
                   	하트받는중
@@ -42,8 +44,31 @@
               </div>
                <input type="button" class="heartBtn btn btn-block btn-danger" value="하트 누르기">
            </div>
-    
-        <div class="col-md-2">
+           
+           <!-- 결제할 때 -->
+		<div class="col-md-6 marginBottom50">
+			<div>결제진행중</div>
+			<h3 class="marginBottom20">낭만이 있는 4일간의 유럽 여행</h3>
+			<div class="thumPay">
+				<span class="leftSpan">여행 날짜</span> <select>
+					<option value="선택">날짜 선택</option>
+					<option value="0911">18.09.11~18.09.15</option>
+					<option value="0912">18.09.12~18.09.16</option>
+					<option value="0913">18.09.13~18.09.17</option>
+					<option value="0914">18.09.14~18.09.18</option>
+				</select>
+			</div>
+			<div class="thumPay">
+				<span class="leftSpan">여행사</span> 핑거트립
+			</div>
+			<div class="thumPay">
+				<span class="leftSpan">여행사 번호</span> 02 - 000 - 0000
+			</div>
+			<div class="marginTop10">파리의 명소를 딥하게 여행해보는 일정</div>
+			<input type="button" class="btn payBtn btn-primary" value="결제하기">
+		</div>
+
+		<div class="col-md-2">
             <ul class="list-group help-group">
                     <div class="faq-list list-group nav">
                         <a class="list-group-item active">
