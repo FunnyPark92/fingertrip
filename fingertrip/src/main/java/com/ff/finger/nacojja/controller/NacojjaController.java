@@ -194,7 +194,7 @@ public class NacojjaController {
 	@RequestMapping("/getTravelList.do")
 	@ResponseBody
 	public List<TravelSpotVO> getTravelList() {   
-		logger.info("나코짜2 여행지 리스트 가져오기");
+		logger.info("나코짜2 여행지 리스트 가져오기, 전체 List.size={}", travelSpotList.size());
 		
 		return travelSpotList;
 	}
