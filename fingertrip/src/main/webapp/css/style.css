@@ -546,7 +546,9 @@ table a:hover, table a:active{text-decoration: none;}
 }
 .naThumHeart{
     position: relative;
-    display: none;
+}
+.naThumHeart, .naThumPay{
+	min-height: 350px;
 }
 .heartBtn{
     position: absolute;
@@ -632,6 +634,7 @@ p.explain{
 .comments-list ul{padding:0; margin: 0;}
 .comments-list ul li {
     border-bottom: 1px dotted #ffb146;
+    list-style: none;
 }
 p.replyTitle{
     background-image: url(../img/replyIcon.png);
