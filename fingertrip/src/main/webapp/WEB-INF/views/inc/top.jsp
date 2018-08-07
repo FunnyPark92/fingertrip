@@ -72,7 +72,7 @@
                         <a class="nav-link" href="<c:url value='/nacojja/nacojja1.do'/>" title="나만의 코스 짜기">나코짜</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value='/nacojja/nacojjaList.do'/>">여행가기</a>
+                        <a class="nav-link" href="<c:url value='/nacojja/nacojjaList.do'/>">나코짜보기</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value='/howto/howto.do'/>">이용방법</a>

@@ -170,10 +170,7 @@
      	        getPlaceInformation(event.placeId);
             } else {
             	$("#place-icon").hide();
-            	//$("#rating-icon").hide();
             	$("#divRating").find("img").remove();
-            	//$("#place-icon").prop("src", "");
-            	//$("#rating-icon").prop("src", "");
             	$("#place-rating").val("");
             	
             	getAddressInformation(event.latLng);
@@ -253,7 +250,6 @@
     	placesService.getDetails({placeId: placeId}, function(place, status) {
         	if (status === 'OK') {
         		$("#divRating").find("img").remove();
-
         		$("#place-icon").show();
 	        	//$("#rating-icon").show();
         		$("#place-icon").prop("src", place.icon);
@@ -264,8 +260,14 @@
 	        	for (var i=1; i<=place.rating; i++) {
 	        		$("#divRating label").after("<img id='rating-icon' src='<c:url value="/img/star.png"/>' height='17' width='17'>");
 	        	}
-	        	//this.infowindowContent.children['place-id'].textContent = place.place_id;
-	        	//this.infowindowContent.children['place-address'].textContent = place.formatted_address;
+        	} else { //placeId는 존재하는데 place 정보가 존재하지 않을 경우 예외처리.. (주로 대한민국이 여기에 해당)
+        		alert('placesService was not successful for the following reason: ' + status);
+        		
+        		$("#place-icon").hide();
+                $("#divRating").find("img").remove();
+                $("#place-rating").val("");
+        		
+        		getAddressInformation(latLng);
         	}
         });
     }
@@ -286,42 +288,68 @@
     
     function addPlace() {
     	//To-Do: 유효성 체크
-
     	
-    	//이전에 선택한 여행지를 중복으로 추가못하게 막기
-    	if (latLngs[latLngs.length-1] == latLng) {
-    		alert("방금 등록하신 여행지입니다. 다른 여행지를 선택해 주세용! +_+");
-    		return;
+    	
+    	//맵을 클릭하여 위도,경도 정보가 존재할때만 여행지 추가 로직 진행
+    	if (latLng != null && latLng != "") {
+	    	//이전에 선택한 여행지를 중복으로 추가못하게 막기
+	    	if (latLngs[latLngs.length-1] == latLng) {
+	    		alert("방금 등록하신 여행지입니다. 다른 여행지를 선택해 주세용! +_+");
+	    		return;
+	    	}
+	    	latLngs.push(latLng);
+    	
+    	
+	     	// 맵 클릭시 새로운 경로 라인 정보 추가
+	     	//alert("여행지 추가 누를시 파라미터 : " + latLng);
+			addLatLng(latLng);
+	    
+	    	// 위도,경도 정보 DB에 넣기 위해 세팅
+	    	$("#latLng").val(latLng);
+	
+	     	marker = new google.maps.Marker({
+	        	position: latLng,
+	        	map: mapFinal,
+	        	//title: '#' + path.getLength(),
+	        	animation: google.maps.Animation.BOUNCE
+	      	});
+	      	markersFinal.push(marker);
+	      	
+	      	mapFinal.setCenter(latLng);
+	      	mapFinal.setZoom(17);
+	      	
+			// ajax로 여행지 정보 List에 담아버리긔
+			$.ajax({
+				url: "<c:url value='/nacojja/addClearPlace.do'/>",
+				type:"post",
+				data: $("form[name=frmNacojja2]").serializeArray(),
+			});
+			
+			//여행지 설명 클리어
+			$("textarea[name=travelContent]").val("");
+			
+			//빠진 일정 없는지 체크하여 submit을 막는 로직
+			setTimeout(function(){
+		    	$.ajax({
+					url: "<c:url value='/nacojja/checkDataValid.do'/>",
+					type:"POST",
+					success: function(map) {
+			        	alert("빠진 일정 체크 결과: " + map["bool"] + ", 몇일차? " + map["day"]);
+						if (map["bool"] == false) {
+							$("#checkDataValidDay").val(map["day"]);
+						} else {
+							$("#checkDataValid").val("Y");
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("error:" + error + ", status=" + status);
+					}
+				});
+       		}, 10);
+			
+    	} else {
+    		alert("가고싶은 여행지를 먼저 선택하세요~ !" + "(\'(\")\')!");
     	}
-    	latLngs.push(latLng);
-    	
-     	// 맵 클릭시 새로운 경로 라인 정보 추가
-     	//alert("여행지 추가 누를시 파라미터 : " + latLng);
-		addLatLng(latLng);
-    
-    	// 위도,경도 정보 DB에 넣기 위해 세팅
-    	$("#latLng").val(latLng);
-
-     	marker = new google.maps.Marker({
-        	position: latLng,
-        	map: mapFinal,
-        	//title: '#' + path.getLength(),
-        	animation: google.maps.Animation.BOUNCE
-      	});
-      	markersFinal.push(marker);
-      	
-      	mapFinal.setCenter(latLng);
-      	mapFinal.setZoom(17);
-      	
-		// ajax로 여행지 정보 List에 담아버리긔
-		$.ajax({
-			url: "<c:url value='/nacojja/addClearPlace.do'/>",
-			type:"post",
-			data: $("form[name=frmNacojja2]").serializeArray(),
-		});
-		
-		//여행지 설명 클리어
-		$("textarea[name=travelContent]").val("");
 	}
 
     function addLatLng(location) {
@@ -339,6 +367,9 @@
     }
     
     function undoPlace(flag) {
+    	//여행지 추가 후 바로 취소 누른뒤 다시 같은곳을 추가하려고 할때 가능하도록 latLng배열에서 
+    	latLngs.pop();
+    	
     	for (var i=markersFinal.length-1; i<markersFinal.length; i++) {
         	markersFinal[i].setMap(null);
       	}
@@ -354,6 +385,24 @@
 				url: "<c:url value='/nacojja/delPrevPlace.do?day=" + $("#day").val() + "'/>",
 				type:"POST",
 			});
+	  	
+		  	//빠진 일정 없는지 체크하여 submit을 막는 로직
+			setTimeout(function(){
+		    	$.ajax({
+					url: "<c:url value='/nacojja/checkDataValid.do'/>",
+					type:"POST",
+					success: function(map) {
+			        	alert("빠진 일정 체크 결과: " + map["bool"] + ", 몇일차? " + map["day"]);
+						if (map["bool"] == false) {
+							$("#checkDataValidDay").val(map["day"]);
+							$("#checkDataValid").val("N");
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("error:" + error + ", status=" + status);
+					}
+				});
+       		}, 10);
 	  	}
 	}
     
@@ -414,7 +463,7 @@
 	$(document).ready(function() {
 		$('#dayTab1').addClass("active");
 		
-		//이전에 지난간 일정도 수정할수 있게 구현중.. 잠시 주석처리
+		//이전에 지난간 일정도 수정할 수 있게 구현중.. 잠시 주석처리
 		/* $('.dayTab').eq(1)
 			.siblings().attr("disabled", "disabled")
 			.end()
@@ -485,8 +534,12 @@
         });
         
         $('.dayTab').click(function(){
-        	//이전에 지난간 일정도 수정할수 있게 구현중.. 잠시 주석처리
+        	//이전에 지난간 일정도 수정할 수 있게 구현중.. 잠시 주석처리
         	//if (confirm("다음 일정으로 넘어가면 이전 일정은 수정할 수 없습니다. 넘어가시겠습니까?")) {
+        		
+        		//일차가 넘어간 후 아무것도 안한상태에서 바로 여행지 추가를 누르면 이벤트 진행되지 않도록 latLng값 초기화
+            	latLng = "";
+        		
         		$("#day").val($(this).val());
             	
             	$("#continent").val("");
@@ -512,29 +565,19 @@
         		$.ajax({
 					url: "<c:url value='/nacojja/getTravelList.do'/>",
 					type:"POST",
-					//data: {continent: $('.continent').val()},
 					success: function(list) {
 						if (list.length > 0) {
-							//initialize();
 							$.each(list, function(idx, travelSpotVO){
 								if (travelSpotVO.day == $("#day").val()) {
-									//alert(idx + "위도,경도:" + travelSpotVO.latLng);
-									//alert(idx + "위도:" + travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")));
-									//alert(idx + "위도:" + travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1));
+									//alert("[" + idx + "]위도,경도: " + travelSpotVO.latLng);
+									//alert("[" + idx + "]위도: " + travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")));
+									//alert("[" + idx + "]경도: " + travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1));
 									var someDayLatLng = new google.maps.LatLng(
 											travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")),
 											travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1)
 									);
 									
-									// 맵 클릭시 새로운 경로 라인 정보 추가
-									//addLatLng(travelSpotVO.latLng);
 									addLatLng(someDayLatLng);
-									
-									/* path = poly.getPath(); //path 정보 담을 배열 객체 가져옴
-								  	path.push(someDayLatLng);
-							   	  	
-								  	polys.push(someDayLatLng); //위도, 경도를 배열에 담기..
-							   		polyIndex++; */
 									
 									marker = new google.maps.Marker({
 							        	position: someDayLatLng,
@@ -546,9 +589,7 @@
 							      	
 							      	mapFinal.setCenter(someDayLatLng);
 							      	mapFinal.setZoom(17);
-									
 								}
-								
 							});
 						}
 					},
@@ -558,10 +599,8 @@
 				});
             	
             	
-            	
-        		//이전에 지난간 일정도 수정할수 있게 구현중.. 잠시 주석처리
-            	/* 
-        		//$('.dayTab').removeClass("active");
+        		//이전에 지난간 일정도 수정할 수 있게 구현중.. 잠시 주석처리
+            	/* $('.dayTab').removeClass("active");
         		$(this).prev().removeClass("active").attr({"disabled" : "disabled", 
         													"style" : "text-align: left; background-color: #e9e9e9"
         													});
@@ -573,10 +612,35 @@
         	
         });
         
+        //나코짜 최종 등록 버튼 누를 시 예외처리 할것들 그리고 데이터 유효성 검사 
         $("#btnFinalAdd").click(function(){
         	checkUnload = false;
         	
+        	if ($("#checkDataValid").val() == "N") {
+        		alert($("#checkDataValidDay").val() + "일차 일정이 빠져있습니다!");
+        		return false;
+        	}
         	
+        	//var bool = true;
+        	//비동기 방식으로 유효성 체크시 bool 값이 세팅 되기도 전에 submit 되어버린다.. setTimeout을 써도 마찬가지..
+        	/* $.ajax({
+				url: "<c:url value='/nacojja/checkDataValid.do'/>",
+				type:"POST",
+				success: function(result) {
+		        	alert("1불값: " + result);
+					if (result == false) {
+						bool = false;
+					}
+				},
+				error: function(xhr, status, error) {
+					alert("error:" + error + ", status=" + status);
+				}
+			});
+        	
+       		setTimeout(function(){
+	        	alert("2불값: " + bool);
+	        	return bool;
+       		}, 6); */
         });
         
 	});
@@ -608,7 +672,8 @@
         <div class="col-md-10">
             <div class="tab-content panels-faq">
            		<div class="tab-pane active" id="tab1">
-                    <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>"   >
+                    <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>">
+                    <%-- <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>" onsubmit="return checkDataValid()"> --%>
                         <div class="courseDiv">
                             <label for="continent" class="courseLabel">대륙</label>
                             <select name="continent" class="continent" id="continent">
@@ -706,6 +771,9 @@
 					    
 					    <input type="hidden" id="countryCode" name="countryCode">
 					    <input type="hidden" id="latLng" name="latLng">
+					    
+					    <input type="hidden" id="checkDataValid" name="checkDataValid" value="N">
+					    <input type="hidden" id="checkDataValidDay" name="checkDataValidDay" value="1">
                     </form>
                	</div>
             </div>
