@@ -9,4 +9,5 @@ public interface BidDAO {
 	public List<Map<String, Object>> selectBidList(SearchVO searchVo);
 	public int totalRecord(SearchVO searchVo);
 	public List<Map<String, Object>> selectByNo(int courseNo);
+	public BidVO selectWin(int courseNo);
 }

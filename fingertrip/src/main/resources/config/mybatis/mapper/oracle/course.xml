@@ -92,7 +92,7 @@
 	</select>
 	
 	<select id="selectCourseProgress" parameterType="int" resultType="map">
-		select c.*, c.bid_start_day+14 as bid_end_day, p.progress_status
+		select c.*, c.bid_start_day+14 as bid_end_day, p.progress_no, p.progress_status
 		from course c join progress p
 		on c.progress_no = p.progress_no
 		where course_no=#{courseNo}
@@ -106,4 +106,9 @@
 		select max(day) as day from travel_spot where course_no = #{courseNo}
 	</select>
 	
+	<update id="updateProgress" parameterType="map">
+		update course
+		set progress_no=#{progressNo}
+		where course_no=#{courseNo}
+	</update>
 </mapper>

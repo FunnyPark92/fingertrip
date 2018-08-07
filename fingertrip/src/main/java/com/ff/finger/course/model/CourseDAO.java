@@ -15,5 +15,5 @@ public interface CourseDAO {
 	public Map<String, Object> selectCourseProgress(int courseNo);
 	public CourseVO selectOneCourse(int courseNo);
 	public int selectMaxDay(int courseNo);
-	
+	public int updateProgress(Map<String, Object> map);
 }

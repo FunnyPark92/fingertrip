@@ -61,4 +61,10 @@ public class CourseDAOMybatis implements CourseDAO{
 		return sqlSession.selectOne(namespace+"selectMaxDay", courseNo);
 	}
 
+	@Override
+	public int updateProgress(Map<String, Object> map) {
+		return sqlSession.update(namespace+"updateProgress", map);
+		
+	}
+
 }
