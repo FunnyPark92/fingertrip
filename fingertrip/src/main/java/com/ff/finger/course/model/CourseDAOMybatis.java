@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.travelspot.model.TravelSpotVO;
 
 @Repository
 public class CourseDAOMybatis implements CourseDAO{
@@ -23,7 +24,6 @@ public class CourseDAOMybatis implements CourseDAO{
 	@Override
 	public int getTotalRecord(SearchVO searchVo) {
 		return sqlSession.selectOne(namespace+"getTotalRecord", searchVo);
-
 	}
 	
 	@Override
@@ -69,6 +69,11 @@ public class CourseDAOMybatis implements CourseDAO{
 	@Override
 	public Map<String, Object> selectOneCTJoin(int courseNo) {
 		return sqlSession.selectOne(namespace+"selectOneCTJoin",courseNo);
+	}
+
+	@Override
+	public List<TravelSpotVO> selectTravelSpot(int courseNo) {
+		return sqlSession.selectList(namespace + "selectTravelSpot", courseNo);
 	}
 
 }

@@ -244,7 +244,7 @@ public class NacojjaController {
 		//Map<String, Object> map = courseService.selectOneCTJoin(courseNo);
 		
 		MemberVO memberVo = memberService.selectMember(courseVo.getMemberNo());
-		
+		List<TravelSpotVO> travelSpotVoList = courseService.selectTravelSpot(courseNo);
 		
 		//출발일부터 날짜 계산
 		Calendar cal = Calendar.getInstance();
@@ -260,6 +260,7 @@ public class NacojjaController {
 		model.addAttribute("tdList", travelDateList);
 		model.addAttribute("courseVo", courseVo);
 		model.addAttribute("memberVo", memberVo);
+		model.addAttribute("tSpotVoList", travelSpotVoList);
 				
 		return "nacojja/nacojjaDetail";
 	}

@@ -120,4 +120,8 @@
 		set progress_no=#{progressNo}
 		where course_no=#{courseNo}
 	</update>
+	
+	<select id="selectTravelSpot" parameterType="int" resultType="TravelSpotVO">
+		SELECT * FROM TRAVEL_SPOT WHERE COURSE_NO=#{courseNo} ORDER BY TRAVEL_SPOT_NO DESC
+	</select>
 </mapper>

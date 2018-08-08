@@ -78,4 +78,9 @@ public class CourseServiceImpl implements CourseService {
 		return courseDao.selectOneCTJoin(courseNo);
 	}
 
+	@Override
+	public List<TravelSpotVO> selectTravelSpot(int courseNo) {
+		return courseDao.selectTravelSpot(courseNo);
+	}
+
 }

@@ -6,6 +6,8 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
+    	$('#dayActive').addClass("active");
+    	
         $('.reply').click(function(){
             $(this).closest('.threaded-comments').children('.recomments-wrap').toggle();
         });
@@ -95,6 +97,7 @@
             	<div class="faq-list list-group nav">
                     <c:set var="i" value="1"/>
                     <c:forEach var="travelDate" items="${tdList}">
+                    	<!-- a태그 사용하지 말고 버튼으로 바꿔서 value값을 주어야 일차 바뀔때 해당 일차 가져올수 있음 -->
                         <a class="list-group-item dayActive" id="dayActive">
                             Day${i}
                             <small><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/></small>
