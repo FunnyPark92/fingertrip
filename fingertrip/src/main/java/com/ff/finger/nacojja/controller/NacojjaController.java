@@ -161,7 +161,10 @@ public class NacojjaController {
 		cnt = memberService.minusHeart(memberVo.getMemberNo());
 		logger.info("나코짜2 DB 처리 후 작성한 회원의 하트 차감 결과, cnt={}", cnt);
 		
-		return "index"; //TO-DO: 나중에 상세 목록으로 가도록 변경
+		int courseNo = travelSpotVo.getCourseNo();
+		logger.info("지금 등록한 코스의 코스번호: {}", courseNo);
+		
+		return "redirect:/nacojja/nacojjaDetail.do?courseNo=" + courseNo + "";
 	}
 	
 	@RequestMapping("/addClearPlace.do")
