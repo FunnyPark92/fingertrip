@@ -206,7 +206,7 @@ public class AdminNoticeController {
 	}
 	
 	@RequestMapping(value="/noticeEdit.do", method=RequestMethod.GET)
-	public String noticeEdit(@RequestParam int noticeNo, Model model) {
+	public String noticeEdit(@RequestParam(defaultValue="0") int noticeNo, Model model) {
 		logger.info("공지사항 수정 화면, 파라미터 noticeNo={}", noticeNo);
 
 		if(noticeNo==0) {

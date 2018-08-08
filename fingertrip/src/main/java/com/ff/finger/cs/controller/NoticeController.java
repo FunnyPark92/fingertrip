@@ -59,7 +59,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/countUpdate.do")
-	public String countUpdate(@RequestParam int noticeNo, Model model) {
+	public String countUpdate(@RequestParam(defaultValue="0") int noticeNo, Model model) {
 		logger.info("공지사항 조회수 증가, 파라미터 noticeNo={}", noticeNo);
 		
 		if(noticeNo==0) {
