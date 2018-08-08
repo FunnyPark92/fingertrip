@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.travelAgency.model.TravelAgencyVO;
 
 public interface MemberService {
 	public int insertMember(MemberVO memberVo);
@@ -24,5 +25,6 @@ public interface MemberService {
 	public List<Map<String, Object>> outLeason(int memberNo);
 	public int adminDeleteMember(int memberNo);
 	public int minusHeart(int memberNo);
+	public int multiDelete(List<MemberVO> list);
 
 }

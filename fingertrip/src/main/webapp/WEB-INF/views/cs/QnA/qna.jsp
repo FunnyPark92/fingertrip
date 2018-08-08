@@ -129,7 +129,7 @@ function pageFunc(currentPage){
                 	</c:if>
                 </div>
                  <div class="width500 margin0 marginT30" style="margin-left:550px;">
-                	<form action="<c:url value='/cs//QnA/qna.do'/>" method="post" class="overflowH">
+                	<form action="<c:url value='/cs/QnA/qna.do'/>" method="post" class="overflowH">
                 		<select name="searchCondition" class="float-left form-control w-25">
                 			<option value="title"
                 				<c:if test="${param.searchCondition=='title' }">

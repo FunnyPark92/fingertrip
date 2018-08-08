@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.travelAgency.model.TravelAgencyVO;
 
 
 @Service
@@ -125,5 +126,22 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int minusHeart(int memberNo) {
 		return memberDao.minusHeart(memberNo);
+	}
+
+	@Override
+	public int multiDelete(List<MemberVO> list) {
+		int cnt =0;
+		try {
+				for(MemberVO vo : list) {
+					int memberNo = vo.getMemberNo();
+					if(memberNo>0) {
+						cnt = memberDao.adminDeleteMember(vo.getMemberNo());
+					}
+				}
+		} catch (RuntimeException e) {
+			cnt=-1;
+			e.printStackTrace();
+		}
+		return cnt;
 	}
 }

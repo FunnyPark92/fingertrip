@@ -17,6 +17,9 @@ public class QnAVO {
 	private int travelAgencyNo;
 	private int adminNo;
 	private int memberNo;
+	//파일 업로드를 위한 변수
+	private String fileName;
+	private String OriginalFileName;
 	public int getQnaNo() {
 		return qnaNo;
 	}
@@ -101,11 +104,37 @@ public class QnAVO {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
-	@Override
-	public String toString() {
-		return "QnAVO [qnaNo=" + qnaNo + ", title=" + title + ", content=" + content + ", name=" + name + ", password="
-				+ password + ", regDate=" + regDate + ", readCount=" + readCount + ", groupNo=" + groupNo + ", step="
-				+ step + ", sortNo=" + sortNo + ", delFlag=" + delFlag + ", travelAgencyNo=" + travelAgencyNo
-				+ ", adminNo=" + adminNo + ", memberNo=" + memberNo + "]";
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getOriginalFileName() {
+		return OriginalFileName;
+	}
+	public void setOriginalFileName(String originalFileName) {
+		OriginalFileName = originalFileName;
+	}
+	public QnAVO(int qnaNo, String title, String content, String name, String password, Timestamp regDate,
+			int readCount, int groupNo, int step, int sortNo, String delFlag, int travelAgencyNo, int adminNo,
+			int memberNo, String fileName, String originalFileName) {
+		super();
+		this.qnaNo = qnaNo;
+		this.title = title;
+		this.content = content;
+		this.name = name;
+		this.password = password;
+		this.regDate = regDate;
+		this.readCount = readCount;
+		this.groupNo = groupNo;
+		this.step = step;
+		this.sortNo = sortNo;
+		this.delFlag = delFlag;
+		this.travelAgencyNo = travelAgencyNo;
+		this.adminNo = adminNo;
+		this.memberNo = memberNo;
+		this.fileName = fileName;
+		OriginalFileName = originalFileName;
 	}
 }
