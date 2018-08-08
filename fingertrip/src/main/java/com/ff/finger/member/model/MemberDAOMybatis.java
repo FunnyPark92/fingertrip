@@ -78,6 +78,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	}
 
 	@Override
+	public MemberVO selectMember(int memberNo) {
+		return sqlSession.selectOne(namespace + "selectMember", memberNo);
+	}
+	
+	@Override
 	public List<MemberVO> selectAll(SearchVO searchVo) {
 		List<MemberVO> list=sqlSession.selectList(namespace+"selectAll",searchVo);
 		return list;
@@ -118,6 +123,8 @@ public class MemberDAOMybatis implements MemberDAO {
 	public int plusHeart(HeartChargeVO heartChargeVo) {
 		return sqlSession.update(namespace + "plusHeart", heartChargeVo);
 	}
+
+	
 
 
 }

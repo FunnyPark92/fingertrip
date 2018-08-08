@@ -68,8 +68,6 @@ public class CourseServiceImpl implements CourseService {
 		return courseDao.selectMaxDay(courseNo);
 	}
 
-
-
 	@Override
 	public int updateProgress(Map<String, Object> map) {
 		return courseDao.updateProgress(map);
@@ -79,6 +77,5 @@ public class CourseServiceImpl implements CourseService {
 	public Map<String, Object> selectOneCTJoin(int courseNo) {
 		return courseDao.selectOneCTJoin(courseNo);
 	}
-	
 
 }

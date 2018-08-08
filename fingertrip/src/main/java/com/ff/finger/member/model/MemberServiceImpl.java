@@ -92,6 +92,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO logingMember(String id) {
 		return memberDao.logingMember(id);
 	}
+	
+	@Override
+	public MemberVO selectMember(int memberNo) {
+		return memberDao.selectMember(memberNo);
+	}
 
 	@Override
 	public List<MemberVO> selectAll(SearchVO searchVo) {
@@ -149,5 +154,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return cnt;
 	}
+
+	
 
 }

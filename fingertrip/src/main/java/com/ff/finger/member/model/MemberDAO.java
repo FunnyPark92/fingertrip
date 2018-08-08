@@ -19,6 +19,7 @@ public interface MemberDAO {
 	public int checkMail(String id);
 	public int memberEdit(MemberVO memberVo);
 	public MemberVO logingMember(String id);
+	public MemberVO selectMember(int memberNo);
 	public List<MemberVO> selectAll(SearchVO searchVo);
 	public int memberTotalRecord();
 	public List<MemberVO> deleteSelectAll(SearchVO searchVo);

@@ -240,12 +240,15 @@ public class NacojjaController {
 	public String nacojjaDetail(@RequestParam int courseNo, Model model) {   
 		logger.info("나코짜 상세보기");
 		int travelDay = courseService.selectMaxDay(courseNo);
-		CourseVO vo = courseService.selectOneCourse(courseNo);
+		CourseVO courseVo = courseService.selectOneCourse(courseNo);
 		//Map<String, Object> map = courseService.selectOneCTJoin(courseNo);
+		
+		MemberVO memberVo = memberService.selectMember(courseVo.getMemberNo());
+		
 		
 		//출발일부터 날짜 계산
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(vo.getStartDay());
+		cal.setTime(courseVo.getStartDay());
 		
 		List<Date> travelDateList = new ArrayList<>();
 		travelDateList.add(cal.getTime());
@@ -255,7 +258,8 @@ public class NacojjaController {
 		}
 		
 		model.addAttribute("tdList", travelDateList);
-		model.addAttribute("vo", vo);
+		model.addAttribute("courseVo", courseVo);
+		model.addAttribute("memberVo", memberVo);
 				
 		return "nacojja/nacojjaDetail";
 	}

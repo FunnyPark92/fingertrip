@@ -55,17 +55,21 @@
 		select count(*) from member where id=#{id} and mail_authen ='N'
 	</select>
    
-   <update id="memberEdit" parameterType="memberVo">
+    <update id="memberEdit" parameterType="memberVo">
    		update member set 
    		<if test="password != null and password !=''">
    			password = #{password},
    		</if>
    		hp1=#{hp1}, hp2=#{hp2},hp3=#{hp3},zipcode = #{zipcode},address=#{address} ,address_detail = #{addressDetail} 
    		where id= #{id}
-   </update>
+    </update>
 	
 	<select id="logingMember" parameterType="String" resultType="MemberVo">
 		select * from member where id=#{id}
+	</select>
+	
+	<select id="selectMember" parameterType="int" resultType="MemberVo">
+		SELECT * FROM MEMBER WHERE MEMBER_NO=#{memberNo}
 	</select>
 	
 	<select id="selectAll" parameterType="SearchVo" resultType="MemberVo">
