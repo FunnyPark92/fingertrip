@@ -3,6 +3,7 @@ package com.ff.finger.cs.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,11 @@ public class QnAController {
 	private QnAService qnAService;
 	
 	@RequestMapping("/QnA/qna.do")
-	public String qna(@ModelAttribute SearchVO searchVo, Model model) {
+	public String qna(@ModelAttribute SearchVO searchVo, @RequestParam(defaultValue="0") int aNo,  Model model) {
+		
+		//일반회원 qna리스트와 admin qna리스트를 이 컨트롤러 하나로 해결
+		logger.info("Controller 한개로 페이지 나누기 위한 변수 1=관리자 0=일반회원 aNo={}", aNo);
+
 		logger.info("QnA 목록 파라미터, searchVo={}", searchVo);
 		
 		PaginationInfo pagingInfo=new PaginationInfo();
@@ -39,7 +44,7 @@ public class QnAController {
 		
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		searchVo.setRecordCountPerPage(CommonConstants.RECORD_COUNT_PER_PAGE);
-	
+
 		List<QnAVO> list=qnAService.selectAll(searchVo);
 		logger.info("QnA목록 조회 결과, list.size={}",list.size());
 		
@@ -50,7 +55,12 @@ public class QnAController {
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
 		
+		//admin이 요청할 경우 admin으로, 일반회원이 요청할 경우 일반 회원으로 
+		if(aNo==1) {
+		return "admin/cs/qna/qnaList";
+		}else{
 		return "cs/QnA/qna";
+		}
 	}
 	
 	@RequestMapping("/QnA/countUpdate.do")

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.travelspot.model.TravelSpotVO;
 
 public interface CourseDAO {
 	public List<Map<String, Object>> nacojjaList(SearchVO searchVo);
@@ -16,4 +17,5 @@ public interface CourseDAO {
 	public CourseVO selectOneCourse(int courseNo);
 	public int selectMaxDay(int courseNo);
 	public int updateProgress(Map<String, Object> map);
+	public Map<String, Object> selectOneCTJoin(int courseNo);
 }

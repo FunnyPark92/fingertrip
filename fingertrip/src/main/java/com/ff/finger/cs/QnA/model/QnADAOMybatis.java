@@ -48,8 +48,8 @@ public class QnADAOMybatis implements QnADAO {
 	}
 
 	@Override
-	public int reply(QnAVO vo) {
-		return sqlSession.insert(namespace+"reply", vo);
+	public int reply(QnAVO qnAVo) {
+		return sqlSession.insert(namespace+"reply", qnAVo);
 	}
 
 	@Override

@@ -34,7 +34,7 @@ function pageFunc(currentPage){
            </div>
            </form>
         </div>
-        <!--<form name="frmList" method="post" action="<c:url value='/admin/product/productList.do'/>"> -->
+        <form name="frmList" method="post" action="<c:url value='/admin/agency/.do'/>" >
         <table class="grayTh">
             <tr>
                 <th>회원번호</th>

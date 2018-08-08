@@ -10,18 +10,19 @@ $(document).ready(function(){
 	$('input[name=chkAll]').click(function(){
 		$('input[type=checkbox]').prop("checked",this.checked);
 	});
+	
 	$('#delMulti').click(function(){
-		alert("눌렀다.!");
-		
 		var count=$('input[type=checkbox]:checked').length;
 		if(count==0){
 			alert("삭제할 회원을 선택하세요.");
-			return;
+			return false;	
+		}else{
+			if(confirm("개인회원을 탈퇴시킬경우 되돌릴 수 없습니다. 그래도 진행하시겠습니까?")){
+				return true;
+			}else{
+				return false;
+			}
 		}
-		/*
-		$("form[name=frmList]").prop("action","<c:url value='/admin/product/deleteMulti.do'/>");
-		$("form[name=frmList]").submit();
-		*/
 	});
 	
 });
@@ -55,7 +56,7 @@ $(document).ready(function(){
            </div>
            </form>
         </div>
-        <!--<form name="frmList" method="post" action="<c:url value='/admin/product/productList.do'/>"> -->
+        <form name="frmList" method="post" action="<c:url value='/admin/member/deleteMulti.do'/>" >
         <table class="grayTh">
             <tr>
                 <th><input type="checkbox" name="chkAll" /></th>
@@ -67,9 +68,10 @@ $(document).ready(function(){
                 <th>이메일주소</th>
             </tr>
             <!-- 회원정보 반복 시작 -->
+            <c:set var="idx" value="0"/>
             <c:forEach var="vo" items="${list}">
 	            <tr>
-	                <td><input type="checkbox" /></td>
+	                <td><input type="checkbox" name="memberItems[${idx}].memberNo" value="${vo.memberNo}"/></td>
 	                <td>${vo.memberNo }</td>
 	                <td><a href="<c:url value='/admin/member/memberDetail.do?id=${vo.id}'/>">${vo.name }</a></td>
 	                <td><a href="<c:url value='/admin/member/memberDetail.do?id=${vo.id}'/>">${vo.id }</a></td>
@@ -77,11 +79,12 @@ $(document).ready(function(){
 	                <td>${vo.hp1 }-${vo.hp2 }-${vo.hp3 }</td>
 	                <td>${vo.email1}@${vo.email2}</td>
 	            </tr>
+	        <c:set var="idx" value="${idx+1 }"/>
             </c:forEach>
             <!-- 회원정보 반복 끝 -->
         </table>
         <div class="fRight aWrap" style="margin-top:25px">
-	 		<a class="darkBorder" href="<c:url value='/admin/member/deleteMemberList.do'/>">탈퇴한일반회원목록으로</a>
+	 		<a class="darkBorder" href="<c:url value='/admin/member/deleteMemberList.do'/>">탈퇴한회원목록으로</a>
 	 	</div>
         <div class="aWrap fRight" style="margin-top:25px">
         	<input type="submit" id="delMulti" class="darkBorder" value="선택한 개인회원 탈퇴시키기"/>
@@ -104,6 +107,7 @@ $(document).ready(function(){
             <a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
          </c:if>
          </div>
+         </form>
     </section>
 </body>
 </html>

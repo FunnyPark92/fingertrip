@@ -15,7 +15,7 @@ public interface QnAService {
 	public int QnAtotalRecord(SearchVO searchVo);
 	//답글화면을 위한 VO한개만 들어있음
 	public QnAVO selectByNoOne(int qnaNo);
-	public int reply(QnAVO vo);
+	public int reply(QnAVO qnAVo);
 	//내가 쓴글 출력을 위한 메서드
 	public List<QnAVO> myWriteSelectAll(SearchVO searchVo);
 	public int myWriteQnAtotalRecord(SearchVO searchVo);

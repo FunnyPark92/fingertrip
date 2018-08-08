@@ -106,6 +106,15 @@
 		select max(day) as day from travel_spot where course_no = #{courseNo}
 	</select>
 	
+	<select id="selectOneCTJoin" parameterType="int" resultType="map">
+		select c.*,t.TRAVEL_SPOT_NO,t.DAY,t.CITY,t.TRAVEL_SPOT,t.IMG,t.LAT_LNG,t.COUNTRY_CODE ,m.ID
+		from course c join travel_spot t
+		on c.COURSE_NO = t.COURSE_NO
+		join member m
+		on c.MEMBER_NO = m.MEMBER_NO
+		where c.COURSE_NO = #{courseNo}
+	</select>
+	
 	<update id="updateProgress" parameterType="map">
 		update course
 		set progress_no=#{progressNo}
