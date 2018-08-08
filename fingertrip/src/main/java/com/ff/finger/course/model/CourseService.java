@@ -12,4 +12,9 @@ public interface CourseService {
 	public int nacojjaWrite(CourseVO travelSpotVo, List<TravelSpotVO> travelSpotList);
 	public List<CourseVO> myWriteSelectAll(SearchVO searchVo);
 	public int myWriteCoursetotalRecord(SearchVO searchVo);
+	public Map<String, Object> selectCourseProgress(int courseNo);
+	public CourseVO selectOneCourse(int courseNo);
+	public int selectMaxDay(int courseNo);
+	public int updateProgress(Map<String, Object> map);
+	public Map<String, Object> selectOneCTJoin(int courseNo);
 }

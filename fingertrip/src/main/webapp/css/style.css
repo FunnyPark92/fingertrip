@@ -540,12 +540,46 @@ table a:hover, table a:active{text-decoration: none;}
 }
 
 /* 나코짜보기 */
-.ncjP{
-    border-top: 2px solid #ffc68b;
+.naThumImg img{
+    max-width: 100%;
+    max-height: 500px;
 }
-.ncjP span{
+.naThumHeart{
+    position: relative;
+}
+.naThumHeart, .naThumPay{
+	min-height: 350px;
+}
+.heartBtn{
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    background-image: url(../img/heartIcon.png);
+    background-repeat: no-repeat;
+    background-position: 62% 50%;
+    width: 95%;
+}
+.prog{color: #909090; font-size: 0.85em;}
+.heartBox img{width: 15px;}
+.progress-bar{background: #ff4c4c;}
+.thumPay{
+    padding: 7px 0px;
+}
+.leftSpan{
+    width: 100px;
     display: inline-block;
+    color: #7b7b7b;
+    font-size: 0.9em;
 }
+.payBtn{
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    width: 95%;
+}
+
+.ncjP{border-top: 2px solid #ffc68b;}
+.ncjP span{display: inline-block;}
 .ncjP span:first-child{
     width: 13%;
     background: #ff9c38;
@@ -585,7 +619,6 @@ p.spotExp{
 .spotImg img{
     width: 32%;
     padding: 1%;
-    max-height: 207px;
 }
 p.explain{
     font-weight: 600;
@@ -597,9 +630,11 @@ p.explain{
 }
 
 
+
 .comments-list ul{padding:0; margin: 0;}
 .comments-list ul li {
     border-bottom: 1px dotted #ffb146;
+    list-style: none;
 }
 p.replyTitle{
     background-image: url(../img/replyIcon.png);

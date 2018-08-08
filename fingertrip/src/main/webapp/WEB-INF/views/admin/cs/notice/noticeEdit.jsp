@@ -93,7 +93,7 @@
      					<span class="warn">※ 파일은 최대 5개까지 등록 가능합니다.</span>
         				<input type="hidden" id="hidFile" name="hidFile">
         				<input type="hidden" name="oldFileName" value="${vo.fileName }">
-        				<input type="hidden" id="fileCnt" name="fileCnt">
+        				<input type="hidden" id="fileCnt" name="fileCnt" value="Y">
      				</td>
      			</tr>
            		<c:if test="${!empty vo.fileName }">

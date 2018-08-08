@@ -4,13 +4,21 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYa_utcbQs1RLoVuJguMaQzuX4yxvQyrs&libraries=places"></script>
 
-<script>
+<script type="text/javascript">
     $(function(){
         $('.reply').click(function(){
             $(this).closest('.threaded-comments').children('.recomments-wrap').toggle();
         });
+        	$('.dayActive').each(function(idx,item){
+		        $(this).click(function(){
+					$(this).addClass("active");
+					$(this).siblings().removeClass("active");
+        		
+        		});
+        	});
     });
 </script>
+
 
 
 <div class="subBg subBgTerm">
@@ -20,28 +28,75 @@
 
 <section class="container marginBottom80 minheight400 plan2">
     <div class="row">
-        <div class="col-md-2">
+    	
+    	<div class="col-md-6 naThumImg marginBottom50">
+               <img src="${pageContext.request.contextPath}/img/spot1.jpg" alt="썸네일">
+           </div>
+           <!-- 하트받읗때 -->
+           <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
+              <div>
+                  	하트받는중
+              </div>
+              <h3>
+                  	${vo.title}
+              </h3>
+              <h5>
+                  ${vo.startDay} ~ ${vo.endDay}
+              </h5>
+              <div>
+                  <small>작성자 :</small>
+              </div>
+              <div>
+                  <small>등록일</small> 2018.08.07
+              </div>
+              <div>
+                  	파리의 명소를 딥하게 여행해보는 일정
+              </div>
+               <input type="button" class="heartBtn btn btn-block btn-danger" value="하트 누르기">
+           </div>
+           
+           <!-- 결제할 때 -->
+		<div class="col-md-6 marginBottom50 naThumPay"  style="display: none;">
+			<div>결제진행중</div>
+			<h3 class="marginBottom20">낭만이 있는 4일간의 유럽 여행</h3>
+			<div class="thumPay">
+				<span class="leftSpan">여행 날짜</span> <select>
+					<option value="선택">날짜 선택</option>
+					<option value="0911">18.09.11~18.09.15</option>
+					<option value="0912">18.09.12~18.09.16</option>
+					<option value="0913">18.09.13~18.09.17</option>
+					<option value="0914">18.09.14~18.09.18</option>
+					<option value="0915">18.09.15~18.09.19</option>
+				</select>
+			</div>
+			<div class="thumPay">
+				<span class="leftSpan">작성자</span> 작성작성
+			</div>
+			<div class="thumPay">
+				<span class="leftSpan">여행사</span> 핑거트립
+			</div>
+			<div class="thumPay">
+				<span class="leftSpan">여행사 번호</span> 02 - 000 - 0000
+			</div>
+			<div class="marginTop10 marginBottom50">파리의 명소를 딥하게 여행해보는 일정</div>
+			<input type="button" class="btn payBtn btn-primary" value="결제하기">
+		</div>
+
+		<div class="col-md-2">
             <ul class="list-group help-group">
                     <div class="faq-list list-group nav">
-                        <a class="list-group-item active">
-                            Day1
-                            <small>09.11</small>
+                    <c:set var="i" value="1"/>
+                    <c:forEach var="travelDate" items="${tdList}">
+                        <a class="list-group-item dayActive" id="dayActive">
+                            Day${i}
+                            <small><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/></small>
                         </a>
-                        <a class="list-group-item">
-                            Day2
-                            <small>09.12</small>
-                        </a>
-                        <a class="list-group-item">
-                            Day3
-                            <small>09.13</small>
-                        </a>
-                        <a class="list-group-item">
-                            Day4
-                            <small>09.14</small>
-                        </a>
+                        <c:set var="i" value="${i+1}"/>
+                     </c:forEach>   
                     </div>
                 </ul>
-            </div>
+         </div>
+            
             
             
             
