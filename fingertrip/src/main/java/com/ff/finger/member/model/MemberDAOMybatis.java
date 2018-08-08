@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.heartcharge.model.HeartChargeVO;
 
 @Repository
 public class MemberDAOMybatis implements MemberDAO {
@@ -111,6 +112,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	@Override
 	public int minusHeart(int memberNo) {
 		return sqlSession.update(namespace + "minusHeart", memberNo);
+	}
+
+	@Override
+	public int plusHeart(HeartChargeVO heartChargeVo) {
+		return sqlSession.update(namespace + "plusHeart", heartChargeVo);
 	}
 
 

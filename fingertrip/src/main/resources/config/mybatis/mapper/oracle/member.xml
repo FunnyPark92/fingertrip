@@ -135,13 +135,9 @@
 		WHERE MEMBER_NO=#{memberNo}
 	</update>
 	
+	<update id="plusHeart" parameterType="int">
+		UPDATE MEMBER 
+		SET HEART_COUNT=HEART_COUNT+#{heartChargeCount}
+		WHERE MEMBER_NO=#{memberNo}
+	</update>
 </mapper>
-
-
-
-
-
-
-
-
-

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.heartcharge.model.HeartChargeVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -121,9 +122,15 @@ public class MemberServiceImpl implements MemberService {
 	public int adminDeleteMember(int memberNo) {
 		return memberDao.adminDeleteMember(memberNo);
 	}
+	
 	@Override
 	public int minusHeart(int memberNo) {
 		return memberDao.minusHeart(memberNo);
+	}
+	
+	@Override
+	public int plusHeart(HeartChargeVO heartChargeVo) {
+		return memberDao.plusHeart(heartChargeVo);
 	}
 
 	@Override
@@ -142,4 +149,5 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return cnt;
 	}
+
 }

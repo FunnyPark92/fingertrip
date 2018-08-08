@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.heartcharge.model.HeartChargeVO;
 
 public interface MemberDAO {
 	public int insertMember(MemberVO memberVo);
@@ -25,4 +26,6 @@ public interface MemberDAO {
 	public List<Map<String, Object>> outLeason(int memberNo);
 	public int adminDeleteMember(int memberNo);
 	public int minusHeart(int memberNo);
+	public int plusHeart(HeartChargeVO heartChargeVo);
+	
 }
