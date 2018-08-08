@@ -107,7 +107,7 @@
 			<c:if test="${!empty list}">
 				<c:forEach var="map" items="${list }" >
 					<div class="listDv">
-						<a href="#" class="decoN">
+						<a href="<c:url value='/nacojja/nacojjaDetail.do?courseNo=${map["COURSE_NO"]}'/>" class="decoN">
 							<img class="listImg listH" alt="" src="${pageContext.request.contextPath }/upload_images/${map['THUMB_IMG']}">
 							<div class="pad15 listSmDv">
 								<p class="listTitle"> 

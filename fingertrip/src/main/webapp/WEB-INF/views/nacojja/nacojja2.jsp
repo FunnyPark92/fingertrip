@@ -166,7 +166,7 @@
             if (event.placeId) {
      	        console.log('You clicked on place:' + event.placeId);
      	
-     	        event.stop(); //POI 클릭시 인포창이 뜨는 이벤트 발생을 일단 막아놓음..
+     	        //event.stop(); //POI 클릭시 인포창이 뜨는 이벤트 발생을 일단 막아놓음..
      	        getPlaceInformation(event.placeId);
             } else {
             	$("#place-icon").hide();
@@ -194,10 +194,6 @@
 		    if (status == 'OK') {
 		    	if (results[0]) {
 			        //map.setCenter(results[0].geometry.location);
-			        var infowindow = new google.maps.InfoWindow({
-			      		content: '주소: ' + results[0].formatted_address
-			    	});
-			        infowindow.open(map, marker);
 			        
 			        //해당 위치에 주소를 받아와서 스트링 배열로 만든다음 도시 정보만 빼오는 방식(but, 국가별 주소 체계가 달라 예외처리 할게 많음)
 			        /* var address = new Array();
@@ -250,18 +246,31 @@
     	placesService.getDetails({placeId: placeId}, function(place, status) {
         	if (status === 'OK') {
         		$("#divRating").find("img").remove();
+        		$("#divPhotos").find("img").remove();
+        		
         		$("#place-icon").show();
-	        	//$("#rating-icon").show();
         		$("#place-icon").prop("src", place.icon);
 	        	$("#place-name").val(place.name);
-	        	//$("#rating-icon").prop("src", "<c:url value='/img/star.png'/>");
 	        	$("#place-rating").val(place.rating);
 	        	
 	        	for (var i=1; i<=place.rating; i++) {
 	        		$("#divRating label").after("<img id='rating-icon' src='<c:url value="/img/star.png"/>' height='17' width='17'>");
 	        	}
+	        	
+	        	if (place.photos != null && place.photos != "") {
+	        		//alert("사진 객체 배열의 길이: " + place.photos.length);
+		        	if (place.photos.length > 0) {
+		        		console.log(place.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200}));
+		        		$("#img").val(place.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 206}));
+		        		
+			        	for (var i=0; i<place.photos.length; i++) {
+			        		var url = place.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 206});
+				        	$("#divPhotos label").after("<img id='photos' src='" + url + "'>&nbsp;&nbsp;");
+			        	}
+		        	}
+	        	}
         	} else { //placeId는 존재하는데 place 정보가 존재하지 않을 경우 예외처리.. (주로 대한민국이 여기에 해당)
-        		alert('placesService was not successful for the following reason: ' + status);
+        		//alert('placesService was not successful for the following reason: ' + status);
         		
         		$("#place-icon").hide();
                 $("#divRating").find("img").remove();
@@ -276,6 +285,11 @@
     	geocoder.geocode({'location': location}, function(results, status) {
 		    if (status == 'OK') {
 		    	if (results[0]) {
+		    		var infowindow = new google.maps.InfoWindow({
+			      		content: '주소: ' + results[0].formatted_address
+			    	});
+			        infowindow.open(map, marker);
+		    		
 		    		$("#place-name").val(results[0].formatted_address);
 		    	} else {
 		            window.alert('No results found');
@@ -288,7 +302,7 @@
     
     function addPlace() {
     	//To-Do: 유효성 체크
-
+    	
     	
     	//맵을 클릭하여 위도,경도 정보가 존재할때만 여행지 추가 로직 진행
     	if (latLng != null && latLng != "") {
@@ -298,7 +312,6 @@
 	    		return;
 	    	}
 	    	latLngs.push(latLng);
-    	
     	
 	     	// 맵 클릭시 새로운 경로 라인 정보 추가
 	     	//alert("여행지 추가 누를시 파라미터 : " + latLng);
@@ -327,6 +340,26 @@
 			
 			//여행지 설명 클리어
 			$("textarea[name=travelContent]").val("");
+			
+			//빠진 일정 없는지 체크하여 submit을 막는 로직
+			setTimeout(function(){
+		    	$.ajax({
+					url: "<c:url value='/nacojja/checkDataValid.do'/>",
+					type:"POST",
+					success: function(map) {
+			        	//alert("빠진 일정 체크 결과: " + map["bool"] + ", 몇일차? " + map["day"]);
+						if (map["bool"] == false) {
+							$("#checkDataValidDay").val(map["day"]);
+						} else {
+							$("#checkDataValid").val("Y");
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("error:" + error + ", status=" + status);
+					}
+				});
+       		}, 10);
+			
     	} else {
     		alert("가고싶은 여행지를 먼저 선택하세요~ !" + "(\'(\")\')!");
     	}
@@ -347,6 +380,9 @@
     }
     
     function undoPlace(flag) {
+    	//여행지 추가 후 바로 취소 누른뒤 다시 같은곳을 추가하려고 할때 가능하도록 latLng배열에서 이전에 기록된 위도경도 제거
+    	latLngs.pop();
+    	
     	for (var i=markersFinal.length-1; i<markersFinal.length; i++) {
         	markersFinal[i].setMap(null);
       	}
@@ -362,6 +398,24 @@
 				url: "<c:url value='/nacojja/delPrevPlace.do?day=" + $("#day").val() + "'/>",
 				type:"POST",
 			});
+	  	
+		  	//빠진 일정 없는지 체크하여 submit을 막는 로직
+			setTimeout(function(){
+		    	$.ajax({
+					url: "<c:url value='/nacojja/checkDataValid.do'/>",
+					type:"POST",
+					success: function(map) {
+			        	//alert("빠진 일정 체크 결과: " + map["bool"] + ", 몇일차? " + map["day"]);
+						if (map["bool"] == false) {
+							$("#checkDataValidDay").val(map["day"]);
+							$("#checkDataValid").val("N");
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("error:" + error + ", status=" + status);
+					}
+				});
+       		}, 10);
 	  	}
 	}
     
@@ -508,6 +562,7 @@
         		$("#place-name").val("");
                 $("#divRating").find("img").remove();
                 $("#place-rating").val("");
+                $("#divPhotos").find("img").remove();
             	
             	deleteMarkers();
             	
@@ -571,10 +626,35 @@
         	
         });
         
+        //나코짜 최종 등록 버튼 누를 시 예외처리 할것들 그리고 데이터 유효성 검사 
         $("#btnFinalAdd").click(function(){
         	checkUnload = false;
         	
+        	if ($("#checkDataValid").val() == "N") {
+        		alert($("#checkDataValidDay").val() + "일차 일정이 빠져있습니다!");
+        		return false;
+        	}
         	
+        	//var bool = true;
+        	//비동기 방식으로 유효성 체크시 bool 값이 세팅 되기도 전에 submit 되어버린다.. setTimeout을 써도 마찬가지..
+        	/* $.ajax({
+				url: "<c:url value='/nacojja/checkDataValid.do'/>",
+				type:"POST",
+				success: function(result) {
+		        	alert("1불값: " + result);
+					if (result == false) {
+						bool = false;
+					}
+				},
+				error: function(xhr, status, error) {
+					alert("error:" + error + ", status=" + status);
+				}
+			});
+        	
+       		setTimeout(function(){
+	        	alert("2불값: " + bool);
+	        	return bool;
+       		}, 6); */
         });
         
 	});
@@ -606,7 +686,8 @@
         <div class="col-md-10">
             <div class="tab-content panels-faq">
            		<div class="tab-pane active" id="tab1">
-                    <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>"   >
+                    <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>">
+                    <%-- <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>" onsubmit="return checkDataValid()"> --%>
                         <div class="courseDiv">
                             <label for="continent" class="courseLabel">대륙</label>
                             <select name="continent" class="continent" id="continent">
@@ -671,13 +752,17 @@
                             <label for="place-rating" class="courseLabel">평점</label>
                             <input type="text" id="place-rating" readonly="readonly" style="border: none;">
                         </div>
+                        
+                        <div id="divPhotos" class="courseDiv">
+                        	<label for="photos" class="courseLabel">포토</label>
+                        	<input type="hidden" id="img" name="img">
+                        </div>
                        
-                        <div id="floating-panel">
+                       <!--  <div id="floating-panel">
 						    <input onclick="clearMarkers();" type=button value="마커 숨기기">
 						    <input onclick="showMarkers();" type=button value="모든 마커 표시">
 						    <input onclick="deleteMarkers();" type=button value="모든 마커 제거">
-						    <input onclick="undoPlace(true);" type=button value="여행지 취소">
-					    </div>
+					    </div> -->
                        
                         <div id="map" class="map"></div>
                        
@@ -689,6 +774,7 @@
                        
                         <textarea name="travelContent" rows="5" class="textCK" placeholder="여행지에 대한 설명을 작성해주세요"></textarea>
                         <input type="button" value="여행지로 추가" onclick="addPlace()" class="btn btn-warning">
+                        <input type=button onclick="undoPlace(true);" value="여행지 취소" class="btn btn-warning">
                        
                         <div id="mapFinal" class="mapFinal"></div>
                        
@@ -704,6 +790,9 @@
 					    
 					    <input type="hidden" id="countryCode" name="countryCode">
 					    <input type="hidden" id="latLng" name="latLng">
+					    
+					    <input type="hidden" id="checkDataValid" name="checkDataValid" value="N">
+					    <input type="hidden" id="checkDataValidDay" name="checkDataValidDay" value="1">
                     </form>
                	</div>
             </div>

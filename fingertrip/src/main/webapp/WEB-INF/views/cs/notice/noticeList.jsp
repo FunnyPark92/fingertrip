@@ -53,10 +53,10 @@
 		                            <td>
 			                            <a href="<c:url value='/cs/notice/countUpdate.do?noticeNo=${map["NOTICE_NO"]}'/>">
 				                            <!--제목이 긴 경우 일부만 보여주기 -->
-				                            <c:if test="${fn:length(map['TITLE'])>25}">
-				                            	${fn:substring(map['TITLE'],0,25) }...
+				                            <c:if test="${fn:length(map['TITLE'])>23}">
+				                            	${fn:substring(map['TITLE'],0,23) }...
 				                            </c:if>
-				                            <c:if test="${fn:length(map['TITLE'])<=25}">
+				                            <c:if test="${fn:length(map['TITLE'])<=23}">
 				                            	${map['TITLE']}
 				                            </c:if>
 			                            </a>
