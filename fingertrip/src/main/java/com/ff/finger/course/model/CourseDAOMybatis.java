@@ -70,4 +70,9 @@ public class CourseDAOMybatis implements CourseDAO{
 		
 	}
 
+	@Override
+	public Map<String, Object> selectOneCTJoin(int courseNo) {
+		return sqlSession.selectOne(namespace+"selectOneCTJoin",courseNo);
+	}
+
 }

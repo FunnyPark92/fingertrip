@@ -238,6 +238,7 @@ public class NacojjaController {
 		logger.info("나코짜 상세보기");
 		int travelDay = courseService.selectMaxDay(courseNo);
 		CourseVO vo = courseService.selectOneCourse(courseNo);
+		Map<String, Object> map = courseService.selectOneCTJoin(courseNo);
 		//출발일부터 날짜 계산
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(vo.getStartDay());

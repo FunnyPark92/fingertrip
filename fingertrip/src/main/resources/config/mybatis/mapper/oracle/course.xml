@@ -106,28 +106,18 @@
 		select max(day) as day from travel_spot where course_no = #{courseNo}
 	</select>
 	
-<<<<<<< HEAD
-	<!--  <select id="selectOneCTJoin" parameterType="int" resultType="map">
+	<select id="selectOneCTJoin" parameterType="int" resultType="map">
 		select c.*,t.TRAVEL_SPOT_NO,t.DAY,t.CITY,t.TRAVEL_SPOT,t.IMG,t.LAT_LNG,t.COUNTRY_CODE ,m.ID
 		from course c join travel_spot t
 		on c.COURSE_NO = t.COURSE_NO
 		join member m
 		on c.MEMBER_NO = m.MEMBER_NO
 		where c.COURSE_NO = #{courseNo}
-	</select> -->
+	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-=======
 	<update id="updateProgress" parameterType="map">
 		update course
 		set progress_no=#{progressNo}
 		where course_no=#{courseNo}
 	</update>
->>>>>>> branch 'master' of https://github.com/geoblo/fingertrip.git
 </mapper>
