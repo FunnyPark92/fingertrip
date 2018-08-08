@@ -98,22 +98,17 @@ public class AdminQnAController {
 		         logger.info("QnA 파일 업로드, qnaVo={}", qnAVo);
 		      }
 		      
-		      int cnt=noticeService.noticeInsert(noticeVo);
-		      logger.info("글쓰기 처리 후, cnt={}", cnt);
+		      int cnt=qnAService.reply(qnAVo);
+		      logger.info("QnA답글 달기 처리 후, cnt={}", cnt);
 		      
 		      if(cnt>0) {
-		         model.addAttribute("msg", "공지사항 등록이 완료되었습니다.");
+		         model.addAttribute("msg", "답글 등록이 완료되었습니다.");
 		      }else {
-		         model.addAttribute("msg", "공지사항 등록이 실패하였습니다.");
+		         model.addAttribute("msg", "답글 등록이 실패하였습니다.");
 		      }
-		      model.addAttribute("url", "/admin/cs/notice/noticeList.do");
+		      model.addAttribute("url", "/admin/cs/qna/qnaList.do");
 		      
 		      return "common/message";
-
-			
-	
-		
-	}
-	
+		}
 }
 

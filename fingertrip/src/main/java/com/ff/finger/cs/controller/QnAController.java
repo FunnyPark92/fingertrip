@@ -44,7 +44,7 @@ public class QnAController {
 		
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		searchVo.setRecordCountPerPage(CommonConstants.RECORD_COUNT_PER_PAGE);
-	
+
 		List<QnAVO> list=qnAService.selectAll(searchVo);
 		logger.info("QnA목록 조회 결과, list.size={}",list.size());
 		

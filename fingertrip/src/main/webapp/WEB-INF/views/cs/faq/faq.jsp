@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
 
-
 <script>
 $(document).ready(function(){
 	$(".accordion").accordion({"heightStyle":"content"});
@@ -19,7 +18,7 @@ $(document).ready(function(){
 </script>
 
 
-<section class="container board marginTop80 marginBottom80 minheight600">
+<section class="container faq marginTop80 marginBottom80 minheight600">
 	<div class="row">
 
 		<!-- 서브메뉴 -->
@@ -41,7 +40,9 @@ $(document).ready(function(){
 				action="<c:url value='/cs/faq/faq.do'/>">
 				<input name="faqCategoryNo" type="hidden">
 			</form>
-
+			
+			
+			<h4>FAQ</h4>
 			<ul class="faqTabNav clearFix">
 				<li value="1"
 					<c:if test="${param.faqCategoryNo==1 }">

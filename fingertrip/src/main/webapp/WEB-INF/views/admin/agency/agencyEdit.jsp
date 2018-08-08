@@ -118,7 +118,7 @@ $(document).ready(function(){
 			</div>
 			<div>
 				<label for="password">비밀번호</label> <input type="password" class="pwd" name="password">
-				<label for="password2">비밀번호 확인</label> <input type="password" class="pwd" name="password2">
+				<label for="password2">비밀번호 확인</label> <input type="password" class="pwd2" name="password2">
 			</div>
 			<div class="div3">
 				<label for="hp1">전화번호</label>&nbsp;
@@ -141,10 +141,10 @@ $(document).ready(function(){
 			
 			<div class="divLast aWrap fRight">
 				<a href="<c:url value='/admin/agency/agencyList.do'/>" class="darkBorder">목록</a>
-				<input type="submit" id="wr_submit" value="수정">
+				<input type="submit" id="wr_submit" class="wr_edit" value="수정">
 			</div>
 			<input type="hidden" id="checkId2" value="Y">
-			<input type="hidden" id="checkId3" value="Y">
+			<input type="hidden" id="checkId3" value="N">
 		</fieldset>
 	</form>
 </section>

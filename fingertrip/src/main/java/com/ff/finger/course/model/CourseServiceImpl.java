@@ -52,6 +52,33 @@ public class CourseServiceImpl implements CourseService {
 	public int myWriteCoursetotalRecord(SearchVO searchVo) {
 		return courseDao.myWriteCoursetotalRecord(searchVo);
 	}
+
+	@Override
+	public Map<String, Object> selectCourseProgress(int courseNo) {
+		return courseDao.selectCourseProgress(courseNo);
+	}
+
+	@Override
+	public CourseVO selectOneCourse(int courseNo) {
+		return courseDao.selectOneCourse(courseNo);
+	}
+
+	@Override
+	public int selectMaxDay(int courseNo) {
+		return courseDao.selectMaxDay(courseNo);
+	}
+
+
+
+	@Override
+	public int updateProgress(Map<String, Object> map) {
+		return courseDao.updateProgress(map);
+	}
+
+	@Override
+	public Map<String, Object> selectOneCTJoin(int courseNo) {
+		return courseDao.selectOneCTJoin(courseNo);
+	}
 	
 
 }
