@@ -62,6 +62,10 @@ public class CourseServiceImpl implements CourseService {
 	public int selectMaxDay(int courseNo) {
 		return courseDao.selectMaxDay(courseNo);
 	}
+
+
+	
+
 	
 
 }

@@ -4,13 +4,21 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYa_utcbQs1RLoVuJguMaQzuX4yxvQyrs&libraries=places"></script>
 
-<script>
+<script type="text/javascript">
     $(function(){
         $('.reply').click(function(){
             $(this).closest('.threaded-comments').children('.recomments-wrap').toggle();
         });
+        	$('.dayActive').each(function(idx,item){
+		        $(this).click(function(){
+					$(this).addClass("active");
+					$(this).siblings().removeClass("active");
+        		
+        		});
+        	});
     });
 </script>
+
 
 
 <div class="subBg subBgTerm">
@@ -24,20 +32,19 @@
     	<div class="col-md-6 naThumImg marginBottom50">
                <img src="${pageContext.request.contextPath}/img/spot1.jpg" alt="썸네일">
            </div>
-           
            <!-- 하트받읗때 -->
            <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
               <div>
                   	하트받는중
               </div>
               <h3>
-                  	낭만이 있는 4일간의 유럽 여행
+                  	${vo.title}
               </h3>
               <h5>
-                  2018.09.11 ~ 2018.09.16
+                  ${vo.startDay} ~ ${vo.endDay}
               </h5>
               <div>
-                  <small>작성자</small> 작성작성
+                  <small>작성자 :</small>
               </div>
               <div>
                   <small>등록일</small> 2018.08.07
@@ -80,7 +87,7 @@
                     <div class="faq-list list-group nav">
                     <c:set var="i" value="1"/>
                     <c:forEach var="travelDate" items="${tdList}">
-                        <a class="list-group-item active">
+                        <a class="list-group-item dayActive" id="dayActive">
                             Day${i}
                             <small><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/></small>
                         </a>
@@ -88,7 +95,8 @@
                      </c:forEach>   
                     </div>
                 </ul>
-            </div>
+         </div>
+            
             
             
             

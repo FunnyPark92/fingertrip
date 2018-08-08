@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.travelspot.model.TravelSpotVO;
 
 @Repository
 public class CourseDAOMybatis implements CourseDAO{
@@ -55,5 +56,10 @@ public class CourseDAOMybatis implements CourseDAO{
 	public int selectMaxDay(int courseNo) {
 		return sqlSession.selectOne(namespace+"selectMaxDay", courseNo);
 	}
+
+	
+
+	
+
 
 }
