@@ -112,11 +112,11 @@ public class TravelAgencyController {
 	public String agencyEdit(@RequestParam String name,Model model) {
 		logger.info("여행사 수정 name={}", name);
 		TravelAgencyVO vo =travelAgencyServise.selectOneAgency(name);
-		String[] aa = vo.getHp().split("-");
-		String hp1="", hp2="",hp3="";
+		/*String[] aa = vo.getHp().split("-");
+		String hp1="", hp2="", hp3="";
 		for(String ss : aa) {
 			
-		}
+		}*/
 		model.addAttribute("vo",vo);
 
 		

@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.SearchVO;
-import com.ff.finger.travelAgency.model.TravelAgencyVO;
-
 
 @Service
 public class MemberServiceImpl implements MemberService {

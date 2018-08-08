@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.ff.finger.common.SearchVO;
-import com.ff.finger.travelAgency.model.TravelAgencyVO;
 
 public interface MemberService {
 	public int insertMember(MemberVO memberVo);
