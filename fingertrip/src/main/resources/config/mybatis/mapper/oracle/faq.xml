@@ -11,8 +11,20 @@
 		<result column="faqCategoryNo" jdbcType="BIGINT" property="faqCategoryNo"/>
 	</resultMap>
 
-	<select id="selectFaqCategory" parameterType="int" resultType="FaqVO">
-		select * from faq where faq_category_no=#{faqCategoryNo}
+	<select id="allFaqCategory" resultType="FaqVO">
+		SELECT f.faq_no, f.title, f.content, f.ADMIN_NO, f.FAQ_CATEGORY_NO, c.FAQ_CATE_TITLE, a.ID
+		FROM faq f JOIN FAQ_CATEGORY c
+		ON f.faq_category_no = c.faq_category_no
+		join admin a on f.ADMIN_NO = a.ADMIN_NO
 	</select>
+	
+	<select id="selectFaqCategory" parameterType="int" resultType="FaqVO">
+		SELECT f.faq_no, f.title, f.content, f.ADMIN_NO, f.FAQ_CATEGORY_NO, c.FAQ_CATE_TITLE, a.ID
+		FROM faq f JOIN FAQ_CATEGORY c
+		ON f.faq_category_no = c.faq_category_no
+		join admin a on f.ADMIN_NO = a.ADMIN_NO
+		where f.faq_category_no=#{faq_category_no}
+	</select>
+	
 	
 </mapper>
