@@ -1,7 +1,5 @@
 package com.ff.finger.admin.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +20,6 @@ import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.PaginationInfo;
 import com.ff.finger.common.SearchVO;
 import com.ff.finger.course.model.CourseService;
-import com.ff.finger.course.model.CourseVO;
 import com.ff.finger.winBid.model.WinBidService;
 
 @Controller
@@ -88,8 +85,8 @@ public class AdminBidController {
 		
 		if(pNo.equals("2")){
 			Date today = new Date();
-/*			Date bidEndDay=(Date) map.get("BID_END_DAY");	다시 BID_END_DAY로 바꾸기
-*/			Date bidEndDay=(Date) map.get("START_DAY");
+//			Date bidEndDay=(Date) map.get("BID_END_DAY");	다시 BID_END_DAY로 바꾸기
+			Date bidEndDay=(Date) map.get("START_DAY");
 			int compare=today.compareTo(bidEndDay);
 			
 			logger.info("날짜 비교, today={}, bidEndDay={}", today, bidEndDay);
