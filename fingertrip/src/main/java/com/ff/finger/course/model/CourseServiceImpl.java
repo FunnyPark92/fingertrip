@@ -54,6 +54,11 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
+	public Map<String, Object> selectCourseProgress(int courseNo) {
+		return courseDao.selectCourseProgress(courseNo);
+	}
+
+	@Override
 	public CourseVO selectOneCourse(int courseNo) {
 		return courseDao.selectOneCourse(courseNo);
 	}
@@ -64,8 +69,11 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 
-	
 
+	@Override
+	public int updateProgress(Map<String, Object> map) {
+		return courseDao.updateProgress(map);
+	}
 	
 
 }

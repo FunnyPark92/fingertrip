@@ -48,6 +48,11 @@ public class CourseDAOMybatis implements CourseDAO{
 	}
 
 	@Override
+	public Map<String, Object> selectCourseProgress(int courseNo) {
+		return sqlSession.selectOne(namespace+"selectCourseProgress", courseNo);
+	}
+
+	@Override
 	public CourseVO selectOneCourse(int courseNo) {
 		return sqlSession.selectOne(namespace+"selectOneCourse",courseNo);
 	}
@@ -59,7 +64,10 @@ public class CourseDAOMybatis implements CourseDAO{
 
 	
 
-	
-
+	@Override
+	public int updateProgress(Map<String, Object> map) {
+		return sqlSession.update(namespace+"updateProgress", map);
+		
+	}
 
 }
