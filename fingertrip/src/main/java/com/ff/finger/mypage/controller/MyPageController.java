@@ -76,10 +76,8 @@ public class MyPageController {
 		String userid = (String) session.getAttribute("userid");
 		MemberVO memberVo = memberService.logingMember(userid);
 		
-		//List<HeartChargeVO> heartChargeVoList = heartChargeService.selectHeartChargeByMemberNo(memberVo.getMemberNo());
 		List<Map<String, Object>> heartListVoList = heartListService.selectHeartListByMemberNo(memberVo.getMemberNo());
 		
-		//model.addAttribute("hcVoList", heartChargeVoList);
 		model.addAttribute("hlVoList", heartListVoList);
 		
 		return "myPage/myHeart/heartList";
