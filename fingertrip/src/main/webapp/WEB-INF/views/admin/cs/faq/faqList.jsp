@@ -2,30 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/adminTop.jsp"%>
 <script type="text/javascript">
-	function pageFunc(currentPage){
-		frmHid.currentPage.value=currentPage;
-		frmHid.submit();
-	}
-	$(document).ready(function(){
-		$('a[name=del]').click(function(){
-			var count=0;
-			$('input[name=chk]').each(function(){
-				if($(this).is(':checked')){
-					count++;
-				}
-			});
-			if(count==0){
-				alert('삭제할 공지사항을 선택해주세요');
-				return false;
-			}else{
-				$('form[name=frmDel]').submit();
-			}
-		});
+
+ $(document).ready(function(){
+	$('select[name="faqCategoryNo"]').change(function(){
+		$('form[name=search] input[name=searchCondition]').val($('select[name=faqCategoryNo] option:selected').val());
+		$('form[name=search]').submit();
 	});
-	
-	function allChecked(bool){
-		$('input[name=chk]').prop('checked',bool);
-	}
+});
 </script>
 
 <section class="admCenter marginTop40" style="text-align: center">
@@ -34,40 +17,32 @@
        	<li><a href="<c:url value='/admin/cs/faq/faqWrite.do'/>">faq등록</a></li>
   	</ul>
 	<h2>FAQ</h2>
-	<form name="faqList" class="faqList" method="get" action="<c:url value='/admin/cs/faq/faqList.do'/>">
-		<input name="faqCategoryNo" type="hidden">
+	<form name="search" action="<c:url value='/admin/cs/faq/faqList.do'/>" method="post">
+      	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 	</form>
+	<%-- <form name="faqList" class="faqList" method="get" action="<c:url value='/admin/cs/faq/faqList.do'/>"> --%>
+		
+		<select name="faqCategoryNo">
+			<option value="0">전체</option>
+			<option value="1" 
+				<c:if test="${param.faqCategoryNo==1}">selected</c:if>
+			>결제/환불</option>
+			<option value="2"
+				<c:if test="${param.faqCategoryNo==2}">selected</c:if>
+			>쿠폰</option>
+			<option value="3"
+				<c:if test="${param.faqCategoryNo==3}">selected</c:if>
+			>상품</option>
+			<option value="4"
+				<c:if test="${param.faqCategoryNo==4}">selected</c:if>
+			>계정</option>
+			<option value="5"
+				<c:if test="${param.faqCategoryNo==5}">selected</c:if>
+			>기타</option>				
+		</select>
+		<button>확인</button>
+	<!-- </form> -->
 			
-			
-			<%-- <h4>FAQ</h4>
-			<ul class="faqTabNav clearFix">
-				<li value="1"
-					<c:if test="${param.faqCategoryNo==1 }">
-						class="gray"
-					</c:if>
-				>결제/환불</li>
-				<li value="2"
-					<c:if test="${param.faqCategoryNo==2 }">
-						class="gray"
-					</c:if>
-				>쿠폰</li>
-				<li value="3"
-					<c:if test="${param.faqCategoryNo==3 }">
-						class="gray"
-					</c:if>
-				>상품</li>
-				<li value="4"
-					<c:if test="${param.faqCategoryNo==4 }">
-						class="gray"
-					</c:if>
-				>계정</li>
-				<li value="5"
-					<c:if test="${param.faqCategoryNo==5 }">
-						class="gray"
-					</c:if>
-				>기타</li>
-			</ul>
-			 --%>
 			<table class="grayTh">
 				<tr>
 					<th><input type="checkbox"></th>
@@ -77,16 +52,16 @@
 					<th>내용</th>
 					<th>관리자</th>
 				</tr>
-				<tr>
-					<c:forEach var="faqCategoryNo1" items="${list}">
+				<c:forEach var="faqCategoryNo1" items="${list}">
+					<tr>
 						<td><input type="checkbox"></td>
-						<td>${faqCategoryNo1.faqNo}</td>
-						<td>${faqCategoryNo1.faqCateTitle}</td>
-						<td><a href="">${faqCategoryNo1.title}</a></td>
-						<td>${faqCategoryNo1.content}</td>
-						<td>${faqCategoryNo1.id}</td>
-					</c:forEach>
-				</tr>
+						<td>${faqCategoryNo1['FAQ_NO']}</td>
+						<td>${faqCategoryNo1['FAQ_CATE_TITLE']}</td>
+						<td><a href="">${faqCategoryNo1['TITLE']}</a></td>
+						<td>${faqCategoryNo1['CONTENT']}</td>
+						<td>${faqCategoryNo1['ID']}</td>
+					</tr>
+				</c:forEach>
 			</table>
 			
                 
