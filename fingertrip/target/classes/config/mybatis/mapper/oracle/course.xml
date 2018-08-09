@@ -118,6 +118,44 @@
 		set progress_no=#{progressNo}
 		where course_no=#{courseNo}
 	</update>
+
+	<select id="selectProgress" resultType="courseVo" parameterType="searchVo">
+		select *
+		from (
+			select list.*, rownum as RNUM
+			from(
+				select *
+		 		from course
+		 		where progress_no=3
+				<if test="searchKeyword!=null and searchKeyword!=''">
+					and ${searchCondition} like '%' || #{searchKeyword} || '%'
+				</if>
+				order by start_day
+				)list
+			)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+		]]>
+	</select>	
+	
+	<select id="getTotalRecordByPrgs" parameterType="searchVo" resultType="int">
+		select count(*)
+		from(
+			select *
+	 		from course
+	 		where progress_no=3
+			<if test="searchKeyword!=null and searchKeyword!=''">
+				and ${searchCondition} like '%' || #{searchKeyword} || '%'
+			</if>
+			)
+	</select>
+	
+	<select id="selectMember" parameterType="int" resultType="map">
+		select * 
+		from course c join member m
+		on c.member_no=m.member_no
+		where course_no=#{courseNo}
+	</select>
 	
 	<select id="selectListTravelSpot" parameterType="TravelSpotVO" resultType="TravelSpotVO" >
 		select *

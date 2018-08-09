@@ -79,15 +79,27 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<TravelSpotVO> selectListTravelSpot(CourseVO vo) {
 		return courseDao.selectListTravelSpot(vo);
 	}
+	@Override
+	public List<CourseVO> selectProgress(SearchVO searchVo) {
+		return courseDao.selectProgress(searchVo);
+	}
+
+	@Override
+	public int getTotalRecordByPrgs(SearchVO searchVo) {
+		return courseDao.getTotalRecordByPrgs(searchVo);
+	}
+
+	@Override
+	public Map<String, Object> selectMember(int courseNo) {
+		return courseDao.selectMember(courseNo);
+	}
 	
-=======
+	@Override
 	public List<TravelSpotVO> selectTravelSpot(int courseNo) {
 		return courseDao.selectTravelSpot(courseNo);
 	}
->>>>>>> branch 'master' of https://github.com/geoblo/fingertrip.git
 
 }

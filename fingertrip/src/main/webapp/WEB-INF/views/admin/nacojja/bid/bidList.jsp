@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 <section class="admCenter marginTop40" style="text-align: center">
 	<ul class="clearFix marginBottom40 lineGnb">
-	    <li ><a href="#">회원혜택관리</a></li>
+	    <li ><a href="<c:url value='/admin/nacojja/coupon/couponList.do'/>">회원혜택관리</a></li>
 	    <li class="on"><a href="<c:url value='/admin/nacojja/bid/bidList.do'/>">기업입찰조회</a></li>
 	    <li><a href="#">나코짜전체관리</a></li>
 	    <li><a href="#">상품매출분석</a></li>
@@ -102,9 +102,6 @@ $(document).ready(function(){
 	           <a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
 	        </c:if>
         </div>
-        <!-- <div class="aWrap fRight">
-        	<input type="submit" class="darkBorder" id="delete" value="삭제"/>
-        </div> -->
         </form>
     </section>
 

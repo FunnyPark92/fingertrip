@@ -7,6 +7,7 @@ public class FaqVO {
 	private String content;
 	private int adminNo;
 	private int faqCategory;
+	private int faqCategoryNo;
 	private String faqCateTitle;
 	private String id;
 	
@@ -40,6 +41,12 @@ public class FaqVO {
 	public void setFaqCategory(int faqCategory) {
 		this.faqCategory = faqCategory;
 	}
+	public int getFaqCategoryNo() {
+		return faqCategoryNo;
+	}
+	public void setFaqCategoryNo(int faqCategoryNo) {
+		this.faqCategoryNo = faqCategoryNo;
+	}
 	public String getFaqCateTitle() {
 		return faqCateTitle;
 	}
@@ -49,13 +56,16 @@ public class FaqVO {
 	public String getId() {
 		return id;
 	}
-	public void setAdminId(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
 	@Override
 	public String toString() {
 		return "FaqVO [faqNo=" + faqNo + ", title=" + title + ", content=" + content + ", adminNo=" + adminNo
-				+ ", faqCategory=" + faqCategory + ", faqCateTitle=" + faqCateTitle + ", id=" + id + "]";
+				+ ", faqCategory=" + faqCategory + ", faqCategoryNo=" + faqCategoryNo + ", faqCateTitle=" + faqCateTitle
+				+ ", id=" + id + "]";
 	}
+	
+	
 }

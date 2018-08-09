@@ -20,6 +20,9 @@
 	function pageFunc(currentPage){
 		frmPage.currentPage.value=currentPage;
 		frmPage.recordCountPerPage.value=frmSearch1.recordCountPerPage.value;
+		frmPage.searchCondition2.value=frmS.search2.value;
+		frmPage.searchCondition.value=frmSC.searchCondition.value;
+		frmPage.searchKeyword.value=frmSC.searchKeyword.value;
 		frmPage.submit();
 	}
 </script>
@@ -72,7 +75,7 @@
 						>20</option>
 					</select>
 				</form>
-				<div class="colorGray form-inline float-right pad10">
+				<form name="frmS" class="colorGray form-inline float-right pad10">
 					<select name="search2" class="form-control colorGray marginR10">
 						<option value="0" class="colorGray">모든 나코짜 목록</option>
 						<option value="1" class="colorGray" 
@@ -101,7 +104,7 @@
 							</c:if>
 						>종료</option>
 					</select>
-				</div>
+				</form>
 			</div>
 			
 			<c:if test="${!empty list}">
@@ -149,7 +152,7 @@
 			</div>	
 			
 			<div class="margin0 width350">
-				<form action="<c:url value='/nacojja/nacojjaList.do'/>" method="post" class="colorGray form-inline">
+				<form name="frmSC" action="<c:url value='/nacojja/nacojjaList.do'/>" method="post" class="colorGray form-inline">
 					<input type="hidden" value="${param.searchCondition2 }" name="searchCondition2">
 					<input type="hidden" value="${param.recordCountPerPage }" name="recordCountPerPage">
 					<select name="searchCondition" class="form-control colorGray marginR10">

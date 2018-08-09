@@ -72,13 +72,26 @@ public class CourseDAOMybatis implements CourseDAO{
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<TravelSpotVO> selectListTravelSpot(CourseVO vo) {
 		return sqlSession.selectList(namespace+"selectListTravelSpot",vo);
-=======
+
+	public List<CourseVO> selectProgress(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectProgress", searchVo);
+	}
+
+	@Override
+	public int getTotalRecordByPrgs(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"getTotalRecordByPrgs", searchVo);
+	}
+
+	@Override
+	public Map<String, Object> selectMember(int courseNo) {
+		return sqlSession.selectOne(namespace+"selectMember", courseNo);
+	}
+	
+	@Override
 	public List<TravelSpotVO> selectTravelSpot(int courseNo) {
 		return sqlSession.selectList(namespace + "selectTravelSpot", courseNo);
->>>>>>> branch 'master' of https://github.com/geoblo/fingertrip.git
 	}
 
 }

@@ -26,7 +26,7 @@ import com.ff.finger.winBid.model.WinBidService;
 @Controller
 @RequestMapping("/admin/nacojja/bid")
 public class AdminBidController {
-	private Logger logger=LoggerFactory.getLogger(AdminBidController.class);
+	private static final Logger logger=LoggerFactory.getLogger(AdminBidController.class);
 	
 	@Autowired 
 	private BidService bidService;

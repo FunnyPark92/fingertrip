@@ -21,6 +21,21 @@ public class CouponDAOMybatis implements CouponDAO {
 		logger.info(id);
 		return sqlSession.selectList(namespace+"selectCouponView",id);
 	}
+
+	@Override
+	public int selectByHeart(int heartNo) {
+		return sqlSession.selectOne(namespace+"selectByHeart", heartNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectHeartMemberCoupon(int courseNo) {
+		return sqlSession.selectList(namespace+"selectHeartMemberCoupon", courseNo);
+	}
+
+	@Override
+	public List<CouponVO> selectAll() {
+		return sqlSession.selectList(namespace+"selectAll");
+	}
 	
 	
 }
