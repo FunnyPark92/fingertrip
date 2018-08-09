@@ -12,7 +12,9 @@ import com.ff.finger.common.SearchVO;
 @Repository
 public class HeartDAOMybatis implements HeartDAO{
 	private String namespace="config.mybatis.mapper.oracle.heart.";
-	@Autowired private SqlSessionTemplate sqlSession;
+	
+	@Autowired 
+	private SqlSessionTemplate sqlSession;
 	
 	@Override
 	public List<Map<String, Object>> myCourseList(SearchVO searchVo) {
@@ -24,6 +26,11 @@ public class HeartDAOMybatis implements HeartDAO{
 		return sqlSession.selectOne(namespace+"getTotalRecord", searchVo);
 	}
 
+	@Override
+	public int insertHeart(Map<String, Integer> map) {
+		return sqlSession.insert(namespace + "insertHeart", map);
+	}
+	
 	@Override
 	public List<HeartVO> selectByCourse(int courseNo) {
 		return sqlSession.selectList(namespace+"selectByCourse", courseNo);

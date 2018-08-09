@@ -64,6 +64,11 @@
 		</where>
 	</select>
 	
+	<insert id="insertHeart" parameterType="map">
+		INSERT INTO HEART(HEART_NO, COURSE_NO, MEMBER_NO)
+		VALUES(HEART_SEQ.NEXTVAL, #{courseNo}, #{memberNo})
+	</insert>
+	
 	<select id="selectByCourse" parameterType="int" resultType="heartVo">
 		select * from heart
 		where course_no=#{courseNo}

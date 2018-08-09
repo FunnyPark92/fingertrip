@@ -68,6 +68,9 @@ public class MyPageController {
 	public String myHeart() {
 		logger.info("하트 내역 화면 보여주기");
 		
+		
+		
+		
 		return "myPage/myHeart/heartList";
 	}
 	
@@ -117,7 +120,7 @@ public class MyPageController {
 			int cnt = heartChargeService.heartCharge(heartChargeVo);
 			logger.info("결제 완료 시 하트 충전 결과 cnt={}", cnt);
 			
-			//멤버서비스 불러서 하트 개수 올리기...
+			//멤버서비스 불러서 하트 개수 올리기
 			cnt = memberService.plusHeart(heartChargeVo);
 			logger.info("회원 하트 업데이트 결과 cnt={}", cnt);
 			
@@ -182,8 +185,8 @@ public class MyPageController {
 	public String myWriteList(@ModelAttribute SearchVO searchVo, @RequestParam(defaultValue="1") int currentPageforCourse, HttpSession session, Model model) {
 		//로그인때 session에 저장된 userid로 회원정보를 가져오기+memberNo를 getter로 받아오기
 		String userid=(String)session.getAttribute("userid");
-		MemberVO memberVo=memberService.logingMember(userid); 
-		int memberNo=memberVo.getMemberNo();  
+		MemberVO memberVo=memberService.logingMember(userid);
+		int memberNo=memberVo.getMemberNo();
 		searchVo.setMemberNo(memberNo); //member를 상속받은 searchVo에 저장해둔 memberNo셋팅
 		
 		//QnA페이징
