@@ -4,27 +4,26 @@
 <%@ include file="../../inc/top.jsp"%>
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		  $(".hid").hide();
-		  var pass1="";
-		  var pass2="";
-		  $(".pwck1").click(function(){
-			 pass1=$(".pass1").val();
-			 if(pass1!==""){	 
-			    $(".hid").hide();
-			    $(this).next().show();
-			    return false;
-			   	}
-		     });
-		  $(".pwck2").click(function(){
-			 pass2=$(".pass2").val();
-			 if(pass2!==""){	 
-			    $(".hid").hide();
-			    $(this).next().show();
-			    return false;
-			    }	 
-		     });
-	        
+$(document).ready(function(){
+	$(".hid").hide();
+		var pass1="";
+		var pass2="";
+	$(".pwck1").click(function(){
+		pass1=$(".pass1").val();
+		if(pass1!==""){	 
+			$(".hid").hide();
+			$(this).next().show();
+			return false;
+		}
+	});
+	$(".pwck2").click(function(){
+		pass2=$(".pass2").val();
+		if(pass2!==""){	 
+			$(".hid").hide();
+			$(this).next().show();
+			return false;
+		}	 
+	});	        
 	});		  
 </script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>

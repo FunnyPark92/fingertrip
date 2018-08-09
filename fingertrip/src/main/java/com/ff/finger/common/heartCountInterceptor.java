@@ -35,7 +35,7 @@ public class heartCountInterceptor extends HandlerInterceptorAdapter  {
 			PrintWriter out = response.getWriter();
 			out.println("<script type='text/javascript'>");
 			out.print("alert('횐님! 하트가 부족하시네요. 충전부터 하시죵~');");
-			out.println("location.href='"+request.getContextPath()+"/index.do'"); //To-Do 하트 충전 페이지로 이동하도록 추후 변경
+			out.println("location.href='"+request.getContextPath()+"/myPage/myHeart/heartList.do'");
 			out.println("</script>");
 			
 			return false;

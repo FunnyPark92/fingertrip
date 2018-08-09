@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.heartcharge.model.HeartChargeVO;
 
 @Repository
 public class MemberDAOMybatis implements MemberDAO {
@@ -77,6 +78,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	}
 
 	@Override
+	public MemberVO selectMember(int memberNo) {
+		return sqlSession.selectOne(namespace + "selectMember", memberNo);
+	}
+	
+	@Override
 	public List<MemberVO> selectAll(SearchVO searchVo) {
 		List<MemberVO> list=sqlSession.selectList(namespace+"selectAll",searchVo);
 		return list;
@@ -112,6 +118,13 @@ public class MemberDAOMybatis implements MemberDAO {
 	public int minusHeart(int memberNo) {
 		return sqlSession.update(namespace + "minusHeart", memberNo);
 	}
+
+	@Override
+	public int plusHeart(HeartChargeVO heartChargeVo) {
+		return sqlSession.update(namespace + "plusHeart", heartChargeVo);
+	}
+
+	
 
 
 }

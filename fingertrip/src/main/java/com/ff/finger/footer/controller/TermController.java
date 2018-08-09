@@ -10,7 +10,7 @@ public class TermController {
 	private static final Logger logger = LoggerFactory.getLogger(TermController.class); 
 	
 	@RequestMapping("/footer/term.do")
-	public String index() {   
+	public String term() {   
 		logger.info("이용약관 문의 보여주기");
 		
 		return "footer/term";

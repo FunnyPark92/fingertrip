@@ -68,8 +68,6 @@ public class CourseServiceImpl implements CourseService {
 		return courseDao.selectMaxDay(courseNo);
 	}
 
-
-
 	@Override
 	public int updateProgress(Map<String, Object> map) {
 		return courseDao.updateProgress(map);
@@ -81,9 +79,15 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<TravelSpotVO> selectListTravelSpot(CourseVO vo) {
 		return courseDao.selectListTravelSpot(vo);
 	}
 	
+=======
+	public List<TravelSpotVO> selectTravelSpot(int courseNo) {
+		return courseDao.selectTravelSpot(courseNo);
+	}
+>>>>>>> branch 'master' of https://github.com/geoblo/fingertrip.git
 
 }

@@ -92,7 +92,7 @@
 	</select>
 	
 	<select id="selectCourseProgress" parameterType="int" resultType="map">
-		select c.*, c.bid_start_day+14 as bid_end_day, p.progress_no, p.progress_status
+		select c.*, c.bid_start_day+14 as bid_end_day, p.progress_status
 		from course c join progress p
 		on c.progress_no = p.progress_no
 		where course_no=#{courseNo}
@@ -135,8 +135,7 @@
 	    
 	</select>
 	
-	
-	
-	
-	
+	<select id="selectTravelSpot" parameterType="int" resultType="TravelSpotVO">
+		SELECT * FROM TRAVEL_SPOT WHERE COURSE_NO=#{courseNo} ORDER BY TRAVEL_SPOT_NO DESC
+	</select>
 </mapper>

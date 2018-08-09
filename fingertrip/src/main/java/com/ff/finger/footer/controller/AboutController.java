@@ -10,7 +10,7 @@ public class AboutController {
 	private static final Logger logger = LoggerFactory.getLogger(AboutController.class); 
 	
 	@RequestMapping("/footer/about.do")
-	public String index() {   
+	public String about() {   
 		logger.info("회사소개 보여주기");
 		
 		return "footer/about";

@@ -128,7 +128,6 @@
 		</dependency>
 
 		<!-- mybatis 필요한 것들 가져오기 -->
-
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
@@ -160,14 +159,12 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-		
 		<!-- DataSource를 사용하기 위함 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-
 
 		<!-- AOP 처리를 위한 aspect.jar -->
 		<dependency>
@@ -181,7 +178,6 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
-
 
 		<!-- 화면에서 ajax처리시 Map처리 가능 -->
 		<!-- <dependency>
@@ -259,6 +255,13 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- iamport API -->
+		<dependency>
+	    	<groupId>com.github.iamport</groupId>
+	    	<artifactId>iamport-rest-client-java</artifactId>
+	    	<version>0.1.10</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>		
@@ -272,8 +275,14 @@
 			<id>oracle</id>
 			<name>ORACLE JDBC Repository</name>
 			<url>https://maven.atlassian.com/3rdparty/</url>
-		</repository>	
+		</repository>
+		
+		<repository>
+	    	<id>jitpack.io</id>
+	    	<url>https://jitpack.io</url>
+		</repository>
 	</repositories>
+	
     <build>
         <plugins>
             <plugin>

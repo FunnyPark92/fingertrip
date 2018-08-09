@@ -1,11 +1,7 @@
 package com.ff.finger.travelAgency.model;
 
-import java.awt.print.PrinterException;
-import java.io.IOException;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +9,8 @@ import com.ff.finger.common.SearchVO;
 
 @Service
 public class TravelAgencyServiceImpl implements TravelAgencyService {
-	private static final Logger logger = LoggerFactory.getLogger(TravelAgencyServiceImpl.class);
-
-	@Autowired TravelAgencyDAO travelAgencyDao;
+	@Autowired 
+	private TravelAgencyDAO travelAgencyDao;
 	
 	@Override
 	public int insertAgency(TravelAgencyVO vo) {
@@ -34,7 +29,6 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 		return result;
 	}
 
-
 	@Override
 	public boolean checkLicenseNoDupl(String licenseNo) {
 		int cnt =travelAgencyDao.checkLicenseNo(licenseNo);
@@ -43,7 +37,6 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 		}else {
 			return true;
 		}
-	
 	}
 
 	@Override
@@ -70,16 +63,17 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 	public int multiDelete(List<TravelAgencyVO> list) {
 		int cnt =0;
 		try {
-				for(TravelAgencyVO vo : list) {
-					int travelAgencyNo = vo.getTravelAgencyNo();
-					if(travelAgencyNo>0) {
-						cnt = travelAgencyDao.deleteAgency(vo.getTravelAgencyNo());
-					}
+			for(TravelAgencyVO vo : list) {
+				int travelAgencyNo = vo.getTravelAgencyNo();
+				if(travelAgencyNo>0) {
+					cnt = travelAgencyDao.deleteAgency(vo.getTravelAgencyNo());
 				}
+			}
 		} catch (RuntimeException e) {
 			cnt=-1;
 			e.printStackTrace();
 		}
+		
 		return cnt;
 	}
 	
@@ -92,6 +86,7 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 		}else {
 			result = true; //아이디 사용가능
 		}
+		
 		return result;
 	}
 
@@ -99,8 +94,5 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 	public int updateAgency(TravelAgencyVO vo) {
 		return travelAgencyDao.updateAgency(vo);
 	}
-
-
-	
 
 }

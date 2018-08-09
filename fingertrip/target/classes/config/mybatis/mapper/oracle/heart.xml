@@ -39,16 +39,16 @@
 	<select id="getTotalRecord" parameterType="searchVo" resultType="int">
 		select count(*)
         from(
-                select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, member_no, listagg(country, ',') within group (order by course_no) as countries
-                from(
-                    select distinct c.course_no, country, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, h.member_no
-                    from corsTrvlCntryCntnentPrgrsView c join heart h
-                    on c.course_no=h.course_no
-                )
-				where member_no=#{memberNo}
-				group by course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, member_no
-				order by course_no desc
-         )
+            select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, member_no, listagg(country, ',') within group (order by course_no) as countries
+            from(
+                select distinct c.course_no, country, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, h.member_no
+                from corsTrvlCntryCntnentPrgrsView c join heart h
+                on c.course_no=h.course_no
+            )
+			where member_no=#{memberNo}
+			group by course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, member_no
+			order by course_no desc
+        )
         <where>
 			<if test="searchCondition2!=0">
 				progress_no = #{searchCondition2}
@@ -63,6 +63,7 @@
 			</if>
 		</where>
 	</select>
+	
 </mapper>
 
 

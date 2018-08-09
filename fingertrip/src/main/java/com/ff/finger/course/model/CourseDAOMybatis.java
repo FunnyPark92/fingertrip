@@ -24,7 +24,6 @@ public class CourseDAOMybatis implements CourseDAO{
 	@Override
 	public int getTotalRecord(SearchVO searchVo) {
 		return sqlSession.selectOne(namespace+"getTotalRecord", searchVo);
-
 	}
 	
 	@Override
@@ -62,12 +61,9 @@ public class CourseDAOMybatis implements CourseDAO{
 		return sqlSession.selectOne(namespace+"selectMaxDay", courseNo);
 	}
 
-	
-
 	@Override
 	public int updateProgress(Map<String, Object> map) {
 		return sqlSession.update(namespace+"updateProgress", map);
-		
 	}
 
 	@Override
@@ -76,8 +72,13 @@ public class CourseDAOMybatis implements CourseDAO{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<TravelSpotVO> selectListTravelSpot(CourseVO vo) {
 		return sqlSession.selectList(namespace+"selectListTravelSpot",vo);
+=======
+	public List<TravelSpotVO> selectTravelSpot(int courseNo) {
+		return sqlSession.selectList(namespace + "selectTravelSpot", courseNo);
+>>>>>>> branch 'master' of https://github.com/geoblo/fingertrip.git
 	}
 
 }

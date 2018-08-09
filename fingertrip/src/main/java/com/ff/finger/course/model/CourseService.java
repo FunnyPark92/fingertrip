@@ -17,5 +17,9 @@ public interface CourseService {
 	public int selectMaxDay(int courseNo);
 	public int updateProgress(Map<String, Object> map);
 	public Map<String, Object> selectOneCTJoin(int courseNo);
+<<<<<<< HEAD
 	public List<TravelSpotVO> selectListTravelSpot(CourseVO vo);
+=======
+	public List<TravelSpotVO> selectTravelSpot(int courseNo);
+>>>>>>> branch 'master' of https://github.com/geoblo/fingertrip.git
 }

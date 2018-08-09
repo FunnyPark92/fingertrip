@@ -14,6 +14,12 @@
 		IMP.init('imp72373641');
 		
 		var price=0;
+		var heartChargeCount = 0;
+		
+		$("#resultCharge").keyup(function(){
+			$("#calcPayment").val($(this).val() * 1100);
+		});
+		
 		$('.btnC').each(function(idx, item){
 			$(this).click(function(){
 				price += $(this).val()*1;
@@ -27,31 +33,56 @@
 			//alert("기타: " + $("#resultCharge").val() * 1100);
 			$("#etcHeartCnt").val($("#resultCharge").val());
 			$("#etcAmount").val($("#resultCharge").val() * 1100);
+			heartChargeCount = $(this).parent().find(":first").val();
 			
 			IMP.request_pay({
 			    pg : 'uplus',
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '주문명: 하트 ' + $(this).parent().find(":first").val() + "개 결제",
+			    name : '주문명: 하트 ' + heartChargeCount + "개 결제",
 			    amount : $(this).prev().val(),
 			    buyer_email : '${memberVo.email1}@${memberVo.email2}',
 			    buyer_name : '${memberVo.name}',
 			    buyer_tel : '${memberVo.hp1}-${memberVo.hp2}-${memberVo.hp3}',
 			    buyer_addr : '${memberVo.address} ${memberVo.addressDetail}',
 			    buyer_postcode : '${memberVo.zipcode}',
-			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+			    //m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 			}, function(rsp) {
-			    if (rsp.success) {
-			        var msg = '결제가 완료되었습니다.';
-			        msg += '고유ID : ' + rsp.imp_uid;
-			        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			        msg += '결제 금액 : ' + rsp.paid_amount;
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
+				if (rsp.success) {
+			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+			    	jQuery.ajax({
+			    		url: "<c:url value='/myPage/payments/complete.do'/>",
+			    		type: 'POST',
+			    		dataType: 'json',
+			    		data: {
+				    		imp_uid : rsp.imp_uid,
+				    		heartCount : heartChargeCount,
+				    		amount : rsp.paid_amount,
+				    		//기타 필요한 데이터가 있으면 추가 전달
+			    		}
+			    	}).done(function(data) {
+			    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+			    		if (data) {
+			    			var msg = '하트 결제가 완료되었습니다.';
+			    			/* msg += '\n고유ID : ' + rsp.imp_uid;
+			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+			    			msg += '\결제 금액 : ' + rsp.paid_amount;
+			    			msg += '카드 승인번호 : ' + rsp.apply_num; */
+
+			    			alert(msg);
+			    			self.close();
+			    		} else {
+			    			//[3] 아직 제대로 결제가 되지 않았습니다.
+			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+			    			alert("아직 제대로 결제가 되지 않았습니다.");
+			    		}
+			    	});
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
+
+			        alert(msg);
 			    }
-			    alert(msg);
 			});
 		});
 		
@@ -153,6 +184,10 @@
 				<input type="text" style="dispaly:inline-block;" class="etcInput" id="resultCharge">
 				<!-- <button type="button" class="btn btn-info btn-sm etcBtn1 btnC" id="btn1" value="1">1 개</button> -->
 			</div>
+				<span class="spanCharge">결제 금액 : 
+					<input type="text" id="calcPayment" value="0" style="border: none;">원
+					<!-- <strong id="payment"></strong> -->
+				</span>
 			<!-- <div class="etcBtnWrap">
 				<button type="button" class="btn btn-info btn-sm etcBtn2 btnC" value="3">3 개</button>
 				<button type="button" class="btn btn-info btn-sm etcBtn2 btnC" value="5">5 개</button>
@@ -161,7 +196,6 @@
 			</div> -->
 			<input type="hidden" id="etcAmount">
 			<button type="button" class="btn btn-danger btn-lg etcBtn">구매하기</button>
-			<span class="spanCharge" style="display: block;">결제 금액 : <strong id="payment"></strong></span>
 		</div>
 			
 		<div style="clear: both;"></div>

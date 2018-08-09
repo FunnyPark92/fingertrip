@@ -46,20 +46,18 @@
 		<form action="" method="post">
 			<table class="grayTh">
 	            <tr>
-	                <th scope="col" style="width:5%; text-align: center"><input type="checkbox" name="chkAll"/></th>
 	                <th scope="col" style="width:20%; text-align: center">여행사</th>
 	                <th scope="col" style="width:10%; text-align: center">입찰가</th>
 	                <th scope="col" style="width:20%; text-align: center">입찰시점</th>
-	                <th scope="col" style="width:10%; text-align: center">여행출발일1</th>
-	                <th scope="col" style="width:10%; text-align: center">여행출발일2</th>
-	                <th scope="col" style="width:10%; text-align: center">여행출발일3</th>
-	                <th scope="col" style="width:10%; text-align: center">여행출발일4</th>
-	                <th scope="col" style="width:5%; text-align: center">낙찰</th>
+	                <th scope="col" style="width:11%; text-align: center">여행출발일1</th>
+	                <th scope="col" style="width:11%; text-align: center">여행출발일2</th>
+	                <th scope="col" style="width:11%; text-align: center">여행출발일3</th>
+	                <th scope="col" style="width:11%; text-align: center">여행출발일4</th>
+	                <th scope="col" style="width:6%; text-align: center">낙찰</th>
 	            </tr>
 	            <!-- 반복 시작 -->
 	            <c:forEach var="map2" items="${list}">
 		            <tr style="text-align: center">
-		                <td><input type="checkbox" name="chk" value="${map2['BID_NO']}"></td>
 		                <td>${map2['NAME']}</td>
 		                <td><fmt:formatNumber value="${map2['BID_PRICE']}" pattern="#,###"/> 원</td>
 		                <td><fmt:formatDate value="${map2['BID_DAY']}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
