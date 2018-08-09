@@ -15,7 +15,7 @@
 				<if test="searchCondition!=0">
 					and c.progress_no=#{searchCondition}
 				</if>
-				order by c.bid_start_day desc
+				order by c.bid_start_day
 				)list
 			)
 		<![CDATA[

@@ -16,7 +16,20 @@ public class CouponServiceImple implements CouponService {
 	public List<Map<String, Object>> selectCouponView(String id) {
 		return couponDao.selectCouponView(id);
 	}
-	
-	
 
+	@Override
+	public int selectByHeart(int heartNo) {
+		return couponDao.selectByHeart(heartNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectHeartMemberCoupon(int courseNo) {
+		return couponDao.selectHeartMemberCoupon(courseNo);
+	}
+
+	@Override
+	public List<CouponVO> selectAll() {
+		return couponDao.selectAll();
+	}
+	
 }

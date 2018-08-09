@@ -64,6 +64,10 @@
 		</where>
 	</select>
 	
+	<select id="selectByCourse" parameterType="int" resultType="heartVo">
+		select * from heart
+		where course_no=#{courseNo}
+	</select>
 </mapper>
 
 
