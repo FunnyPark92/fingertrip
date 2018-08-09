@@ -749,8 +749,8 @@
                             <input id="address" type="textbox" placeholder="지도에 표시될 여행지를 검색해주세요" 
                         		onkeypress="if (event.keyCode==13) {return false;}"> <!-- 엔터키로 submit 되어버리는 현상 막음 -->
                             <input type="button" onclick="findPlace(18)" class="searchIcon">
-                       		<input type="button" value="여행지 추가" onclick="addPlace()" class="btn btn-warning">
-                        	<input type=button onclick="undoPlace(true);" value="여행지 취소" class="btn btn-danger">
+                       		<input type="button" value="여행지 추가" onclick="addPlace()" class="btn btn-outline-info">
+                        	<input type=button onclick="undoPlace(true);" value="여행지 취소" class="btn btn-outline-danger">
                         </div>
                        
                         <div class="courseDiv">
