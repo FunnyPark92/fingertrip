@@ -12,7 +12,7 @@
 		where heart_no=#{heartNo}
 	</select>
 	
-	<select id="selectHeartMemberCoupon" parameterType="int" resultType="map">
+<!-- 	<select id="selectHeartMemberCoupon" parameterType="int" resultType="map">
 		select * 
 		from heart h join member m
 		on h.member_no=m.member_no
@@ -22,6 +22,23 @@
 		on cl.coupon_no=c.coupon_no
 		where h.course_no=#{courseNo}
 		and h.heart_no>(select min(heart_no ) from heart where course_no=#{courseNo})
+		order by h.heart_no
+	</select> -->
+	<select id="selectHeartMemberCoupon" parameterType="map" resultType="map">
+		select * 
+		from heart h join member m
+		on h.member_no=m.member_no
+		left outer join coupon_list cl
+		on h.heart_no=cl.heart_no
+		left outer join coupon c
+		on cl.coupon_no=c.coupon_no
+		where h.course_no=#{courseNo}
+		<if test="find==0">
+			and h.heart_no=(select min(heart_no ) from heart where course_no=#{courseNo})
+		</if>
+		<if test="find!=0">
+			and h.heart_no>(select min(heart_no ) from heart where course_no=#{courseNo})
+		</if>
 		order by h.heart_no
 	</select>
 	

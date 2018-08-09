@@ -7,6 +7,6 @@ public interface CouponDAO {
 	
 	public List<Map<String , Object>> selectCouponView(String id);
 	public int selectByHeart(int heartNo);
-	public List<Map<String , Object>> selectHeartMemberCoupon(int courseNo);
+	public List<Map<String , Object>> selectHeartMemberCoupon(Map<String, Object> map);
 	public List<CouponVO> selectAll();
 }

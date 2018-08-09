@@ -74,7 +74,9 @@ public class CourseDAOMybatis implements CourseDAO{
 	@Override
 	public List<TravelSpotVO> selectListTravelSpot(CourseVO vo) {
 		return sqlSession.selectList(namespace+"selectListTravelSpot",vo);
-
+	}
+				
+	@Override
 	public List<CourseVO> selectProgress(SearchVO searchVo) {
 		return sqlSession.selectList(namespace+"selectProgress", searchVo);
 	}

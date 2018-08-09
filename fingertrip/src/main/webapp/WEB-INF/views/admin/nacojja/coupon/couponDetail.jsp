@@ -31,15 +31,20 @@
 	 		<tr>
 	 			<th>작성자</th>
 	 			<td>
-	 				ID: ${map['ID'] } / NAME: ${map['NAME'] } 
-	 				<input type="hidden" value="${map['COURSE_NO'] }">
-	 				<input type="submit" value="1+1쿠폰 제공">
+	 				<c:forEach var="map1" items="${list1 }">
+	 					ID: ${map1['ID']} / NAME: ${map1['NAME'] } 
+	 				<input name="courseNo" type="hidden" value="${map1['COURSE_NO'] }">
+	 				<input name="memberNo" type="hidden" value="${map1['MEMBER_NO'] }">
+	 				<c:if test="${empty map1['COUPON_NAME'] }">
+	 					<input type="submit" value="1+1쿠폰 제공">
+					</c:if>
+	 				</c:forEach>
 	 			</td>
 	 		</tr>	
 		</table>
 		
 		<form action="" method="post">
-			<input type="hidden" value="${map['COURSE_NO'] }">
+			<input name="courseNo" type="hidden" value="${map['COURSE_NO'] }">
 			<table class="grayTh">
 	            <tr>
 	                <th scope="col" style="width:10%; text-align: center">회원번호</th>
@@ -48,7 +53,7 @@
 	                <th scope="col" style="width:40%; text-align: center">쿠폰</th>
 	            </tr>
 	            <!-- 반복 시작 -->
-	            <c:forEach var="map2" items="${list}">
+	            <c:forEach var="map2" items="${list2}">
 		            <tr style="text-align: center">
 		                <td>${map2['MEMBER_NO']}</td>
 		                <td>${map2['NAME']}</td>
