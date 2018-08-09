@@ -425,7 +425,6 @@ table a:hover, table a:active{text-decoration: none;}
 
 
 /* 나코짜2 plan2 */
-/* li{list-style: none} */
 .faq-list .list-group-item.active {
     z-index: 2;
     color: #fff;
@@ -444,44 +443,68 @@ table a:hover, table a:active{text-decoration: none;}
     right: 10px;
     bottom: 10px;
 }
+.frmNacojja2{position: relative;}
 .course{
     width:100%;
-    border-top: 3px solid #2288ff;
-    border-bottom: 3px solid #2288ff;
+    /* border-top: 3px solid #2288ff;
+    border-bottom: 3px solid #2288ff; */
 }
 .courseDiv{
-    border-bottom: 1px solid #cbe3ff;
+    border-top: 1px solid #a0c3dc;
 }
 .courseLabel{
-    width: 20%;
+    width: 14%;
     box-sizing: border-box;
-    background: #e9f0f5;
+    border-top:2px solid #457fa9;
+   /*  border-top: 2px solid #a0ceef;
+    background: #eff6ff; */
     margin: 0;
-    padding: 10px;
-    text-align: center;
+    padding:0.5%;
+    vertical-align: top;
 }
 .courseInput[type=text]{
     width: 78%;
     border: none;
     padding-left: 3px;
 }
+.continentDiv{
+	position: absolute;
+	top: 362px;
+    left: 24px;
+    z-index: 9;
+}
+.continentDiv select{
+	border:none;
+	padding: 5px 3px;
+	background: #fffcf8;
+}
 .mapSearch{
     margin: 8px 0 10px;
 }
+.searchIcon{
+	background-image: url(../img/searchIcon.png);
+	background-repeat: no-repeat;
+	width: 24px;
+	height: 24px;
+	border:none;
+	background-color: #fff;
+	position: relative;
+    bottom: -3px;
+}
 .mapSearch input[type=textbox]{
-    width:89.5%; 
+    width:72%; 
     padding: 3px;
     border: none;
-    border-bottom: 1px solid #ffab3a;
-}
-.mapSearch input[type=button]{
-    position: relative;
-    bottom: 3px;
+    box-sizing: border-box;
+    background: #eee;
+    box-sizing: border-box;
+    padding-left: 8px;
 }
 .textCK{
-    width: 99.5%;
-    padding: 5px;
-    border: 1px solid #c7c7c7;
+    width: 85%;
+    padding: 0.5%;
+    border: 1px solid #f3f3f3;
+    box-sizing: border-box;
 }
 #map{
     width:100%; 

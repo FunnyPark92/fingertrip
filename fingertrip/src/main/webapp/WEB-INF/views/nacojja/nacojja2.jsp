@@ -687,10 +687,9 @@
         <div class="col-md-10">
             <div class="tab-content panels-faq">
            		<div class="tab-pane active" id="tab1">
-                    <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>">
+                    <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>" class="frmNacojja2">
                     <%-- <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>" onsubmit="return checkDataValid()"> --%>
-                        <div class="courseDiv">
-                            <label for="continent" class="courseLabel">대륙</label>
+                        <div class="continentDiv">
                             <select name="continent" class="continent" id="continent">
                             	<option value="">== 대륙 선택 ==</option>
                             	<option value="asia"
@@ -738,6 +737,22 @@
                             </select>
                         </div>
                        
+                       <!--  <div id="floating-panel">
+						    <input onclick="clearMarkers();" type=button value="마커 숨기기">
+						    <input onclick="showMarkers();" type=button value="모든 마커 표시">
+						    <input onclick="deleteMarkers();" type=button value="모든 마커 제거">
+					    </div> -->
+                       
+                        <div id="map" class="map"></div>
+                        
+                        <div class="mapSearch">
+                            <input id="address" type="textbox" placeholder="지도에 표시될 여행지를 검색해주세요" 
+                        		onkeypress="if (event.keyCode==13) {return false;}"> <!-- 엔터키로 submit 되어버리는 현상 막음 -->
+                            <input type="button" onclick="findPlace(18)" class="searchIcon">
+                       		<input type="button" value="여행지 추가" onclick="addPlace()" class="btn btn-warning">
+                        	<input type=button onclick="undoPlace(true);" value="여행지 취소" class="btn btn-danger">
+                        </div>
+                       
                         <div class="courseDiv">
                             <label for="city" class="courseLabel">도시</label>
                             <input type="text" id="city" name="city" readonly="readonly" style="border: none; width: 70%">
@@ -754,32 +769,20 @@
                             <input type="text" id="place-rating" readonly="readonly" style="border: none;">
                         </div>
                         
+                        <div class="courseDiv">
+                        	<label for="travelContent" class="courseLabel">설명</label>
+                       		<textarea name="travelContent" rows="5" class="textCK" placeholder="해당 날짜 여행지에 대한 설명을 작성해주세요"></textarea>
+                        </div>
+                        
                         <div id="divPhotos" class="courseDiv">
                         	<label for="photos" class="courseLabel">포토</label>
                         	<input type="hidden" id="img" name="img">
                         </div>
                        
-                       <!--  <div id="floating-panel">
-						    <input onclick="clearMarkers();" type=button value="마커 숨기기">
-						    <input onclick="showMarkers();" type=button value="모든 마커 표시">
-						    <input onclick="deleteMarkers();" type=button value="모든 마커 제거">
-					    </div> -->
-                       
-                        <div id="map" class="map"></div>
-                       
-                        <div class="mapSearch">
-                            <input id="address" type="textbox" placeholder="지도에 표시될 여행지를 검색해주세요" 
-                        		onkeypress="if (event.keyCode==13) {return false;}"> <!-- 엔터키로 submit 되어버리는 현상 막음 -->
-                            <input type="button" value="장소검색" onclick="findPlace(18)" class="btn btn-warning">
-                        </div>
-                       
-                        <textarea name="travelContent" rows="5" class="textCK" placeholder="여행지에 대한 설명을 작성해주세요"></textarea>
-                        <input type="button" value="여행지로 추가" onclick="addPlace()" class="btn btn-warning">
-                        <input type=button onclick="undoPlace(true);" value="여행지 취소" class="btn btn-warning">
-                       
+                        
                         <div id="mapFinal" class="mapFinal"></div>
-                       
-                        <input type="submit" id="btnFinalAdd" value="나코짜 최종 등록" class="btn btn-warning">
+                        
+                        <input type="submit" id="btnFinalAdd" value="나코짜 최종 등록" class="btn btn-primary btn-block marginTop30">
                        
                         <input type="hidden" name="title" value="${travelSpotVo.title }">
 		        		<input type="hidden" name="content" value="${travelSpotVo.content }">
