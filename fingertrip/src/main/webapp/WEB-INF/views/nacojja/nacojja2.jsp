@@ -48,7 +48,6 @@
 	
 	//해당 페이지를 벗어나려는 시도를 할때
 	window.onbeforeunload = function(event) {
-		//location.href="<c:url value='/nacojja/addPlace.do?clearFlag=true'/>";
 		if (checkUnload) {
 			return "작성중이던 정보가 날라가는데 나가실꺼유~?";
 		}
@@ -172,6 +171,7 @@
             	$("#place-icon").hide();
             	$("#divRating").find("img").remove();
             	$("#place-rating").val("");
+            	$("#divPhotos").find("img").remove();
             	
             	getAddressInformation(event.latLng);
             }
@@ -194,22 +194,6 @@
 		    if (status == 'OK') {
 		    	if (results[0]) {
 			        //map.setCenter(results[0].geometry.location);
-			        
-			        //해당 위치에 주소를 받아와서 스트링 배열로 만든다음 도시 정보만 빼오는 방식(but, 국가별 주소 체계가 달라 예외처리 할게 많음)
-			        /* var address = new Array();
-			        address = results[0].formatted_address.split(",");
-			        
-			        var city;
-			        if (address[0].split(" ")[0] == "일본") { //일본 주소 체계중 국가부터 나올때
-			        	city = address[1];
-			        } else { //국가가 뒤에 나오는 나머지 나라들
-				        city = address[address.length-2];
-			        }
-			        
-			        if (city == null || city == "") { //대한민국만  해당
-			        	address = results[0].formatted_address.split(" ");
-			        	city = address[1];
-			        } */
 			        
 			        $("#city").val("");
 			        for (var i=0; i<results[0].address_components.length; i++) {
@@ -260,7 +244,6 @@
 	        	if (place.photos != null && place.photos != "") {
 	        		//alert("사진 객체 배열의 길이: " + place.photos.length);
 		        	if (place.photos.length > 0) {
-		        		console.log(place.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200}));
 		        		$("#img").val(place.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 206}));
 		        		
 			        	//for (var i=0; i<place.photos.length; i++) { //해당 장소의 모든 이미지가 보여지도록
@@ -276,6 +259,7 @@
         		$("#place-icon").hide();
                 $("#divRating").find("img").remove();
                 $("#place-rating").val("");
+                $("#divPhotos").find("img").remove();
         		
         		getAddressInformation(latLng);
         	}
@@ -302,9 +286,6 @@
 	}
     
     function addPlace() {
-    	//To-Do: 유효성 체크
-    	
-    	
     	//맵을 클릭하여 위도,경도 정보가 존재할때만 여행지 추가 로직 진행
     	if (latLng != null && latLng != "") {
 	    	//이전에 선택한 여행지를 중복으로 추가못하게 막기
@@ -315,7 +296,6 @@
 	    	latLngs.push(latLng);
     	
 	     	// 맵 클릭시 새로운 경로 라인 정보 추가
-	     	//alert("여행지 추가 누를시 파라미터 : " + latLng);
 			addLatLng(latLng);
 	    
 	    	// 위도,경도 정보 DB에 넣기 위해 세팅
@@ -367,17 +347,11 @@
 	}
 
     function addLatLng(location) {
-    	//alert("addLatLng함수");
-    	
 	  	path = poly.getPath(); //path 정보 담을 배열 객체 가져옴
 	  	path.push(location);
    	  	
 	  	polys.push(location); //위도, 경도를 배열에 담기..
    		polyIndex++;
-	  	
-   		//alert("path:" + path);
-   		//alert("polys:" + polys);
-   		//alert("polyIndex:" + polyIndex);
     }
     
     function undoPlace(flag) {
@@ -477,12 +451,6 @@
 	$(document).ready(function() {
 		$('#dayTab1').addClass("active");
 		
-		//이전에 지난간 일정도 수정할 수 있게 구현중.. 잠시 주석처리
-		/* $('.dayTab').eq(1)
-			.siblings().attr("disabled", "disabled")
-			.end()
-			.nextAll().attr("style", "text-align: left; background-color: #e9e9e9"); */
-
 		$('.country').hide();
         $("#place-icon").hide();
         
@@ -491,11 +459,6 @@
             	$('.country').hide();
             	$('#country').val("");
             } else { //대륙별 국가 리스트 받아와서 뿌리기
-            	//컨트롤러를 거쳐서 새롭게 다시 뿌려주는 이전 방식
-            	//checkUnload = false;
-            	//$("form[name=frmNacojja2]").prop("action", "<c:url value='/country.do'/>");
-				//$("form[name=frmNacojja2]").submit();
-				
 				//비동기 방식으로 가져와서 뿌리기
 				$.ajax({
 					url: "<c:url value='/country.do'/>",
@@ -548,83 +511,63 @@
         });
         
         $('.dayTab').click(function(){
-        	//이전에 지난간 일정도 수정할 수 있게 구현중.. 잠시 주석처리
-        	//if (confirm("다음 일정으로 넘어가면 이전 일정은 수정할 수 없습니다. 넘어가시겠습니까?")) {
-        		
-        		//일차가 넘어간 후 아무것도 안한상태에서 바로 여행지 추가를 누르면 이벤트 진행되지 않도록 latLng값 초기화
-            	latLng = "";
-        		
-        		$("#day").val($(this).val());
-            	
-            	$("#continent").val("");
-            	$('.country').hide();
-                $("#city").val("");
-                $("#place-icon").hide();
-        		$("#place-name").val("");
-                $("#divRating").find("img").remove();
-                $("#place-rating").val("");
-                $("#divPhotos").find("img").remove();
-            	
-            	deleteMarkers();
-            	
-            	//아래 두개 함수를 undoPlace() 함수 하나로 처리하도록 바꿈..
-            	/* deleteMarkersFinal();
-            	deletePolys(); */
-            	
-            	var pathLength = polyIndex; // poly.getPath().length == polys.length == polyIndex
-        		for (var i=0; i<pathLength; i++) {
-        			undoPlace();
-          		}
-            	
-            	//일정을 다시 되돌아가면 그 정보를 맵에 뿌려주고 수정할 수 있도록 구현..
-        		$.ajax({
-					url: "<c:url value='/nacojja/getTravelList.do'/>",
-					type:"POST",
-					success: function(list) {
-						if (list.length > 0) {
-							$.each(list, function(idx, travelSpotVO){
-								if (travelSpotVO.day == $("#day").val()) {
-									//alert("[" + idx + "]위도,경도: " + travelSpotVO.latLng);
-									//alert("[" + idx + "]위도: " + travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")));
-									//alert("[" + idx + "]경도: " + travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1));
-									var someDayLatLng = new google.maps.LatLng(
-											travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")),
-											travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1)
-									);
-									
-									addLatLng(someDayLatLng);
-									
-									marker = new google.maps.Marker({
-							        	position: someDayLatLng,
-							        	map: mapFinal,
-							        	//title: '#' + path.getLength(),
-							        	animation: google.maps.Animation.BOUNCE
-							      	});
-							      	markersFinal.push(marker);
-							      	
-							      	mapFinal.setCenter(someDayLatLng);
-							      	mapFinal.setZoom(17);
-								}
-							});
-						}
-					},
-					error: function(xhr, status, error) {
-						alert("error:" + error + ", status=" + status);
+       		//일차가 넘어간 후 아무것도 안한상태에서 바로 여행지 추가를 누르면 이벤트 진행되지 않도록 latLng값 초기화
+           	latLng = "";
+       		
+       		$("#day").val($(this).val());
+           	
+           	$("#continent").val("");
+           	$('.country').hide();
+               $("#city").val("");
+               $("#place-icon").hide();
+       		$("#place-name").val("");
+               $("#divRating").find("img").remove();
+               $("#place-rating").val("");
+               $("#divPhotos").find("img").remove();
+           	
+           	deleteMarkers();
+           	
+           	var pathLength = polyIndex; // poly.getPath().length == polys.length == polyIndex
+       		for (var i=0; i<pathLength; i++) {
+       			undoPlace();
+         		}
+           	
+           	//일정을 다시 되돌아가면 그 정보를 맵에 뿌려주고 수정할 수 있도록 구현..
+       		$.ajax({
+				url: "<c:url value='/nacojja/getTravelList.do'/>",
+				type:"POST",
+				success: function(list) {
+					if (list.length > 0) {
+						$.each(list, function(idx, travelSpotVO){
+							if (travelSpotVO.day == $("#day").val()) {
+								//alert("[" + idx + "]위도,경도: " + travelSpotVO.latLng);
+								//alert("[" + idx + "]위도: " + travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")));
+								//alert("[" + idx + "]경도: " + travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1));
+								var someDayLatLng = new google.maps.LatLng(
+										travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")),
+										travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1)
+								);
+								
+								addLatLng(someDayLatLng);
+								
+								marker = new google.maps.Marker({
+						        	position: someDayLatLng,
+						        	map: mapFinal,
+						        	//title: '#' + path.getLength(),
+						        	animation: google.maps.Animation.BOUNCE
+						      	});
+						      	markersFinal.push(marker);
+						      	
+						      	mapFinal.setCenter(someDayLatLng);
+						      	mapFinal.setZoom(17);
+							}
+						});
 					}
-				});
-            	
-            	
-        		//이전에 지난간 일정도 수정할 수 있게 구현중.. 잠시 주석처리
-            	/* $('.dayTab').removeClass("active");
-        		$(this).prev().removeClass("active").attr({"disabled" : "disabled", 
-        													"style" : "text-align: left; background-color: #e9e9e9"
-        													});
-        		$(this).addClass("active").attr({"disabled" : "disabled"});
-        		
-        		$(this).next().attr("style", "text-align: left; background-color: #fff; color: #777");
-        		$(this).next().removeAttr("disabled", "disabled"); */
-        	//}
-        	
+				},
+				error: function(xhr, status, error) {
+					alert("error:" + error + ", status=" + status);
+				}
+			});
         });
         
         //나코짜 최종 등록 버튼 누를 시 예외처리 할것들 그리고 데이터 유효성 검사 
@@ -635,27 +578,6 @@
         		alert($("#checkDataValidDay").val() + "일차 일정이 빠져있습니다!");
         		return false;
         	}
-        	
-        	//var bool = true;
-        	//비동기 방식으로 유효성 체크시 bool 값이 세팅 되기도 전에 submit 되어버린다.. setTimeout을 써도 마찬가지..
-        	/* $.ajax({
-				url: "<c:url value='/nacojja/checkDataValid.do'/>",
-				type:"POST",
-				success: function(result) {
-		        	alert("1불값: " + result);
-					if (result == false) {
-						bool = false;
-					}
-				},
-				error: function(xhr, status, error) {
-					alert("error:" + error + ", status=" + status);
-				}
-			});
-        	
-       		setTimeout(function(){
-	        	alert("2불값: " + bool);
-	        	return bool;
-       		}, 6); */
         });
         
 	});
@@ -671,7 +593,6 @@
         <div class="col-md-2">
             <ul class="list-group help-group">
                 <div class="faq-list list-group nav">
-                    <%-- <c:forEach var="i" begin="1" end="${travelDay}"> --%>
                     <c:set var="i" value="1"></c:set>
                     <c:forEach var="travelDate" items="${tdList}">
                     	<button id="dayTab${i}" class="list-group-item dayTab" value="${i}" style="text-align: left;" role="tab" data-toggle="tab">
@@ -688,7 +609,6 @@
             <div class="tab-content panels-faq">
            		<div class="tab-pane active" id="tab1">
                     <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>" class="frmNacojja2">
-                    <%-- <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>" onsubmit="return checkDataValid()"> --%>
                         <div class="courseDiv continentDiv">
                             <select name="continent" class="continent" id="continent">
                             	<option value="">== 대륙 선택 ==</option>
