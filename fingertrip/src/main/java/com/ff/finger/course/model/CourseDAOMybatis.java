@@ -75,4 +75,9 @@ public class CourseDAOMybatis implements CourseDAO{
 		return sqlSession.selectOne(namespace+"selectOneCTJoin",courseNo);
 	}
 
+	@Override
+	public List<TravelSpotVO> selectListTravelSpot(CourseVO vo) {
+		return sqlSession.selectList(namespace+"selectListTravelSpot",vo);
+	}
+
 }

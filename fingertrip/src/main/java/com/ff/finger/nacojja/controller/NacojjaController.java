@@ -199,6 +199,7 @@ public class NacojjaController {
 	@RequestMapping("/getTravelList.do")
 	@ResponseBody
 	public List<TravelSpotVO> getTravelList() {   
+		
 		logger.info("나코짜2 여행지 리스트 가져오기, 전체 List.size={}", travelSpotList.size());
 		
 		return travelSpotList;
@@ -234,11 +235,12 @@ public class NacojjaController {
 	}
 	
 	@RequestMapping("/nacojjaDetail.do")
-	public String howto(@RequestParam int courseNo,Model model) {   
+	public String detail(@RequestParam int courseNo,Model model) {   
 		logger.info("나코짜 상세보기");
 		int travelDay = courseService.selectMaxDay(courseNo);
 		CourseVO vo = courseService.selectOneCourse(courseNo);
 		Map<String, Object> map = courseService.selectOneCTJoin(courseNo);
+		
 		//출발일부터 날짜 계산
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(vo.getStartDay());
@@ -249,12 +251,21 @@ public class NacojjaController {
 					cal.add(Calendar.DATE, 1);
 					travelDateList.add(cal.getTime());
 				}
-				model.addAttribute("tdList",travelDateList);
-				model.addAttribute("vo",vo);
-			
 				
+				model.addAttribute("tdList",travelDateList); //일수 출력
+				model.addAttribute("vo",vo); // courese 1개 셀렉트
+				model.addAttribute("map",map); // course,member join
 				
 		return "nacojja/nacojjaDetail";
+	}
+	
+	@RequestMapping("/selectTravel.do")
+	@ResponseBody
+	public List<TravelSpotVO> dayList(@ModelAttribute TravelSpotVO vo){
+		logger.info("테스트 vo={}",vo);
+		List<TravelSpotVO> list =courseService.selectListTravelSpot(vo);
+		logger.info("DB list.size={}",list.size());
+		return list;
 	}
 	
 }

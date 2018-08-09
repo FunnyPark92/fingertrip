@@ -18,4 +18,5 @@ public interface CourseDAO {
 	public int selectMaxDay(int courseNo);
 	public int updateProgress(Map<String, Object> map);
 	public Map<String, Object> selectOneCTJoin(int courseNo);
+	public List<TravelSpotVO> selectListTravelSpot(CourseVO vo);
 }

@@ -107,12 +107,10 @@
 	</select>
 	
 	<select id="selectOneCTJoin" parameterType="int" resultType="map">
-		select c.*,t.TRAVEL_SPOT_NO,t.DAY,t.CITY,t.TRAVEL_SPOT,t.IMG,t.LAT_LNG,t.COUNTRY_CODE ,m.ID
-		from course c join travel_spot t
-		on c.COURSE_NO = t.COURSE_NO
-		join member m
-		on c.MEMBER_NO = m.MEMBER_NO
-		where c.COURSE_NO = #{courseNo}
+		select c.*, m.id, m.name
+	    from course c join member m
+	    on c.MEMBER_NO = m.MEMBER_NO
+	    where c.course_no= #{course_no}
 	</select>
 	
 	<update id="updateProgress" parameterType="map">
@@ -120,4 +118,25 @@
 		set progress_no=#{progressNo}
 		where course_no=#{courseNo}
 	</update>
+	
+	<select id="selectListTravelSpot" parameterType="TravelSpotVO" resultType="TravelSpotVO" >
+		select *
+	    from course c join travel_spot t
+	    on c.COURSE_NO = t.COURSE_NO 
+	    where c.course_no=#{courseNo} 
+	    <choose>
+	    	<when test="day != null and day !=''">
+	    		and day =#{day}
+	    	</when>
+	    	<otherwise>
+	    		and day =1
+	    	</otherwise>
+	    </choose>
+	    
+	</select>
+	
+	
+	
+	
+	
 </mapper>

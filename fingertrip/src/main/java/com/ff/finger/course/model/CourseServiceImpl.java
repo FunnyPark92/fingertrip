@@ -79,6 +79,11 @@ public class CourseServiceImpl implements CourseService {
 	public Map<String, Object> selectOneCTJoin(int courseNo) {
 		return courseDao.selectOneCTJoin(courseNo);
 	}
+
+	@Override
+	public List<TravelSpotVO> selectListTravelSpot(CourseVO vo) {
+		return courseDao.selectListTravelSpot(vo);
+	}
 	
 
 }
