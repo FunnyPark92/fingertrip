@@ -524,12 +524,12 @@
            	
            	$("#continent").val("");
            	$('.country').hide();
-               $("#city").val("");
-               $("#place-icon").hide();
+            $("#city").val("");
+            $("#place-icon").hide();
        		$("#place-name").val("");
-               $("#divRating").find("img").remove();
-               $("#place-rating").val("");
-               $("#divPhotos").find("img").remove();
+            $("#divRating").find("img").remove();
+            $("#place-rating").val("");
+            $("#divPhotos").find("img").remove();
            	
            	deleteMarkers();
            	
@@ -603,7 +603,7 @@
                     <c:forEach var="travelDate" items="${tdList}">
                     	<button id="dayTab${i}" class="list-group-item dayTab" value="${i}" style="text-align: left;" role="tab" data-toggle="tab">
                     		Day${i}
-                    		<small><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/> </small>
+                    		<small><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/></small>
                    		</button>
                    		<c:set var="i" value="${i+1}"></c:set>
                     </c:forEach>
@@ -704,7 +704,6 @@
                         	<label for="photos" class="courseLabel">포토</label>
                         	<input type="hidden" id="img" name="img" class="marginTop10">
                         </div>
-                       
                         
                         <div id="mapFinal" class="mapFinal"></div>
                         
