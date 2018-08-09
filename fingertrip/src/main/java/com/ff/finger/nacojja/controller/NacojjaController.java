@@ -28,6 +28,7 @@ import com.ff.finger.common.PaginationInfo;
 import com.ff.finger.common.SearchVO;
 import com.ff.finger.course.model.CourseService;
 import com.ff.finger.course.model.CourseVO;
+import com.ff.finger.heart.model.HeartService;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
 import com.ff.finger.travelspot.model.TravelSpotVO;
@@ -47,6 +48,9 @@ public class NacojjaController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private HeartService heartService;
 	
 	@RequestMapping("/nacojjaList.do")
 	public String nacojjaList(@ModelAttribute SearchVO searchVo, Model model) {
@@ -161,8 +165,16 @@ public class NacojjaController {
 		cnt = memberService.minusHeart(memberVo.getMemberNo());
 		logger.info("나코짜2 DB 처리 후 작성한 회원의 하트 차감 결과, cnt={}", cnt);
 		
+		
 		int courseNo = travelSpotVo.getCourseNo();
 		logger.info("지금 등록한 코스의 코스번호: {}", courseNo);
+
+		Map<String, Integer> map = new HashMap<>();
+		map.put("courseNo", courseNo);
+		map.put("memberNo", memberVo.getMemberNo());
+		
+		cnt = heartService.insertHeart(map);
+		logger.info("하트 테이블에 insert한 결과, cnt={}", cnt);
 		
 		return "redirect:/nacojja/nacojjaDetail.do?courseNo=" + courseNo + "";
 	}

@@ -28,8 +28,8 @@ public class CouponDAOMybatis implements CouponDAO {
 	}
 
 	@Override
-	public List<Map<String, Object>> selectHeartMemberCoupon(int courseNo) {
-		return sqlSession.selectList(namespace+"selectHeartMemberCoupon", courseNo);
+	public List<Map<String, Object>> selectHeartMemberCoupon(Map<String, Object> map) {
+		return sqlSession.selectList(namespace+"selectHeartMemberCoupon", map);
 	}
 
 	@Override

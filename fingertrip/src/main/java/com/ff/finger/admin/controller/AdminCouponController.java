@@ -1,6 +1,7 @@
 package com.ff.finger.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -102,12 +103,22 @@ public class AdminCouponController {
 		Map<String, Object> map=courseService.selectMember(courseNo);
 		logger.info("코스 조회 후 map={}", map);
 		
-		List<Map<String, Object>> list=couponService.selectHeartMemberCoupon(courseNo);
-		logger.info("쿠폰회원 목록 조회 후 list.size={}", list.size());
+		Map<String, Object> map2=new HashMap<>();
+		map2.put("find", 0);
+		map2.put("courseNo", courseNo);
+		List<Map<String, Object>> list1=couponService.selectHeartMemberCoupon(map2);
+		logger.info("등록자 조회 후 list1.size={}", list1.size());
 		
+		map2.remove("find");
+		map2.put("find", 1);
+		List<Map<String, Object>> list2=couponService.selectHeartMemberCoupon(map2);
+		logger.info("쿠폰회원 목록 조회 후 list2.size={}", list2.size());
+
 		List<CouponVO> cList=couponService.selectAll();
+		logger.info("쿠폰 종류 cList.size={}", cList.size());
 		
-		model.addAttribute("list", list);
+		model.addAttribute("list1", list1);
+		model.addAttribute("list2", list2);
 		model.addAttribute("cList", cList);
 		model.addAttribute("map", map);
 		

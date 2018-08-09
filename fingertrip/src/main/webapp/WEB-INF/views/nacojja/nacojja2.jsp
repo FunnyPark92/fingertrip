@@ -263,7 +263,8 @@
 		        		console.log(place.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200}));
 		        		$("#img").val(place.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 206}));
 		        		
-			        	for (var i=0; i<place.photos.length; i++) {
+			        	//for (var i=0; i<place.photos.length; i++) { //해당 장소의 모든 이미지가 보여지도록
+			        	for (var i=0; i<1; i++) { //1개의 대표 이미지만 보여지도록
 			        		var url = place.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 206});
 				        	$("#divPhotos label").after("<img id='photos' src='" + url + "'>&nbsp;&nbsp;");
 			        	}

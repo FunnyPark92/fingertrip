@@ -23,8 +23,8 @@ public class CouponServiceImple implements CouponService {
 	}
 
 	@Override
-	public List<Map<String, Object>> selectHeartMemberCoupon(int courseNo) {
-		return couponDao.selectHeartMemberCoupon(courseNo);
+	public List<Map<String, Object>> selectHeartMemberCoupon(Map<String , Object> map) {
+		return couponDao.selectHeartMemberCoupon(map);
 	}
 
 	@Override
