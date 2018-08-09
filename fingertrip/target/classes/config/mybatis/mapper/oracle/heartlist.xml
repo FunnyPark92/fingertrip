@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.heartlist">
+	<insert id="insertHeartListUse" parameterType="HeartListVO">
+		INSERT INTO HEART_LIST(HEART_LIST_NO, STATUS, HEART_NO, MEMBER_NO)
+		VALUES(HEART_LIST_SEQ.NEXTVAL, #{status}, #{heartNo}, #{memberNo})
+	</insert>
+	
+	<insert id="insertHeartListCharge" parameterType="HeartListVO">
+		INSERT INTO HEART_LIST(HEART_LIST_NO, STATUS, HEART_CHARGE_NO, MEMBER_NO)
+		VALUES(HEART_LIST_SEQ.NEXTVAL, #{status}, #{heartChargeNo}, #{memberNo})
+	</insert>
+	
+	<!-- <select id="selectHeartListByMemberNo" parameterType="int" resultType="HeartListVO">
+		SELECT * FROM HEART_LIST WHERE MEMBER_NO=#{memberNo} ORDER BY HEART_LIST_NO DESC
+	</select> -->
+	
+	<select id="selectHeartListByMemberNo" parameterType="int" resultType="map">
+		SELECT *
+		FROM HEART_LIST HL LEFT OUTER JOIN HEART_CHARGE HC
+		ON HL.HEART_CHARGE_NO = HC.HEART_CHARGE_NO
+		LEFT OUTER JOIN HEART H
+		ON HL.HEART_NO = H.HEART_NO
+		LEFT OUTER JOIN COURSE C
+		ON H.COURSE_NO = C.COURSE_NO
+		WHERE HL.MEMBER_NO=#{memberNo}
+		ORDER BY HEART_LIST_NO DESC
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

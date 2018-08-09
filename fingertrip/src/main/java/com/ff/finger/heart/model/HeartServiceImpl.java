@@ -24,8 +24,8 @@ public class HeartServiceImpl implements HeartService{
 	}
 
 	@Override
-	public int insertHeart(Map<String, Integer> map) {
-		return heartDao.insertHeart(map);
+	public int insertHeart(HeartVO heartVo) {
+		return heartDao.insertHeart(heartVo);
 	}
 	
 	@Override
