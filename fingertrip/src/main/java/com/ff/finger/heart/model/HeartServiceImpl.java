@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.coupon.model.CouponDAO;
 
 @Service
 public class HeartServiceImpl implements HeartService{
@@ -32,5 +33,6 @@ public class HeartServiceImpl implements HeartService{
 	public List<HeartVO> selectByCourse(int courseNo) {
 		return heartDao.selectByCourse(courseNo);
 	}
+
 
 }

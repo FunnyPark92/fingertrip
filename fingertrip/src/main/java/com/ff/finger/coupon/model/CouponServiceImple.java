@@ -6,11 +6,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ff.finger.heart.model.HeartDAO;
+
 @Service
 public class CouponServiceImple implements CouponService {
 	
 	@Autowired
 	private CouponDAO couponDao;
+	@Autowired
+	private HeartDAO heartDao;
 
 	@Override
 	public List<Map<String, Object>> selectCouponView(String id) {
@@ -32,4 +36,12 @@ public class CouponServiceImple implements CouponService {
 		return couponDao.selectAll();
 	}
 	
+	@Override
+	public int offerCoupon(Map<String, Object> map) {
+		int heartNo =heartDao.selectHeartNo(map);
+		System.out.println("heartNo="+heartNo);
+		map.put("heartNo", heartNo);
+		
+		return couponDao.insertCouponList(map);
+	}
 }

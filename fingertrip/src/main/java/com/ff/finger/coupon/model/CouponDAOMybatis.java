@@ -36,6 +36,11 @@ public class CouponDAOMybatis implements CouponDAO {
 	public List<CouponVO> selectAll() {
 		return sqlSession.selectList(namespace+"selectAll");
 	}
+
+	@Override
+	public int insertCouponList(Map<String, Object> map) {
+		return sqlSession.insert(namespace+"insertCouponList", map);
+	}
 	
 	
 }

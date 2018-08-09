@@ -73,6 +73,12 @@
 		select * from heart
 		where course_no=#{courseNo}
 	</select>
+
+	<select id="selectHeartNo" parameterType="map" resultType="int">
+		select heart_no from heart
+		where course_no=#{courseNo}
+		and member_no=#{memberNo}
+	</select>
 </mapper>
 
 

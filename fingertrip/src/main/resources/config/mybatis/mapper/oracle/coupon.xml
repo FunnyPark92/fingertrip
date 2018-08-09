@@ -45,6 +45,11 @@
 	<select id="selectAll" resultType="couponVo">
 		select * from coupon order by coupon_no
 	</select>
+	
+	<insert id="insertCouponList" parameterType="map">
+		insert into coupon_list
+		values(coupon_list_seq.nextval, #{heartNo}, #{couponNo})
+	</insert>
 </mapper>
 
 
