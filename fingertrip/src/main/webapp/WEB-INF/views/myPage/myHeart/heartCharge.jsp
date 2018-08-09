@@ -1,12 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../inc/top.jsp" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<!DOCTYPE html >
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap core CSS -->
+	<link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet">
+	<!-- 셀프 css -->
+    <link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/heartChargeC.css">
 
+    <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -88,7 +99,8 @@
 		
 	});
 </script>
-
+</head>
+<body>
 <section class="minheight600">
 	<div class="container heartC">
 		<h1 class="text-center">하트 충전하기</h1>
@@ -179,21 +191,15 @@
 		</div>
 		<div class="heartEtc divA">
 			<input type="hidden" id="etcHeartCnt">
-			<div class="areaEtc text-right">
-				<span class="etcSpan">기타 : &nbsp;</span>
-				<input type="text" style="dispaly:inline-block;" class="etcInput" id="resultCharge">
-				<!-- <button type="button" class="btn btn-info btn-sm etcBtn1 btnC" id="btn1" value="1">1 개</button> -->
+			<div class="areaEtc">
+				<p>기타 충전</p>
+				<span>하트 &nbsp;</span>
+				<input type="number" class="etcInput" id="resultCharge" oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
+				<span style=" margin-left: 184px;">개</span>
 			</div>
-				<span class="spanCharge">결제 금액 : 
-					<input type="text" id="calcPayment" value="0" style="border: none;">원
-					<!-- <strong id="payment"></strong> -->
+				<span class="spanCharge">
+					<input type="text" id="calcPayment" value="0" style="border: none;" readonly="readonly">원
 				</span>
-			<!-- <div class="etcBtnWrap">
-				<button type="button" class="btn btn-info btn-sm etcBtn2 btnC" value="3">3 개</button>
-				<button type="button" class="btn btn-info btn-sm etcBtn2 btnC" value="5">5 개</button>
-				<button type="button" class="btn btn-info btn-sm etcBtn2 btnC" value="10">10 개</button>
-				<button type="button" class="btn btn-info btn-sm etcBtn2 btnC" value="50">50 개</button>
-			</div> -->
 			<input type="hidden" id="etcAmount">
 			<button type="button" class="btn btn-danger btn-lg etcBtn">구매하기</button>
 		</div>
@@ -202,6 +208,5 @@
 
     </div>
 </section>
-
-
-<%-- <%@ include file="../../inc/bottom.jsp" %> --%>
+</body>
+</html>

@@ -2,7 +2,7 @@
 
 	.heartC{
 	    border:2px solid #ddd;
-		margin-top:60px;
+		margin-top:15px;
 		padding: 30xp;
 	}
 	.heartImg{
@@ -44,11 +44,14 @@
 		  margin-right: 10px;
 	}
 	.areaEtc{
-		/*   position: absolute; */
-		  width: 80px;
+		  width: 260px;
 		  margin-top:20px;
 		  margin-left: 50px;
 		  margin-right: 10px;
+	}
+	.areaEtc>p{
+		font-weight: 600;
+		margin-bottom:5px;
 	}
 	.etcSpan{
 		color:#0e54ff;
@@ -83,9 +86,21 @@
    			 top: 34px;
 	}
 	.spanCharge{
-		    position: absolute;
-   			font-weight: bold;
-   			top: 34px;
-   			left: 409px;
-   			font-size: 28px
+		position: absolute;
+   		font-weight: bold;
+   		top: 36px;
+    	left: 317px;
+    	font-size: 28px;
+	}
+	#calcPayment{
+		border: none;
+    	display: inline-block;
+    	text-align: right;
+    	width: 200px;
+	}
+	
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
 	}
