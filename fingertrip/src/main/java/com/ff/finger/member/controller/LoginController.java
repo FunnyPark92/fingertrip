@@ -53,7 +53,7 @@ public class LoginController {
 							HttpServletResponse response,
 							Model model) {
 		logger.info("로그인 처리 전 파라미터, memberVo={}", memberVo);
-		logger.info("로그인 처리 전 파라미터, saveId={}", saveId1);
+		logger.info("로그인 처리 전 파라미터, saveId1={}", saveId1);
 		
 		int result = memberService.processLogin(memberVo.getId(), memberVo.getPassword());
 		logger.info("로그인 처리 결과, result={}", result);		
@@ -104,7 +104,7 @@ public class LoginController {
 							HttpServletResponse response,
 							Model model) {
 		logger.info("기업회원 로그인 처리 전 파라미터, travelAgencyVo={}", travelAgencyVo);
-		logger.info("기업회원 로그인 처리 전 파라미터, saveId={}", saveId2);
+		logger.info("기업회원 로그인 처리 전 파라미터, saveId2={}", saveId2);
 		
 		int result = travelAgencyService.processAgencyLogin(travelAgencyVo.getId(), travelAgencyVo.getPassword());
 		logger.info("기업회원 로그인 처리 결과, result={}", result);		
@@ -144,13 +144,25 @@ public class LoginController {
 	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
-		logger.info("로그아웃처리 ");
-		String id = (String)session.getAttribute("userid");
-		logger.info("현재 세션 id={}",id);
-		memberService.memberLogOut(id);
+		logger.info("일반회원 로그아웃 처리 ");
+		String id = (String) session.getAttribute("userid");
+		logger.info("현재 세션 id={}", id);
+		int cnt = memberService.memberLogOut(id);
+		logger.info("일반회원 로그아웃 날짜 기록 결과, cnt={}", cnt);
 		
 		session.removeAttribute("userid");
 		//session.removeAttribute("userName");
+		
+		return "redirect:/index.do";
+	}
+	
+	@RequestMapping("/agencyLogout.do")
+	public String agencyLogout(HttpSession session) {
+		logger.info("기업회원 로그아웃 처리 ");
+		String id = (String) session.getAttribute("agencyid");
+		logger.info("현재 세션 id={}", id);
+		
+		session.removeAttribute("agencyid");
 		
 		return "redirect:/index.do";
 	}

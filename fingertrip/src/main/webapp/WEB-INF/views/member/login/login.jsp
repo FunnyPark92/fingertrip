@@ -32,9 +32,9 @@
                             <button type="submit" class="btn">login!</button>
                          <div>
                             <input type="checkbox" name="saveId1" id="saveId1"
-                            		<c:if test="${!empty cookie.ck_userid }">
-                            			checked=checked
-                            		</c:if>
+                           		<c:if test="${!empty cookie.ck_userid }">
+                           			checked=checked
+                           		</c:if>
                             >
                             <label for="saveId1">아이디 저장</label>
                              <p class="fRight">
@@ -64,18 +64,24 @@
                         <form role="form" action="<c:url value='/member/login/agencyLogin.do'/>" method="post" class="login-form">
                             <div class="form-group">
                                 <label class="sr-only" for="id">Agencyid</label>
-                                <input type="text" name="id" placeholder="AgencyId..." class="form-username form-control" id="id">
+                                <input type="text" name="id" placeholder="AgencyId..." class="form-username form-control" id="id"
+                                	value="${cookie.ck_agencyid.value }"
+                                >
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="password">Password</label>
                                 <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="password">
                             </div>
                             <button type="submit" class="btn">login!</button>
-                        </form>
                         <div>
-                            <input type="checkbox" name="saveId2" id="saveId2">
+                            <input type="checkbox" name="saveId2" id="saveId2"
+                            	<c:if test="${!empty cookie.ck_agencyid }">
+                           			checked=checked
+                           		</c:if>
+                            >
                             <label for="saveId2">아이디 저장</label>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
