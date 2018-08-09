@@ -5,8 +5,6 @@ import java.util.List;
 import com.ff.finger.common.SearchVO;
 
 public interface TravelAgencyService {
-	
-	
 	public int insertAgency(TravelAgencyVO vo);
 	public boolean idDuplicate(String id);
 	public boolean nameDuplicate(String name);
@@ -17,5 +15,5 @@ public interface TravelAgencyService {
 	public int deleteAgency(int travelAgencyNo);
 	public int multiDelete(List<TravelAgencyVO> list);
 	public int updateAgency(TravelAgencyVO vo);
-	
+	public int processAgencyLogin(String id, String password);
 }

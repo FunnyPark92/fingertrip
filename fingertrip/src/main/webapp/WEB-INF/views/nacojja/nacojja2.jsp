@@ -340,7 +340,6 @@
 					}
 				});
        		}, 10);
-			
     	} else {
     		alert("가고싶은 여행지를 먼저 선택하세요~ !" + "(\'(\")\')!");
     	}
@@ -530,7 +529,7 @@
            	var pathLength = polyIndex; // poly.getPath().length == polys.length == polyIndex
        		for (var i=0; i<pathLength; i++) {
        			undoPlace();
-         		}
+         	}
            	
            	//일정을 다시 되돌아가면 그 정보를 맵에 뿌려주고 수정할 수 있도록 구현..
        		$.ajax({
@@ -544,8 +543,8 @@
 								//alert("[" + idx + "]위도: " + travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")));
 								//alert("[" + idx + "]경도: " + travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1));
 								var someDayLatLng = new google.maps.LatLng(
-										travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")),
-										travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1)
+									travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")),
+									travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1)
 								);
 								
 								addLatLng(someDayLatLng);

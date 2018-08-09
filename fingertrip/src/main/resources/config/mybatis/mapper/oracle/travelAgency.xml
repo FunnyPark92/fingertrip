@@ -3,78 +3,69 @@
 
 
 <mapper namespace="config.mybatis.mapper.oracle.travelAgency">
-
-		<insert id="insertAgency" parameterType="travelAgencyVO" >
-			<selectKey keyProperty="travelAgencyNo" order="BEFORE" resultType="int">
-				select travel_agency_seq.nextval from dual
-			</selectKey>
-				insert into travel_agency
-			values(#{travelAgencyNo},#{name},#{id},#{password},#{hp},#{licenseNo})
-		</insert>
-		
-		<select id="agencyIdCheck" parameterType="String" resultType="int">
-			select count(*) from travel_agency where id=#{id}
-		</select>
-		<select id="agencyNameCheck" parameterType="String" resultType="int">
-			select count(*) from travel_agency where name=#{Name}
-		</select>
-		
-		
-		<select id="checkLicenseNo" parameterType="String" resultType="int">
-			select count(*) from travel_agency where license_no = #{licenseNo}
-		</select>
-		
-		<select id="selectAgency" parameterType="SearchVo" resultType="TravelAgencyVo">
-			select *
-			from(   
-			    select list.* , rownum as RNUM
-			    from(
-			         select * from travel_agency
-			         <if test="searchKeyword!=null and searchKeyword!=''">
-				         	where ${searchCondition} like '%' || #{searchKeyword} || '%'
-			         </if> 
-			         order by travel_agency_no desc
-			         ) list
-			    )
-			 <![CDATA[
-			where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
-			]]> 
-		</select>
-		
-		<select id="totalRecord" resultType="int" parameterType="SearchVo">
-			select count(*)
-			from travel_agency
-			<if test="searchKeyword!=null and searchKeyword!=''">
-				where ${searchCondition} like '%' || #{searchKeyword} || '%'
-			</if>
-		</select>
-		<select id="selectOneAgency" parameterType="String" resultType="TravelAgencyVO">
-			select * from travel_agency where name =#{name}
-		</select>
-		
-		<delete id="deleteAgency" parameterType="int">
-			delete from travel_agency where travel_agency_no = #{travelAgencyNo}
-		</delete>
-		
-		<update id="updateAgency" parameterType="TravelAgencyVO" >
-			update travel_agency set name = #{name}, 
-			<if test="password !=null and password !='' ">
-			password = #{password},
-			</if>
-			hp= #{hp} , license_no = #{licenseNo} where travel_agency_no = #{travelAgencyNo}
-		</update>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	<insert id="insertAgency" parameterType="travelAgencyVO" >
+		<selectKey keyProperty="travelAgencyNo" order="BEFORE" resultType="int">
+			select travel_agency_seq.nextval from dual
+		</selectKey>
+			insert into travel_agency
+		values(#{travelAgencyNo},#{name},#{id},#{password},#{hp},#{licenseNo})
+	</insert>
+	
+	<select id="agencyIdCheck" parameterType="String" resultType="int">
+		select count(*) from travel_agency where id=#{id}
+	</select>
+	<select id="agencyNameCheck" parameterType="String" resultType="int">
+		select count(*) from travel_agency where name=#{Name}
+	</select>
+	
+	
+	<select id="checkLicenseNo" parameterType="String" resultType="int">
+		select count(*) from travel_agency where license_no = #{licenseNo}
+	</select>
+	
+	<select id="selectAgency" parameterType="SearchVo" resultType="TravelAgencyVo">
+		select *
+		from(   
+		    select list.* , rownum as RNUM
+		    from(
+		         select * from travel_agency
+		         <if test="searchKeyword!=null and searchKeyword!=''">
+			         	where ${searchCondition} like '%' || #{searchKeyword} || '%'
+		         </if> 
+		         order by travel_agency_no desc
+		         ) list
+		    )
+		 <![CDATA[
+		where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+		]]> 
+	</select>
+	
+	<select id="totalRecord" resultType="int" parameterType="SearchVo">
+		select count(*)
+		from travel_agency
+		<if test="searchKeyword!=null and searchKeyword!=''">
+			where ${searchCondition} like '%' || #{searchKeyword} || '%'
+		</if>
+	</select>
+	<select id="selectOneAgency" parameterType="String" resultType="TravelAgencyVO">
+		select * from travel_agency where name =#{name}
+	</select>
+	
+	<delete id="deleteAgency" parameterType="int">
+		delete from travel_agency where travel_agency_no = #{travelAgencyNo}
+	</delete>
+	
+	<update id="updateAgency" parameterType="TravelAgencyVO" >
+		update travel_agency set name = #{name}, 
+		<if test="password !=null and password !='' ">
+		password = #{password},
+		</if>
+		hp= #{hp} , license_no = #{licenseNo} where travel_agency_no = #{travelAgencyNo}
+	</update>
+	
+	<select id="selectAgencyDbPwd" parameterType="string" resultType="string">
+		SELECT PASSWORD FROM TRAVEL_AGENCY WHERE ID=#{id} 
+	</select>
 		
 	
 </mapper>

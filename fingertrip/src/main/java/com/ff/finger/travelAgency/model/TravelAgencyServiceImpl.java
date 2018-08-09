@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.SearchVO;
 
 @Service
@@ -93,6 +94,24 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 	@Override
 	public int updateAgency(TravelAgencyVO vo) {
 		return travelAgencyDao.updateAgency(vo);
+	}
+
+	@Override
+	public int processAgencyLogin(String id, String password) {
+		String dbPwd = travelAgencyDao.selectAgencyDbPwd(id);
+		
+		int result = 0;
+		if (dbPwd != null && !dbPwd.isEmpty()) {
+			if (dbPwd.equals(password)) {
+				result = CommonConstants.LOGIN_OK;
+			} else {
+				result = CommonConstants.PWD_MISMATCH;
+			}
+		} else {
+			result = CommonConstants.ID_NONE;
+		}
+		
+		return result;
 	}
 
 }
