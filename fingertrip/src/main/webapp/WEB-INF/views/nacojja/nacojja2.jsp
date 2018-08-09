@@ -689,7 +689,7 @@
            		<div class="tab-pane active" id="tab1">
                     <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>" class="frmNacojja2">
                     <%-- <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>" onsubmit="return checkDataValid()"> --%>
-                        <div class="continentDiv">
+                        <div class="courseDiv continentDiv">
                             <select name="continent" class="continent" id="continent">
                             	<option value="">== 대륙 선택 ==</option>
                             	<option value="asia"
@@ -774,9 +774,9 @@
                        		<textarea name="travelContent" rows="5" class="textCK" placeholder="해당 날짜 여행지에 대한 설명을 작성해주세요"></textarea>
                         </div>
                         
-                        <div id="divPhotos" class="courseDiv">
+                        <div id="divPhotos" class="courseDiv marginBottom20">
                         	<label for="photos" class="courseLabel">포토</label>
-                        	<input type="hidden" id="img" name="img">
+                        	<input type="hidden" id="img" name="img" class="marginTop10">
                         </div>
                        
                         
