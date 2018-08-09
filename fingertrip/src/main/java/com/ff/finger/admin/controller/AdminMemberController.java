@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.PaginationInfo;
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.member.model.MemberListVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
 
@@ -117,19 +117,32 @@ public class AdminMemberController {
 		int cnt=memberService.adminDeleteMember(memberNo);
 		logger.info("회원탈퇴 처리 cnt={}", cnt);
 		
-		return "redirect:/admin/member/memberList.do";
+		String msg="", url="/admin/member/memberList.do";
+	      if(cnt>0) {
+	         msg="맴버 삭제가 완료되었습니다";
+	      }else {
+	         msg="삭제 실패!";
+	      }
+	      model.addAttribute("msg",msg);
+	      model.addAttribute("url",url);
+	      return "common/message";
 	}
-	/*미완료
+	
 	@RequestMapping("member/deleteMulti.do")
-	public String deleteMulti(@RequestParam String[] chk, Model model) {
-		logger.info("여러 글 삭제");
+	public String deleteMulti(@ModelAttribute MemberListVO listVo, Model model) {
+		logger.info("맴버 다중 삭제 파라미터, MemberListVO={}", listVo);
+		int cnt=memberService.multiDelete(listVo.getMemberItems());
 		
-		if(chk!=null) {
-			int i=0;
-			for(String no: chk) {
-				logger.info("{} : 파라미터=>{}",i++,no);
-			}
-		}//if
+		logger.info("맴버 다중 삭제 결과 cnt={}", cnt);
+		
+		String msg="", url="/admin/member/memberList.do";
+	      if(cnt>0) {
+	         msg="다중 삭제가 완료되었습니다";
+	      }else {
+	         msg="삭제 실패!";
+	      }
+	      model.addAttribute("msg",msg);
+	      model.addAttribute("url",url);
+	      return "common/message";
 	}
-	*/
 }

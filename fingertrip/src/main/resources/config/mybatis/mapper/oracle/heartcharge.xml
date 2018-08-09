@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.heartcharge">
+	<insert id="heartCharge" parameterType="HeartChargeVO">
+		INSERT INTO HEART_CHARGE(HEART_CHARGE_NO, HEART_CHARGE_COUNT, HEART_CHARGE_PAY, MEMBER_NO)
+		VALUES(HEART_CHARGE_SEQ.NEXTVAL, #{heartChargeCount}, #{heartChargePay}, #{memberNo})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+

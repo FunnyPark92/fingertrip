@@ -43,9 +43,9 @@ public class QnAServiceImpl implements QnAService {
 	}
 
 	@Override
-	public int reply(QnAVO vo) {
-		int cnt=qnADao.updateSortNo(vo.getQnaNo());
-		cnt=qnADao.reply(vo);
+	public int reply(QnAVO qnAVo) {
+		int cnt=qnADao.updateSortNo(qnAVo.getQnaNo());
+		cnt=qnADao.reply(qnAVo);
 		return cnt;
 	}
 

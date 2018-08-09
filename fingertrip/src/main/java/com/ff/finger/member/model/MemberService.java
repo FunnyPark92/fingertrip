@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.heartcharge.model.HeartChargeVO;
 
 public interface MemberService {
 	public int insertMember(MemberVO memberVo);
@@ -17,6 +18,7 @@ public interface MemberService {
 	public int emailAuth(String id);
 	public int memberEdit(MemberVO memberVo);
 	public MemberVO logingMember(String id);
+	public MemberVO selectMember(int memberNo);
 	public List<MemberVO> selectAll(SearchVO searchVo);
 	public int memberTotalRecord();
 	public List<MemberVO> deleteSelectAll(SearchVO searchVo);
@@ -24,5 +26,7 @@ public interface MemberService {
 	public List<Map<String, Object>> outLeason(int memberNo);
 	public int adminDeleteMember(int memberNo);
 	public int minusHeart(int memberNo);
+	public int plusHeart(HeartChargeVO heartChargeVo);
+	public int multiDelete(List<MemberVO> list);
 
 }

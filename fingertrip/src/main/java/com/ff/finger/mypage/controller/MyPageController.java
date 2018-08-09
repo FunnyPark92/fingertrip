@@ -10,39 +10,52 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ff.finger.IamportRestClient.IamportClient;
+import com.ff.finger.IamportRestClient.response.AccessToken;
+import com.ff.finger.IamportRestClient.response.IamportResponse;
+import com.ff.finger.IamportRestClient.response.Payment;
+import com.ff.finger.common.CommonConstants;
+import com.ff.finger.common.PaginationInfo;
+import com.ff.finger.common.SearchVO;
 import com.ff.finger.coupon.model.CouponService;
 import com.ff.finger.course.model.CourseService;
 import com.ff.finger.course.model.CourseVO;
 import com.ff.finger.cs.QnA.model.QnAService;
 import com.ff.finger.cs.QnA.model.QnAVO;
-import com.ff.finger.common.CommonConstants;
-import com.ff.finger.common.PaginationInfo;
-import com.ff.finger.common.SearchVO;
 import com.ff.finger.heart.model.HeartService;
+import com.ff.finger.heartcharge.model.HeartChargeService;
+import com.ff.finger.heartcharge.model.HeartChargeVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
-
 
 @Controller
 @RequestMapping("/myPage")
 public class MyPageController {
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class); 
+	private IamportClient client; //아임포트 클라이언트 for Rest API
+	
 	@Autowired 
 	private MemberService memberService;
+	
 	@Autowired
 	private HeartService heartService;
+	
 	@Autowired 
 	private CouponService couponService;
+	
 	@Autowired
 	private QnAService qnAService;
+	
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private HeartChargeService heartChargeService;
 
 	@RequestMapping("/myPayment/paymentList.do")
 	public String myPayment() {
@@ -60,14 +73,66 @@ public class MyPageController {
 	
 	@RequestMapping("/myHeart/heartCharge.do")
 	public String heartCharge(HttpSession session, Model model) {
-		logger.info("하트 화면 보여주기");
+		logger.info("하트 충전 화면 보여주기");
 
-		String userid =  (String) session.getAttribute("userid");
+		String userid = (String) session.getAttribute("userid");
 		MemberVO memberVo = memberService.logingMember(userid);
 		
 		model.addAttribute("memberVo", memberVo);
 		
 		return "myPage/myHeart/heartCharge";
+	}
+	
+	@RequestMapping("/payments/complete.do")
+	@ResponseBody
+	public boolean payComplete(@RequestParam String imp_uid, @RequestParam int heartCount,
+			@RequestParam int amount, HttpSession session) {
+		//imp_uid = extract_POST_value_from_url('imp_uid'); //post ajax request로부터 imp_uid확인
+		logger.info("결제 완료 시 로직, 가맹점 식별코드 imp_uid={}", imp_uid);
+		logger.info("결제 완료 시 로직, 하트수 heartCount={}, 결제금액 amount={}", heartCount, amount);
+
+		String test_api_key = "3971268384217405";
+		String test_api_secret = "aLBqv3qP2aZgRODLdPTWiZx1fUKDxcKIYm8upyjsJjIB7lmlbfhuePvuJg7gtRYre6VEFf6pyO0Fam0m";
+		client = new IamportClient(test_api_key, test_api_secret);
+		
+		IamportResponse<AccessToken> auth_response = client.getAuth();
+		logger.info("REST API 사용을 위한 access_token값={}", auth_response.getResponse().getToken());
+		
+		IamportResponse<Payment> payment_result = client.paymentByImpUid(imp_uid);
+		
+		//amount_to_be_paid = query_amount_to_be_paid(payment_result.merchant_uid); //결제되었어야 하는 금액 조회. 가맹점에서는 merchant_uid기준으로 관리
+
+		logger.info("결제 상태 값={}", payment_result.getResponse().getStatus());
+		if (payment_result.getResponse().getStatus().equalsIgnoreCase("paid")) {
+			//DB 작업 처리
+			String userid = (String) session.getAttribute("userid");
+			MemberVO memberVo = memberService.logingMember(userid);
+			
+			HeartChargeVO heartChargeVo = new HeartChargeVO();
+			heartChargeVo.setHeartChargeCount(heartCount);
+			heartChargeVo.setHeartChargePay(amount);
+			heartChargeVo.setMemberNo(memberVo.getMemberNo());
+			logger.info("결제 완료 시 하트 충전을 위한 heartChargeVo={}", heartChargeVo);
+			
+			int cnt = heartChargeService.heartCharge(heartChargeVo);
+			logger.info("결제 완료 시 하트 충전 결과 cnt={}", cnt);
+			
+			//멤버서비스 불러서 하트 개수 올리기...
+			cnt = memberService.plusHeart(heartChargeVo);
+			logger.info("회원 하트 업데이트 결과 cnt={}", cnt);
+			
+			return true;
+		} else {
+			return false;
+		}
+		
+		/*IF payment_result.status == 'paid' AND payment_result.amount == amount_to_be_paid
+			success_post_process(payment_result) //결제까지 성공적으로 완료
+		ELSE IF payment_result.status == 'ready' AND payment.pay_method == 'vbank'
+			vbank_number_assigned(payment_result) //가상계좌 발급성공
+		ELSE
+			fail_post_process(payment_result) //결제실패 처리
+*/		
 	}
 	
 	@RequestMapping("/myCoupon/couponList.do")

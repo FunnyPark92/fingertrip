@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.SearchVO;
-
+import com.ff.finger.heartcharge.model.HeartChargeVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -92,6 +92,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO logingMember(String id) {
 		return memberDao.logingMember(id);
 	}
+	
+	@Override
+	public MemberVO selectMember(int memberNo) {
+		return memberDao.selectMember(memberNo);
+	}
 
 	@Override
 	public List<MemberVO> selectAll(SearchVO searchVo) {
@@ -122,8 +127,34 @@ public class MemberServiceImpl implements MemberService {
 	public int adminDeleteMember(int memberNo) {
 		return memberDao.adminDeleteMember(memberNo);
 	}
+	
 	@Override
 	public int minusHeart(int memberNo) {
 		return memberDao.minusHeart(memberNo);
 	}
+	
+	@Override
+	public int plusHeart(HeartChargeVO heartChargeVo) {
+		return memberDao.plusHeart(heartChargeVo);
+	}
+
+	@Override
+	public int multiDelete(List<MemberVO> list) {
+		int cnt =0;
+		try {
+				for(MemberVO vo : list) {
+					int memberNo = vo.getMemberNo();
+					if(memberNo>0) {
+						cnt = memberDao.adminDeleteMember(vo.getMemberNo());
+					}
+				}
+		} catch (RuntimeException e) {
+			cnt=-1;
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	
+
 }

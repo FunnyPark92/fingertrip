@@ -24,7 +24,6 @@ public class CourseDAOMybatis implements CourseDAO{
 	@Override
 	public int getTotalRecord(SearchVO searchVo) {
 		return sqlSession.selectOne(namespace+"getTotalRecord", searchVo);
-
 	}
 	
 	@Override
@@ -62,17 +61,19 @@ public class CourseDAOMybatis implements CourseDAO{
 		return sqlSession.selectOne(namespace+"selectMaxDay", courseNo);
 	}
 
-	
-
 	@Override
 	public int updateProgress(Map<String, Object> map) {
 		return sqlSession.update(namespace+"updateProgress", map);
-		
 	}
 
 	@Override
 	public Map<String, Object> selectOneCTJoin(int courseNo) {
 		return sqlSession.selectOne(namespace+"selectOneCTJoin",courseNo);
+	}
+
+	@Override
+	public List<TravelSpotVO> selectTravelSpot(int courseNo) {
+		return sqlSession.selectList(namespace + "selectTravelSpot", courseNo);
 	}
 
 }

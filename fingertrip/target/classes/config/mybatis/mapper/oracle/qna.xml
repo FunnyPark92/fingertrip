@@ -56,10 +56,10 @@
 	</update>
 	
 	<insert id="reply" parameterType="QnAVO">
-		insert into qna(qna_no,title,content,name,password,group_no,step,sort_no,travel_agency_no,admin_no,member_no)
+		insert into qna(qna_no,title,content,name,password,group_no,step,sort_no,member_no,file_name,original_file_name)
 		values(qna_seq.nextval,#{title},#{content},#{name},#{password},(select group_no from qna where qna_no=#{qnaNo}),
 		(select step from qna where qna_no=#{qnaNo})+1,
-		(select sort_no from qna where qna_no=#{qnaNo})+1,#{travelAgencyNo},#{adminNo},#{memberNo})
+		(select sort_no from qna where qna_no=#{qnaNo})+1,#{adminNo},#{fileName, jdbcType=VARCHAR},#{originalFileName, jdbcType=VARCHAR})
 	</insert>
 		
 	<select id="serchGroupNo" parameterType="int" resultType="int">

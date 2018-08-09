@@ -161,7 +161,10 @@ public class NacojjaController {
 		cnt = memberService.minusHeart(memberVo.getMemberNo());
 		logger.info("나코짜2 DB 처리 후 작성한 회원의 하트 차감 결과, cnt={}", cnt);
 		
-		return "index"; //TO-DO: 나중에 상세 목록으로 가도록 변경
+		int courseNo = travelSpotVo.getCourseNo();
+		logger.info("지금 등록한 코스의 코스번호: {}", courseNo);
+		
+		return "redirect:/nacojja/nacojjaDetail.do?courseNo=" + courseNo + "";
 	}
 	
 	@RequestMapping("/addClearPlace.do")
@@ -234,25 +237,30 @@ public class NacojjaController {
 	}
 	
 	@RequestMapping("/nacojjaDetail.do")
-	public String howto(@RequestParam int courseNo,Model model) {   
+	public String nacojjaDetail(@RequestParam int courseNo, Model model) {   
 		logger.info("나코짜 상세보기");
 		int travelDay = courseService.selectMaxDay(courseNo);
-		CourseVO vo = courseService.selectOneCourse(courseNo);
-		Map<String, Object> map = courseService.selectOneCTJoin(courseNo);
+		CourseVO courseVo = courseService.selectOneCourse(courseNo);
+		//Map<String, Object> map = courseService.selectOneCTJoin(courseNo);
+		
+		MemberVO memberVo = memberService.selectMember(courseVo.getMemberNo());
+		List<TravelSpotVO> travelSpotVoList = courseService.selectTravelSpot(courseNo);
+		
 		//출발일부터 날짜 계산
-				Calendar cal = Calendar.getInstance();
-				cal.setTime(vo.getStartDay());
-				
-				List<Date> travelDateList = new ArrayList<>();
-				travelDateList.add(cal.getTime());
-				for (int i=1; i<travelDay; i++) {
-					cal.add(Calendar.DATE, 1);
-					travelDateList.add(cal.getTime());
-				}
-				model.addAttribute("tdList",travelDateList);
-				model.addAttribute("vo",vo);
-			
-				
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(courseVo.getStartDay());
+		
+		List<Date> travelDateList = new ArrayList<>();
+		travelDateList.add(cal.getTime());
+		for (int i=1; i<travelDay; i++) {
+			cal.add(Calendar.DATE, 1);
+			travelDateList.add(cal.getTime());
+		}
+		
+		model.addAttribute("tdList", travelDateList);
+		model.addAttribute("courseVo", courseVo);
+		model.addAttribute("memberVo", memberVo);
+		model.addAttribute("tSpotVoList", travelSpotVoList);
 				
 		return "nacojja/nacojjaDetail";
 	}
