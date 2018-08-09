@@ -8,4 +8,5 @@ import com.ff.finger.common.SearchVO;
 public interface HeartDAO {
 	public List<Map<String, Object>> myCourseList(SearchVO searchVo);
 	public int getTotalRecord(SearchVO searchVo);
+	public List<HeartVO> selectByCourse(int courseNo);
 }

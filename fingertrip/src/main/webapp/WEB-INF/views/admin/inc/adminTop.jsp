@@ -34,8 +34,13 @@
  <h1>핑거트립 관리자 페이지</h1>
     <header>
         <nav class="admCenter">
+        	<div class="subMenu">
+	        	<a href="">로그아웃</a> ㅣ
+	        	<a href="">홈으로</a>
+        	</div>
+        	
             <ul class="clearFix">
-                <li><a href="<c:url value='/admin/nacojja/bid/bidList.do'/>">나코짜관리</a></li>
+                <li><a href="<c:url value='/admin/nacojja/coupon/couponList.do'/>">나코짜관리</a></li>
                 <li><a href="<c:url value='/admin/member/memberList.do'/>">개인회원관리</a></li>
                 <li><a href="<c:url value='/admin/agency/agencyList.do'/>">기업회원관리</a></li>
                 <li><a href="<c:url value='/admin/admin/adminList.do'/>">관리자회원관리</a></li>

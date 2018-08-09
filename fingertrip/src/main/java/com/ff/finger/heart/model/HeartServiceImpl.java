@@ -23,4 +23,9 @@ public class HeartServiceImpl implements HeartService{
 		return heartDao.getTotalRecord(searchVo);
 	}
 
+	@Override
+	public List<HeartVO> selectByCourse(int courseNo) {
+		return heartDao.selectByCourse(courseNo);
+	}
+
 }

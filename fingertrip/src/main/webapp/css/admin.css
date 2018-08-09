@@ -42,6 +42,7 @@ h1{
     margin: 30px;
 }
 header{border-bottom: 3px solid #4c4c4c;}
+header nav{ position: relative;}
 header li{
 	float: left;
 	width: 14%;
@@ -49,7 +50,11 @@ header li{
 	text-align: center;
 	list-style: none;
 }
-
+.subMenu{
+	position:absolute;
+	top:-50px;
+	right:0;
+	font-size:09}
 
 
 /* 목록 테이블 공통 */

@@ -17,5 +17,8 @@ public interface CourseService {
 	public int selectMaxDay(int courseNo);
 	public int updateProgress(Map<String, Object> map);
 	public Map<String, Object> selectOneCTJoin(int courseNo);
+	public List<CourseVO> selectProgress(SearchVO searchVo);
+	public int getTotalRecordByPrgs(SearchVO searchVo);
+	public Map<String, Object> selectMember(int courseNo);
 	public List<TravelSpotVO> selectTravelSpot(int courseNo);
 }

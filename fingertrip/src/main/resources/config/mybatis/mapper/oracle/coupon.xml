@@ -4,10 +4,30 @@
 <mapper namespace="config.mybatis.mapper.oracle.coupon">
 	
 	<select id="selectCouponView" parameterType="String" resultType="map">
-	
 		select * from coupon_heart_contentView where id = #{id}
 	</select>
 	
+	<select id="selectByHeart" resultType="int" parameterType="int">
+		select count(*) from coupon_list
+		where heart_no=#{heartNo}
+	</select>
+	
+	<select id="selectHeartMemberCoupon" parameterType="int" resultType="map">
+		select * 
+		from heart h join member m
+		on h.member_no=m.member_no
+		left outer join coupon_list cl
+		on h.heart_no=cl.heart_no
+		left outer join coupon c
+		on cl.coupon_no=c.coupon_no
+		where h.course_no=#{courseNo}
+		and h.heart_no>(select min(heart_no ) from heart where course_no=#{courseNo})
+		order by h.heart_no
+	</select>
+	
+	<select id="selectAll" resultType="couponVo">
+		select * from coupon order by coupon_no
+	</select>
 </mapper>
 
 
