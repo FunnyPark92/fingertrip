@@ -10,4 +10,5 @@ public interface HeartDAO {
 	public int getTotalRecord(SearchVO searchVo);
 	public int insertHeart(HeartVO heartVo);
 	public List<HeartVO> selectByCourse(int courseNo);
+	public int selectHeartNo(Map<String , Object> map);
 }

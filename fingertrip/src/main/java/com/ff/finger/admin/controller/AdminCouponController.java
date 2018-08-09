@@ -100,6 +100,13 @@ public class AdminCouponController {
 	public String couponDetail(@RequestParam(defaultValue="0") int courseNo, Model model) {
 		logger.info("관리자 회원혜택관리 상세보기, courseNo={}",courseNo);
 		
+		if(courseNo==0) {
+			model.addAttribute("msg", "잘못된 url입니다");
+			model.addAttribute("url", "/admin/nacojja/coupon/couponList.do");
+			
+			return "common/message";
+		}
+		
 		Map<String, Object> map=courseService.selectMember(courseNo);
 		logger.info("코스 조회 후 map={}", map);
 		
@@ -123,5 +130,39 @@ public class AdminCouponController {
 		model.addAttribute("map", map);
 		
 		return "admin/nacojja/coupon/couponDetail";
+	}
+	
+	@RequestMapping("/offerCoupon.do")
+	public String offerCoupon(@RequestParam(defaultValue="0") int courseNo, @RequestParam(defaultValue="0") int memberNo, 
+			@RequestParam(defaultValue="0") int couponNo, Model model) {
+		logger.info("쿠폰 제공하기, 파라미터 courseNo={}, memberNo={}",courseNo, memberNo);
+		logger.info("쿠폰 제공하기, 파라미터 couponNo={}", couponNo);
+
+		String msg="", url="";
+		if(courseNo==0||memberNo==0||couponNo==0) {
+			msg="잘못된 url입니다";
+			url="/admin/nacojja/coupon/couponList.do";
+		}else {
+			Map<String, Object> map=new HashMap<>();
+			map.put("courseNo", courseNo);
+			map.put("memberNo", memberNo);
+			map.put("couponNo", couponNo);
+			
+			int cnt=couponService.offerCoupon(map);
+			logger.info("쿠폰제공 후 cnt={}", cnt);
+			
+			if(cnt>0) {
+				msg="쿠폰제공이 완료되었습니다.";
+				url="/admin/nacojja/coupon/couponDetail.do?courseNo="+courseNo;
+			}else {
+				msg="쿠폰제공이 실패하였습니다.";
+				url="/admin/nacojja/coupon/couponDetail.do";
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 }

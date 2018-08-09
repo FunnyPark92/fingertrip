@@ -36,4 +36,9 @@ public class HeartDAOMybatis implements HeartDAO{
 		return sqlSession.selectList(namespace+"selectByCourse", courseNo);
 	}
 
+	@Override
+	public int selectHeartNo(Map<String, Object> map) {
+		return sqlSession.selectOne(namespace+"selectHeartNo", map);
+	}
+
 }
