@@ -26,7 +26,6 @@ public class AdminFaqController {
 		List<Map<String, Object>> list=faqservice.allFaqCategory(faqCategoryNo);
 		logger.info("faq 조회 결과 list.size={}", list.size());
 		
-		
 		model.addAttribute("list", list);
 		
 		return "admin/cs/faq/faqList";
