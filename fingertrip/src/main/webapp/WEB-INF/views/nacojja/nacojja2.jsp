@@ -175,6 +175,10 @@
             	
             	getAddressInformation(event.latLng);
             }
+            
+			//맵 클릭하고 진짜 개빠르게 여행지 추가를 누를시 도시 또는 여행지명이 세팅되기도 전에 리스트에 null로 넘어가버린다. 이걸 막기위해 추가.
+			$("#addPlaceBtn").removeAttr("disabled");
+            
     	}, 400); //수십차례 테스트 해 본 결과 딜레이는 400밀리초가 마지노선임. 조금 더 빠르게 처리 불가.. (수정 금지)
  		
     }
@@ -510,7 +514,10 @@
         });
         
         $('.dayTab').click(function(){
-       		//일차가 넘어간 후 아무것도 안한상태에서 바로 여행지 추가를 누르면 이벤트 진행되지 않도록 latLng값 초기화
+        	//맵 클릭하고 진짜 개빠르게 여행지 추가를 누를시 도시 또는 여행지명이 세팅되기도 전에 리스트에 null로 넘어가버린다. 이걸 막기위해 추가.
+			$("#addPlaceBtn").attr("disabled", "disabled");
+        	
+        	//일차가 넘어간 후 아무것도 안한상태에서 바로 여행지 추가를 누르면 이벤트 진행되지 않도록 latLng값 초기화
            	latLng = "";
        		
        		$("#day").val($(this).val());
@@ -668,7 +675,7 @@
                             <input id="address" type="textbox" placeholder="지도에 표시될 여행지를 검색해주세요" 
                         		onkeypress="if (event.keyCode==13) {return false;}"> <!-- 엔터키로 submit 되어버리는 현상 막음 -->
                             <input type="button" onclick="findPlace(18)" class="searchIcon">
-                       		<input type="button" value="여행지 추가" onclick="addPlace()" class="btn btn-outline-info">
+                       		<input type="button" value="여행지 추가" onclick="addPlace()" id="addPlaceBtn" class="btn btn-outline-info" disabled="disabled">
                         	<input type=button onclick="undoPlace(true);" value="여행지 취소" class="btn btn-outline-danger">
                         </div>
                        
