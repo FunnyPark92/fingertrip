@@ -70,7 +70,7 @@
       		
       				$.each(list, function(idx, travelSpotVO){
       					$("<p class='spot'>" + travelSpotVO.travelSpot + "</p>").appendTo('.spotDiv'); //여행지명(장소정보가 없을 시 주소가 출력됨)
-      					$("<p class='address'>" + travelSpotVO.spotAddress + "</p>").appendTo('.spotDiv'); //여행지 도시정보
+      					$("<p class='address spotExp'>" + travelSpotVO.spotAddress + "</p>").appendTo('.spotDiv'); //여행지 도시정보
       					
       					if (travelSpotVO.travelContent != null && travelSpotVO.travelContent != "") {
       						//alert(travelSpotVO.travelSpot + "-" + travelSpotVO.travelContent);
@@ -199,7 +199,7 @@
             	<c:forEach var="tSpotVo" items="${tSpotVoList }">
             		<c:if test="${tSpotVo.day == 1 }">
 		            	<p class='spot'>${tSpotVo.travelSpot }</p>
-		      			<p class='address'>${tSpotVo.spotAddress }</p>
+		      			<p class='address spotExp'>${tSpotVo.spotAddress }</p>
             		</c:if>
 				</c:forEach>
             </div>
