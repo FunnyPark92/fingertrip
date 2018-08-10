@@ -220,7 +220,11 @@
 			        	$("#city").val("도시 정보 없음");
 			        }
 			        
-			        $("#spotAddress").val(results[0].formatted_address); //여행지의 주소 정보도 DB에 저장
+			        if (results[0].formatted_address == null || results[0].formatted_address == "") {
+			        	$("#spotAddress").val("주소 정보 없음");
+			        } else {
+				        $("#spotAddress").val(results[0].formatted_address); //여행지의 주소 정보도 DB에 저장
+			        }
 			        
 			        //console.log(results);
 					//console.log(results[0]);
