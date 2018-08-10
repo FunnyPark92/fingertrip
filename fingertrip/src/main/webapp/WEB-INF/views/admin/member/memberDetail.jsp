@@ -15,7 +15,7 @@
 
 <section class="admCenter marginTop40">
 		<c:if test="${!empty list}">
-      	<h2 class="admCenter marginTop40" style="text-align: center">탈퇴한 일반회원 상세보기</h2>
+      	<h2 class="admCenter marginTop40" style="text-align: center">탈퇴회원 상세보기</h2>
       	</c:if>
       	<c:if test="${empty list}">
       	<h2 class="admCenter marginTop40" style="text-align: center">일반 회원 상세보기</h2>

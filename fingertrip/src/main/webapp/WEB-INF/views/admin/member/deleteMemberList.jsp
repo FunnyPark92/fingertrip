@@ -13,7 +13,7 @@ function pageFunc(currentPage){
 	        <input type="hidden" name="searchCondition" value="${param.searchCondition }">
 	        <input type="hidden" name="searchKeyword" value="${param.searchKeyword }"> 
         </form>
-        <h2>탈퇴한 개인 회원 조회</h2>
+        <h2>탈퇴회원 조회</h2>
         <div class="clearFix">
         <form action="<c:url value='/admin/member/deleteMemberList.do'/>" method="post">
            	<div class="fRight">
