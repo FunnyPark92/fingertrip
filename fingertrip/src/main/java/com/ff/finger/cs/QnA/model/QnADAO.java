@@ -20,6 +20,8 @@ public interface QnADAO {
 	//내가 쓴글 출력을 위한 메서드
 	public List<QnAVO> myWriteSelectAll(SearchVO searchVo);
 	public int myWriteQnAtotalRecord(SearchVO searchVo);
+	public int qnADelete(int qnaNo);
+	public int qnaWrite(QnAVO qnAVo);
 	
 	
 }

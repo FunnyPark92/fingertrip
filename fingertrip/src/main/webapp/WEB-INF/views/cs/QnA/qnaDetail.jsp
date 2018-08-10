@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="../../inc/top.jsp"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -26,7 +27,6 @@ $(document).ready(function(){
 	});	        
 	});		  
 </script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 <section class="container board marginTop80 marginBottom80 minheight600">
         <div class="row">
            <!-- 서브메뉴 -->
@@ -75,6 +75,13 @@ $(document).ready(function(){
                              </c:if>	
                                	<br>
                                	<p>${vo.content}</p>
+                               	<c:if test="${!empty listImg }">
+									<c:set value="0" var="i"/>
+									<c:forEach var="img" items="${listImg}">
+										<img alt="" src="${pageContext.request.contextPath }/upload_pds/${img}" class="maxH500">
+									<c:set value="${i+1 }" var="i"/>
+									</c:forEach>
+								</c:if>
                             </div>
                         </td>
                     </tr>
@@ -122,8 +129,9 @@ $(document).ready(function(){
                     </c:if>
                 	</table>
                 	<div class="fRight">
-                		<!-- 기업로그인 완료되면 if문 처리 해야함, 세션받아서 처리 메모장이 코드 있음 -->
+                		<!-- 기업로그인 완료되면 if문 처리 해야함, 세션받아서 처리 메모장이 코드 있음
                 		<a class="btn btn-primary" href="<c:url value='/cs/QnA/reply.do?qnaNo=${vo.qnaNo}'/>">답변하기</a>
+                		-->
                     	<a href="<c:url value='/cs/QnA/qna.do'/>" class="btn btn btn-warning">목록</a>
                     </div>
                 </div>

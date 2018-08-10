@@ -63,4 +63,14 @@ public class QnAServiceImpl implements QnAService {
 	public int myWriteQnAtotalRecord(SearchVO searchVo) {
 		return qnADao.myWriteQnAtotalRecord(searchVo);
 	}
+
+	@Override
+	public int qnADelete(int qnaNo) {
+		return qnADao.qnADelete(qnaNo);
+	}
+
+	@Override
+	public int qnaWrite(QnAVO qnAVo) {
+		return qnADao.qnaWrite(qnAVo);
+	}
 }

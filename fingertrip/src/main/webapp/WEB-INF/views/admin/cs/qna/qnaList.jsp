@@ -27,7 +27,10 @@ $(document).ready(function(){
 	$(".hid").hide();
 	$(".click").click(function(){
 		$(".hid").hide();
-		$(this).next().show();	
+		var del=$('.delf').val();
+		if(del!="N"){
+			$(this).next().show();	
+		}
 	});
 });
 </script>
@@ -63,7 +66,7 @@ $(document).ready(function(){
     		<input type="hidden" name="aNo" value="1">
    		</form>
    	</div>
-    <form name="frmDel" action="<c:url value='/admin/cs/notice/deleteMulti.do'/>" method="post">        	
+    <form name="frmDel" action="<c:url value='/admin/cs/QnA/deleteMulti.do'/>" method="post">        	
     <table class="grayTh">
         <tr>
             <th scope="col" style="width:5%; text-align: center" ><input type="checkbox" name="chkAll"></th>
@@ -76,6 +79,8 @@ $(document).ready(function(){
        	<c:if test="${!empty list}">
 			  <!-- QnA 반복문 시작 -->          	 
           	  <c:forEach var="vo" items="${list}">
+          	  <!-- 삭제된 글은 상세보기와 답글달기 버튼이 나타나지 않게 하기 위한 값 -->
+          	  <input type="hidden" class="delFlag" class="delf" value="${vo.delFlag}">
               <tr style="text-align:center" class="click">
               	<td><input type="checkbox" name="chk" value="${vo.qnaNo}"></td>
                   <td scope="row" class="text-center">${vo.qnaNo}</td>
@@ -114,7 +119,7 @@ $(document).ready(function(){
               <tr class="hid">
               	<td colspan="6">
 					<div class="aWrap fleft">                 
-                		<a class="darkBorder"  href="<c:url value='/admin/cs/QnA/qnAReplyWrite.do?qnaNo=${vo.qnaNo}'/>">상세보기</a>
+                		<a class="darkBorder"  href="<c:url value='/admin/cs/QnA/adminQnADetail.do?qnaNo=${vo.qnaNo}'/>">상세보기</a>
                     	<a class="darkBorder"  href="<c:url value='/admin/cs/QnA/qnAReplyWrite.do?qnaNo=${vo.qnaNo}'/>">답변하기</a>
                     </div>
               	</td>

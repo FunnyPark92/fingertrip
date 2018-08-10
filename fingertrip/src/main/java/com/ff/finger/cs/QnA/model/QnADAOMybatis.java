@@ -72,4 +72,14 @@ public class QnADAOMybatis implements QnADAO {
 	public int myWriteQnAtotalRecord(SearchVO searchVo) {
 		return sqlSession.selectOne(namespace+"myWriteQnAtotalRecord", searchVo);
 	}
+
+	@Override
+	public int qnADelete(int qnaNo) {
+		return sqlSession.update(namespace+"qnADelete",qnaNo);
+	}
+
+	@Override
+	public int qnaWrite(QnAVO qnAVo) {
+		return sqlSession.insert(namespace+"qnaWrite", qnAVo);
+	}
 }
