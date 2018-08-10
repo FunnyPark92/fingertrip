@@ -7,12 +7,12 @@
 		text-decoration: underline;
 		color:blue;
 	}
+	
+	
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#del').click(function(){
-			if()
-			
 			if(confirm("삭제하시겠습니까?")){
 				$('form[name=frmDel]').submit();
 			}

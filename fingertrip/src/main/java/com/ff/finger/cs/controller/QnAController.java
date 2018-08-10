@@ -138,7 +138,16 @@ public class QnAController {
 	}
 		
 	@RequestMapping("/QnA/qnaWrite.do")
-	public String qnaWrite() {
+	public String qnaWrite(Model model,HttpSession session) {
+		String id = (String)session.getAttribute("userid");
+		logger.info("세션조회 id={}", id);
+		
+		if(id==null) {
+			model.addAttribute("msg", "로그인 후 QnA 작성이 가능합니다.");
+			model.addAttribute("url", "/member/login/login.do");
+			
+			return "common/message";
+		}
 		logger.info("Q&A글쓰기 화면 보기");	
 		return "cs/QnA/qnaWrite";
 	}
@@ -199,12 +208,6 @@ public class QnAController {
 		String id = (String)session.getAttribute("userid");
 		logger.info("세션조회 id={}", id);
 		
-		if(id==null) {
-			model.addAttribute("msg", "로그인 후 QnA 작성이 가능합니다.");
-			model.addAttribute("url", "/index.do");
-			
-			return "common/message";
-		}
 		//회원 정보 가져오기 위한 메서드 호출
 		MemberVO memberVo=memberService.logingMember(id); 
 		logger.info("회원 정보 조회 결과 MemberVO={}", memberVo);

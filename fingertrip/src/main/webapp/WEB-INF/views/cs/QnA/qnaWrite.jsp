@@ -3,9 +3,6 @@
 <%@ include file="../../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 <style>
-.form-control{
-	width:600px;
-}
 #editor ol, #editor ul{
 	padding-left: 30px;
 	}
@@ -13,6 +10,10 @@
 	text-decoration: underline;
 	color: blue;
 	}
+#editor {
+	min-height: 300px;
+	border: 1px solid #ced4da;
+}
 </style>
 
 <script type="text/javascript">
@@ -31,6 +32,7 @@ $(document).ready(function(){
 	  $("#sc").show();
   });
   $('form[name=frmCk]').submit(function(){
+		$('input[name=fileCnt]').val("Y");	
 		if($('input[name=title]').val()<1){
 			alert('제목을 입력하세요');
 			$('input[name=title]').focus();
@@ -127,8 +129,7 @@ $(document).ready(function(){
             	<input type="text" class="form-control" id="title" name="title"  />
             </div>
         	<div>  
-           		<label for="content">내용</label>
-           		<div class="form-control" style="height:300px;">     
+           		<label for="content">내용</label>    
           		<div id="toolbar-container"></div>
 	      	    <div id="editor" name="content"></div>
 	      	        <script>
@@ -145,9 +146,8 @@ $(document).ready(function(){
 					            .catch( error => {
 					                console.error( error );
 					            } );
-				    	</script>
-				       	<input type="hidden" name="content">
-				</div>          	
+				    </script>
+				 <input type="hidden" name="content">
         	</div>
         	<div>
             	<input id="file" type="file" name="upfile" multiple="multiple"><br>
