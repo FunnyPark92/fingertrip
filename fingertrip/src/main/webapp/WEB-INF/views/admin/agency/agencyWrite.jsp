@@ -11,6 +11,8 @@
 <script type="text/javascript" src="<c:url value='/js/travelAgency.js'/>"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+	
+		
 		$('#id').keyup(function(){
 			if($(this).val().length < 2){
 				$('.message').html("아이디는 2자리 이상이어야 합니다.");

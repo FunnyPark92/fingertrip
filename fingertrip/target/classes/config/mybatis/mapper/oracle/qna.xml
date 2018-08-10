@@ -29,7 +29,7 @@
 	<select id="selectByNo" parameterType="int" resultType="QnAVO">
 		select * from qna
 		where (group_no=#{groupNo}+1 or group_no=#{groupNo}-1) and step=0
-		order by qna_no
+		order by qna_no desc
 	</select>
 	
 	<select id="passck" parameterType="int" resultType="string">
@@ -56,8 +56,8 @@
 	</update>
 	
 	<insert id="reply" parameterType="QnAVO">
-		insert into qna(qna_no,title,content,name,password,group_no,step,sort_no,member_no,file_name,original_file_name)
-		values(qna_seq.nextval,#{title},#{content},#{name},#{password},(select group_no from qna where qna_no=#{qnaNo}),
+		insert into qna(qna_no,title,content,name,password,reg_date,read_count,group_no,step,sort_no,admin_no,file_name,original_file_name)
+		values(qna_seq.nextval,#{title},#{content},#{name},#{password},sysdate,0,(select group_no from qna where qna_no=#{qnaNo}),
 		(select step from qna where qna_no=#{qnaNo})+1,
 		(select sort_no from qna where qna_no=#{qnaNo})+1,#{adminNo},#{fileName, jdbcType=VARCHAR},#{originalFileName, jdbcType=VARCHAR})
 	</insert>
@@ -84,6 +84,17 @@
 		select count(*) from qna
 		where member_no=#{memberNo}
 	</select>
+	
+	<update id="qnADelete" parameterType="int">
+		update qna
+        set del_flag='Y'
+        where qna_no=${qnaNo}
+	</update>
+	
+	<insert id="qnaWrite" parameterType="QnAVO">
+		insert into qna(qna_no,title,content,name,password,reg_date,read_count,group_no,step,sort_no,member_no,file_name,original_file_name)
+		values(qna_seq.nextval,#{title},#{content},#{name},#{password},sysdate,0,qna_seq.nextval,0,0,#{memberNo},#{fileName, jdbcType=VARCHAR},#{originalFileName, jdbcType=VARCHAR})	
+	</insert>
 	
 </mapper>
 

@@ -64,9 +64,12 @@
 		</where>
 	</select>
 	
-	<insert id="insertHeart" parameterType="map">
+	<insert id="insertHeart" parameterType="HeartVO">
+		<selectKey keyProperty="heartNo" order="BEFORE" resultType="int">
+			SELECT HEART_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO HEART(HEART_NO, COURSE_NO, MEMBER_NO)
-		VALUES(HEART_SEQ.NEXTVAL, #{courseNo}, #{memberNo})
+		VALUES(#{heartNo}, #{courseNo}, #{memberNo})
 	</insert>
 	
 	<select id="selectByCourse" parameterType="int" resultType="heartVo">

@@ -505,6 +505,7 @@ table a:hover, table a:active{text-decoration: none;}
     padding: 0.5%;
     border: 1px solid #f3f3f3;
     box-sizing: border-box;
+    margin-top: 6px;
 }
 #map{
     width:100%; 

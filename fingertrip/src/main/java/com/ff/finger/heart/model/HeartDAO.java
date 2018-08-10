@@ -8,7 +8,7 @@ import com.ff.finger.common.SearchVO;
 public interface HeartDAO {
 	public List<Map<String, Object>> myCourseList(SearchVO searchVo);
 	public int getTotalRecord(SearchVO searchVo);
-	public int insertHeart(Map<String, Integer> map);
+	public int insertHeart(HeartVO heartVo);
 	public List<HeartVO> selectByCourse(int courseNo);
 	public int selectHeartNo(Map<String , Object> map);
 }

@@ -38,32 +38,47 @@
 			<table class="box2">
 				<caption>하트 내역</caption>
 				<colgroup>
-					<col style="width:9%" />
+					<col style="width:20%" />
 					<col style="width:12%" />
 					<col style="width:40%" />
-					<col style="width:12%" />
+					<col style="width:30%" />
 					<col style="width:12%" />	
 					<col style="width:14%" />
 				</colgroup>
 				<thead>
 				  <tr>
-				    <th scope="col">하트번호</th>
-					<th scope="col">구매일</th>
-					<th scope="col">사용일</th>
+				    <th scope="col">하트내역 번호</th>
 					<th scope="col">개수</th>
 					<th scope="col">충전/사용 상태</th>
-					<th scope="col">???</th>
+					<th scope="col">구매/사용일</th>
 				  </tr>
 				</thead> 
 				<tbody>
-					<c:if test="${empty list }">
+					<c:if test="${empty hlVoList }">
 						<tr>
 							<td colspan="6">해당 기간의 하트 충전/사용 내역이 없습니다.</td>
 						</tr>
 					</c:if>
-					<c:if test="${!empty list }">
+					<c:if test="${!empty hlVoList }">
 						<!-- 반복 시작 -->
-						
+						<c:forEach var="map" items="${hlVoList }">
+							<c:if test="${map['STATUS'] == '충전' }">
+								<tr style="color: green;">
+									<th scope="col">${map['HEART_LIST_NO'] }</th>
+									<th scope="col">+${map['HEART_CHARGE_COUNT'] }</th>
+									<th scope="col">충전</th>
+									<th scope="col">${map['HEART_CHARGE_DAY'] }</th>
+								</tr>
+							</c:if>
+							<c:if test="${map['STATUS'] == '사용' }">
+								<tr style="color: red">
+									<th scope="col">${map['HEART_LIST_NO'] }</th>
+									<th scope="col">-1</th>
+									<th scope="col">코스 등록에 사용</th>
+									<th scope="col">${map['REGDATE'] }</th>
+								</tr>
+							</c:if>
+						</c:forEach>
 						<!-- 반복 끝 -->
 					</c:if>
 				</tbody>

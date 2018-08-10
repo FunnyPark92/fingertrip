@@ -3,9 +3,16 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.heartcharge">
 	<insert id="heartCharge" parameterType="HeartChargeVO">
+		<selectKey keyProperty="heartChargeNo" order="BEFORE" resultType="int">
+			SELECT HEART_CHARGE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO HEART_CHARGE(HEART_CHARGE_NO, HEART_CHARGE_COUNT, HEART_CHARGE_PAY, MEMBER_NO)
-		VALUES(HEART_CHARGE_SEQ.NEXTVAL, #{heartChargeCount}, #{heartChargePay}, #{memberNo})
+		VALUES(#{heartChargeNo}, #{heartChargeCount}, #{heartChargePay}, #{memberNo})
 	</insert>
+	
+	<select id="selectHeartChargeByMemberNo" parameterType="int" resultType="HeartChargeVO">
+		SELECT * FROM HEART_CHARGE WHERE MEMBER_NO=#{memberNo} ORDER BY HEART_CHARGE_NO DESC
+	</select>
 </mapper>
 
 

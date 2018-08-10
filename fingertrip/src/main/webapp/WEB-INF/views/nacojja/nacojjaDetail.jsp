@@ -5,47 +5,62 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYa_utcbQs1RLoVuJguMaQzuX4yxvQyrs&libraries=place"></script>
 
 <script type="text/javascript">
-
-
-    
-
+		var mapCanvas = document.getElementById("map")
+		var myZoom =18;
+		var map;
+		var marker;
+		var myCenter;
+	function initialize(){
+		var mapOptions = {
+				center: myCenter,
+				zoom: myZoom,
+				//mapTypeId:google.maps.MapTypeId.HYBRID
+		}
+		mapCanvas = document.getElementById("map");
+		myZoom= 18;
+		map = new google.maps.Map(mapCanvas,mapOptions);
+		marker = new google.maps.Marker({
+			position:myCenter
+			,map:map});
+		  marker.setMap(map);
+	}
+	myCenter = new google.maps.LatLng(37.52651121051272, 126.88800752162933);
     $(document).ready(function(){
-    	
     	$('#dayActive').addClass("active");
-
     	
         $('.reply').click(function(){
             $(this).closest('.threaded-comments').children('.recomments-wrap').toggle();
         });
-
+       	$('.daySel').click(function(){
+      		var day = $(this).val();
+      		$('#day').text("Day "+day);
+      		var year = $(this).find('small').text().substring(0,4);
+      		var month = $(this).find('small').text().substring(5,7);
+      		var dd = $(this).find('small').text().substring(8,10);
+      		var date = year +"년"+ month+"월" + dd+"일";
+      		
+      		$('#date').text(date);
+      		$.ajax({
+      			url:"<c:url value='/nacojja/selectTravel.do'/>",
+      			type:"POST",
+      			data:{courseNo:"${param.courseNo}",day:day},
+      			success:function(list){
+        		initialize();
+      				$('#spotContent').text("");
+      				$('.spot').remove(); //클릴 할 때마다 초기화
+      				$('.spotExp').remove(); // 클릭 할 때마다 초기화
+      				$.each(list,function(idx,travelSpotVO){
+      					$('#spotContent').append(travelSpotVO.travelContent+"<br>"); // spot별 설명 
+      					$("<p class='spot'>"+travelSpotVO.city+"</p>").appendTo('.spotDiv'); //일짜별 도시 ex)1일차에 3개면 3개
+      					$("<p class='spotExp'>"+travelSpotVO.travelSpot+"</p>").appendTo('.spotDiv');
+      				}); //each문
+      			},
+      			error:function(xhr,starus,error){
+      				alert("error : "+ error);
+      			}
+      		});
+      	});//click
         	
-         	$('.daySel').click(function(){
-        		var day = $(this).val();
-        		$('#day').text("Day "+day);
-        		var year = $(this).find('small').text().substring(0,4);
-        		var month = $(this).find('small').text().substring(5,7);
-        		var dd = $(this).find('small').text().substring(8,10);
-        		var date = year +"년"+ month+"월" + dd+"일";
-        		
-        		$('#date').text(date);
-        		$.ajax({
-        			url:"<c:url value='/nacojja/selectTravel.do'/>",
-        			type:"POST",
-        			data:{courseNo:${param.courseNo},day:day},
-        			success:function(list){
-        				$.each(list,function(idx,vo){
-        					$('.spotContent').text(vo.travelContent);
-        					
-			
-        				});
-        			},
-        			error:function(xhr,starus,error){
-        				alert("error : "+ error);
-        			}
-        		});
-        		
-        	});
-        
        	$('.dayActive').each(function(idx,item){
 	        $(this).click(function(){
 				$(this).addClass("active");
@@ -67,7 +82,6 @@
     	<div class="col-md-6 naThumImg marginBottom50">
             <img src="<c:url value='/upload_images/${courseVo.thumbImg}'/>" alt="썸네일">
         </div>
-
         <!-- 하트받을때 -->
         <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
             <div>
@@ -94,6 +108,7 @@
             </div>
             <input type="button" class="heartBtn btn btn-block btn-danger" value="하트 누르기">
         </div>
+        
            <!-- 결제할 때 -->
 		<%--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;">
 			<div>결제진행중</div>
@@ -126,7 +141,7 @@
             	<div class="faq-list list-group nav">
                     <c:set var="i" value="1"/>
                     <c:forEach var="travelDate" items="${tdList}">
-                        <button type="button" class="list-group-item dayActive daySel" value="${i }">
+                        <button type="button" class="list-group-item dayActive daySel" value="${i }" id="dayActive">
                             Day${i}
                             <small id="travelDate"><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/></small>
                         </button>
@@ -144,34 +159,13 @@
                  
             <div id="map" class="marginBottom50"></div>
                  
-            <div class="spotDiv marginBottom20">
-            	<p class="spot">
-					루브르 박물관
-                </p>
-                <p class="spotExp">
-					프랑스 Paris Rue de Rivoli 75001
-                </p>
-                <p class="spot">
-					노트르담 대성당
-				</p>
-				<p class="spotExp">
-					프랑스 Paris 6 Parvis Notre-Dame - Pl. Jean-Paul II 75004
-				</p>
-                <p class="spot">
-					에펠탑
-				</p>
-				<p class="spotExp">
-					프랑스 Paris Champ de Mars 5 Avenue Anatole France 75007
-				</p>
-			</div>
+            <div class="spotDiv marginBottom20"></div>
                  
 			<div>
 				<p class="explain">
 					여행지 설명
 				</p>
-				루브르 박물관 - 모나리자가 전시되어져있는 박물관으로 큰 규모를 자랑합니다.<br>
-				노트르담 대성당 - 프랑스 파리의 시테 섬의 동쪽 반쪽에 있는 프랑스후기고딕 양식의 성당이다.<br>
-				에펠탑 - 프랑스의 대표 건축물인 이 탑은 격자 구조로 이루어져 파리에서 가장 높은 건축물이다.
+				<p id="spotContent"></p>
 			</div>
                 
             <div class="spotImg">

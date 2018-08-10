@@ -29,6 +29,9 @@ import com.ff.finger.common.SearchVO;
 import com.ff.finger.course.model.CourseService;
 import com.ff.finger.course.model.CourseVO;
 import com.ff.finger.heart.model.HeartService;
+import com.ff.finger.heart.model.HeartVO;
+import com.ff.finger.heartlist.model.HeartListService;
+import com.ff.finger.heartlist.model.HeartListVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
 import com.ff.finger.travelspot.model.TravelSpotVO;
@@ -51,6 +54,9 @@ public class NacojjaController {
 	
 	@Autowired
 	private HeartService heartService;
+	
+	@Autowired
+	private HeartListService heartListService;
 	
 	@RequestMapping("/nacojjaList.do")
 	public String nacojjaList(@ModelAttribute SearchVO searchVo, Model model) {
@@ -154,8 +160,6 @@ public class NacojjaController {
 		
 		String userid = (String) session.getAttribute("userid");
 		MemberVO memberVo = memberService.logingMember(userid);
-		logger.info("로그인 한 회원의 정보, memberVo={}", memberVo);
-		
 		travelSpotVo.setMemberNo(memberVo.getMemberNo());
 		logger.info("나코짜2 DB 처리하기, 세팅 후 파라미터 travelSpotVo={}", travelSpotVo);
 		
@@ -165,16 +169,21 @@ public class NacojjaController {
 		cnt = memberService.minusHeart(memberVo.getMemberNo());
 		logger.info("나코짜2 DB 처리 후 작성한 회원의 하트 차감 결과, cnt={}", cnt);
 		
-		
 		int courseNo = travelSpotVo.getCourseNo();
 		logger.info("지금 등록한 코스의 코스번호: {}", courseNo);
 
-		Map<String, Integer> map = new HashMap<>();
-		map.put("courseNo", courseNo);
-		map.put("memberNo", memberVo.getMemberNo());
-		
-		cnt = heartService.insertHeart(map);
+		HeartVO heartVO = new HeartVO();
+		heartVO.setCourseNo(courseNo);
+		heartVO.setMemberNo(memberVo.getMemberNo());
+		cnt = heartService.insertHeart(heartVO);
 		logger.info("하트 테이블에 insert한 결과, cnt={}", cnt);
+		
+		HeartListVO heartListVo = new HeartListVO();
+		heartListVo.setStatus("사용");
+		heartListVo.setHeartNo(heartVO.getHeartNo()); //하트 넘버 제대로 들어가는지 확인해 볼것
+		heartListVo.setMemberNo(memberVo.getMemberNo());
+		cnt = heartListService.insertHeartListUse(heartListVo);
+		logger.info("하트 내역 테이블에 insert한 결과, cnt={}", cnt);
 		
 		return "redirect:/nacojja/nacojjaDetail.do?courseNo=" + courseNo + "";
 	}
@@ -205,8 +214,8 @@ public class NacojjaController {
 				delIndex = i;
 			}
 		}
-		
 		logger.info("삭제할 인덱스, delIndex={}", delIndex);
+		
 		travelSpotList.remove(delIndex);
 		logger.info("일차별 이전 여행지 1개 삭제 결과, list.size={}", travelSpotList.size());
 	}
@@ -214,7 +223,6 @@ public class NacojjaController {
 	@RequestMapping("/getTravelList.do")
 	@ResponseBody
 	public List<TravelSpotVO> getTravelList() {   
-		
 		logger.info("나코짜2 여행지 리스트 가져오기, 전체 List.size={}", travelSpotList.size());
 		
 		return travelSpotList;
@@ -259,7 +267,6 @@ public class NacojjaController {
 		
 		MemberVO memberVo = memberService.selectMember(courseVo.getMemberNo());
 		List<TravelSpotVO> travelSpotVoList = courseService.selectTravelSpot(courseNo);
-
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(courseVo.getStartDay());
 		
@@ -272,9 +279,8 @@ public class NacojjaController {
 		
 		model.addAttribute("tdList", travelDateList); //일수 
 		model.addAttribute("courseVo", courseVo); //코스
-		model.addAttribute("memberVo", memberVo);
+		model.addAttribute("memberVo", memberVo); //멤버
 		model.addAttribute("tSpotVoList", travelSpotVoList);
-				
 		return "nacojja/nacojjaDetail";
 	}
 	

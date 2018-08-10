@@ -1,7 +1,6 @@
 package com.ff.finger.travelAgency.model;
 
-public class TravelAgencyVO{
-	
+public class TravelAgencyVO {
 	private int travelAgencyNo;
 	private String name;
 	private String id;
@@ -9,6 +8,12 @@ public class TravelAgencyVO{
 	private String hp;
 	private String licenseNo;
 	
+	public int getTravelAgencyNo() {
+		return travelAgencyNo;
+	}
+	public void setTravelAgencyNo(int travelAgencyNo) {
+		this.travelAgencyNo = travelAgencyNo;
+	}
 	public String getName() {
 		return name;
 	}
@@ -39,20 +44,11 @@ public class TravelAgencyVO{
 	public void setLicenseNo(String licenseNo) {
 		this.licenseNo = licenseNo;
 	}
+	
 	@Override
 	public String toString() {
 		return "TravelAgencyVO [travelAgency=" + travelAgencyNo + ", name=" + name + ", id=" + id + ", password="
 				+ password + ", hp=" + hp + ", licenseNo=" + licenseNo + "]";
 	}
-	public int getTravelAgencyNo() {
-		return travelAgencyNo;
-	}
-	public void setTravelAgencyNo(int travelAgencyNo) {
-		this.travelAgencyNo = travelAgencyNo;
-	}
-	
-	
-	
-	
 
 }
