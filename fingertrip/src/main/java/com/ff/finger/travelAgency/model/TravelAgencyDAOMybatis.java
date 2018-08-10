@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.ff.finger.common.SearchVO;
 
 @Repository
-public class TravelAgencyDAOMybatis implements TravelAgencyDAO{
+public class TravelAgencyDAOMybatis implements TravelAgencyDAO {
 	private String namespace ="config.mybatis.mapper.oracle.travelAgency.";
 	
 	@Autowired	private SqlSessionTemplate sqlSession;
@@ -57,6 +57,11 @@ public class TravelAgencyDAOMybatis implements TravelAgencyDAO{
 	@Override
 	public int updateAgency(TravelAgencyVO vo) {
 		return sqlSession.update(namespace+"updateAgency",vo);
+	}
+
+	@Override
+	public String selectAgencyDbPwd(String id) {
+		return sqlSession.selectOne(namespace + "selectAgencyDbPwd", id);
 	}
 
 }

@@ -22,6 +22,8 @@ import com.ff.finger.common.CommonConstants;
 import com.ff.finger.email.EmailSender;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
+import com.ff.finger.travelAgency.model.TravelAgencyService;
+import com.ff.finger.travelAgency.model.TravelAgencyVO;
 
 @Controller
 @RequestMapping("/member/login")
@@ -30,7 +32,12 @@ public class LoginController {
 	
 	@Autowired
 	private MemberService memberService;
-	@Autowired private EmailSender emailSender;
+	
+	@Autowired
+	private TravelAgencyService travelAgencyService;
+	
+	@Autowired 
+	private EmailSender emailSender;
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String login_get() {
@@ -46,7 +53,7 @@ public class LoginController {
 							HttpServletResponse response,
 							Model model) {
 		logger.info("로그인 처리 전 파라미터, memberVo={}", memberVo);
-		logger.info("로그인 처리 전 파라미터, saveId={}", saveId1);
+		logger.info("로그인 처리 전 파라미터, saveId1={}", saveId1);
 		
 		int result = memberService.processLogin(memberVo.getId(), memberVo.getPassword());
 		logger.info("로그인 처리 결과, result={}", result);		
@@ -90,15 +97,72 @@ public class LoginController {
 		return "common/message";
 	}
 	
+	@RequestMapping(value="/agencyLogin.do", method=RequestMethod.POST)
+	public String agencyLogin_post(@ModelAttribute TravelAgencyVO travelAgencyVo,
+							@RequestParam(required=false) String saveId2,
+							HttpServletRequest request,
+							HttpServletResponse response,
+							Model model) {
+		logger.info("기업회원 로그인 처리 전 파라미터, travelAgencyVo={}", travelAgencyVo);
+		logger.info("기업회원 로그인 처리 전 파라미터, saveId2={}", saveId2);
+		
+		int result = travelAgencyService.processAgencyLogin(travelAgencyVo.getId(), travelAgencyVo.getPassword());
+		logger.info("기업회원 로그인 처리 결과, result={}", result);		
+		
+		String msg = "", url = "/member/login/login.do";
+		if (result == CommonConstants.LOGIN_OK) {
+			//[1] 세션에 저장
+			request.getSession().setAttribute("agencyid", travelAgencyVo.getId());
+			
+			//[2] 아이디 저장에 체크되었으면 쿠키에 저장
+			Cookie ck = new Cookie("ck_agencyid", travelAgencyVo.getId());
+			ck.setPath("/");
+			
+			if (saveId2 != null) {
+				ck.setMaxAge(30*24*60*60); //쿠키 유효기간 - 30일
+				response.addCookie(ck);
+			} else {
+				ck.setMaxAge(0); //쿠키 삭제
+				response.addCookie(ck);
+			}
+			
+			msg = "로그인 되었습니다!";
+			url = "/index.do";
+		} else if (result == CommonConstants.PWD_MISMATCH){
+			msg = "비밀번호 불일치!";
+		} else if (result == CommonConstants.ID_NONE) {
+			msg = "존재하지 않는 아이디임!";
+		} else {
+			msg = "로그인 처리 실패!";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
-		logger.info("로그아웃처리 ");
-		String id = (String)session.getAttribute("userid");
-		logger.info("현재 세션 id={}",id);
-		memberService.memberLogOut(id);
+		logger.info("일반회원 로그아웃 처리 ");
+		String id = (String) session.getAttribute("userid");
+		logger.info("현재 세션 id={}", id);
+		int cnt = memberService.memberLogOut(id);
+		logger.info("일반회원 로그아웃 날짜 기록 결과, cnt={}", cnt);
 		
 		session.removeAttribute("userid");
 		//session.removeAttribute("userName");
+		
+		return "redirect:/index.do";
+	}
+	
+	@RequestMapping("/agencyLogout.do")
+	public String agencyLogout(HttpSession session) {
+		logger.info("기업회원 로그아웃 처리 ");
+		String id = (String) session.getAttribute("agencyid");
+		logger.info("현재 세션 id={}", id);
+		
+		session.removeAttribute("agencyid");
 		
 		return "redirect:/index.do";
 	}

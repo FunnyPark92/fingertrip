@@ -5,17 +5,15 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
 <script type="text/javascript">
-
 function pageFunc1(currentPage){
 	page.currentPage.value=currentPage;
 	page.submit();
-    }
+}
 
 function pageFunc2(currentPage){
 	page.currentPageforCourse.value=currentPage;
-	
 	page.submit();
-    }
+}
 </script>
 
 <section class="container board marginTop80 marginBottom80 minheight600">
@@ -116,7 +114,7 @@ function pageFunc2(currentPage){
 	                        <tr>
 	                            <td scope="row" class="text-center">${vo.courseNo }</td>
 	                            <td>
-		                            <a href="<c:url value='미정 나코자게시판이 완성되면 디테일페이지로 연결=${vo.courseNo }'/>">
+		                            <a href="<c:url value='/nacojja/nacojjaDetail.do?courseNo=${vo.courseNo }'/>">
 			                            <!--제목이 긴 경우 일부만 보여주기 -->
 			                            <c:if test="${fn:length(vo.title)>25}">
 			                            	${fn:substring(vo.title,0,25) }...

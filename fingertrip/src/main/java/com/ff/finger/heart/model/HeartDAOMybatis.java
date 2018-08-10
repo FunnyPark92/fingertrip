@@ -27,8 +27,8 @@ public class HeartDAOMybatis implements HeartDAO{
 	}
 
 	@Override
-	public int insertHeart(Map<String, Integer> map) {
-		return sqlSession.insert(namespace + "insertHeart", map);
+	public int insertHeart(HeartVO heartVo) {
+		return sqlSession.insert(namespace + "insertHeart", heartVo);
 	}
 	
 	@Override

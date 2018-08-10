@@ -8,54 +8,56 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <title>Finger Trip</title>
+<title>Finger Trip</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<!-- Custom fonts for this template -->
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Custom styles for this template -->
-    <link href="${pageContext.request.contextPath }/css/landing-page.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="${pageContext.request.contextPath }/css/landing-page.min.css" rel="stylesheet">
 
-    <!-- bxslider -->
-    <link href="${pageContext.request.contextPath }/css/jquery.bxslider.css" rel="stylesheet">
+<!-- bxslider -->
+<link href="${pageContext.request.contextPath }/css/jquery.bxslider.css" rel="stylesheet">
 
-    <!-- 셀프 css -->
-    <link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
+<!-- 셀프 css -->
+<link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
 
-    <!-- 추가한 테마 css -->
-    <link href="${pageContext.request.contextPath }/css/import.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/ionicons.min.css" rel="stylesheet">
-    <!-- 제이쿼리 CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">
-    
-     <!-- Bootstrap core JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script>
-    
-    <!-- ckEditor -->
-    <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
-    
-    <script type="text/javascript">
-    	$(document).ready(function(){
-    		$("#btnLogout").click(function(){
-    			location.href="<c:url value='/member/login/logout.do'/>";
-    		});
-    	});
-    </script>
+<!-- 추가한 테마 css -->
+<link href="${pageContext.request.contextPath }/css/import.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/ionicons.min.css" rel="stylesheet">
+<!-- 제이쿼리 CSS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">
 
+ <!-- Bootstrap core JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script>
+
+<!-- ckEditor -->
+<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#btnLogout").click(function(){
+			location.href="<c:url value='/member/login/logout.do'/>";
+		});
+		
+		$("#btnAgencyLogout").click(function(){
+			location.href="<c:url value='/member/login/agencyLogout.do'/>";
+		});
+	});
+</script>
 </head>
 
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light gnb">
         <div class="container">
@@ -79,7 +81,7 @@
                     </li>
                     <li class="nav-item dropdown hidden-xs">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            고객센터
+							고객센터
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="<c:url value='/cs/notice/noticeList.do'/>">공지사항</a>
@@ -98,7 +100,7 @@
                 </ul>
             </div>
 			<!-- 로그인 안된 경우 -->
-			<c:if test="${empty sessionScope.userid }">	
+			<c:if test="${empty sessionScope.userid && empty sessionScope.agencyid}">	
 	            <!-- 로그인 안 했을때 나오는 .topLoginDiv -->
 	            <div class="topMenu disNone992 topLoginDiv">
 	                <a class="btn btn-info mar5" style="color:#fff;" href="<c:url value='/member/agreement.do'/>">회원가입</a>
@@ -106,9 +108,9 @@
 	            </div>
             </c:if>
 
-			<!-- 로그인 된 경우 -->
-			<c:if test="${!empty sessionScope.userid }">
-	            <!-- 로그인 했을때 나오는 .topLogoutDiv -->
+			<!-- 일반회원 로그인 된 경우 -->
+			<c:if test="${!empty sessionScope.userid}">
+	            <!-- 일반회원 로그인 했을때 나오는 .topLogoutDiv -->
 	            <li class="nav-item dropdown list-unstyled disNone992 topLogoutDiv">
 	            	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	            		마이페이지
@@ -124,6 +126,24 @@
 	                </div>
 	            </li>
 	            <button type="button" id="btnLogout" class="btn btn-primary disNone992">로그아웃</button>
+            </c:if>
+            
+            <!-- 기업회원 로그인 된 경우 -->
+			<c:if test="${!empty sessionScope.agencyid}">
+	            <!-- 기업회원 로그인 했을때 나오는 .topLogoutDiv -->
+	            <li class="nav-item dropdown list-unstyled disNone992 topLogoutDiv">
+	            	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	            		기업페이지
+	            	</a>
+	            	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	            		<a class="dropdown-item" href="">뭐1</a>
+	                    <a class="dropdown-item" href="">뭐2</a>
+	                    <a class="dropdown-item" href="">뭐3</a>
+	                    <a class="dropdown-item" href="">뭐4</a>
+	                    <a class="dropdown-item" href="">뭐5</a>
+	            	</div>
+	            </li>
+	            <button type="button" id="btnAgencyLogout" class="btn btn-primary disNone992">로그아웃</button>
             </c:if>
 
         </div>

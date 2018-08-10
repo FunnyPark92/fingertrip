@@ -30,6 +30,8 @@ import com.ff.finger.cs.QnA.model.QnAVO;
 import com.ff.finger.heart.model.HeartService;
 import com.ff.finger.heartcharge.model.HeartChargeService;
 import com.ff.finger.heartcharge.model.HeartChargeVO;
+import com.ff.finger.heartlist.model.HeartListService;
+import com.ff.finger.heartlist.model.HeartListVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
 
@@ -56,6 +58,9 @@ public class MyPageController {
 	
 	@Autowired
 	private HeartChargeService heartChargeService;
+	
+	@Autowired
+	private HeartListService heartListService;
 
 	@RequestMapping("/myPayment/paymentList.do")
 	public String myPayment() {
@@ -65,11 +70,15 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/myHeart/heartList.do")
-	public String myHeart() {
+	public String myHeart(HttpSession session, Model model) {
 		logger.info("하트 내역 화면 보여주기");
 		
+		String userid = (String) session.getAttribute("userid");
+		MemberVO memberVo = memberService.logingMember(userid);
 		
+		List<Map<String, Object>> heartListVoList = heartListService.selectHeartListByMemberNo(memberVo.getMemberNo());
 		
+		model.addAttribute("hlVoList", heartListVoList);
 		
 		return "myPage/myHeart/heartList";
 	}
@@ -119,6 +128,13 @@ public class MyPageController {
 			
 			int cnt = heartChargeService.heartCharge(heartChargeVo);
 			logger.info("결제 완료 시 하트 충전 결과 cnt={}", cnt);
+			
+			HeartListVO heartListVo = new HeartListVO();
+			heartListVo.setStatus("충전");
+			heartListVo.setHeartChargeNo(heartChargeVo.getHeartChargeNo()); //하트 넘버 제대로 들어가는지 확인해 볼것
+			heartListVo.setMemberNo(memberVo.getMemberNo());
+			cnt = heartListService.insertHeartListCharge(heartListVo);
+			logger.info("하트 내역 테이블에 insert한 결과, cnt={}", cnt);
 			
 			//멤버서비스 불러서 하트 개수 올리기
 			cnt = memberService.plusHeart(heartChargeVo);
