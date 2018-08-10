@@ -7,11 +7,12 @@ public class TravelSpotVO extends CourseVO {
 	private int day; /* 일차 NOT NULL*/
 	private String city; /* 도시 NOT NULL*/
 	private String travelSpot; /* 여행지 NOT NULL*/
+	private String spotAddress;
 	private String img; /* 이미지 */
 	private String travelContent; /* 설명 */
+	private String latLng; /* 위도경도 NOT NULL*/
 	private int dayNo; /* 일차번호 NOT NULL*/
 	private String countryCode; /* 국가코드 NOT NULL*/
-	private String latLng; /* 위도경도 NOT NULL*/
 	
 	public int getTravelSpotNo() {
 		return travelSpotNo;
@@ -37,6 +38,12 @@ public class TravelSpotVO extends CourseVO {
 	public void setTravelSpot(String travelSpot) {
 		this.travelSpot = travelSpot;
 	}
+	public String getSpotAddress() {
+		return spotAddress;
+	}
+	public void setSpotAddress(String spotAddress) {
+		this.spotAddress = spotAddress;
+	}
 	public String getImg() {
 		return img;
 	}
@@ -48,6 +55,12 @@ public class TravelSpotVO extends CourseVO {
 	}
 	public void setTravelContent(String travelContent) {
 		this.travelContent = travelContent;
+	}
+	public String getLatLng() {
+		return latLng;
+	}
+	public void setLatLng(String latLng) {
+		this.latLng = latLng;
 	}
 	public int getDayNo() {
 		return dayNo;
@@ -61,18 +74,14 @@ public class TravelSpotVO extends CourseVO {
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	public String getLatLng() {
-		return latLng;
-	}
-	public void setLatLng(String latLng) {
-		this.latLng = latLng;
-	}
 	
 	@Override
 	public String toString() {
 		return "TravelSpotVO [travelSpotNo=" + travelSpotNo + ", day=" + day + ", city=" + city + ", travelSpot="
-				+ travelSpot + ", img=" + img + ", travelContent=" + travelContent + ", dayNo=" + dayNo
-				+ ", countryCode=" + countryCode + ", latLng=" + latLng + ", toString()=" + super.toString() + "]";
+				+ travelSpot + ", spotAddress=" + spotAddress + ", img=" + img + ", travelContent=" + travelContent
+				+ ", latLng=" + latLng + ", dayNo=" + dayNo + ", countryCode=" + countryCode + ", toString()="
+				+ super.toString() + "]";
 	}
-		
+	
+	
 }

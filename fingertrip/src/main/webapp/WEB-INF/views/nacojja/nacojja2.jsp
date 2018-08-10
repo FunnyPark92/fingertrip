@@ -220,6 +220,8 @@
 			        	$("#city").val("도시 정보 없음");
 			        }
 			        
+			        $("#spotAddress").val(results[0].formatted_address); //여행지의 주소 정보도 DB에 저장
+			        
 			        //console.log(results);
 					//console.log(results[0]);
 					console.log(results[0].address_components);
@@ -536,6 +538,9 @@
             $("#place-rating").val("");
             $("#img").val("");
             $("#divPhotos").find("img").remove();
+            
+          	//여행지 설명 클리어
+			$("textarea[name=travelContent]").val("");
            	
            	deleteMarkers();
            	
@@ -726,6 +731,7 @@
 					    
 					    <input type="hidden" id="countryCode" name="countryCode">
 					    <input type="hidden" id="latLng" name="latLng">
+					    <input type="hidden" id="spotAddress" name="spotAddress">
 					    
 					    <input type="hidden" id="checkDataValid" name="checkDataValid" value="N">
 					    <input type="hidden" id="checkDataValidDay" name="checkDataValidDay" value="1">

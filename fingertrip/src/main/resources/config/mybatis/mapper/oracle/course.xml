@@ -69,8 +69,8 @@
 	</insert>
 	
 	<insert id="nacojjaTravelSpotWrite" parameterType="travelSpotVo">
-		INSERT INTO TRAVEL_SPOT(TRAVEL_SPOT_NO, DAY, CITY, TRAVEL_SPOT, IMG, TRAVEL_CONTENT, LAT_LNG, COUNTRY_CODE, COURSE_NO)
-		VALUES(TRAVEL_SPOT_SEQ.NEXTVAL, #{day}, #{city}, #{travelSpot}, #{img, jdbcType=VARCHAR}, #{travelContent}, #{latLng}, #{countryCode}, #{courseNo})
+		INSERT INTO TRAVEL_SPOT(TRAVEL_SPOT_NO, DAY, CITY, TRAVEL_SPOT, IMG, TRAVEL_CONTENT, LAT_LNG, COUNTRY_CODE, COURSE_NO, SPOT_ADDRESS)
+		VALUES(TRAVEL_SPOT_SEQ.NEXTVAL, #{day}, #{city}, #{travelSpot}, #{img, jdbcType=VARCHAR}, #{travelContent}, #{latLng}, #{countryCode}, #{courseNo}, #{spotAddress})
 	</insert>
 	
 	<select id="myWriteSelectAll" parameterType="SearchVo" resultType="courseVo">
