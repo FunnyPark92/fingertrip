@@ -18,6 +18,10 @@
     $(document).ready(function() {
     	$("input[name=title]").focus();
     	
+    	//나코짜2로 넘어갔다가 뒤로가기 눌러서 나코짜1으로 왔다가 다시 나코짜2로 넘어갈때 날짜로 인해 발생하는 타입 미스 에러 해결
+    	$("input[name=startDay]").val("");
+    	$("input[name=endDay]").val("");
+    	
     	$("form[name=frmNacojja1]").submit(function(){
 			var bool = true;
 			

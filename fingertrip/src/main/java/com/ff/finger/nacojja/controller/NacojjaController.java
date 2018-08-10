@@ -107,8 +107,8 @@ public class NacojjaController {
 	@RequestMapping(value = "/nacojja1.do", method = RequestMethod.POST)
 	public String nacojja1Write_post(@ModelAttribute CourseVO travelSpotVo, @RequestParam int travelDay, 
 			HttpServletRequest request, Model model) {
-		logger.info("나코짜1 DB 처리하기, 파라미터 travelSpotVo={}", travelSpotVo);
-		logger.info("나코짜1 DB 처리하기, 여행기간 travelDay={}", travelDay);
+		logger.info("나코짜1 처리하기, 파라미터 travelSpotVo={}", travelSpotVo);
+		logger.info("나코짜1 처리하기, 여행기간 travelDay={}", travelDay);
 		
 		//파일 업로드 처리
 		String fileName = "";
