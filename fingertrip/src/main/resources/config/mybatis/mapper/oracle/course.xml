@@ -160,20 +160,20 @@
 	<select id="selectListTravelSpot" parameterType="TravelSpotVO" resultType="TravelSpotVO" >
 		select *
 	    from course c join travel_spot t
-	    on c.COURSE_NO = t.COURSE_NO 
-	    where c.course_no=#{courseNo} 
+	    on c.COURSE_NO = t.COURSE_NO
+	    where c.course_no=#{courseNo}
 	    <choose>
 	    	<when test="day != null and day !=''">
-	    		and day =#{day}
+	    		and day=#{day}
 	    	</when>
 	    	<otherwise>
-	    		and day =1
+	    		and day=1
 	    	</otherwise>
 	    </choose>
 	    
 	</select>
 	
 	<select id="selectTravelSpot" parameterType="int" resultType="TravelSpotVO">
-		SELECT * FROM TRAVEL_SPOT WHERE COURSE_NO=#{courseNo} ORDER BY TRAVEL_SPOT_NO DESC
+		SELECT * FROM TRAVEL_SPOT WHERE COURSE_NO=#{courseNo}
 	</select>
 </mapper>

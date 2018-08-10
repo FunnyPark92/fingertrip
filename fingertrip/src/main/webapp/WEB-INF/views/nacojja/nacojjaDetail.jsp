@@ -5,12 +5,17 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYa_utcbQs1RLoVuJguMaQzuX4yxvQyrs&libraries=place"></script>
 
 <script type="text/javascript">
-		var mapCanvas = document.getElementById("map")
-		var myZoom =18;
-		var map;
-		var marker;
-		var myCenter;
-	function initialize(){
+	var mapCanvas = document.getElementById("map")
+	var myZoom = 18;
+	var map;
+	var marker;
+	var myCenter;
+	
+	window.onload = function() {
+		initialize();
+	}
+	
+	function initialize() {
 		var mapOptions = {
 				center: myCenter,
 				zoom: myZoom,
@@ -25,34 +30,48 @@
 		  marker.setMap(map);
 	}
 	myCenter = new google.maps.LatLng(37.52651121051272, 126.88800752162933);
-    $(document).ready(function(){
-    	$('#dayActive').addClass("active");
+    
+	$(document).ready(function(){
+    	$('#dayTab1').addClass("active");
     	
         $('.reply').click(function(){
             $(this).closest('.threaded-comments').children('.recomments-wrap').toggle();
         });
+        
        	$('.daySel').click(function(){
       		var day = $(this).val();
       		$('#day').text("Day "+day);
+      		
       		var year = $(this).find('small').text().substring(0,4);
       		var month = $(this).find('small').text().substring(5,7);
-      		var dd = $(this).find('small').text().substring(8,10);
-      		var date = year +"년"+ month+"월" + dd+"일";
+      		var date = $(this).find('small').text().substring(8,10);
       		
-      		$('#date').text(date);
+      		$('#date').text(year + "년 " + month + "월 " + date + "일");
+      		
       		$.ajax({
       			url:"<c:url value='/nacojja/selectTravel.do'/>",
       			type:"POST",
-      			data:{courseNo:"${param.courseNo}",day:day},
+      			data:{
+      					courseNo:"${param.courseNo}",
+      					day:day
+      				},
       			success:function(list){
-        		initialize();
+	      			//불필요 코드 - 추후 의논 후 삭제 여부 결정
+	        		//initialize();
+      			
       				$('#spotContent').text("");
-      				$('.spot').remove(); //클릴 할 때마다 초기화
-      				$('.spotExp').remove(); // 클릭 할 때마다 초기화
-      				$.each(list,function(idx,travelSpotVO){
-      					$('#spotContent').append(travelSpotVO.travelContent+"<br>"); // spot별 설명 
-      					$("<p class='spot'>"+travelSpotVO.city+"</p>").appendTo('.spotDiv'); //일짜별 도시 ex)1일차에 3개면 3개
-      					$("<p class='spotExp'>"+travelSpotVO.travelSpot+"</p>").appendTo('.spotDiv');
+      				$('.spot').remove(); //?클릴 할 때마다  ? 초기화
+      				$('.spotExp').remove(); //?클릭 할 때마다 ? 초기화
+      				$(".spotImg").find("img").remove(); //데이탭이 바뀔때마다 여행지별 이미지 초기화
+      				
+      				$.each(list, function(idx, travelSpotVO){
+      					$("<p class='spot'>" + travelSpotVO.travelSpot + "</p>").appendTo('.spotDiv'); //여행지명(장소정보가 없을 시 주소가 출력됨)
+      					$("<p class='spotExp'>" + travelSpotVO.city + "</p>").appendTo('.spotDiv'); //여행지 도시정보
+      					$('#spotContent').append("<b>" + travelSpotVO.travelSpot + "</b>" + " - " 
+      												+ travelSpotVO.travelContent + "<br>"); //여행지별 설명
+      					if (travelSpotVO.img != null && travelSpotVO.img != "") {
+	      					$(".spotImg").append("<img src='" + travelSpotVO.img + "'>"); //여행지별 이미지
+      					}
       				}); //each문
       			},
       			error:function(xhr,starus,error){
@@ -61,13 +80,14 @@
       		});
       	});//click
         	
-       	$('.dayActive').each(function(idx,item){
+      	//불필요 코드 - 추후 의논 후 삭제 여부 결정
+       	/* $('.dayActive').each(function(idx,item){
 	        $(this).click(function(){
 				$(this).addClass("active");
 				$(this).siblings().removeClass("active");
        		
        		});
-       	});
+       	}); */ 
        	
     });
 </script>
@@ -141,7 +161,8 @@
             	<div class="faq-list list-group nav">
                     <c:set var="i" value="1"/>
                     <c:forEach var="travelDate" items="${tdList}">
-                        <button type="button" class="list-group-item dayActive daySel" value="${i }" id="dayActive">
+                        <button id="dayTab${i}" class="list-group-item dayActive daySel" value="${i}" 
+                        		style="text-align: left;" role="tab" data-toggle="tab">
                             Day${i}
                             <small id="travelDate"><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/></small>
                         </button>
@@ -151,27 +172,46 @@
              </ul>
          </div>
             
-            <div class="col-md-10 ncjD">
-                <div class="ncjP">
-                    <span id="day"></span>
-                    <span id="date"></span>
-           </div>
+         <div class="col-md-10 ncjD">
+             <div class="ncjP">
+                 <span id="day"></span>
+                 <span id="date"></span>
+             </div>
                  
             <div id="map" class="marginBottom50"></div>
                  
-            <div class="spotDiv marginBottom20"></div>
+            <div class="spotDiv marginBottom20">
+            	<!-- 여행지명<br>
+            		여행지 도시 정보 들어가는 자리 -->
+            	<c:forEach var="tSpotVo" items="${tSpotVoList }">
+            		<c:if test="${tSpotVo.day == 1 }">
+		            	<p class='spot'>${tSpotVo.travelSpot }</p>
+		      			<p class='spotExp'>${tSpotVo.city }</p>
+            		</c:if>
+				</c:forEach>
+            </div>
                  
 			<div>
 				<p class="explain">
 					여행지 설명
 				</p>
-				<p id="spotContent"></p>
+				<p id="spotContent">
+					<!-- 여행지별 설명 -->
+					<c:forEach var="tSpotVo" items="${tSpotVoList }">
+            			<c:if test="${tSpotVo.day == 1 }">
+							<b>${tSpotVo.travelSpot }</b> - ${tSpotVo.travelContent }<br>
+						</c:if>
+					</c:forEach>
+				</p>
 			</div>
-                
+            
             <div class="spotImg">
-                <img src="${pageContext.request.contextPath }/img/spot1.jpg" alt="루브르박물관">
-                <img src="${pageContext.request.contextPath }/img/spot2.jpg" alt="노트르담대성당">
-                <img src="${pageContext.request.contextPath }/img/spot3.jpg" alt="에펠탑">
+				<!-- 여행지별 사진 들어가는 자리 -->
+				<c:forEach var="tSpotVo" items="${tSpotVoList }">
+            		<c:if test="${tSpotVo.day == 1 }">
+						<img src='${tSpotVo.img }'>
+					</c:if>
+				</c:forEach>
             </div>
                 
             <div class="comments-list">

@@ -267,6 +267,7 @@
                 $("#divRating").find("img").remove();
                 $("#place-rating").val("");
                 $("#divPhotos").find("img").remove();
+                $("#img").val("");
         		
         		getAddressInformation(latLng);
         	}
@@ -533,6 +534,7 @@
             $("#divRating").find("img").remove();
             $("#place-rating").val("");
             $("#divPhotos").find("img").remove();
+            $("#img").val("");
            	
            	deleteMarkers();
            	
@@ -604,7 +606,8 @@
                 <div class="faq-list list-group nav">
                     <c:set var="i" value="1"></c:set>
                     <c:forEach var="travelDate" items="${tdList}">
-                    	<button id="dayTab${i}" class="list-group-item dayTab" value="${i}" style="text-align: left;" role="tab" data-toggle="tab">
+                    	<button id="dayTab${i}" class="list-group-item dayTab" value="${i}" 
+                    			style="text-align: left;" role="tab" data-toggle="tab">
                     		Day${i}
                     		<small><fmt:formatDate value="${travelDate}" pattern="yyyy/MM/dd"/></small>
                    		</button>
