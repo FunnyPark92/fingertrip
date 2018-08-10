@@ -112,6 +112,9 @@
 	
  	// 실제 클릭이 발생 했을 시 모든 처리를 여기서 해결(클릭핸들러 개념)
     function handleClick(event) {
+    	//맵 클릭하고 진짜 개빠르게 여행지 추가를 누를시 도시 또는 여행지명이 세팅되기도 전에 리스트에 null로 넘어가버린다. 이걸 막기위해 추가.
+		$("#addPlaceBtn").attr("disabled", "disabled");
+ 		
     	//콤보 박스에서 국가 선택하고 구글 맵에서 다른 국가의 여행지 선택 시 alert 띄우고 예외처리
  		if ($("#country").val() != null && $("#country").val() != "") {
 			geocoder.geocode({'location': event.latLng}, function(results, status) {

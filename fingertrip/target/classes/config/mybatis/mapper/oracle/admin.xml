@@ -2,12 +2,11 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.admin">
-	
 	<select id="dbPwd" parameterType="string" resultType="string">
 		select password from admin where id = #{id}
 	</select>
 	
-	<select id="getAdmin" parameterType="int" resultType="adminVo">
+	<select id="getAdmin" parameterType="int" resultType="AdminVO">
 		select * from admin where admin_no=#{adminNo}
 	</select>
 </mapper>
