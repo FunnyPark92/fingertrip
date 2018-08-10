@@ -280,7 +280,8 @@ public class NacojjaController {
 		model.addAttribute("tdList", travelDateList); //일수 
 		model.addAttribute("courseVo", courseVo); //코스
 		model.addAttribute("memberVo", memberVo); //멤버
-		model.addAttribute("tSpotVoList", travelSpotVoList);
+		model.addAttribute("tSpotVoList", travelSpotVoList); //여행지 정보 리스트
+		//model.addAttribute("tSpotVoList", travelSpotVoList); //1일차 여행지 정보 리스트
 		
 		return "nacojja/nacojjaDetail";
 	}

@@ -58,8 +58,9 @@
       			success:function(list){
 	      			//불필요 코드 - 추후 의논 후 삭제 여부 결정
 	        		//initialize();
-      			
-      				$('#spotContent').text("");
+      				//$('#spotContent').text("");
+      				
+      				$('#spotContent').find("div").remove();
       				$('.spot').remove(); //?클릴 할 때마다  ? 초기화
       				$('.spotExp').remove(); //?클릭 할 때마다 ? 초기화
       				$(".spotImg").find("img").remove(); //데이탭이 바뀔때마다 여행지별 이미지 초기화
@@ -67,8 +68,13 @@
       				$.each(list, function(idx, travelSpotVO){
       					$("<p class='spot'>" + travelSpotVO.travelSpot + "</p>").appendTo('.spotDiv'); //여행지명(장소정보가 없을 시 주소가 출력됨)
       					$("<p class='spotExp'>" + travelSpotVO.city + "</p>").appendTo('.spotDiv'); //여행지 도시정보
-      					$('#spotContent').append("<b>" + travelSpotVO.travelSpot + "</b>" + " - " 
-      												+ travelSpotVO.travelContent + "<br>"); //여행지별 설명
+      					
+      					if (travelSpotVO.travelContent != null && travelSpotVO.travelContent != "") {
+      						//alert(travelSpotVO.travelSpot + "-" + travelSpotVO.travelContent);
+      						$("<div><b>" + travelSpotVO.travelSpot + "</b>" + " - " 
+      								+ travelSpotVO.travelContent + "<br></div>").appendTo('#spotContent'); //여행지별 설명
+      					}
+      					
       					if (travelSpotVO.img != null && travelSpotVO.img != "") {
 	      					$(".spotImg").append("<img src='" + travelSpotVO.img + "'>"); //여행지별 이미지
       					}
@@ -174,8 +180,8 @@
             
          <div class="col-md-10 ncjD">
              <div class="ncjP">
-                 <span id="day"></span>
-                 <span id="date"></span>
+                 <span id="day">Day 1</span>
+                 <span id="date"><fmt:formatDate value="${tdList[0] }" pattern="yyyy년 MM월 dd일"/>  </span>
              </div>
                  
             <div id="map" class="marginBottom50"></div>
@@ -192,17 +198,28 @@
             </div>
                  
 			<div>
-				<p class="explain">
-					여행지 설명
-				</p>
-				<p id="spotContent">
+				<c:set var="i" value="0"></c:set>
+				<c:forEach var="tSpotVo" items="${tSpotVoList }">
+					<c:if test="${tSpotVo.day == 1 && !empty tSpotVo.travelContent }">
+						<c:if test="${i < 1 }">
+			       			<p class="explain">
+								여행지 설명
+							</p>
+							<c:set var="i" value="${i+1}"></c:set>
+           				</c:if>
+					</c:if>
+				</c:forEach>
+				
+				<div id="spotContent">
 					<!-- 여행지별 설명 -->
 					<c:forEach var="tSpotVo" items="${tSpotVoList }">
-            			<c:if test="${tSpotVo.day == 1 }">
-							<b>${tSpotVo.travelSpot }</b> - ${tSpotVo.travelContent }<br>
+         				<c:if test="${tSpotVo.day == 1 && !empty tSpotVo.travelContent }">
+							<div>
+								<b>${tSpotVo.travelSpot }</b> - ${tSpotVo.travelContent }<br>
+							</div>
 						</c:if>
 					</c:forEach>
-				</p>
+				</div>
 			</div>
             
             <div class="spotImg">

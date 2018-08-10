@@ -174,6 +174,7 @@
             	$("#place-icon").hide();
             	$("#divRating").find("img").remove();
             	$("#place-rating").val("");
+            	$("#img").val("");
             	$("#divPhotos").find("img").remove();
             	
             	getAddressInformation(event.latLng);
@@ -266,8 +267,8 @@
         		$("#place-icon").hide();
                 $("#divRating").find("img").remove();
                 $("#place-rating").val("");
-                $("#divPhotos").find("img").remove();
                 $("#img").val("");
+                $("#divPhotos").find("img").remove();
         		
         		getAddressInformation(latLng);
         	}
@@ -533,8 +534,8 @@
        		$("#place-name").val("");
             $("#divRating").find("img").remove();
             $("#place-rating").val("");
-            $("#divPhotos").find("img").remove();
             $("#img").val("");
+            $("#divPhotos").find("img").remove();
            	
            	deleteMarkers();
            	
