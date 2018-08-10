@@ -25,39 +25,43 @@ public class EmailAuthenticationController {
 	private MemberService memberService;
 	@Autowired
 	private JavaMailSender mailSender;
+	@Autowired
+	private MailHandler sendMail;
 	
 
 	@RequestMapping("/member/emailAuth.do") 
 	public String emailAuth(@RequestParam String id, String email,Model model) throws MessagingException, UnsupportedEncodingException {
-		logger.info("이메일 전송 컨트롤러 id={} ,email={}",id,email);
+		logger.info("이메일 전송 컨트롤러 id={} ,email={}",id,email);	// 사용자 아이디와 이메일주소를 받음 
 		
-		MailHandler sendMail = new MailHandler(mailSender);
-		sendMail.setSubject("[이메일 인증]");
-		sendMail.setText(new StringBuffer().append("<h1>FingerTrip Email본인인증</h1>")
+		// 보낼 이메일 내용
+		String subject = "[이메일 인증]";
+		String htmlContent = new StringBuffer().append("<h1>FingerTrip Email본인인증</h1>") 
 				.append("아래 버튼 클릭시 회원 가입이 완료됩니다.")
-				.append("<form action='http://localhost:9090/finger/member/emailComplete.do' method='post'>")
-				.append("<input type='submit' value='본인 인증 확인'>")
-				.append("<input type='hidden' name='id' value='"+id+"'>")
+				//form으로 만들어 사용자가 버튼 클릭시 특정 url로 id값을 보내도록 구현
+				.append("<form action='http://localhost:9090/finger/member/emailComplete.do' method='post'>") 
+				.append("<input type='submit' value='본인 인증 확인'>")  //  
+				.append("<input type='hidden' name='id' value='"+id+"'>") 
 				.append("</form>")
-				.toString());
-		sendMail.setFrom("admin@fingerTrip.com", "FingerTrip");
-		sendMail.setTo(email);
-		sendMail.send();
-		
+				.toString();
+		String email2 ="admin@fingerTrip.com"; // 보내는 사람 이메일 주소
+		String name = "FingerTrip"; // 보내는 사람 이름
+		String emailTo = email; // 받는 사람 이메일 주소 
+		//
+		sendMail.sendMail(subject, htmlContent, email2, name, emailTo);
 		String msg="이메일 발송 완료, 인증 후 로그인하세요 !!", url="/index.do";
 		model.addAttribute("msg",msg);
 		model.addAttribute("url", url);
 		
 		return "common/message";
-		
 	}
 	
-	@RequestMapping("/member/emailComplete.do")
+	
+	@RequestMapping("/member/emailComplete.do") //보내진 이메일에서 인증 버튼을 클릭
 	public String emailAuthCom(@RequestParam String id,Model model) {
-		logger.info("이메일에서 받아온 파라미터 vo={}",id);
+		logger.info("이메일에서 받아온 파라미터 vo={}",id); //이메일 사용자의 아이디 값 받아오기 
 		
-		String msg="" , url="/member/login/login.do";
-		int cnt = memberService.emailAuth(id);
+		String msg="" , url="/member/login/login.do"; 
+		int cnt = memberService.emailAuth(id); // 받아온 아이디 값으로 DB에 인증 컬럼을 'Y' 로 변경 
 		if(cnt>0) {
 			logger.info("id 는 이메일 인증 완료 id={} , cnt={}",id,cnt);
 			msg=id+"님 인증 성공";
