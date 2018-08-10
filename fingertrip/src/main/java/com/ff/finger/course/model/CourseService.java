@@ -9,7 +9,8 @@ import com.ff.finger.travelspot.model.TravelSpotVO;
 public interface CourseService {
 	public List<Map<String, Object>> nacojjaList(SearchVO searchVo);
 	public int getTotalRecord(SearchVO searchVo);
-	public int nacojjaWrite(CourseVO travelSpotVo, List<TravelSpotVO> travelSpotList);
+	//public int nacojjaWrite(CourseVO travelSpotVo, List<TravelSpotVO> travelSpotList);
+	public int nacojjaWrite(CourseVO travelSpotVo, List<Map<String, TravelSpotVO>> travelSpotListById, String userid);
 	public List<CourseVO> myWriteSelectAll(SearchVO searchVo);
 	public int myWriteCoursetotalRecord(SearchVO searchVo);
 	public Map<String, Object> selectCourseProgress(int courseNo);

@@ -562,10 +562,11 @@
        		$.ajax({
 				url: "<c:url value='/nacojja/getTravelList.do'/>",
 				type:"POST",
+				data: {day : $("#day").val()},
 				success: function(list) {
 					if (list.length > 0) {
 						$.each(list, function(idx, travelSpotVO){
-							if (travelSpotVO.day == $("#day").val()) {
+							//if (travelSpotVO.day == $("#day").val()) {
 								//alert("[" + idx + "]위도,경도: " + travelSpotVO.latLng);
 								//alert("[" + idx + "]위도: " + travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")));
 								//alert("[" + idx + "]경도: " + travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1));
@@ -586,7 +587,7 @@
 						      	
 						      	mapFinal.setCenter(someDayLatLng);
 						      	mapFinal.setZoom(17);
-							}
+							//}
 						});
 					}
 				},

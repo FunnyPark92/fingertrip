@@ -1,7 +1,10 @@
 package com.ff.finger.course.model;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +15,8 @@ import com.ff.finger.travelspot.model.TravelSpotVO;
 
 @Service
 public class CourseServiceImpl implements CourseService {
-	@Autowired CourseDAO courseDao;
+	@Autowired 
+	private CourseDAO courseDao;
 	
 	@Override
 	public List<Map<String, Object>> nacojjaList(SearchVO searchVo) {
@@ -26,7 +30,7 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	@Transactional
-	public int nacojjaWrite(CourseVO travelSpotVo, List<TravelSpotVO> travelSpotList) {
+	public int nacojjaWrite(CourseVO travelSpotVo, List<Map<String, TravelSpotVO>> travelSpotListById, String userid) {
 		int cnt = 0;
 		
 		//코스 테이블에 먼저 insert
@@ -34,11 +38,18 @@ public class CourseServiceImpl implements CourseService {
 		//System.out.println("[goni]" + travelSpotVo.getCourseNo());
 		
 		//상속 구조로 인해 코스 넘버를 이미 갖고있으므로 그대로 여행지 테이블에 다시 insert
-		for (int i=0; i<travelSpotList.size(); i++) {
+		for (int i=0; i<travelSpotListById.size(); i++) {
+			travelSpotListById.get(i).get(userid).setCourseNo(travelSpotVo.getCourseNo());
+			System.out.println("[goni]" + travelSpotListById.get(i).get(userid));
+			cnt = courseDao.nacojjaTravelSpotWrite(travelSpotListById.get(i).get(userid));
+		}
+		
+		
+		/*for (int i=0; i<travelSpotList.size(); i++) {
 			travelSpotList.get(i).setCourseNo(travelSpotVo.getCourseNo());
 			//System.out.println("[goni]" + travelSpotList.get(i));
 			cnt = courseDao.nacojjaTravelSpotWrite(travelSpotList.get(i));
-		}
+		}*/
 		
 		return cnt;
 	}
