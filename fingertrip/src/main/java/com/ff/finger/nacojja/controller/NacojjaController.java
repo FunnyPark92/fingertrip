@@ -259,7 +259,6 @@ public class NacojjaController {
 		
 		MemberVO memberVo = memberService.selectMember(courseVo.getMemberNo());
 		List<TravelSpotVO> travelSpotVoList = courseService.selectTravelSpot(courseNo);
-
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(courseVo.getStartDay());
 		
@@ -272,9 +271,8 @@ public class NacojjaController {
 		
 		model.addAttribute("tdList", travelDateList); //일수 
 		model.addAttribute("courseVo", courseVo); //코스
-		model.addAttribute("memberVo", memberVo);
+		model.addAttribute("memberVo", memberVo); //멤버
 		model.addAttribute("tSpotVoList", travelSpotVoList);
-				
 		return "nacojja/nacojjaDetail";
 	}
 	
