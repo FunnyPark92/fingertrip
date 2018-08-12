@@ -78,17 +78,17 @@
      <form role="form" name="frmRegi" method="post" action="<c:url value='/member/memberEditOk2.do'/>">
 	 	<div class="form-group">
             <label for="username">이름</label><br>
-            <span class="spanGray">username</span>
+            <span class="spanGray">${vo.name}</span>
         </div>
 	 	
 	 	<div class="form-group">
          	<label for="userid">회원아이디</label><br>
-            <span class="spanGray" >userid</span>
+            <span class="spanGray" >${sessionScope.userid}</span>
         </div>
 	 
 		<div class="form-group">
          	<label for="useremail">회원이메일</label><br>
-            <span class="spanGray">useremail</span>
+            <span class="spanGray">${vo.email1}@${vo.email2}</span>
         </div>
         
         <div class="form-group">
