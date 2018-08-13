@@ -5,11 +5,14 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYa_utcbQs1RLoVuJguMaQzuX4yxvQyrs&libraries=place"></script>
 
 <script type="text/javascript">
-	var mapCanvas = document.getElementById("map")
-	var myZoom = 18;
+	var myZoom;
 	var map;
 	var marker;
+	var markers = []; 
 	var myCenter;
+	var path;
+	var poly;
+	var polys = []; 
 	
 	window.onload = function() {
 		initialize();
@@ -21,15 +24,69 @@
 				zoom: myZoom,
 				//mapTypeId:google.maps.MapTypeId.HYBRID
 		}
-		mapCanvas = document.getElementById("map");
-		myZoom= 18;
-		map = new google.maps.Map(mapCanvas,mapOptions);
-		marker = new google.maps.Marker({
-			position:myCenter
-			,map:map});
-		  marker.setMap(map);
+		map = new google.maps.Map(document.getElementById("map"),mapOptions);
+		
+		var lineSymbol = {
+		     path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+		     scale: 5, //두께
+		     strokeColor: '#ffff00'
+		};
+		    	
+   	    poly = new google.maps.Polyline({
+			icons: [{
+	            icon: lineSymbol,
+	            offset: '100%'
+	        }],
+		    strokeColor: "#0000ff",
+		    strokeOpacity: 0.6,
+		    strokeWeight: 5
+		});
+    	
+		poly.setMap(map);
+		animate(poly);
+		
+		initMarker();//초기 로드시 1일차 map	
 	}
-	myCenter = new google.maps.LatLng(37.52651121051272, 126.88800752162933);
+  
+	function animate(line) {
+        var count = 0;
+        window.setInterval(function() {
+          count = (count + 1) % 200;
+
+          var icons = line.get('icons');
+          icons[0].offset = (count / 2) + '%';
+          line.set('icons', icons);
+      }, 10);
+   }
+	
+	function initMarker(){
+		$('.mapLat').each(function(idx,travelSpotVO){
+			var someDayLatLng = new google.maps.LatLng(
+					$(this).val().substring(1, $(this).val().indexOf(",")),
+					$(this).val().substring($(this).val().indexOf(",")+2, $(this).val().length-1)
+				);
+			addLatLng(someDayLatLng);
+			 marker = new google.maps.Marker({
+		    	position:someDayLatLng ,
+		    	map: map,
+		    	animation: google.maps.Animation.BOUNCE
+		  	});
+			markers.push(marker);
+			map.setCenter(someDayLatLng);
+			map.setZoom(16);  //어느정도가 적당?
+		});
+	}
+	
+	function addLatLng(location) {
+	  path = poly.getPath(); 
+	  path.push(location);
+    }
+    
+    function setMapOnAll(map) {
+      	for (var i=0; i<markers.length; i++) {
+        	markers[i].setMap(map);
+      	}
+    }
     
 	$(document).ready(function(){
     	$('#dayTab1').addClass("active");
@@ -39,13 +96,15 @@
         });
         
        	$('.daySel').click(function(){
+       		for (var i=-1; i<=poly.getPath().length; i++) {
+        		poly.getPath().removeAt(i);
+          	}
+       		
       		var day = $(this).val();
       		$('#day').text("Day "+day);
-      		
       		var year = $(this).find('small').text().substring(0,4);
       		var month = $(this).find('small').text().substring(5,7);
       		var date = $(this).find('small').text().substring(8,10);
-      		
       		$('#date').text(year + "년 " + month + "월 " + date + "일");
       		
       		$.ajax({
@@ -59,7 +118,6 @@
 	      			//불필요 코드 - 추후 의논 후 삭제 여부 결정
 	        		//initialize();
       				//$('#spotContent').text("");
-      				
       				var diaplayOnce = true;
       				
       				$('#spotContent').find("div").remove();
@@ -67,8 +125,23 @@
       				$('.address').remove(); //?클릭 할 때마다 ? 초기화
       				$(".spotImg").find("img").remove(); //데이탭이 바뀔때마다 여행지별 이미지 초기화
       				$("#spotExp").find("p").remove();
-      		
+      				setMapOnAll(null);
+      				
       				$.each(list, function(idx, travelSpotVO){
+      					var someDayLatLng = new google.maps.LatLng(
+								travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")),
+								travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1)
+							);
+      					addLatLng(someDayLatLng);
+      					marker = new google.maps.Marker({
+				        	position: someDayLatLng,
+				        	map: map,
+				        	animation: google.maps.Animation.BOUNCE
+				      	});
+      					markers.push(marker);
+      					map.setCenter(someDayLatLng);
+      					map.setZoom(16); //어느 정도가 적당?
+      					
       					$("<p class='spot'>" + travelSpotVO.travelSpot + "</p>").appendTo('.spotDiv'); //여행지명(장소정보가 없을 시 주소가 출력됨)
       					$("<p class='address spotExp'>" + travelSpotVO.spotAddress + "</p>").appendTo('.spotDiv'); //여행지 도시정보
       					
@@ -190,8 +263,14 @@
                  <span id="day">Day 1</span>
                  <span id="date"><fmt:formatDate value="${tdList[0] }" pattern="yyyy년 MM월 dd일"/>  </span>
              </div>
-                 
-            <div id="map" class="marginBottom50"></div>
+            
+          	  <div id="map" class="marginBottom50"></div>
+            <c:forEach var="tSpotVo" items="${tSpotVoList }">
+            	<c:if test="${tSpotVo.day == 1 && !empty tSpotVo.travelContent }">
+            	<input type="hidden" value="${tSpotVo.latLng}" class="mapLat">
+            	</c:if>
+            </c:forEach>
+            
                  
             <div class="spotDiv marginBottom20">
             	<!-- 여행지명<br>
