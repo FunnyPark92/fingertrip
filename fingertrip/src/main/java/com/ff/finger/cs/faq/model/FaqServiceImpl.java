@@ -20,4 +20,14 @@ public class FaqServiceImpl implements FaqService {
 		return faqDao.allFaqCategory(faqCategoryNo);
 	}
 
+	@Override
+	public int getAdminNo(String id) {
+		return faqDao.getAdminNo(id);
+	}
+
+	@Override
+	public int faqInsert(FaqVO faqVo) {
+		return faqDao.faqInsert(faqVo);
+	}
+
 }
