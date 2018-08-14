@@ -15,6 +15,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('form[name=frmCk]').submit(function(){
+		$('input[name=fileCnt]').val("Y");
 		if($('input[name=title]').val()<1){
 			alert('제목을 입력하세요');
 			$('input[name=title]').focus();

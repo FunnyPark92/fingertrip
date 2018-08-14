@@ -26,4 +26,14 @@ public class FaqDAOMybatis implements FaqDAO {
 		return sqlSession.selectList(namespace+"allFaqCategory",faqCategoryNo);
 	}
 
+	@Override
+	public int getAdminNo(String id) {
+		return sqlSession.selectOne(namespace+"getAdminNo", id);
+	}
+
+	@Override
+	public int faqInsert(FaqVO faqVo) {
+		return sqlSession.insert(namespace+"faqInsert",faqVo);
+	}
+
 }

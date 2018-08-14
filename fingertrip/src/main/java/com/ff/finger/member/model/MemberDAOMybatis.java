@@ -124,6 +124,11 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.update(namespace + "plusHeart", heartChargeVo);
 	}
 
+	@Override
+	public int pressHeart(String id) {
+		return sqlSession.update(namespace+"pressHeart",id);
+	}
+
 	
 
 

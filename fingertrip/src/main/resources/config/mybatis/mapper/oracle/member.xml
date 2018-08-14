@@ -144,4 +144,8 @@
 		SET HEART_COUNT=HEART_COUNT+#{heartChargeCount}
 		WHERE MEMBER_NO=#{memberNo}
 	</update>
+	
+	<update id="pressHeart" parameterType="String">
+		update member set heart_count = heart_count -1 where id = #{id} and  heart_count > 0
+	</update>
 </mapper>

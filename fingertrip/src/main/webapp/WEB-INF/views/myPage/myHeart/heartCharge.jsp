@@ -47,7 +47,7 @@
 			heartChargeCount = $(this).parent().find(":first").val();
 			
 			IMP.request_pay({
-			    pg : 'uplus',
+			    pg : 'html5_inicis',
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : '주문명: 하트 ' + heartChargeCount + "개 결제",

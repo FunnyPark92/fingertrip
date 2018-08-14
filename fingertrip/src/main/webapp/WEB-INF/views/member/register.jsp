@@ -7,10 +7,6 @@
  	display: none;
  	font-size: 12px;
 }
-
-.divId{
-	width: 600px;
-}
 </style>
 
 <script type="text/javascript" src="<c:url value='/js/member.js'/>"></script>
@@ -134,7 +130,7 @@ $(document).ready(function(){
      <div class="form-group">
      	<span style="color: red">*</span>
        <label for="id">회원ID</label>
-       <input type="text" class="form-control valid divId" name="id" id="id" placeholder="영문 혹은 숫자로만 입력해주세요" autocomplete="off">
+       <input type="text" class="form-control valid" name="id" id="id" placeholder="영문 혹은 숫자로만 입력해주세요" autocomplete="off">
        <span class="message"></span>
        <div class="mandatory"></div>
      </div>

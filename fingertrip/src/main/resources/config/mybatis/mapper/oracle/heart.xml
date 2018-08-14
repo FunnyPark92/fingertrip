@@ -82,6 +82,11 @@
 		where course_no=#{courseNo}
 		and member_no=#{memberNo}
 	</select>
+	
+	<select id="countHeartMember" parameterType="heartVo" resultType="int">
+		select count(*)
+		from heart where course_no = #{courseNo} and member_no= #{memberNo}
+	</select>
 </mapper>
 
 

@@ -220,7 +220,11 @@
 			        	$("#city").val("도시 정보 없음");
 			        }
 			        
-			        $("#spotAddress").val(results[0].formatted_address); //여행지의 주소 정보도 DB에 저장
+			        if (results[0].formatted_address == null || results[0].formatted_address == "") {
+			        	$("#spotAddress").val("주소 정보 없음");
+			        } else {
+				        $("#spotAddress").val(results[0].formatted_address); //여행지의 주소 정보도 DB에 저장
+			        }
 			        
 			        //console.log(results);
 					//console.log(results[0]);
@@ -291,7 +295,12 @@
 		            window.alert('No results found');
 		        }
 		    } else {
-		        alert('Geocode was not successful for the following reason: ' + status);
+		        //alert('Geocode was not successful for the following reason: ' + status);
+		        
+		        //이상한 바다 한가운데 아무런 정보도 없는곳 찍었을 때 null값 들어가는 에러 해결
+		    	$("#city").val("도시 정보 없음");
+		    	$("#place-name").val("여행지 정보 없음");
+		    	$("#spotAddress").val("주소 정보 없음");
 		    }
 	  	});
 	}
@@ -553,10 +562,11 @@
        		$.ajax({
 				url: "<c:url value='/nacojja/getTravelList.do'/>",
 				type:"POST",
+				data: {day : $("#day").val()},
 				success: function(list) {
 					if (list.length > 0) {
 						$.each(list, function(idx, travelSpotVO){
-							if (travelSpotVO.day == $("#day").val()) {
+							//if (travelSpotVO.day == $("#day").val()) {
 								//alert("[" + idx + "]위도,경도: " + travelSpotVO.latLng);
 								//alert("[" + idx + "]위도: " + travelSpotVO.latLng.substring(1, travelSpotVO.latLng.indexOf(",")));
 								//alert("[" + idx + "]경도: " + travelSpotVO.latLng.substring(travelSpotVO.latLng.indexOf(",")+2, travelSpotVO.latLng.length-1));
@@ -577,7 +587,7 @@
 						      	
 						      	mapFinal.setCenter(someDayLatLng);
 						      	mapFinal.setZoom(17);
-							}
+							//}
 						});
 					}
 				},
