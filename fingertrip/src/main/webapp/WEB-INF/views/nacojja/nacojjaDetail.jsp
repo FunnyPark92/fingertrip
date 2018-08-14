@@ -12,8 +12,6 @@
 	var myCenter;
 	var path;
 	var poly;
-	var polys = []; 
-	
 	window.onload = function() {
 		initialize();
 	}
@@ -73,7 +71,7 @@
 		  	});
 			markers.push(marker);
 			map.setCenter(someDayLatLng);
-			map.setZoom(16);  //어느정도가 적당?
+			map.setZoom(14);  //어느정도가 적당?
 		});
 	}
 	
@@ -87,6 +85,13 @@
         	markers[i].setMap(map);
       	}
     }
+    function pressHeart(){ // 하트 누르기 
+    	if(confirm("하트 1개가 차감됩니다. 여행에 한걸음 다가서겠습니까?")){
+    		location.href="<c:url value='/nacojja/pressHeart.do?courseNo=${courseVo.courseNo}'/>";
+    	}else{
+    		alert("아쉽군");
+    	}
+    }
     
 	$(document).ready(function(){
     	$('#dayTab1').addClass("active");
@@ -96,7 +101,7 @@
         });
         
        	$('.daySel').click(function(){
-       		for (var i=-1; i<=poly.getPath().length; i++) {
+       	 	for (var i=-10; i<=markers.length; i++) { //왜 마이너스 여야지?
         		poly.getPath().removeAt(i);
           	}
        		
@@ -140,7 +145,7 @@
 				      	});
       					markers.push(marker);
       					map.setCenter(someDayLatLng);
-      					map.setZoom(16); //어느 정도가 적당?
+      					map.setZoom(14); //어느 정도가 적당?
       					
       					$("<p class='spot'>" + travelSpotVO.travelSpot + "</p>").appendTo('.spotDiv'); //여행지명(장소정보가 없을 시 주소가 출력됨)
       					$("<p class='address spotExp'>" + travelSpotVO.spotAddress + "</p>").appendTo('.spotDiv'); //여행지 도시정보
@@ -212,7 +217,7 @@
                		</h3>
                	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
             </div>
-            <input type="button" class="heartBtn btn btn-block btn-danger" value="하트 누르기">
+            <input type="button" class="heartBtn btn btn-block btn-danger" onclick="pressHeart()" value="하트 누르기">
         </div>
         
            <!-- 결제할 때 -->

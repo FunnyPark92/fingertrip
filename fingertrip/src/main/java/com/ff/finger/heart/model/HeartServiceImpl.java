@@ -34,5 +34,11 @@ public class HeartServiceImpl implements HeartService{
 		return heartDao.selectByCourse(courseNo);
 	}
 
+	@Override
+	public int countHeartMember(HeartVO heartvo) {
+		return heartDao.countHeartMember(heartvo);
+	}
+
+	
 
 }

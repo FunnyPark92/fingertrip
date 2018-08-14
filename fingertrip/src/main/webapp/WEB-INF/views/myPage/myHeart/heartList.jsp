@@ -78,6 +78,14 @@
 									<th scope="col">${map['REGDATE'] }</th>
 								</tr>
 							</c:if>
+							<c:if test="${map['STATUS'] == '하트' }">
+								<tr style="color: red">
+									<th scope="col">${map['HEART_LIST_NO'] }</th>
+									<th scope="col">-1</th>
+									<th scope="col">코스에 하트 누르기</th>
+									<th scope="col">${map['REGDATE'] }</th>
+								</tr>
+							</c:if>
 						</c:forEach>
 						<!-- 반복 끝 -->
 					</c:if>
