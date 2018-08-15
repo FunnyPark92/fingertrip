@@ -193,7 +193,8 @@
     	<div class="col-md-6 naThumImg marginBottom50">
             <img src="<c:url value='/upload_images/${courseVo.thumbImg}'/>" alt="썸네일">
         </div>
-        <!-- 하트받을때 -->
+        
+      <%--   <!-- 하트받을때 -->
         <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
             <div>
                	하트받는중
@@ -218,12 +219,13 @@
                	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
             </div>
             <input type="button" class="heartBtn btn btn-block btn-danger" onclick="pressHeart()" value="하트 누르기">
-        </div>
+        </div> --%>
         
            <!-- 결제할 때 -->
-		<%--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;">
+		<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
+		 <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
 			<div>결제진행중</div>
-			<h3 class="marginBottom20">${vo.title}</h3>
+			<h3 class="marginBottom20">${courseVo.title}</h3>
 			<div class="thumPay">
 				<span class="leftSpan">여행 날짜</span> <select>
 					<option value="선택">날짜 선택</option>
@@ -235,7 +237,7 @@
 				</select>
 			</div>
 			<div class="thumPay">
-				<span class="leftSpan">작성자</span>  ${map['ID']}
+				<span class="leftSpan">작성자</span>${memberVo.name}
 			</div>
 			<div class="thumPay">
 				<span class="leftSpan">여행사</span> 핑거트립
@@ -245,8 +247,8 @@
 			</div>
 			<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
 			<input type="button" class="btn payBtn btn-primary" value="결제하기">
-		</div>  --%>
-
+		</div>
+		
 		<div class="col-md-2">
             <ul class="list-group help-group">
             	<div class="faq-list list-group nav">
@@ -272,7 +274,7 @@
           	  <div id="map" class="marginBottom50"></div>
             <c:forEach var="tSpotVo" items="${tSpotVoList }">
             	<c:if test="${tSpotVo.day == 1 && !empty tSpotVo.travelContent }">
-            	<input type="hidden" value="${tSpotVo.latLng}" class="mapLat">
+            		<input type="hidden" value="${tSpotVo.latLng}" class="mapLat">
             	</c:if>
             </c:forEach>
             
