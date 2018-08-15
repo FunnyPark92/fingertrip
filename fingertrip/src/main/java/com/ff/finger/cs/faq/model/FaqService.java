@@ -11,4 +11,6 @@ public interface FaqService {
 	public List<Map<String, Object>> allFaqCategory(int faqCategoryNo);
 	public int getAdminNo(String id);
 	public int faqInsert(FaqVO faqVo);
+	public FaqVO faqSelectByNo(int faqNo);
+	public int faqUpdate(FaqVO faqVo);
 }
