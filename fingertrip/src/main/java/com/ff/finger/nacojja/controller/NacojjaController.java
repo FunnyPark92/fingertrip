@@ -375,10 +375,14 @@ public class NacojjaController {
 		}else {
 			int cnt  = memberService.pressHeart(id);
 			logger.info("하트 누르기 멤버 업데이트 결과 cnt={}",cnt);
+			
 			heartVo.setMemberNo(memberVo.getMemberNo());
 			if(cnt>0) {
 				msg="소중한 하트 감사합니다.";
 				url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
+				
+				int cCnt =heartService.updateCourseHeart(heartVo.getCourseNo());
+				logger.info("코스테이블에 하트 업데이트 결과 cCnt={}",cCnt);
 				
 				int hCnt =heartService.insertHeart(heartVo);
 				logger.info("하트테이블 insert결과 hCnt={}",hCnt);
