@@ -344,7 +344,7 @@
 		</div> 
 		 </c:if>
 		
-		<c:if test="${courseVo.progressNo==4}">
+		<c:if test="${courseVo.progressNo==4 || courseVo.progressNo==5}">
 		<!-- 실패 -->
         <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
             <div>
