@@ -38,7 +38,7 @@ public class EmailAuthenticationController {
 		String htmlContent = new StringBuffer().append("<h1>FingerTrip Email본인인증</h1>") 
 				.append("아래 버튼 클릭시 회원 가입이 완료됩니다.")
 				//form으로 만들어 사용자가 버튼 클릭시 특정 url로 id값을 보내도록 구현
-				.append("<form action='http://localhost:9090/finger/member/emailComplete.do' method='post'>") 
+				.append("<form action='http://192.168.2.116:9090/finger/member/emailComplete.do' method='post'>") 
 				.append("<input type='submit' value='본인 인증 확인'>")  //  
 				.append("<input type='hidden' name='id' value='"+id+"'>") 
 				.append("</form>")
