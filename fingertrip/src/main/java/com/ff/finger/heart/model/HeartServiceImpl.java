@@ -44,6 +44,11 @@ public class HeartServiceImpl implements HeartService{
 		return heartDao.updateCourseHeart(courseNo);
 	}
 
+	@Override
+	public int countHeart200(int courseNo) {
+		return heartDao.countHeart200(courseNo);
+	}
+
 	
 
 }

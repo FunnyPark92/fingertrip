@@ -176,4 +176,9 @@
 	<select id="selectTravelSpot" parameterType="int" resultType="TravelSpotVO">
 		SELECT * FROM TRAVEL_SPOT WHERE COURSE_NO=#{courseNo}
 	</select>
+	
+	<update id="ProgressNo2" parameterType="int">
+		update course set progress_no = 2  where course_No = #{courseNo}
+	</update>
+	
 </mapper>

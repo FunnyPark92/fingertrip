@@ -13,4 +13,5 @@ public interface HeartDAO {
 	public int selectHeartNo(Map<String , Object> map);
 	public int countHeartMember(HeartVO heartvo);
 	public int updateCourseHeart(int courseNo);
+	public int countHeart200(int courseNo);
 }
