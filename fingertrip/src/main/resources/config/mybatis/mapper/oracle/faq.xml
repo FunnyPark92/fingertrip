@@ -12,28 +12,11 @@
 	</resultMap>
 
 	<select id="allFaqCategory" parameterType="int" resultType="map">
-		<!-- SELECT f.faq_no, f.title, f.content, f.ADMIN_NO, f.FAQ_CATEGORY_NO, c.FAQ_CATE_TITLE, a.ID
+		SELECT f.faq_no, f.TITLE, f.content, f.ADMIN_NO, f.FAQ_CATEGORY_NO, c.FAQ_CATE_TITLE, a.ID
 		FROM faq f JOIN FAQ_CATEGORY c
 		ON f.faq_category_no = c.faq_category_no
 		join admin a on f.ADMIN_NO = a.ADMIN_NO		
-		<if test="faq_category_no==0"> 
-			where f.faq_category_no=#{faqCategoryNo}
-		</if -->
-		<choose>
-			<when test="faqCategoryNo==1">
-				SELECT f.faq_no, f.title, f.content, f.ADMIN_NO, f.FAQ_CATEGORY_NO, c.FAQ_CATE_TITLE, a.ID
-				FROM faq f JOIN FAQ_CATEGORY c
-				ON f.faq_category_no = c.faq_category_no
-				join admin a on f.ADMIN_NO = a.ADMIN_NO
-			</when>
-			<otherwise>
-				SELECT f.faq_no, f.title, f.content, f.ADMIN_NO, f.FAQ_CATEGORY_NO, c.FAQ_CATE_TITLE, a.ID
-				FROM faq f JOIN FAQ_CATEGORY c
-				ON f.faq_category_no = c.faq_category_no
-				join admin a on f.ADMIN_NO = a.ADMIN_NO
-				where f.faq_category_no=#{faqCategoryNo}
-			</otherwise>			
-		</choose> 
+		where f.FAQ_CATEGORY_NO=#{faqCategoryNo}
 	</select>
 	
 	<select id="selectFaqCategory" parameterType="int" resultType="FaqVO">
@@ -41,5 +24,23 @@
 		where faq_category_no=#{faqCategoryNo}
 	</select>
 	
+	<select id="getAdminNo" parameterType="string" resultType="int">
+		select admin_no from admin where id=#{id}
+	</select>
+	
+	<insert id="faqInsert" parameterType="FaqVO">
+		insert into FAQ(FAQ_NO ,TITLE ,CONTENT ,ADMIN_NO , FAQ_CATEGORY_NO )
+		values(faq_seq.nextval, #{title} , #{content} , #{adminNo} , #{faqCategoryNo})
+	</insert>
+	
+	<select id="faqSelectByNo" parameterType="int" resultType="faqVo">
+		select * from faq where faq_no=#{faqNo}
+	</select>
+	
+	<update id="faqUpdate" parameterType="faqVo">
+		update FAQ
+		set TITLE=#{title}, content=#{content}, FAQ_CATEGORY_NO=#{faqCategoryNo}
+		where faq_no=#{faqNo}
+	</update>
 	
 </mapper>

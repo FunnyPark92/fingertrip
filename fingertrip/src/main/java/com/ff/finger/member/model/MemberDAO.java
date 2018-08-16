@@ -28,5 +28,6 @@ public interface MemberDAO {
 	public int adminDeleteMember(int memberNo);
 	public int minusHeart(int memberNo);
 	public int plusHeart(HeartChargeVO heartChargeVo);
+	public int pressHeart(String id);
 	
 }

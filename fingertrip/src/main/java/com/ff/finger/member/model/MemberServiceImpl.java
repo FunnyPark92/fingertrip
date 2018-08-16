@@ -155,6 +155,11 @@ public class MemberServiceImpl implements MemberService {
 		return cnt;
 	}
 
+	@Override
+	public int pressHeart(String id) {
+		return memberDao.pressHeart(id);
+	}
+
 	
 
 }

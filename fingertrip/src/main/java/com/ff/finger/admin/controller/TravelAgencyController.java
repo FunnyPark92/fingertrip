@@ -31,7 +31,6 @@ public class TravelAgencyController {
 	@RequestMapping("/agency/agencyWrite.do")
 	public String agencyWrite() {
 		logger.info("여행사 회원 가입 화면");
-		
 		return "admin/agency/agencyWrite";
 	}
 	

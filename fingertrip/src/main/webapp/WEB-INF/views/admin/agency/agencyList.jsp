@@ -50,12 +50,12 @@ $(document).ready(function(){
            <div class="fRight">
            		<select name="searchCondition">
            			<option value="name"
-           				<c:if test="${param.searchCondition=='name' }">
+           				<c:if test="${param.searchCondition=='name'}">
                 					selected="selected"
                 		</c:if>
            			>상호명</option>
            			<option value="license_No"
-           				<c:if test="${param.searchCondition=='licenseNo'}">
+           				<c:if test="${param.searchCondition=='license_No'}">
                 					selected="selected"
                 		</c:if>
            			>사업자 번호</option>

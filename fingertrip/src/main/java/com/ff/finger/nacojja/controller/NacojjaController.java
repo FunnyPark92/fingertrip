@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -356,6 +357,50 @@ public class NacojjaController {
 		//logger.info("여행지 정보 가져온 결과, travelSpotVoList.size={}", travelSpotVoList.size());
 		
 		return travelSpotVoList;
+	}
+	@RequestMapping("/pressHeart.do")
+	public String pressHeart(@ModelAttribute HeartVO heartVo,HttpSession session, Model model) {
+		String id =  (String) session.getAttribute("userid"); //하트 누르는 사람의 아이디! 등록한 사람 이 아님
+		logger.info("하트 누르기 파라미터 userid={} courseNo={}",id,heartVo.getCourseNo());
+		
+		MemberVO memberVo = memberService.logingMember(id);
+		heartVo.setMemberNo(memberVo.getMemberNo());
+		int result = heartService.countHeartMember(heartVo);
+		
+		String msg="", url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
+		
+		if(result>0) { //이미 해당코스에 하트를 사용했을 경우 
+			msg="이미 하트를 부여했습니다. 하트주기는 코스당 1회로 제한됩니다.!";
+			logger.info("과거 해당코스에 하트 부여 여부 result={}",result);
+		}else {
+			int cnt  = memberService.pressHeart(id);
+			logger.info("하트 누르기 멤버 업데이트 결과 cnt={}",cnt);
+			heartVo.setMemberNo(memberVo.getMemberNo());
+			if(cnt>0) {
+				msg="소중한 하트 감사합니다.";
+				url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
+				
+				int hCnt =heartService.insertHeart(heartVo);
+				logger.info("하트테이블 insert결과 hCnt={}",hCnt);
+				
+				HeartListVO heartListVo = new HeartListVO();
+				heartListVo.setMemberNo(memberVo.getMemberNo());
+				heartListVo.setStatus("하트");
+				heartListVo.setHeartNo(heartVo.getHeartNo());
+				
+				int lCnt =heartListService.insertHeartListUse(heartListVo);
+				logger.info("하트내역 insert결과 lCnt={}",lCnt);
+			}else {
+				
+				msg="하트가 부족합니다! 충전하러 가시겠어요?";
+				url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
+			}
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
 	}
 	
 }

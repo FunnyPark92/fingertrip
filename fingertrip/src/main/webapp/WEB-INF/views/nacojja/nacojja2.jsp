@@ -586,7 +586,7 @@
 						      	markersFinal.push(marker);
 						      	
 						      	mapFinal.setCenter(someDayLatLng);
-						      	mapFinal.setZoom(17);
+						      	mapFinal.setZoom(16);
 							//}
 						});
 					}
