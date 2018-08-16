@@ -87,6 +87,10 @@
 		select count(*)
 		from heart where course_no = #{courseNo} and member_no= #{memberNo}
 	</select>
+	
+	<update id="updateCourseHeart" parameterType="int">
+		update course set heart_count = heart_count+1 where course_No =#{courseNo}
+	</update>
 </mapper>
 
 

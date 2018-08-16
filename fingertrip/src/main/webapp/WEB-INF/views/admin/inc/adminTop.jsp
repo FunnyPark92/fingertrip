@@ -35,8 +35,13 @@
     <header>
         <nav class="admCenter">
         	<div class="subMenu">
-	        	<a href="">로그아웃</a> ㅣ
-	        	<a href="">홈으로</a>
+        		<c:if test="${!empty sessionScope.adminid}">
+	        		<a href="<c:url value='/admin/adminLogout.do'/>">로그아웃</a> ㅣ
+        		</c:if>
+        		<c:if test="${empty sessionScope.adminid}">
+	        		<a href="<c:url value='/admin/adminLogout.do'/>">로그인</a> ㅣ
+        		</c:if>
+	        	<a href="<c:url value='/index.do'/>">홈으로</a>
         	</div>
         	
             <ul class="clearFix">

@@ -11,4 +11,5 @@ public interface HeartService {
 	public int insertHeart(HeartVO heartVo);
 	public List<HeartVO> selectByCourse(int courseNo);
 	public int countHeartMember(HeartVO heartvo);
+	public int updateCourseHeart(int courseNo);
 }

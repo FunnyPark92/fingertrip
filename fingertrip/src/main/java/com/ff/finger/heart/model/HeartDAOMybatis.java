@@ -46,4 +46,9 @@ public class HeartDAOMybatis implements HeartDAO{
 		return sqlSession.selectOne(namespace+"countHeartMember",heartvo);
 	}
 
+	@Override
+	public int updateCourseHeart(int courseNo) {
+		return sqlSession.update(namespace+"updateCourseHeart",courseNo);
+	}
+
 }

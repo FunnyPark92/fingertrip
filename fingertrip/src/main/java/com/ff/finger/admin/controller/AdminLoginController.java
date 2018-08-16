@@ -3,6 +3,7 @@ package com.ff.finger.admin.controller;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,8 +64,16 @@ public class AdminLoginController {
 		model.addAttribute("url",url);
 		
 		return "common/message";
+	}
+	
+	@RequestMapping("/admin/adminLogout.do")
+	public String adminLogout(HttpSession session) {
+		String id =  (String)session.getAttribute("adminid");
+		logger.info("관리자 로그 아웃 처리 id={}",id);
 		
+		session.removeAttribute("adminid");
 		
+		return "redirect:/admin/adminLogin.do";
 	}
 	
 	

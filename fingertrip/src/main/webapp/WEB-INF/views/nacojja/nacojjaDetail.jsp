@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<style>
+.qna{
+		width:30px;
+		margin: 10px;
+	}
+.heart2{
+	margin-top: 4px;
+	font-size: 25px;
+}
+</style>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYa_utcbQs1RLoVuJguMaQzuX4yxvQyrs&libraries=place"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -29,6 +39,7 @@
 	var poly;
 	window.onload = function() {
 		initialize();
+		initMarker();//초기 로드시 1일차 map	
 	}
 	
 	function initialize() {
@@ -58,7 +69,7 @@
 		poly.setMap(map);
 		animate(poly);
 		
-		initMarker();//초기 로드시 1일차 map	
+	
 	}
   
 	function animate(line) {
@@ -123,6 +134,7 @@
        	 	for (var i=-10; i<=markers.length; i++) { //왜 마이너스 여야지?
         		poly.getPath().removeAt(i);
           	}
+
        		
       		var day = $(this).val();
       		$('#day').text("Day "+day);
@@ -224,35 +236,44 @@
             <img src="<c:url value='/upload_images/${courseVo.thumbImg}'/>" alt="썸네일">
         </div>
         
-      <%--   <!-- 하트받을때 -->
-        <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
-            <div>
-               	하트받는중
-            </div>
-            <h2>
-               	${courseVo.title}
-            </h2>
-            <h5>
-                ${courseVo.startDay} ~ ${courseVo.endDay}
-            </h5>
-            <div>
-                <small>작성자 : </small>${memberVo.name}
-            </div>
-            <div>
-                <small>등록일 : </small>${courseVo.regDate}
-            </div>
-            <div>
-               	<img src="<c:url value='/img/quot1.png'/>" style="width: 10px; height: 10px">
-               		<h3 style="display: inherit;">
-	               		&quot;${courseVo.content}&quot;
-               		</h3>
-               	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
-            </div>
-            <input type="button" class="heartBtn btn btn-block btn-danger" onclick="pressHeart()" value="하트 누르기">
-        </div> --%>
+	        <!-- 하트받을때 -->
+        <c:if test="${courseVo.progressNo==1}">
+	        <div class="col-md-6 naThumHeart marginBottom50" ">
+	            <div>
+	               	하트받는중 
+	            </div>
+	            <h2>
+	               	${courseVo.title}
+	            </h2>
+	            <h5>
+	                ${courseVo.startDay} ~ ${courseVo.endDay}
+	            </h5>
+	            <div>
+	                <small>작성자 : </small>${memberVo.name}
+	            </div>
+	            <div>
+	                <small>등록일 : </small>${courseVo.regDate}
+	            </div>
+	            <div>
+	               	<img src="<c:url value='/img/quot1.png'/>" style="width: 10px; height: 10px">
+	               		<h3 style="display: inherit;">
+		               		&quot;${courseVo.content}&quot;
+	               		</h3>
+	               	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
+	            </div>
+	            <input type="button" class="heartBtn btn btn-block btn-danger" onclick="pressHeart()" value="하트 누르기">
+	            <div>
+	            	<span class="listTitle float-left"><img src="${pageContext.request.contextPath }/img/heart.png" class="qna"></span>
+	            	
+	            	<p class="float-left heart2">${courseVo.heartCount }</p>
+	            </div>
+	        </div>
+        </c:if>
         
-           <!-- 결제할 때 -->
+        <c:if test="${courseVo.progressNo==3}">
+            <!-- 결제할 때 -->
 		<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
+<<<<<<< HEAD
 		<%--  <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
 			<div>결제진행중</div>
 			<h3 class="marginBottom20">${courseVo.title}</h3>
@@ -265,7 +286,34 @@
 					<option value="0914">18.09.14~18.09.18</option>
 					<option value="0915">18.09.15~18.09.19</option>
 				</select>
+=======
+			 <div class="col-md-6 naThumHeart marginBottom50"">
+				<div>결제진행중</div>
+				<h3 class="marginBottom20">${courseVo.title}</h3>
+				<div class="thumPay">
+					<span class="leftSpan">여행 날짜</span> <select>
+						<option value="선택">날짜 선택</option>
+						<option value="0911">18.09.11~18.09.15</option>
+						<option value="0912">18.09.12~18.09.16</option>
+						<option value="0913">18.09.13~18.09.17</option>
+						<option value="0914">18.09.14~18.09.18</option>
+						<option value="0915">18.09.15~18.09.19</option>
+					</select>
+				</div>
+				<div class="thumPay">
+					<span class="leftSpan">작성자</span>${memberVo.name}
+				</div>
+				<div class="thumPay">
+					<span class="leftSpan">여행사</span> 핑거트립
+				</div>
+				<div class="thumPay">
+					<span class="leftSpan">여행사 번호</span> 02 - 000 - 0000
+				</div>
+				<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
+				<input type="button" class="btn payBtn btn-primary" value="결제하기">
+>>>>>>> branch 'master' of https://github.com/geoblo/fingertrip.git
 			</div>
+<<<<<<< HEAD
 			<div class="thumPay">
 				<span class="leftSpan">작성자</span>${memberVo.name}
 			</div>
@@ -347,6 +395,9 @@
         
 		
 		
+=======
+		</c:if>
+>>>>>>> branch 'master' of https://github.com/geoblo/fingertrip.git
 		<div class="col-md-2">
             <ul class="list-group help-group">
             	<div class="faq-list list-group nav">
