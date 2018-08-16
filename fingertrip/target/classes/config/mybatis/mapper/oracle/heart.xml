@@ -91,6 +91,9 @@
 	<update id="updateCourseHeart" parameterType="int">
 		update course set heart_count = heart_count+1 where course_No =#{courseNo}
 	</update>
+	<select id="countHeart200" parameterType="int" resultType="int">
+		select count(*) from course where heart_count >=199 and course_No=#{courseNo}
+	</select>
 </mapper>
 
 

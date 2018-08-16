@@ -23,4 +23,5 @@ public interface CourseService {
 	public int getTotalRecordByPrgs(SearchVO searchVo);
 	public Map<String, Object> selectMember(int courseNo);
 	public List<TravelSpotVO> selectTravelSpot(int courseNo);
+	public int ProgressNo2(int courseNo);
 }

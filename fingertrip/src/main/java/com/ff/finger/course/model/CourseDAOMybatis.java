@@ -96,4 +96,9 @@ public class CourseDAOMybatis implements CourseDAO{
 		return sqlSession.selectList(namespace + "selectTravelSpot", courseNo);
 	}
 
+	@Override
+	public int ProgressNo2(int courseNo) {
+		return sqlSession.update(namespace+"ProgressNo2",courseNo);
+	}
+
 }

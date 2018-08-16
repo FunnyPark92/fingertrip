@@ -371,6 +371,7 @@ public class NacojjaController {
 			msg="이미 하트를 부여했습니다. 하트주기는 코스당 1회로 제한됩니다.!";
 			logger.info("과거 해당코스에 하트 부여 여부 result={}",result);
 		}else {
+			
 			int cnt  = memberService.pressHeart(id);
 			logger.info("하트 누르기 멤버 업데이트 결과 cnt={}",cnt);
 			
@@ -378,20 +379,39 @@ public class NacojjaController {
 			if(cnt>0) {
 				msg="소중한 하트 감사합니다.";
 				url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
-				
-				int cCnt =heartService.updateCourseHeart(heartVo.getCourseNo());
-				logger.info("코스테이블에 하트 업데이트 결과 cCnt={}",cCnt);
-				
-				int hCnt =heartService.insertHeart(heartVo);
-				logger.info("하트테이블 insert결과 hCnt={}",hCnt);
-				
-				HeartListVO heartListVo = new HeartListVO();
-				heartListVo.setMemberNo(memberVo.getMemberNo());
-				heartListVo.setStatus("하트");
-				heartListVo.setHeartNo(heartVo.getHeartNo());
-				
-				int lCnt =heartListService.insertHeartListUse(heartListVo);
-				logger.info("하트내역 insert결과 lCnt={}",lCnt);
+				int countHeart = heartService.countHeart200(heartVo.getCourseNo());
+				logger.info("하트 200개  countHeart={}",countHeart);
+				if(countHeart > 0) {
+					int progress2 = courseService.ProgressNo2(heartVo.getCourseNo());
+					logger.info("진행상태 업뎃2 결과 progress={}",progress2);
+					int cCnt =heartService.updateCourseHeart(heartVo.getCourseNo());
+					logger.info("코스테이블에 하트 업데이트 결과 cCnt={}",cCnt);
+					
+					int hCnt =heartService.insertHeart(heartVo);
+					logger.info("하트테이블 insert결과 hCnt={}",hCnt);
+					
+					HeartListVO heartListVo = new HeartListVO();
+					heartListVo.setMemberNo(memberVo.getMemberNo());
+					heartListVo.setStatus("하트");
+					heartListVo.setHeartNo(heartVo.getHeartNo());
+					
+					int lCnt =heartListService.insertHeartListUse(heartListVo);
+					logger.info("하트내역 insert결과 lCnt={}",lCnt);
+				}else {
+					int cCnt =heartService.updateCourseHeart(heartVo.getCourseNo());
+					logger.info("코스테이블에 하트 업데이트 결과 cCnt={}",cCnt);
+					
+					int hCnt =heartService.insertHeart(heartVo);
+					logger.info("하트테이블 insert결과 hCnt={}",hCnt);
+					
+					HeartListVO heartListVo = new HeartListVO();
+					heartListVo.setMemberNo(memberVo.getMemberNo());
+					heartListVo.setStatus("하트");
+					heartListVo.setHeartNo(heartVo.getHeartNo());
+					
+					int lCnt =heartListService.insertHeartListUse(heartListVo);
+					logger.info("하트내역 insert결과 lCnt={}",lCnt);
+				}
 			}else {
 				
 				msg="하트가 부족합니다! 충전하러 가시겠어요?";

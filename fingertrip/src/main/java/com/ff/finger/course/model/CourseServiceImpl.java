@@ -113,4 +113,9 @@ public class CourseServiceImpl implements CourseService {
 		return courseDao.selectTravelSpot(courseNo);
 	}
 
+	@Override
+	public int ProgressNo2(int courseNo) {
+		return courseDao.ProgressNo2(courseNo);
+	}
+
 }
