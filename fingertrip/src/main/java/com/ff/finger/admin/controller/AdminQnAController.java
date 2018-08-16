@@ -26,10 +26,12 @@ import com.ff.finger.admin.model.AdminService;
 import com.ff.finger.admin.model.AdminVO;
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.FileUploadUtil;
+import com.ff.finger.cs.QnA.model.QnAListVO;
 import com.ff.finger.cs.QnA.model.QnAService;
 import com.ff.finger.cs.QnA.model.QnAVO;
 import com.ff.finger.cs.notice.model.NoticeService;
 import com.ff.finger.cs.notice.model.NoticeVO;
+import com.ff.finger.member.model.MemberListVO;
 
 @Controller
 @RequestMapping("/admin/cs/QnA")
@@ -48,11 +50,21 @@ public class AdminQnAController {
 	//목록보기는 QnAContoller를 통해 보여줌
 	
 	@RequestMapping(value="/qnAReplyWrite.do", method=RequestMethod.GET)
-	public String anAReplyWrite(@RequestParam(defaultValue="0") int qnaNo, Model model) {
+	public String anAReplyWrite(@RequestParam(defaultValue="0") int qnaNo, HttpSession session, Model model) {
 		logger.info("QnA답변쓰기 화면 보여주기 파라미터 qnaNo={}", qnaNo);
 		
 		QnAVO vo=qnAService.selectByNoOne(qnaNo);
 		logger.info("QnA답변하기-조회결과, vo={}", vo);
+		
+		//관리자로 로그인 했는지 체크
+		String adminId=(String)session.getAttribute("adminid");
+		logger.info("세션조회 adminId={}", adminId);
+		if(adminId==null) {
+			model.addAttribute("msg", "관리자로 로그인 후 답글 작성이 가능합니다.");
+			model.addAttribute("url", "/index.do");
+			
+			return "common/message";
+		}
 			
 		//이미지 처리에 관한 내용
 		ArrayList<String> listImg=new ArrayList<>();
@@ -78,12 +90,6 @@ public class AdminQnAController {
 		String adminId=(String)session.getAttribute("adminid");
 		logger.info("세션조회 adminId={}", adminId);
 		
-		if(adminId==null) {
-			model.addAttribute("msg", "관리자로 로그인 후 답글 작성이 가능합니다.");
-			model.addAttribute("url", "/index.do");
-			
-			return "common/message";
-		}
 		//관리자 번호를 가져오기 위한 메서드 호출
 		int adminNo= noticeService.getAdminNo(adminId);
 		qnAVo.setAdminNo(adminNo);
@@ -200,10 +206,11 @@ public class AdminQnAController {
 		QnAVO vo=qnAService.selectByNoOne(qnaNo);
 		logger.info("QnA 상세보기, vo={}", vo);
 		
-		//리스트로 GroupNo +1, -1 가져오기 
-		List<QnAVO> list=qnAService.selectByNo(groupNo);
-		logger.info("QnA 이전글 다음글 갯수확인, list.size={} ", list.size());
-		logger.info("QnA 이전글 다음글 상세보기 결과, list={} ", list);
+		//윗글 아랫글을 가져오기 위한 공간
+		QnAVO voUp=qnAService.selectUp(groupNo);
+		logger.info("윗글가져오기 결과 QnAUP={}", voUp);
+		QnAVO voDw=qnAService.selectDw(groupNo);
+		logger.info("아랫글가져오기 결과 QnADW={}", voDw);
 		
 		//이미지 처리에 관한 내용
 		ArrayList<String> listImg=new ArrayList<>();
@@ -218,14 +225,15 @@ public class AdminQnAController {
 		
 		model.addAttribute("listImg", listImg);
 		model.addAttribute("vo",vo);
-		model.addAttribute("list",list);
-		
+		model.addAttribute("voUp",voUp);
+		model.addAttribute("voDw",voDw);
+	
 		return "admin/cs/qna/qnaDetail";
 	}
 	
 	@RequestMapping("/adminQnADelete.do")
 	public String adminQnADelete(@ModelAttribute QnAVO qnAVo, HttpServletRequest request, Model model) {
-		logger.info("공지사항 삭제, 파라미터 noticeVo={}", qnAVo);
+		logger.info("공지사항 삭제, 파라미터 QnAVo={}", qnAVo);
 		
 		String msg="", url="/cs/QnA/qna.do?aNo=1";
 		if(qnAVo.getQnaNo()==0) {
@@ -235,17 +243,6 @@ public class AdminQnAController {
 			logger.info("QnA 삭제 cnt={}", cnt);
 			
 			if(cnt>0) {
-				String[] file=qnAVo.getFileName().split(", ");
-				logger.info("qnAVo.getFileName(), file.length={}", qnAVo.getFileName(), file.length);
-				
-				for(int i=0;i<file.length;i++) {
-					logger.info("공지사항 file={}", file[i]);
-					File oldFile=new File(fileUploadUtil.getUploadPath(request,CommonConstants.PATH_FLAG_PDS), file[i]);
-					if(oldFile.exists()) {
-						boolean bool=oldFile.delete();
-						logger.info("기존파일 삭제 여부: {}", bool);
-					}
-				}
 				msg="QnA 삭제를 성공하였습니다.";
 			}else {
 				msg="QnA 삭제를 실패하였습니다.";
@@ -255,6 +252,24 @@ public class AdminQnAController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
+	}
+
+	@RequestMapping("/deleteMulti.do")
+	public String deleteMulti(@ModelAttribute QnAListVO listVo, Model model) {
+		logger.info("QnA 삭제 파라미터, QnAListVO={}", listVo);
+		int cnt=qnAService.multiDelete(listVo.getQnAItems());
+		
+		logger.info("QnA 다중 삭제 결과 cnt={}", cnt);
+		
+		String msg="", url="/cs/QnA/qna.do?aNo=1";
+	      if(cnt>0) {
+	         msg="다중 삭제가 완료되었습니다";
+	      }else {
+	         msg="삭제 실패!";
+	      }
+	      model.addAttribute("msg",msg);
+	      model.addAttribute("url",url);
+	      return "common/message";
 	}
 }
 

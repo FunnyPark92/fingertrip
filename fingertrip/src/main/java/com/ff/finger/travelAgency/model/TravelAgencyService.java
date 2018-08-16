@@ -16,4 +16,5 @@ public interface TravelAgencyService {
 	public int multiDelete(List<TravelAgencyVO> list);
 	public int updateAgency(TravelAgencyVO vo);
 	public int processAgencyLogin(String id, String password);
+	public String getAgencyName(String agencyid);
 }

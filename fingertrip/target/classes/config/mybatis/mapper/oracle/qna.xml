@@ -26,12 +26,6 @@
 		where qna_no=#{qnaNo}
 	</update>
 	
-	<select id="selectByNo" parameterType="int" resultType="QnAVO">
-		select * from qna
-		where (group_no=#{groupNo}+1 or group_no=#{groupNo}-1) and step=0
-		order by qna_no desc
-	</select>
-	
 	<select id="passck" parameterType="int" resultType="string">
 		select password from qna
 		where qna_no=#{qnaNo}
@@ -88,7 +82,7 @@
 	<update id="qnADelete" parameterType="int">
 		update qna
         set del_flag='Y'
-        where qna_no=${qnaNo}
+        where qna_no=#{qnaNo}
 	</update>
 	
 	<insert id="qnaWrite" parameterType="QnAVO">
@@ -96,6 +90,42 @@
 		values(qna_seq.nextval,#{title},#{content},#{name},#{password},sysdate,0,qna_seq.nextval,0,0,#{memberNo},#{fileName, jdbcType=VARCHAR},#{originalFileName, jdbcType=VARCHAR})	
 	</insert>
 	
+	<select id="selectUp" parameterType="int" resultType="QnAVO">
+	 	select *
+		from (
+			select rownum as RNUM, list.*
+			from(
+				select * from qna
+                where group_no>#{groupNo} and step=0 and del_flag='N'
+                order by group_no
+				)list
+			)
+		<![CDATA[
+		where RNUM<2
+		]]>
+	</select>
+	
+	<select id="selectDw" parameterType="int" resultType="QnAVO">
+	select *
+	<![CDATA[
+		from (
+			select rownum as RNUM, list.*
+			from(
+				select * from qna
+                where group_no<#{groupNo} and step=0 and del_flag='N'
+                order by group_no desc
+				)list
+			)
+		where RNUM<2 
+		]]>
+	</select>
+	
+	<insert id="agencyReply" parameterType="QnAVO">
+		insert into qna(qna_no,title,content,name,password,reg_date,read_count,group_no,step,sort_no,travel_agency_no,file_name,original_file_name)
+		values(qna_seq.nextval,#{title},#{content},#{name},#{password},sysdate,0,(select group_no from qna where qna_no=#{qnaNo}),
+		(select step from qna where qna_no=#{qnaNo})+1,
+		(select sort_no from qna where qna_no=#{qnaNo})+1,#{travelAgencyNo},#{fileName, jdbcType=VARCHAR},#{originalFileName, jdbcType=VARCHAR})
+	</insert>
 </mapper>
 
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ff.finger.common.SearchVO;
+import com.ff.finger.member.model.MemberVO;
 
 @Service
 public class QnAServiceImpl implements QnAService {
@@ -20,11 +21,6 @@ public class QnAServiceImpl implements QnAService {
 	@Override
 	public int countUpdate(int qnaNo) {
 		return qnADao.countUpdate(qnaNo);
-	}
-
-	@Override
-	public List<QnAVO> selectByNo(int groupNo) {
-		return qnADao.selectByNo(groupNo);
 	}
 
 	@Override
@@ -72,5 +68,39 @@ public class QnAServiceImpl implements QnAService {
 	@Override
 	public int qnaWrite(QnAVO qnAVo) {
 		return qnADao.qnaWrite(qnAVo);
+	}
+
+	@Override
+	public QnAVO selectUp(int groupNo) {
+		return qnADao.selectUp(groupNo);
+	}
+
+	@Override
+	public QnAVO selectDw(int groupNo) {
+		return qnADao.selectDw(groupNo);
+	}
+
+	@Override
+	public int multiDelete(List<QnAVO> list) {
+		int cnt=0;
+		try {
+			for(QnAVO vo : list) {
+				int qnaNo = vo.getQnaNo();
+				if(qnaNo>0) {
+					cnt = qnADao.qnADelete(vo.getQnaNo());
+				}
+			}
+		} catch (RuntimeException e) {
+			cnt=-1;
+			e.printStackTrace();
+		}
+		return cnt; 
+	}
+
+	@Override
+	public int agencyReply(QnAVO qnAVo) {
+		int cnt=qnADao.updateSortNo(qnAVo.getQnaNo());
+		cnt=qnADao.agencyReply(qnAVo);
+		return cnt;
 	}
 }
