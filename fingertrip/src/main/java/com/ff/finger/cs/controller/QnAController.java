@@ -58,6 +58,10 @@ public class QnAController {
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 		pagingInfo.setRecordCountPerPage(CommonConstants.RECORD_COUNT_PER_PAGE);
 		
+		
+		
+		
+		
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		searchVo.setRecordCountPerPage(CommonConstants.RECORD_COUNT_PER_PAGE);
 
