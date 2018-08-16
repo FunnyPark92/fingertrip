@@ -3,6 +3,21 @@
 <%@ include file="../inc/top.jsp"%>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYa_utcbQs1RLoVuJguMaQzuX4yxvQyrs&libraries=place"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+<style>
+    .datepicker{
+    	z-index:1151 !important; 
+    	border:none;
+    	border-bottom:1px solid #70bdff;
+    	margin-bottom: 3px;
+    }
+    .ui-state-default, .ui-widget-content .ui-state-default{border: none;}
+    .ui-state-highlight, .ui-widget-content .ui-state-highlight{background:#c3e6ff; }
+    .ui-widget-header {border: none; background: #fff; }
+</style>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
 	var myZoom;
@@ -94,6 +109,10 @@
     }
     
 	$(document).ready(function(){
+		$(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+		
     	$('#dayTab1').addClass("active");
     	
         $('.reply').click(function(){
@@ -180,6 +199,17 @@
        		});
        	}); */ 
        	
+       	$.datepicker.setDefaults({
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], //월 이름
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], //
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년'
+        });
     });
 </script>
 
@@ -223,7 +253,7 @@
         
            <!-- 결제할 때 -->
 		<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
-		 <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
+		<%--  <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
 			<div>결제진행중</div>
 			<h3 class="marginBottom20">${courseVo.title}</h3>
 			<div class="thumPay">
@@ -247,7 +277,75 @@
 			</div>
 			<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
 			<input type="button" class="btn payBtn btn-primary" value="결제하기">
-		</div>
+		</div> --%>
+		
+		
+		
+		<!-- 입찰 -->
+		<%-- <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
+			<div>입찰진행중</div>
+			<h3 class="marginBottom20">${courseVo.title}</h3>
+            <div>
+            	<span class="leftSpan">작성자</span>
+                ${memberVo.name}
+            </div>
+			<div>
+				<span class="leftSpan">작성자 일정</span>
+				${courseVo.startDay} ~ ${courseVo.endDay}
+			</div>
+            <div>
+               	<img src="<c:url value='/img/quot1.png'/>" style="width: 10px; height: 10px">
+	             ${courseVo.content}
+               	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
+            </div>
+			<div>
+				<span class="leftSpan">출발일</span>
+	    		<label for="startDay1" hidden="">출발일</label>
+	        	<input type="text" name="startDay1" placeholder="출발일1" class="datepicker valid" readonly="readonly">,
+	    		<label for="startDay2" hidden="">출발일</label>
+	        	<input type="text" name="startDay2" placeholder="출발일2" class="datepicker valid" readonly="readonly">
+			</div>
+			<div>
+				<span class="leftSpan"></span>
+	    		<label for="startDay3" hidden="">출발일</label>
+	        	<input type="text" name="startDay3" placeholder="출발일3" class="datepicker valid" readonly="readonly">,
+	    		<label for="startDay4" hidden="">출발일</label>
+	        	<input type="text" name="startDay4" placeholder="출발일4" class="datepicker valid" readonly="readonly">
+			</div>
+            <div class="marginTop10">
+				<span class="leftSpan">입찰금액</span>
+            	<input type="text" placeholder="회원들에게 결제받을 금액을 적어주세요" style="width:70%;"/>
+            </div>
+			<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
+			<input type="button" class="btn payBtn btn-primary" value="입찰하기">
+		</div> --%>
+		
+		<!-- 실패 -->
+        <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
+            <div>
+               	종료
+            </div>
+            <h2>
+               	${courseVo.title}
+            </h2>
+            <h5>
+                ${courseVo.startDay} ~ ${courseVo.endDay}
+            </h5>
+            <div>
+                <small>작성자 : </small>${memberVo.name}
+            </div>
+            <div>
+                <small>등록일 : </small>${courseVo.regDate}
+            </div>
+            <div>
+               	<img src="<c:url value='/img/quot1.png'/>" style="width: 10px; height: 10px">
+	            ${courseVo.content}
+               	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
+            </div>
+            <input type="button" class="btn btn-block" disabled="disabled" onclick="pressHeart()" value="종료되었습니다">
+        </div>
+        
+		
 		
 		<div class="col-md-2">
             <ul class="list-group help-group">

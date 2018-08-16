@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/adminTop.jsp"%>
-<script type="text/javascript">
-
- $(document).ready(function(){
-	/* $('select[name="faqCategoryNo"]').change(function(){
-		$('form[name=search] input[name=searchCondition]').val($('select[name=faqCategoryNo] option:selected').val());
-		$('form[name=search]').submit();
-	}); */
-});
-</script>
 
 <section class="admCenter marginTop40" style="text-align: center">
 	<ul class="clearFix marginBottom40 lineGnb">
@@ -55,7 +46,7 @@
 						<td><input type="checkbox"></td>
 						<td>${faqCategoryNo1['FAQ_NO']}</td>
 						<td>${faqCategoryNo1['FAQ_CATE_TITLE']}</td>
-						<td><a href="<c:url value='/admin/cs/faq/faqEdit.do?faqNo=${faqCategoryNo1["FAQ_NO"]}'/>">${faqCategoryNo1['TITLE']}</a></td>
+						<td><a href="<c:url value='/admin/cs/faq/faqDetail.do?faqNo=${faqCategoryNo1["FAQ_NO"]}'/>">${faqCategoryNo1['TITLE']}</a></td>
 						<td>${faqCategoryNo1['CONTENT']}</td>
 						<td>${faqCategoryNo1['ID']}</td>
 					</tr>

@@ -42,20 +42,6 @@ public class AdminFaqController {
 		List<Map<String, Object>> list=faqservice.allFaqCategory(faqCategoryNo);
 		logger.info("faq 조회 결과 list.size={}", list.size());
 		
-	/*	StringBuffer s = new StringBuffer();
-        for(int i=0;i<list.size();i++) {
-        	
-        	BufferedReader br = new BufferedReader(list.get(i).get("CONTENT").getCharacterStream());
-            String ts = "";
-            while((ts = br.readLine()) != null) {
-                   s.append(ts + "\n");
-            }
-            br.close();
-            String ss= s.toString();
-            
-        	
-        }*/
-		
 		model.addAttribute("list", list);
 		
 		return "admin/cs/faq/faqList";
@@ -132,6 +118,23 @@ public class AdminFaqController {
 		return "common/message";
 	}
 	
+	
+	@RequestMapping(value="/faqDetail.do", method=RequestMethod.GET)
+	public String faqDetail(@RequestParam(defaultValue="0") int faqNo, Model model) {
+		logger.info("faq 자세히보기, 파라미터 faqNo={}", faqNo);
+
+		if(faqNo==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/admin/cs/faq/faqList.do");
+			
+			return "common/message";
+		}
+		
+		FaqVO vo=faqservice.faqSelectByNo(faqNo);
+		
+		model.addAttribute("vo", vo);
+		return "admin/cs/faq/faqDetail";
+	}
 	
 	
 }
