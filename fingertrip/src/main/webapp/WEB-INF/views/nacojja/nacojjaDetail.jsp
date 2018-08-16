@@ -238,7 +238,7 @@
         
 	        <!-- 하트받을때 -->
         <c:if test="${courseVo.progressNo==1}">
-	        <div class="col-md-6 naThumHeart marginBottom50" ">
+	        <div class="col-md-6 naThumHeart marginBottom50">
 	            <div>
 	               	하트받는중 
 	            </div>
@@ -254,11 +254,9 @@
 	            <div>
 	                <small>등록일 : </small>${courseVo.regDate}
 	            </div>
-	            <div>
+	            <div class="expDiv">
 	               	<img src="<c:url value='/img/quot1.png'/>" style="width: 10px; height: 10px">
-	               		<h3 style="display: inherit;">
-		               		&quot;${courseVo.content}&quot;
-	               		</h3>
+	               	${courseVo.content}
 	               	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
 	            </div>
 	            <input type="button" class="heartBtn btn btn-block btn-danger" onclick="pressHeart()" value="하트 누르기">
@@ -352,6 +350,7 @@
             </div>
             <h2>
                	${courseVo.title}
+               	
             </h2>
             <h5>
                 ${courseVo.startDay} ~ ${courseVo.endDay}
