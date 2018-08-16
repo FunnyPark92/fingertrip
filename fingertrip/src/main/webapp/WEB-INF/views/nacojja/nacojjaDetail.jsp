@@ -273,8 +273,7 @@
         <c:if test="${courseVo.progressNo==3}">
             <!-- 결제할 때 -->
 		<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
-<<<<<<< HEAD
-		<%--  <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
+		<div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
 			<div>결제진행중</div>
 			<h3 class="marginBottom20">${courseVo.title}</h3>
 			<div class="thumPay">
@@ -286,7 +285,6 @@
 					<option value="0914">18.09.14~18.09.18</option>
 					<option value="0915">18.09.15~18.09.19</option>
 				</select>
-=======
 			 <div class="col-md-6 naThumHeart marginBottom50"">
 				<div>결제진행중</div>
 				<h3 class="marginBottom20">${courseVo.title}</h3>
@@ -311,9 +309,7 @@
 				</div>
 				<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
 				<input type="button" class="btn payBtn btn-primary" value="결제하기">
->>>>>>> branch 'master' of https://github.com/geoblo/fingertrip.git
 			</div>
-<<<<<<< HEAD
 			<div class="thumPay">
 				<span class="leftSpan">작성자</span>${memberVo.name}
 			</div>
@@ -325,12 +321,13 @@
 			</div>
 			<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
 			<input type="button" class="btn payBtn btn-primary" value="결제하기">
-		</div> --%>
+		</div>
+        </c:if>
 		
 		
-		
+		<c:if test="${courseVo.progressNo==2}">
 		<!-- 입찰 -->
-		<%-- <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
+		<div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
 			<div>입찰진행중</div>
 			<h3 class="marginBottom20">${courseVo.title}</h3>
             <div>
@@ -366,8 +363,10 @@
             </div>
 			<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
 			<input type="button" class="btn payBtn btn-primary" value="입찰하기">
-		</div> --%>
+		</div> 
+		 </c:if>
 		
+		<c:if test="${courseVo.progressNo==4}">
 		<!-- 실패 -->
         <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
             <div>
@@ -392,12 +391,9 @@
             </div>
             <input type="button" class="btn btn-block" disabled="disabled" onclick="pressHeart()" value="종료되었습니다">
         </div>
-        
-		
-		
-=======
 		</c:if>
->>>>>>> branch 'master' of https://github.com/geoblo/fingertrip.git
+		
+		
 		<div class="col-md-2">
             <ul class="list-group help-group">
             	<div class="faq-list list-group nav">
