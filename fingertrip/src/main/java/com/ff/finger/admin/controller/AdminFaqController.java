@@ -74,7 +74,7 @@ public class AdminFaqController {
 	@RequestMapping(value="/faqWrite.do", method=RequestMethod.POST)
 	public String faqWrite_post(@ModelAttribute FaqVO faqVo,
 			HttpServletRequest request, HttpSession session, Model model ) {
-		logger.info("공지사항 글쓰기 처리, faqVo={},  hidFile={}", faqVo);
+		logger.info("faq 글쓰기 처리, faqVo={},  hidFile={}", faqVo);
 		
 		String adminId=(String) session.getAttribute("adminid");
 		logger.info("세션 조회 adminId={}", adminId);
@@ -88,13 +88,50 @@ public class AdminFaqController {
 		logger.info("글쓰기 처리 후, cnt={}", cnt);
 		
 		if(cnt>0) {
-			model.addAttribute("msg", "공지사항 등록이 완료되었습니다.");
+			model.addAttribute("msg", "faq 등록이 완료되었습니다.");
 		}else {
-			model.addAttribute("msg", "공지사항 등록이 실패하였습니다.");
+			model.addAttribute("msg", "faq 등록이 실패하였습니다.");
 		}
 		model.addAttribute("url", "/admin/cs/faq/faqList.do");
 		
 		return "common/message";
 	}
+	
+	
+	@RequestMapping(value="/faqEdit.do", method=RequestMethod.GET)
+	public String faqEdit(@RequestParam(defaultValue="0") int faqNo, Model model) {
+		logger.info("faq 수정 화면, 파라미터 faqNo={}", faqNo);
+
+		if(faqNo==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/admin/cs/faq/faqList.do");
+			
+			return "common/message";
+		}
+		
+		FaqVO vo=faqservice.faqSelectByNo(faqNo);
+		
+		model.addAttribute("vo", vo);
+		return "admin/cs/faq/faqEdit";
+	}
+	
+	@RequestMapping(value="/faqEdit.do", method=RequestMethod.POST)
+	public String faqEdit_post(@ModelAttribute FaqVO faqVo, HttpServletRequest request,  HttpSession session, Model model ) {
+		logger.info("faq 수정 처리, 파라미터 faqVo={}", faqVo);
+		
+		int cnt=faqservice.faqUpdate(faqVo);
+		logger.info("공지사항 수정 처리 후, cnt={}", cnt);
+		
+		if(cnt>0) {
+			model.addAttribute("msg", "faq 수정이 완료되었습니다.");
+		}else {
+			model.addAttribute("msg", "faq 수정이 실패하였습니다.");
+		}
+		model.addAttribute("url", "/admin/cs/faq/faqList.do");
+		
+		return "common/message";
+	}
+	
+	
 	
 }

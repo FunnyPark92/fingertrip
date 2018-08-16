@@ -36,4 +36,14 @@ public class FaqDAOMybatis implements FaqDAO {
 		return sqlSession.insert(namespace+"faqInsert",faqVo);
 	}
 
+	@Override
+	public FaqVO faqSelectByNo(int faqNo) {
+		return sqlSession.selectOne(namespace+"faqSelectByNo", faqNo);
+	}
+
+	@Override
+	public int faqUpdate(FaqVO faqVo) {
+		return sqlSession.update(namespace+"faqUpdate", faqVo);
+	}
+
 }
