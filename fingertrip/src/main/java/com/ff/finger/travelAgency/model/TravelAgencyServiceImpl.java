@@ -114,4 +114,9 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 		return result;
 	}
 
+	@Override
+	public String getAgencyName(String agencyid) {
+		return travelAgencyDao.getAgencyName(agencyid);
+	}
+
 }

@@ -27,12 +27,6 @@ public class QnADAOMybatis implements QnADAO {
 	}
 
 	@Override
-	public List<QnAVO> selectByNo(int groupNo) {
-		List<QnAVO> list=sqlSession.selectList(namespace+"selectByNo", groupNo);
-		return list;
-	}
-
-	@Override
 	public String passck(int qnaNo) {
 		return sqlSession.selectOne(namespace+"passck", qnaNo);
 	}
@@ -81,5 +75,20 @@ public class QnADAOMybatis implements QnADAO {
 	@Override
 	public int qnaWrite(QnAVO qnAVo) {
 		return sqlSession.insert(namespace+"qnaWrite", qnAVo);
+	}
+
+	@Override
+	public QnAVO selectUp(int groupNo) {
+		return sqlSession.selectOne(namespace+"selectUp", groupNo);
+	}
+
+	@Override
+	public QnAVO selectDw(int groupNo) {
+		return sqlSession.selectOne(namespace+"selectDw", groupNo);
+	}
+
+	@Override
+	public int agencyReply(QnAVO qnAVo) {
+		return sqlSession.insert(namespace+"agencyReply", qnAVo);
 	}
 }

@@ -15,7 +15,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('form[name=frmCk]').submit(function(){
-		$('input[name=fileCnt]').val("Y");
 		if($('input[name=title]').val()<1){
 			alert('제목을 입력하세요');
 			$('input[name=title]').focus();
@@ -38,8 +37,8 @@ $(document).ready(function(){
 		if($('input[type=file]').val()<1){
 			$('#hidFile').val("N");
 		}		
-
 	});
+	$('input[name=fileCnt]').val("Y");	
 	$('input[type=file]').on("change", function(){
 		var form = $('form')[0];
     	var formData = new FormData(form);
@@ -98,7 +97,6 @@ $(document).ready(function(){
     <!-- 답변 등록에 필요한 값들 -->
     <input type="hidden" name="qnaNo" value="${vo.qnaNo}">
    	<input type="hidden" name="password" value="${vo.password}">
-   	<input type="hidden" name="adminNo" value="${vo.adminNo}">
   		<h2>답변등록</h2>
             <table class="grayBor">
        			<tr class="div1st">

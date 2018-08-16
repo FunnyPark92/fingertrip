@@ -9,8 +9,6 @@ public interface QnADAO {
 	public int countUpdate(int qnaNo);
 	//이전글,다음글에서 group_no보내기 위한 메서드
 	public int serchGroupNo(int qnaNo);
-	//상세보기에서 이전글과 다음글을 하기 위해 list에는 VO가 3개가 들어있음
-	public List<QnAVO> selectByNo(int groupNo);
 	public String passck(int qnaNo);
 	public int QnAtotalRecord(SearchVO searchVo);
 	//답글화면을 위한 VO한개만 들어있음
@@ -22,6 +20,10 @@ public interface QnADAO {
 	public int myWriteQnAtotalRecord(SearchVO searchVo);
 	public int qnADelete(int qnaNo);
 	public int qnaWrite(QnAVO qnAVo);
+	//이전 글 다음을을 선택해오기 위한 두개의 메서드
+	public QnAVO selectUp(int groupNo);
+	public QnAVO selectDw(int groupNo);
+	public int agencyReply(QnAVO qnAVo);
 	
 	
 }

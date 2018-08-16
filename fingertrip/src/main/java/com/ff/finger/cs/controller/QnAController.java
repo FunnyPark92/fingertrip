@@ -28,6 +28,8 @@ import com.ff.finger.cs.QnA.model.QnAService;
 import com.ff.finger.cs.QnA.model.QnAVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
+import com.ff.finger.travelAgency.model.TravelAgencyService;
+import com.ff.finger.travelAgency.model.TravelAgencyVO;
 
 @Controller
 @RequestMapping("/cs")
@@ -40,6 +42,8 @@ public class QnAController {
 	private MemberService memberService;
 	@Autowired 
 	private FileUploadUtil fileUploadUtil; 
+	@Autowired
+	private TravelAgencyService travelAgencyService;
 	
 	@RequestMapping("/QnA/qna.do")
 	public String qna(@ModelAttribute SearchVO searchVo, @RequestParam(defaultValue="0") int aNo,  Model model) {
@@ -88,17 +92,26 @@ public class QnAController {
 		int cnt=qnAService.countUpdate(qnaNo);
 		logger.info("조회수 증가 후 cnt={}", cnt);
 		
-		/*
-		int groupNo=qnAService.serchGroupNo(qnaNo);
-		logger.info("group넘버 찾기 결과값 int groupNo=", groupNo);
-		*/
 		return "redirect:/cs/QnA/qnaDetail.do?qnaNo="+qnaNo;
 	
 	}
 	
 	@RequestMapping("/QnA/qnaDetail.do")
-	public String qnaDetail(@RequestParam(defaultValue="0") int qnaNo, HttpServletRequest request, Model model) {
+	public String qnaDetail(@RequestParam(defaultValue="0") int qnaNo, HttpServletRequest request, HttpSession session, Model model) {
 		logger.info("QnA 상세보기 파라미터 qnaNo={}", qnaNo);
+		
+		//기업회원일 경우 답글쓰기를 보여주기 위해 기업세션 조회
+		String agencyid = (String)session.getAttribute("agencyid");
+		logger.info("세션조회 agencyid={}", agencyid);
+		
+		//자신이 쓴 글은 삭제 버튼을 만들어 주기 위해 회원 세션 조회
+		String userid = (String)session.getAttribute("userid");
+		logger.info("세션조회 id={}", userid);
+		//로그인 회원 정보 조회
+		MemberVO memberVo=memberService.logingMember(userid);
+		int memberNo=memberVo.getMemberNo();
+		logger.info("회원번호 조회 memberNo={}", memberNo);
+		
 		
 		if(qnaNo==0) {
 			model.addAttribute("msg","잘못됫 url입니다.");
@@ -110,14 +123,15 @@ public class QnAController {
 		int groupNo=(int)qnAService.serchGroupNo(qnaNo);
 		logger.info("QnA 그룹넘버 가져오기 groupNo={}", groupNo);
 	
-		
 		//Detail에 뿌려줄 한개의 QnAVO가져오기
 		QnAVO vo=qnAService.selectByNoOne(qnaNo);
 		logger.info("QnA 상세보기, vo={}", vo);
 		
-		//리스트로 GroupNo +1, -1 가져오기 
-		List<QnAVO> list=qnAService.selectByNo(groupNo);
-		logger.info("QnA 상세보기 결과, list={} ", list);
+		//윗글 아랫글을 가져오기 위한 공간
+		QnAVO voUp=qnAService.selectUp(groupNo);
+		logger.info("윗글가져오기 결과 QnAUP={}", voUp);
+		QnAVO voDw=qnAService.selectDw(groupNo);
+		logger.info("아랫글가져오기 결과 QnADW={}", voDw);
 		
 		//이미지 처리에 관한 내용
 		ArrayList<String> listImg=new ArrayList<>();
@@ -132,8 +146,11 @@ public class QnAController {
 		
 		model.addAttribute("listImg", listImg);
 		model.addAttribute("vo",vo);
-		model.addAttribute("list",list);
-		
+		model.addAttribute("voUp",voUp);
+		model.addAttribute("voDw",voDw);
+		model.addAttribute("agency",agencyid);
+		model.addAttribute("memberNo",memberNo);
+	
 		return "cs/QnA/qnaDetail";
 	}
 		
@@ -169,37 +186,115 @@ public class QnAController {
 		}
 	}
 	
-	//기업답변은 완료되지 않음
 	@RequestMapping(value="/QnA/reply.do", method=RequestMethod.GET)
-	public String reply(@RequestParam(defaultValue="0") int qnaNo, Model model) {
-		logger.info("QnA답변하기 화면, 파라미터 qnaNo={}", qnaNo);
+	public String reply(@RequestParam(defaultValue="0") int qnaNo, HttpSession session, Model model) {
+		logger.info("QnA기업답변하기 화면보여주기, 파라미터 qnaNo={}", qnaNo);
 		
 		if(qnaNo==0) {
 			model.addAttribute("msg","잘못됫 url입니다.");
 			model.addAttribute("url","/cs/QnA/qna.do");
 			return "common/message"; 
 		}
+		//기업으로 로그인 했는지 체크
+		String agencyid = (String)session.getAttribute("agencyid");
+		logger.info("세션조회 agencyid={}", agencyid);
+		if(agencyid==null) {
+			model.addAttribute("msg", "기업회원만 QnA답변 작성이 가능합니다.");
+			model.addAttribute("url", "/member/login/login.do");
+			
+			return "common/message";
+		}
 		
 		QnAVO vo=qnAService.selectByNoOne(qnaNo);
-		logger.info("QnA답변하기-조회결과, vo={}", vo);
+		logger.info("QnA기업답변하기-조회결과, vo={}", vo);
 		
+		//이미지 처리에 관한 내용
+		ArrayList<String> listImg=new ArrayList<>();
+		String fileName=vo.getFileName();
+		if(fileName!=null && !fileName.isEmpty()) {
+			String[] spFileName=fileName.split(", ");
+			for(int i=0;i<spFileName.length;i++) {
+				listImg.add(spFileName[i]);
+			}
+		}
+		logger.info("이미지 파일 갯수 확인 listImg.size={}", listImg.size());
+		
+		model.addAttribute("listImg", listImg);
 		model.addAttribute("vo", vo);
 		
 		return "cs/QnA/reply";
 	}
 	
-	//기업답변은 완료되지 않음.
 	@RequestMapping(value="/QnA/reply.do", method=RequestMethod.POST)
-	public String reply_post(@ModelAttribute QnAVO vo) {
-		logger.info("QnA답변하기 처리, 파라미터 vo={}", vo);
-		//기업 로그인이 완성되면 여기다가 session으로 name을 받아서 (session저장할때 name 있어야함) QnAVO에 getter로 세팅
-		//이후에 xml문서 가서 name에 내가 세팅한 name으로 insert하면 된다. 
+	public String reply_post(@ModelAttribute QnAVO qnAVo, @RequestParam String hidFile, HttpServletRequest request, MultipartHttpServletRequest fRequest, HttpSession session, Model model) {
+		logger.info("QnA 기업답변하기 처리, qnAVo={}, hidFile={}", qnAVo, hidFile);
 		
-		int cnt=qnAService.reply(vo);
-		logger.info("QnA답변 처리 결과, cnt={}", cnt);
+		String agencyid = (String)session.getAttribute("agencyid");
+		logger.info("기업세션조회  agencyid={}", agencyid);
 		
-		return "redirect:/cs/QnA/qna.do";
-	}
+		//여행사 이름을 가져오기 위한 메서드 호출
+		String agencyName=travelAgencyService.getAgencyName(agencyid);
+		logger.info("여행사 이름 조회 결과, agencyName={}", agencyName);
+		
+		//여행사 이름 세팅하기
+		qnAVo.setName(agencyName);
+		logger.info("답글 여행사 이름 세팅결과 qnAVo={}",qnAVo);
+		
+		//여생사 정보 불러오와서 travelAgencyNo 세팅하기 
+		TravelAgencyVO travelAgencyVo=travelAgencyService.selectOneAgency(agencyName);
+		int travelAgencyNo= travelAgencyVo.getTravelAgencyNo();
+		qnAVo.setTravelAgencyNo(travelAgencyNo);
+		logger.info("답글 여행사 번호 세팅결과 qnAVo={}",qnAVo);
+		
+		//파일업로드
+		if(!hidFile.equals("N")) {
+			List<MultipartFile> list=fRequest.getFiles("upfile");
+		    logger.info("QnA 파일업로드 list.size={}", list.size());
+		         
+		    String originalFileName="", fileName="";
+		         
+		    MultipartFile[] mf=new MultipartFile[list.size()];
+		   
+		    for(int i=0; i<list.size();i++) {
+		    	mf[i]=list.get(i);
+		            
+		        String getOriginalFileName=mf[i].getOriginalFilename();
+		        String getFileName=fileUploadUtil.getUniqueFileName(getOriginalFileName);
+		        logger.info("QnA 기업 답변 파일, getOriginalFileName={}, getFileName={}", getOriginalFileName, getFileName);
+		            
+		        if(i!=0) {
+		        	originalFileName+=", ";
+		            fileName+=", ";
+		        }
+		        originalFileName+=getOriginalFileName;
+		        fileName+=getFileName;
+		            
+		        File file=new File(fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS), getFileName); 
+		        try {
+		        	mf[i].transferTo(file);
+		        } catch (IllegalStateException e) {
+		            e.printStackTrace();
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		          }
+		        }
+		         qnAVo.setOriginalFileName(originalFileName);
+		         qnAVo.setFileName(fileName);
+		         logger.info("QnA 기업 답변 파일 업로드, qnaVo={}", qnAVo);
+		      }
+		      
+		      int cnt=qnAService.agencyReply(qnAVo);
+		      logger.info("QnA답글 달기 처리 후, cnt={}", cnt);
+		      
+		      if(cnt>0) {
+		         model.addAttribute("msg", "답글 등록이 완료되었습니다.");
+		      }else {
+		         model.addAttribute("msg", "답글 등록이 실패하였습니다.");
+		      }
+		      model.addAttribute("url", "/cs/QnA/qna.do");
+		      
+		      return "common/message";
+		}
 	
 	@RequestMapping(value="/QnA/qnaWrite.do", method=RequestMethod.POST)
 	public String anAReplyWrite_post(@ModelAttribute QnAVO qnAVo, @RequestParam String hidFile, HttpServletRequest request, MultipartHttpServletRequest fRequest, HttpSession session, Model model) {
@@ -254,12 +349,12 @@ public class QnAController {
 		      }
 		
 		int cnt=qnAService.qnaWrite(qnAVo);
-		logger.info("QnA답글 쓰기 처리 후, cnt={}", cnt);
+		logger.info("QnA쓰기 처리 후, cnt={}", cnt);
 		
 		   if(cnt>0) {
-		         model.addAttribute("msg", "답글 등록이 완료되었습니다.");
+		         model.addAttribute("msg", "QnA 등록이 완료되었습니다.");
 		      }else {
-		         model.addAttribute("msg", "답글 등록이 실패하였습니다.");
+		         model.addAttribute("msg", "QnA 등록이 실패하였습니다.");
 		      }
 		      model.addAttribute("url", "/cs/QnA/qna.do");
 		      
