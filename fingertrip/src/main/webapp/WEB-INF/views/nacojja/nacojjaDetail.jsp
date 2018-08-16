@@ -269,23 +269,11 @@
 	            </div>
 	        </div>
         </c:if>
-        
-        <c:if test="${courseVo.progressNo==3}">
-            <!-- 결제할 때 -->
-		<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
-		<div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
-			<div>결제진행중</div>
-			<h3 class="marginBottom20">${courseVo.title}</h3>
-			<div class="thumPay">
-				<span class="leftSpan">여행 날짜</span> <select>
-					<option value="선택">날짜 선택</option>
-					<option value="0911">18.09.11~18.09.15</option>
-					<option value="0912">18.09.12~18.09.16</option>
-					<option value="0913">18.09.13~18.09.17</option>
-					<option value="0914">18.09.14~18.09.18</option>
-					<option value="0915">18.09.15~18.09.19</option>
-				</select>
-			 <div class="col-md-6 naThumHeart marginBottom50"">
+
+		<c:if test="${courseVo.progressNo==3}">
+			<!-- 결제할 때 -->
+			<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
+			<div class="col-md-6 naThumHeart marginBottom50" style="display:;">
 				<div>결제진행중</div>
 				<h3 class="marginBottom20">${courseVo.title}</h3>
 				<div class="thumPay">
@@ -308,23 +296,13 @@
 					<span class="leftSpan">여행사 번호</span> 02 - 000 - 0000
 				</div>
 				<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
-				<input type="button" class="btn payBtn btn-primary" value="결제하기">
+				<div>
+					<input type="button" class="btn payBtn btn-primary" value="결제하기">
+				</div>
 			</div>
-			<div class="thumPay">
-				<span class="leftSpan">작성자</span>${memberVo.name}
-			</div>
-			<div class="thumPay">
-				<span class="leftSpan">여행사</span> 핑거트립
-			</div>
-			<div class="thumPay">
-				<span class="leftSpan">여행사 번호</span> 02 - 000 - 0000
-			</div>
-			<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
-			<input type="button" class="btn payBtn btn-primary" value="결제하기">
-		</div>
-        </c:if>
-		
-		
+		</c:if>
+
+
 		<c:if test="${courseVo.progressNo==2}">
 		<!-- 입찰 -->
 		<div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
