@@ -41,6 +41,8 @@ import com.ff.finger.travelspot.model.TravelSpotVO;
 public class NacojjaController {
 	private static final Logger logger = LoggerFactory.getLogger(NacojjaController.class);
 	private List<TravelSpotVO> travelSpotList = new ArrayList<>();
+	//private List<Map<String, TravelSpotVO>> travelSpotListById = new ArrayList<>();
+	//private Map<Object, Object> travelSpotMapById = new HashMap<>();
 	private int totalTravelDay;
 	
 	@Autowired 
@@ -190,7 +192,9 @@ public class NacojjaController {
 	
 	@RequestMapping("/addClearPlace.do")
 	@ResponseBody
-	public void addClearPlace(@ModelAttribute TravelSpotVO travelSpotVo, @RequestParam(required=false) boolean clearFlag) {
+	public void addClearPlace(@ModelAttribute TravelSpotVO travelSpotVo, 
+			@RequestParam(required=false) boolean clearFlag,
+			HttpSession session) {
 		logger.info("나코짜2 여행지 담거나 지우거나, 파라미터 travelSpotVo={}", travelSpotVo);
 		logger.info("나코짜2 여행지 리스트 쓸어버릴까? clearFlag={}", clearFlag);
 		
