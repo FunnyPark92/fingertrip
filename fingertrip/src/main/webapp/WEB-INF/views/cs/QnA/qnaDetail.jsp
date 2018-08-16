@@ -6,6 +6,13 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#del').click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			return true;
+		}else{
+			return false;
+		}
+	});
 	$(".hid").hide();
 		var pass1="";
 		var pass2="";
@@ -139,8 +146,9 @@ $(document).ready(function(){
                 		<c:if test="${!empty agencyid}">
                 			<a class="btn btn-success" href="<c:url value='/cs/QnA/reply.do?qnaNo=${vo.qnaNo}'/>">답변하기(기업전용)</a>
  						</c:if>
- 						<c:if test="${vo.memberNo==memberNo}">
-                			<a class="btn btn-success" href="<c:url value='/cs/QnA/reply.do?qnaNo=${vo.qnaNo}'/>">답변하기(기업전용)</a>
+ 						<!-- 혹시나 관리자 아이디와 일반회원 아이디가 같은 경우를 대비해 step으로도 처리, 삭제한 글은 삭제버튼 뜨지 않게 -->
+ 						<c:if test="${vo.memberNo==memberNo&&vo.step==0&&vo.delFlag!='Y'}">
+                			<a class="btn btn-success" id="del" href="<c:url value='/cs/QnADelete.do?qnaNo=${vo.qnaNo}'/>">삭제</a>
  						</c:if>
                     	<a href="<c:url value='/cs/QnA/qna.do'/>" class="btn btn btn-warning">목록</a>
                     </div>

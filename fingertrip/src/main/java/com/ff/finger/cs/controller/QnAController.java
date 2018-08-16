@@ -58,10 +58,6 @@ public class QnAController {
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 		pagingInfo.setRecordCountPerPage(CommonConstants.RECORD_COUNT_PER_PAGE);
 		
-		
-		
-		
-		
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		searchVo.setRecordCountPerPage(CommonConstants.RECORD_COUNT_PER_PAGE);
 
@@ -109,13 +105,17 @@ public class QnAController {
 		logger.info("세션조회 agencyid={}", agencyid);
 		
 		//자신이 쓴 글은 삭제 버튼을 만들어 주기 위해 회원 세션 조회
+		
 		String userid = (String)session.getAttribute("userid");
-		logger.info("세션조회 id={}", userid);
+		if(userid!=null) {
+		logger.info("세션조회 userid={}", userid);
 		//로그인 회원 정보 조회
 		MemberVO memberVo=memberService.logingMember(userid);
+		//null을 방지 하기 위한 값
 		int memberNo=memberVo.getMemberNo();
 		logger.info("회원번호 조회 memberNo={}", memberNo);
-		
+		model.addAttribute("memberNo", memberNo);
+		}
 		
 		if(qnaNo==0) {
 			model.addAttribute("msg","잘못됫 url입니다.");
@@ -153,8 +153,7 @@ public class QnAController {
 		model.addAttribute("voUp",voUp);
 		model.addAttribute("voDw",voDw);
 		model.addAttribute("agency",agencyid);
-		model.addAttribute("memberNo",memberNo);
-	
+		
 		return "cs/QnA/qnaDetail";
 	}
 		
@@ -364,4 +363,27 @@ public class QnAController {
 		      
 		      return "common/message";
 	}	
+	
+	@RequestMapping("/QnADelete.do")
+	public String QnADelete(@RequestParam(defaultValue="0") int qnaNo, HttpServletRequest request, Model model) {
+		logger.info("QnA 삭제, 파라미터 qnaNo={}", qnaNo);
+		
+		String msg="", url="/cs/QnA/qna.do?aNo";
+		if(qnaNo==0) {
+			msg="잘못된 url입니다.";
+		}else {
+			int cnt=qnAService.qnADelete(qnaNo);
+			logger.info("QnA 삭제 cnt={}", cnt);
+			
+			if(cnt>0) {
+				msg="QnA 삭제를 성공하였습니다.";
+			}else {
+				msg="QnA 삭제를 실패하였습니다.";
+			}
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 }

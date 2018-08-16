@@ -233,7 +233,7 @@ public class AdminQnAController {
 	
 	@RequestMapping("/adminQnADelete.do")
 	public String adminQnADelete(@ModelAttribute QnAVO qnAVo, HttpServletRequest request, Model model) {
-		logger.info("공지사항 삭제, 파라미터 QnAVo={}", qnAVo);
+		logger.info("QnA 삭제, 파라미터 QnAVo={}", qnAVo);
 		
 		String msg="", url="/cs/QnA/qna.do?aNo=1";
 		if(qnAVo.getQnaNo()==0) {
