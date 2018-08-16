@@ -8,7 +8,6 @@ function pageFunc(currentPage){
 	page.currentPage.value=currentPage;
 	page.submit();
 }
-
   $(document).ready(function(){
 	  $(".hid").hide();
 	  var pass="";
@@ -69,6 +68,12 @@ function pageFunc(currentPage){
                             <c:choose>
                             	<c:when test="${vo.delFlag=='Y'}">
                             		<span style="color:gray; font-size:1.0em">
+                            		<c:if test="${vo.step>0 }">
+                            		<c:forEach var="i" begin="1" end="${vo.step }">
+                            			&nbsp;
+                            		</c:forEach>
+                            		<img src="${pageContext.request.contextPath }/img/re.gif">
+                            		</c:if>
                             		삭제된 글입니다.
                             		</span>   
                          		</c:when>
@@ -96,21 +101,26 @@ function pageFunc(currentPage){
                             <td class="text-center">${vo.readCount}</td>
                         </tr>
                         <!-- 비밀번호 유무 비교에 필요한 값들 -->
-	    				<input type="hidden" class="pass" name="pass" value="${vo.password}">
-                        <tr class="hid">
-                        	<td colspan="4">
-                        	<form name="passck" method="post" action="<c:url value='/cs/QnA/passck.do'/>">
-                        		<span>비밀글 입니다. 비밀번호를 입력해주세요.<br>
-                        		<input type="password" class="form-control" class="password" name="pwd" placeholder="4자리" style="width:100px; display:inline-block;" /> 
-                        		<input type="submit" class="ckpassword" class="btn btn-success" style="margin-bottom:3px;" value="확인"/></span>
-                        		<input type="hidden" name="qnaNo" value="${vo.qnaNo}">
-                        	</form>	
-                        	<td>
-                        </tr>   
+                       	<c:if test="${vo.delFlag=='N'}"><!-- 삭제된 글은 비밀번호 확인 없이 삭제된 글이라는 상세보기 가능 -->
+                       		<c:if test="${empty agencyid}"><!-- 기업회원일 경우 비밀번호 입력 없이 QnA상세보기 가능 -->
+	    						<input type="hidden" class="pass" name="pass" value="${vo.password}">
+                       			 	<tr class="hid">
+                        				<td colspan="4">
+                        				<form name="passck" method="post" action="<c:url value='/cs/QnA/passck.do'/>">
+                        				<span>비밀글 입니다. 비밀번호를 입력해주세요.<br>
+                        				<input type="password" class="form-control" class="password" name="pwd" placeholder="4자리" style="width:100px; display:inline-block;" /> 
+                        				<input type="submit" class="ckpassword" class="btn btn-success" style="margin-bottom:3px;" value="확인"/></span>
+                        				<input type="hidden" name="qnaNo" value="${vo.qnaNo}">
+                        				</form>	
+                        				<td>
+                      			  </tr>   
+                      	  </c:if>
+                        </c:if>
                      </c:forEach>
                      </c:if>
                     </tbody>
                 </table>
+                <div class="width500 margin0 marginT30" style="margin-left:400px;">
               	   	<c:if test="${pagingInfo.firstPage>1 }">
                 		<a href="#" class="decoN colorBlue" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
                 	</c:if>
@@ -127,7 +137,8 @@ function pageFunc(currentPage){
                 	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
                 		<a href="#" class="decoN colorBlue" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
                 	</c:if>
-                </div>
+                </div>	
+          </div>
                  <div class="width500 margin0 marginT30" style="margin-left:550px;">
                 	<form action="<c:url value='/cs/QnA/qna.do'/>" method="post" class="overflowH">
                 		<select name="searchCondition" class="float-left form-control w-25">
@@ -146,10 +157,10 @@ function pageFunc(currentPage){
                 		<input type="submit" value="검색" class="btn btn-info float-left marginL10">
                 	</form>
                 </div>
-            </div>
-        		<div class="form-group text-right">
-	                <a class="btn btn-primary" style="color:#fff;" href="<c:url value='/cs/QnA/qnaWrite.do'/>">글쓰기</a>
-	   			</div>
-    </section>
+   </div>
+   <div class="form-group text-right">
+	   <a class="btn btn-primary" style="color:#fff;" href="<c:url value='/cs/QnA/qnaWrite.do'/>">글쓰기</a>
+   </div>
+</section>
 
  <%@ include file="../../inc/bottom.jsp"%>

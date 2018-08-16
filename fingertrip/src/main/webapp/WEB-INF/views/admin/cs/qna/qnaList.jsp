@@ -78,11 +78,12 @@ $(document).ready(function(){
         </tr>
        	<c:if test="${!empty list}">
 			  <!-- QnA 반복문 시작 -->          	 
+			  <c:set var="idx" value="0"/>
           	  <c:forEach var="vo" items="${list}">
           	  <!-- 삭제된 글은 상세보기와 답글달기 버튼이 나타나지 않게 하기 위한 값 -->
           	  <input type="hidden" class="delFlag" class="delf" value="${vo.delFlag}">
               <tr style="text-align:center" class="click">
-              	<td><input type="checkbox" name="chk" value="${vo.qnaNo}"></td>
+              	<td><input type="checkbox" name="qnAItems[${idx}].qnaNo" value="${vo.qnaNo}"/></td>
                   <td scope="row" class="text-center">${vo.qnaNo}</td>
                   <td style="text-align:left">
                    <a  href="#">
@@ -90,6 +91,12 @@ $(document).ready(function(){
                     <c:choose>
                     	<c:when test="${vo.delFlag=='Y'}">
                         	<span style="color:gray; font-size:1.0em">
+                            	<c:if test="${vo.step>0 }">
+                            		<c:forEach var="i" begin="1" end="${vo.step }">
+                            			&nbsp;
+                            		</c:forEach>
+                            		<img src="${pageContext.request.contextPath }/img/re.gif">
+                            	</c:if>
                             		삭제된 글입니다.
                             </span>   
                         </c:when>
@@ -124,6 +131,7 @@ $(document).ready(function(){
                     </div>
               	</td>
               </tr>
+            <c:set var="idx" value="${idx+1 }"/>
            	</c:forEach>
        </c:if>
     </table> 

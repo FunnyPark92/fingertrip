@@ -66,6 +66,9 @@
 	<select id="selectAgencyDbPwd" parameterType="string" resultType="string">
 		SELECT PASSWORD FROM TRAVEL_AGENCY WHERE ID=#{id} 
 	</select>
-		
 	
+	<select id="getAgencyName" parameterType="String" resultType="String">
+		select NAME from TRAVEL_AGENCY 
+		where id=#{agencyid}
+	</select>
 </mapper>

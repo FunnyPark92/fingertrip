@@ -36,10 +36,11 @@ $(document).ready(function(){
                     <h1 class="mb-5">Finger Trip</h1>
                 </div>
                 <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                    <form>
+                    <form action="<c:url value='/nacojja/nacojjaList.do'/>" method="post">
                         <div class="form-row">
                             <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                <input type="text" id="cityset" class="form-control form-control-lg" placeholder="가고싶은 어디든">
+                            	<input type="hidden" name="searchCondition" value="countries">
+                                <input type="text" id="cityset" name="searchKeyword" class="form-control form-control-lg" placeholder="가고싶은 어디든">
                             </div>
                             <div class="col-12 col-md-3">
                                 <button type="submit" class="btn btn-block btn-lg btn-danger">검색</button>

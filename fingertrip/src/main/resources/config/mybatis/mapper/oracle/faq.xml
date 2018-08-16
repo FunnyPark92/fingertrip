@@ -33,4 +33,14 @@
 		values(faq_seq.nextval, #{title} , #{content} , #{adminNo} , #{faqCategoryNo})
 	</insert>
 	
+	<select id="faqSelectByNo" parameterType="int" resultType="faqVo">
+		select * from faq where faq_no=#{faqNo}
+	</select>
+	
+	<update id="faqUpdate" parameterType="faqVo">
+		update FAQ
+		set TITLE=#{title}, content=#{content}, FAQ_CATEGORY_NO=#{faqCategoryNo}
+		where faq_no=#{faqNo}
+	</update>
+	
 </mapper>

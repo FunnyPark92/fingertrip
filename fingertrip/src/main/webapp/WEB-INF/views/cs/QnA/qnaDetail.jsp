@@ -6,6 +6,13 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#del').click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			return true;
+		}else{
+			return false;
+		}
+	});
 	$(".hid").hide();
 		var pass1="";
 		var pass2="";
@@ -74,71 +81,82 @@ $(document).ready(function(){
                              	<p class="font-italic font-weight-bold"><img class="qna" src="${pageContext.request.contextPath }/img/answer.png">Answer</p>
                              </c:if>	
                                	<br>
+                               	<c:choose>
+                    			<c:when test="${vo.delFlag=='Y'}">
+                    					삭제된 글입니다.
+                    			</c:when>
+                    			<c:otherwise>
                                	<p>${vo.content}</p>
-                               	<c:if test="${!empty listImg }">
-									<c:set value="0" var="i"/>
-									<c:forEach var="img" items="${listImg}">
-										<img alt="" src="${pageContext.request.contextPath }/upload_pds/${img}" class="maxH500">
-									<c:set value="${i+1 }" var="i"/>
-									</c:forEach>
-								</c:if>
+                               		<c:if test="${!empty listImg }">
+										<c:set value="0" var="i"/>
+										<c:forEach var="img" items="${listImg}">
+											<img alt="" src="${pageContext.request.contextPath }/upload_pds/${img}" class="maxH500">
+										<c:set value="${i+1 }" var="i"/>
+										</c:forEach>
+									</c:if>
+								</c:otherwise>
+                    			</c:choose>
                             </div>
                         </td>
                     </tr>
                 </table>
                 <div>
                 <div>
-                    <c:set var="vo2" value="${list[1]}"/>     
-                    <c:set var="vo1" value="${list[0]}"/>  
                 	<table class="table tableBorder">
-                		<c:if test="${vo.step==0}">
+                		<c:if test="${!empty voUp}">
                 		<tr class="pwck1">
-                			<th><img class="prev" alt="다음글" src="${pageContext.request.contextPath }/img/up.png">다음글</th>
-                			<td><a href='<c:url value="/cs/QnA/countUpdate.do?qnaNo=${vo2.qnaNo}"/>'>${vo2.title }</a></td>
-                			<td>${vo2.name }</td>
-                			<td><fmt:formatDate value="${vo2.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
+                			<th><img class="prev" alt="윗글" src="${pageContext.request.contextPath }/img/up.png">윗글</th>
+                			<td><a href='<c:url value="/cs/QnA/countUpdate.do?qnaNo=${voUp.qnaNo}"/>'>${voUp.title }</a></td>
+                			<td>${voUp.name}</td>
+                			<td><fmt:formatDate value="${voUp.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
                 		</tr>
                 		<tr class="hid">
                         	<td colspan="4"> 	
-                        	<!-- 다음글 비밀번호 확인을 위한 값 -->
+                        	<!-- 윗글 비밀번호 확인을 위한 값 -->
                         	<form name="passck" method="post" action="<c:url value='/cs/QnA/passck.do'/>">
                         		<span>비밀글 입니다. 비밀번호를 입력해주세요.<br>
                         		<input type="password" class="form-control" class="password" name="pwd" placeholder="4자리" style="width:100px; display:inline-block;" /> 
                         		<input type="submit" class="ckpassword" class="btn btn-success" style="margin-bottom:3px;" value="확인"/></span>
-                        		<input type="hidden" name="qnaNo" value="${vo2.qnaNo}">
+                        		<input type="hidden" name="qnaNo" value="${voUp.qnaNo}">
                         	</form>	
                         	<td>
                         </tr>   
+                        </c:if>
+                        <c:if test="${!empty voDw}">
                 		<tr class="pwck2">
-                			<th><img class="prev" alt="이전글" src="${pageContext.request.contextPath }/img/down.png">이전글</th>
-                			<td><a href='<c:url value="/cs/QnA/countUpdate.do?qnaNo=${vo1.qnaNo}"/>'>${vo1.title }</a></td>
-                			<td>${vo1.name}</td>
-                			<td><fmt:formatDate value="${vo1.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
+                			<th><img class="prev" alt="아랫글" src="${pageContext.request.contextPath }/img/down.png">아랫글</th>
+                			<td><a href='<c:url value="/cs/QnA/countUpdate.do?qnaNo=${voDw.qnaNo}"/>'>${voDw.title }</a></td>
+                			<td>${voDw.name }</td>
+                			<td><fmt:formatDate value="${voDw.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
                 		</tr>
                 		<tr class="hid">
                         	<td colspan="4">
-                        	<!-- 이전글 비밀번호 확인을 위한 값 -->
+                        	<!-- 아랫글 비밀번호 확인을 위한 값 -->
                         	<form name="passck" method="post" action="<c:url value='/cs/QnA/passck.do'/>">
                         		<span>비밀글 입니다. 비밀번호를 입력해주세요.<br>
                         		<input type="password" class="form-control" class="password" name="pwd" placeholder="4자리" style="width:100px; display:inline-block;" /> 
                         		<input type="submit" class="ckpassword" class="btn btn-success" style="margin-bottom:3px;" value="확인"/></span>
-                        		<input type="hidden" name="qnaNo" value="${vo1.qnaNo}">
+                        		<input type="hidden" name="qnaNo" value="${voDw.qnaNo}">
                         	</form>	
                         	<td>
                         </tr>   
                     </c:if>
                 	</table>
                 	<div class="fRight">
-                		<!-- 기업로그인 완료되면 if문 처리 해야함, 세션받아서 처리 메모장이 코드 있음
-                		<a class="btn btn-primary" href="<c:url value='/cs/QnA/reply.do?qnaNo=${vo.qnaNo}'/>">답변하기</a>
-                		-->
+                		<c:if test="${!empty agencyid}">
+                			<a class="btn btn-success" href="<c:url value='/cs/QnA/reply.do?qnaNo=${vo.qnaNo}'/>">답변하기(기업전용)</a>
+ 						</c:if>
+ 						<!-- 혹시나 관리자 아이디와 일반회원 아이디가 같은 경우를 대비해 step으로도 처리, 삭제한 글은 삭제버튼 뜨지 않게 -->
+ 						<c:if test="${vo.memberNo==memberNo&&vo.step==0&&vo.delFlag!='Y'}">
+                			<a class="btn btn-success" id="del" href="<c:url value='/cs/QnADelete.do?qnaNo=${vo.qnaNo}'/>">삭제</a>
+ 						</c:if>
                     	<a href="<c:url value='/cs/QnA/qna.do'/>" class="btn btn btn-warning">목록</a>
                     </div>
                 </div>
             </div>
     		<!-- 비밀번호 유무 비교에 필요한 값들 -->
-	        <input type="hidden" class="pass1" name="pass1" value="${vo2.password}">
-	        <input type="hidden" class="pass2" name="pass2" value="${vo1.password}">		
+	        <input type="hidden" class="pass1" name="pass1" value="${voUp.password}">
+	        <input type="hidden" class="pass2" name="pass2" value="${voDw.password}">
         </div>
        </div>
     </section>

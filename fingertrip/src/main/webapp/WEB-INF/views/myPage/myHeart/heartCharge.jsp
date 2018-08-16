@@ -114,10 +114,10 @@
 			<div class="area text-right">
 				<span>하트 <strong>1</strong>개</span><br>
 				<span class="price">
-					<fmt:formatNumber value="1100" pattern="#,###" />
+					<fmt:formatNumber value="100" pattern="#,###" />
 				</span>원
 			</div>
-			<input type="hidden" value="1100">
+			<input type="hidden" value="100">
 			<button type="button" class="btn btn-primary btnA btn-lg">구매하기</button>
 		 </div>
 		

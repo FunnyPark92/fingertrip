@@ -32,7 +32,6 @@ $(document).ready(function(){
 	  $("#sc").show();
   });
   $('form[name=frmCk]').submit(function(){
-		$('input[name=fileCnt]').val("Y");	
 		if($('input[name=title]').val()<1){
 			alert('제목을 입력하세요');
 			$('input[name=title]').focus();
@@ -45,7 +44,7 @@ $(document).ready(function(){
 			alert('첨부파일을 확인해 주세요.(최대5개)(이미지파일만 첨부가능)');
 			return false;
 		}else{
-			var confrm=confirm("답변을 등록하시겠습니까?");
+			var confrm=confirm("QnA을 등록하시겠습니까?");
 			if(!confrm) {
 				$('div[name=content]').focus();
 				return false;
@@ -55,8 +54,8 @@ $(document).ready(function(){
 		if($('input[type=file]').val()<1){
 			$('#hidFile').val("N");
 		}		
-
 	});
+	$('input[name=fileCnt]').val("Y");	
 	$('input[type=file]').on("change", function(){
 		var form = $('form')[0];
   	var formData = new FormData(form);
@@ -155,10 +154,9 @@ $(document).ready(function(){
      			<span class="warn">※ 이미지 파일만 등록이 가능합니다.(jpg,png,gif) </span>	
         		<input type="hidden" class="form-control" id="hidFile" name="hidFile">
         		<input type="hidden" class="form-control" id="fileCnt" name="fileCnt">
-          
         	</div>
         	<div class="form-group text-right" class="divLast">
-       			<input type="submit" class="btn btn-info float-right " value="등록">
+       			<input type="submit" class="btn btn-success" value="등록">
        			<input type = "Button" class="btn btn-warning" value="글목록"  onclick="location.href='<c:url value="/cs/QnA/qna.do"/>'" />
        			<input type="hidden" id="fileCnt" name="fileCnt">    
             </div>

@@ -100,7 +100,7 @@ public class NacojjaController {
 		Calendar cal = Calendar.getInstance();
 		Date today = new Date();
 		cal.setTime(today);
-		cal.add(Calendar.DATE, 14);
+		cal.add(Calendar.DATE, 30); //출발 가능일 - 30일 뒤부터
 		
 		model.addAttribute("availableStartDay", cal.getTime());
 		

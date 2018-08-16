@@ -56,16 +56,16 @@
 			var endDayMillis = new Date($("input[name=endDay]").val()).getTime();
 			var travelDay = (endDayMillis - startDayMillis) / (1000*60*60*24) + 1;
 			
-    		if (startDayMillis - todayMillis < 24*60*60*1000 * 13) { //출발일을 2주 후부터 설정 가능하도록 계산
-				alert("출발일은 오늘 날짜 기준 최소 2주 후부터 선택 가능합니다!!!");
+    		if (startDayMillis - todayMillis < 24*60*60*1000 * 29) { //출발일을 30일 후부터 설정 가능하도록 계산
+				alert("출발일은 오늘 날짜 기준 최소 30일 후부터 선택 가능합니다!");
 				$(this).val("");
 				$(this).focus();
 			} else if (travelDay < 1) {
-				alert("출발일보다 도착일이 더 빠를순 없습니다!!!");
+				alert("도착일이 출발일보다 이전입니다!");
 				$(this).val("");
 				$(this).focus();
 			} else if (travelDay > 10) {
-				alert("여행기간은 10일을 초과할 수 없습니다!!!");
+				alert("여행기간은 10일을 초과할 수 없습니다!");
 				$(this).val("");
 				$(this).focus();
 			} else {
