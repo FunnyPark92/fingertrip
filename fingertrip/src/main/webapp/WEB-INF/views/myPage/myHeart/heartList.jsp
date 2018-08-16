@@ -49,8 +49,8 @@
 				  <tr>
 				    <th scope="col">하트내역 번호</th>
 					<th scope="col">개수</th>
-					<th scope="col">충전/사용 상태</th>
-					<th scope="col">구매/사용일</th>
+					<th scope="col">충전/적립/사용 상태</th>
+					<th scope="col">충전/적립/사용일</th>
 				  </tr>
 				</thead> 
 				<tbody>
@@ -70,7 +70,7 @@
 									<th scope="col">${map['HEART_CHARGE_DAY'] }</th>
 								</tr>
 							</c:if>
-							<c:if test="${map['STATUS'] == '사용' }">
+							<c:if test="${map['STATUS'] == '코스등록' }">
 								<tr style="color: red">
 									<th scope="col">${map['HEART_LIST_NO'] }</th>
 									<th scope="col">-1</th>
@@ -84,6 +84,14 @@
 									<th scope="col">-1</th>
 									<th scope="col">코스에 하트 누르기</th>
 									<th scope="col">${map['REGDATE'] }</th>
+								</tr>
+							</c:if>
+							<c:if test="${map['STATUS'] == '장기미접속' }">
+								<tr style="color: green;">
+									<th scope="col">${map['HEART_LIST_NO'] }</th>
+									<th scope="col">+1</th>
+									<th scope="col">장기 미접속자 혜택</th>
+									<th scope="col">${map['HEART_CHARGE_DAY'] }</th>
 								</tr>
 							</c:if>
 						</c:forEach>

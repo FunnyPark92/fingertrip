@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,9 +40,8 @@ import com.ff.finger.travelspot.model.TravelSpotVO;
 @RequestMapping("/nacojja")
 public class NacojjaController {
 	private static final Logger logger = LoggerFactory.getLogger(NacojjaController.class);
-	private List<TravelSpotVO> travelSpotList = new ArrayList<>();
+	//private List<TravelSpotVO> travelSpotList = new ArrayList<>();
 	private List<Map<String, TravelSpotVO>> travelSpotListById = new ArrayList<>();
-	//private Map<Object, Object> travelSpotMapById = new HashMap<>();
 	private int totalTravelDay;
 	
 	@Autowired 
@@ -184,7 +182,7 @@ public class NacojjaController {
 		logger.info("하트 테이블에 insert한 결과, cnt={}", cnt);
 		
 		HeartListVO heartListVo = new HeartListVO();
-		heartListVo.setStatus("사용");
+		heartListVo.setStatus("코스등록");
 		heartListVo.setHeartNo(heartVO.getHeartNo()); //하트 넘버 제대로 들어가는지 확인해 볼것
 		heartListVo.setMemberNo(memberVo.getMemberNo());
 		cnt = heartListService.insertHeartListUse(heartListVo);

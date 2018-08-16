@@ -12,10 +12,6 @@
 		VALUES(HEART_LIST_SEQ.NEXTVAL, #{status}, #{heartChargeNo}, #{memberNo})
 	</insert>
 	
-	<!-- <select id="selectHeartListByMemberNo" parameterType="int" resultType="HeartListVO">
-		SELECT * FROM HEART_LIST WHERE MEMBER_NO=#{memberNo} ORDER BY HEART_LIST_NO DESC
-	</select> -->
-	
 	<select id="selectHeartListByMemberNo" parameterType="int" resultType="map">
 		SELECT *
 		FROM HEART_LIST HL LEFT OUTER JOIN HEART_CHARGE HC

@@ -1,5 +1,7 @@
 package com.ff.finger.member.model;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,17 +25,26 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int processLogin(String id, String pwd) {
 		String dbPwd = memberDao.selectDbPwd(id);
-		int cnt = memberDao.checkMail(id);
+		int emailAuth = memberDao.checkMail(id);
+		
 		
 		int result = 0;
 		if (dbPwd != null && !dbPwd.isEmpty()) {
 			if (dbPwd.equals(pwd)) {
-				if(cnt == 1) {
+				if (emailAuth == 1) {
 					result = CommonConstants.EMAIL_AUTHENTICATION;
-				}else {
-					result = CommonConstants.LOGIN_OK;
+				} else { //로그인 성공 영역
+					MemberVO memberVo = memberDao.logingMember(id);
+					Timestamp logoutDate = memberVo.getLogoutDate();
+					Timestamp today = new Timestamp(new Date().getTime());
+					
+					if (today.getTime() - logoutDate.getTime() >= 15552000000L) {
+						result = CommonConstants.LOGIN_OK_LONG_TERM_NOT_LOGIN;
+					} else {
+						result = CommonConstants.LOGIN_OK;
+					}
 				}
-			}else {
+			} else {
 				result = CommonConstants.PWD_MISMATCH;
 			}
 		} else {

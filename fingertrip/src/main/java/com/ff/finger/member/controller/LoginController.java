@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.email.EmailSender;
+import com.ff.finger.heartcharge.model.HeartChargeService;
+import com.ff.finger.heartcharge.model.HeartChargeVO;
+import com.ff.finger.heartlist.model.HeartListService;
+import com.ff.finger.heartlist.model.HeartListVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
 import com.ff.finger.travelAgency.model.TravelAgencyService;
@@ -39,6 +43,12 @@ public class LoginController {
 	@Autowired 
 	private EmailSender emailSender;
 	
+	@Autowired
+	private HeartListService heartListService;
+	
+	@Autowired
+	private HeartChargeService heartChargeService;
+	
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String login_get() {
 		logger.info("로그인 화면 보여주기");
@@ -56,10 +66,10 @@ public class LoginController {
 		logger.info("로그인 처리 전 파라미터, saveId1={}", saveId1);
 		
 		int result = memberService.processLogin(memberVo.getId(), memberVo.getPassword());
-		logger.info("로그인 처리 결과, result={}", result);		
+		logger.info("로그인 처리 결과, result={}", result);
 		
 		String msg = "", url = "/member/login/login.do";
-		if (result == CommonConstants.LOGIN_OK) {
+		if (result == CommonConstants.LOGIN_OK || result == CommonConstants.LOGIN_OK_LONG_TERM_NOT_LOGIN) {
 			//[1] 세션에 저장
 			request.getSession().setAttribute("userid", memberVo.getId());
 			//회원정보 읽어오기
@@ -78,9 +88,33 @@ public class LoginController {
 				response.addCookie(ck);
 			}
 			
-			msg = "로그인 되었습니다!";
-			//msg = userName + "님 로그인 되었습니다!";
-			url = "/index.do";
+			if (result == CommonConstants.LOGIN_OK_LONG_TERM_NOT_LOGIN) {
+				int memberNo = memberService.logingMember(memberVo.getId()).getMemberNo();
+				
+				HeartChargeVO heartChargeVo = new HeartChargeVO();
+				heartChargeVo.setHeartChargeCount(1);
+				heartChargeVo.setMemberNo(memberNo);
+				
+				int cnt = heartChargeService.heartCharge(heartChargeVo);
+				logger.info("장기미방문 하트 적립 결과 cnt={}", cnt);
+				
+				HeartListVO heartListVo = new HeartListVO();
+				heartListVo.setStatus("장기미접속");
+				heartListVo.setHeartChargeNo(heartChargeVo.getHeartChargeNo());
+				heartListVo.setMemberNo(memberNo);
+				cnt = heartListService.insertHeartListCharge(heartListVo);
+				logger.info("하트 내역 테이블에 insert한 결과, cnt={}", cnt);
+				
+				cnt = memberService.plusHeart(heartChargeVo);
+				logger.info("회원 하트 업데이트 결과 cnt={}", cnt);
+				
+				msg = "어머~ 오랜만에 방문하셨네요. 감사의 의미로 하트 1개 적립해 드렸습니다!";
+				url = "/index.do";
+			} else {
+				msg = "로그인 되었습니다!";
+				//msg = userName + "님 로그인 되었습니다!";
+				url = "/index.do";
+			}
 		} else if (result == CommonConstants.PWD_MISMATCH){
 			msg = "비밀번호 불일치!";
 		} else if (result == CommonConstants.ID_NONE) {
