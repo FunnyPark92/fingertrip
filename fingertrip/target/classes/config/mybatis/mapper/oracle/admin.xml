@@ -9,6 +9,7 @@
 	<select id="getAdmin" parameterType="int" resultType="AdminVO">
 		select * from admin where admin_no=#{adminNo}
 	</select>
+	
 </mapper>
 
 

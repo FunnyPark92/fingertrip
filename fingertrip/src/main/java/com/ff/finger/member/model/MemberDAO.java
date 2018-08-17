@@ -29,5 +29,6 @@ public interface MemberDAO {
 	public int minusHeart(int memberNo);
 	public int plusHeart(HeartChargeVO heartChargeVo);
 	public int pressHeart(String id);
-	
+	public List<OutReasonVO> selectOutReason();
+	public int selectOutReasonCount(int outReasonNo);
 }

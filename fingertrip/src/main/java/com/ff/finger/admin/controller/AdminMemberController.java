@@ -1,5 +1,7 @@
 package com.ff.finger.admin.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +22,7 @@ import com.ff.finger.common.SearchVO;
 import com.ff.finger.member.model.MemberListVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
+import com.ff.finger.member.model.OutReasonVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -144,5 +147,30 @@ public class AdminMemberController {
 	      model.addAttribute("msg",msg);
 	      model.addAttribute("url",url);
 	      return "common/message";
+	}
+	
+	@RequestMapping("/member/deleteMemberChart.do")
+	public String deleteMemberChart(Model model) {
+		logger.info("탈퇴멤버분석");
+		
+		List<OutReasonVO> listR=memberService.selectOutReason();
+		logger.info("탈퇴사유 listR.size={}", listR.size());
+		
+		model.addAttribute("listR", listR);
+		
+		ArrayList<Integer> listC=new ArrayList<>();
+		for(int i=1;i<listR.size();i++) {
+			int cnt=memberService.selectOutReasonCount(i);
+			logger.info("탈퇴사유 cnt={}", cnt);
+			listC.add(cnt);
+		}
+		
+		int cnt=memberService.selectOutReasonCount(100);
+		logger.info("탈퇴사유 cnt={}", cnt);
+		listC.add(cnt);
+		
+		model.addAttribute("listC", listC);
+
+		return "/admin/member/deleteMemberChart";
 	}
 }

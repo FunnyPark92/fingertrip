@@ -29,5 +29,6 @@ public interface MemberService {
 	public int plusHeart(HeartChargeVO heartChargeVo);
 	public int multiDelete(List<MemberVO> list);
 	public int pressHeart(String id);
-
+	public List<OutReasonVO> selectOutReason();
+	public int selectOutReasonCount(int outReasonNo);
 }

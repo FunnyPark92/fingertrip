@@ -170,5 +170,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.pressHeart(id);
 	}
 
+	@Override
+	public List<OutReasonVO> selectOutReason() {
+		return memberDao.selectOutReason();
+	}
+
+	@Override
+	public int selectOutReasonCount(int outReasonNo) {
+		return memberDao.selectOutReasonCount(outReasonNo);
+	}
 
 }
