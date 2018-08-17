@@ -8,7 +8,7 @@
 		from (
 			select list.*, rownum as RNUM
 			from(
-				select c.*, c.bid_start_day+14 as bid_end_day, p.progress_status
+				select c.*, c.bid_start_day+2 as bid_end_day, p.progress_status
 				from course c join progress p
 				on c.progress_no = p.progress_no
 				where c.progress_no in (2,3,4)

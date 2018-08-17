@@ -134,7 +134,7 @@
 		          		<table class="table tableBorder grayBor">
 		         			<c:if test="${param.noticeNo==list[1].noticeNo}">
 				           		<tr>
-				          			<th class="width20"><img class="marR10" alt="이전글" src="${pageContext.request.contextPath }/img/up-arrow.png">이전글</th>
+				          			<th class="width20"><img class="marR10" alt="윗글" src="${pageContext.request.contextPath }/img/up-arrow.png">윗글</th>
 					           			<td class="width60"><a href="<c:url value='/admin/cs/notice/noticeDetail.do?noticeNo=${list[0].noticeNo }'/>">${list[0].title }</a></td>
 					           			<td class="width20"><fmt:formatDate value="${list[0].regDate }" pattern="yyyy-MM-dd"/></td>
 				           		</tr>
@@ -142,7 +142,7 @@
 		         			
 		         			<c:if test="${(empty list[2]&&param.noticeNo!=list[1].noticeNo)||!empty list[2]}">
 				           		<tr>
-				           			<th class="width20"><img class="marR10" alt="다음글" src="${pageContext.request.contextPath }/img/down-arrow.png">다음글</th>
+				           			<th class="width20"><img class="marR10" alt="아랫글" src="${pageContext.request.contextPath }/img/down-arrow.png">아랫글</th>
 				           			<c:if test="${!empty list[2] }">
 					           			<td class="width60"><a href="<c:url value='/admin/cs/notice/noticeDetail.do?noticeNo=${list[2].noticeNo }'/>">${list[2].title }</a></td>
 					           			<td class="width20"><fmt:formatDate value="${list[2].regDate }" pattern="yyyy-MM-dd"/></td>
