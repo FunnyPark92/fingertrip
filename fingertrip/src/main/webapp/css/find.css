@@ -200,4 +200,7 @@
 	#datatable tbody th{
 		text-align: left;
 	}
-	
+	#container2 {
+		height: 400px;
+		max-width: 1200px;
+	}

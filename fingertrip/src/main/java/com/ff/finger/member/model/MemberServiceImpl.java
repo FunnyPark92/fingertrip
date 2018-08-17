@@ -180,4 +180,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectOutReasonCount(outReasonNo);
 	}
 
+	@Override
+	public int selectMemberCnt() {
+		return memberDao.selectMemberCnt();
+	}
+
+	@Override
+	public int selectJoinCnt(String fDay) {
+		return memberDao.selectJoinCnt(fDay);
+	}
+
+	@Override
+	public int selectOutCnt(String fDay) {
+		return memberDao.selectOutCnt(fDay);
+	}
+
 }

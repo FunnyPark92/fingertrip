@@ -31,4 +31,8 @@ public interface MemberDAO {
 	public int pressHeart(String id);
 	public List<OutReasonVO> selectOutReason();
 	public int selectOutReasonCount(int outReasonNo);
+	public int selectMemberCnt();
+	public int selectJoinCnt(String fDay);
+	public int selectOutCnt(String fDay);
+	
 }

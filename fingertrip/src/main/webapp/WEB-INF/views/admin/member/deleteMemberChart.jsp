@@ -8,9 +8,9 @@
 	    <li class="on"><a href="<c:url value='/admin/member/deleteMemberChart.do'/>">탈퇴회원분석</a></li>
 	</ul>
 	 	
-	 	<div id="container" style="width:100%; height:400px;"></div>
+	 	<div id="container" style="width:100%; height:400px;" class="marginBottom100"></div>
 	 	
-	 	<table id="datatable" class="marginBottom70 width350 grayTh">
+	 	<table id="datatable" class="marginBottom70 width350 grayTh" style="display:none;">
 	 		<thead>
 		 		<tr>
 		 			<th></th>
@@ -29,6 +29,8 @@
 	 		</tbody>
 	 	</table>
 	 	
+	 	<div id="container2" class="marginBottom100"></div>
+
 	 	<script>
 	 	Highcharts.chart('container', {
 	 	    data: {
@@ -38,12 +40,12 @@
 	 	        type: 'column'
 	 	    },
 	 	    title: {
-	 	        text: '회원탈퇴분석'
+	 	        text: '회원 탈퇴 원인 분석'
 	 	    },
 	 	    yAxis: {
 	 	        allowDecimals: false,
 	 	        title: {
-	 	            text: '탈퇴회원수'
+	 	            text: '탈퇴회원 수'
 	 	        }
 	 	    },
 	 	    tooltip: {
@@ -54,6 +56,41 @@
 	 	    }
 	 	});
 	 	
+	 	var chart = Highcharts.chart('container2', {
+	 	    chart: {
+	 	        type: 'column'
+	 	    },
+	 	    title: {
+	 	        text: '회원 수 비교 분석'
+	 	    },
+	 	    legend: {
+	 	        align: 'right',
+	 	        verticalAlign: 'middle',
+	 	        layout: 'vertical'
+	 	    },
+	 	    xAxis: {
+	 	        categories: ['회원 수 비교'],
+	 	        labels: {
+	 	            x: -10
+	 	        }
+	 	    },
+	 	    yAxis: {
+	 	        allowDecimals: false,
+	 	        title: {
+	 	            text: '회원 수'
+	 	        }
+	 	    },
+	 	    series: [{
+	 	        name: '전체 회원 수',
+	 	        data: [${cntAll}]
+	 	    }, {
+	 	        name: '이번 달 신규 회원 수',
+	 	        data: [${cntJoin}]
+	 	    }, {
+	 	        name: '이번 달 탈퇴 회원 수',
+	 	        data: [${cntOut}]
+	 	    }],
+	 	});
 	 	</script>
     </section>
 </body>

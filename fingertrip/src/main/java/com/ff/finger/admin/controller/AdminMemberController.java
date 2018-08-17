@@ -1,6 +1,8 @@
 package com.ff.finger.admin.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,6 +173,27 @@ public class AdminMemberController {
 		
 		model.addAttribute("listC", listC);
 
+		int cntAll=memberService.selectMemberCnt();
+		logger.info("전체회원 cntAll={}", cntAll);
+		
+		model.addAttribute("cntAll", cntAll);
+		
+		Date today = new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMM");
+		String fDay=sdf.format(today);
+		fDay=fDay+"01";
+		logger.info("fDay={}",fDay);
+		
+		int cntJoin=memberService.selectJoinCnt(fDay);
+		logger.info("신규회원 cntJoin={}", cntJoin);
+		
+		model.addAttribute("cntJoin", cntJoin);
+
+		int cntOut=memberService.selectOutCnt(fDay);
+		logger.info("탈퇴회원 cntOut={}", cntOut);
+		
+		model.addAttribute("cntOut", cntOut);
+		
 		return "/admin/member/deleteMemberChart";
 	}
 }

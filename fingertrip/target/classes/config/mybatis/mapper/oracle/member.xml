@@ -158,4 +158,18 @@
 		select count(*) from member
 		where out_reason_no=#{outReasonNo}
 	</select>
+	
+	<select id="selectMemberCnt" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<select id="selectJoinCnt" parameterType="String" resultType="int">
+		select count(*) from member
+		where join_date between to_date(#{fDay},'YYYYMMDD') and last_day(#{fDay})
+	</select>
+	
+	<select id="selectOutCnt" parameterType="String" resultType="int">
+		select count(*) from member
+		where out_date between to_date(#{fDay},'YYYYMMDD') and last_day(#{fDay})
+	</select>
 </mapper>
