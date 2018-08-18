@@ -60,7 +60,7 @@
 						<c:if test="${!empty listImg }">
 							<c:set value="0" var="i"/>
 							<c:forEach var="img" items="${listImg}">
-								<img alt="" src="${pageContext.request.contextPath }/upload_pds/${img}" class="maxH500">
+								<img alt="" src="${pageContext.request.contextPath }/upload_images/${img}" class="maxH500">
 								<c:set value="${i+1 }" var="i"/>
 							</c:forEach>
 						</c:if>

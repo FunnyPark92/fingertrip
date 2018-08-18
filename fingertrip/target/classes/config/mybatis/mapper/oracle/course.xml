@@ -177,6 +177,45 @@
 		SELECT * FROM TRAVEL_SPOT WHERE COURSE_NO=#{courseNo}
 	</select>
 	
+	<select id="selectListJoinMember" parameterType="SearchVo" resultType="map">
+	select *
+		from(	
+    		select list.*, rownum as RNUM
+			from(
+				select*
+				from course c join member m 
+				on c.member_no=m.member_no
+				join PROGRESS p
+				on c.progress_no=p.progress_no
+				<if test="searchCondition!=0">
+					where
+					c.progress_no=#{searchCondition}
+				</if>
+				order by c.start_day
+				)list
+			)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectOneJoinMember" parameterType="int" resultType="map">
+	select *
+		from(	
+    		select list.*, rownum as RNUM
+			from(
+				select*
+				from course c join member m 
+				on c.member_no=m.member_no
+				join PROGRESS p
+				on c.progress_no=p.progress_no
+				where
+				c.course_no=#{courseNo}
+				order by c.start_day
+				)list
+			)	
+	</select>
+
 	<update id="ProgressNo2" parameterType="int">
 		update course set progress_no = 2  where course_No = #{courseNo}
 	</update>

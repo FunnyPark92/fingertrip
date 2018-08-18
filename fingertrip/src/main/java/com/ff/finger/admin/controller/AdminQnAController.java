@@ -118,7 +118,7 @@ public class AdminQnAController {
 		        originalFileName+=getOriginalFileName;
 		        fileName+=getFileName;
 		            
-		        File file=new File(fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS), getFileName); 
+		        File file=new File(fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_IMAGE), getFileName); 
 		        try {
 		        	mf[i].transferTo(file);
 		        } catch (IllegalStateException e) {
