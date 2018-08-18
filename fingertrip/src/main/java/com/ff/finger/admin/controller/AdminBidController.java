@@ -1,9 +1,12 @@
 package com.ff.finger.admin.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -64,6 +67,7 @@ public class AdminBidController {
 		map3.clear();
 		Date today = new Date();
 		Date bidEndDay = new Date();
+		Date bidEndDay2 = new Date();
 		BidVO bidVo=new BidVO();
 		for(int i=0;i<list.size();i++) {
 			cNo=list.get(i).get("COURSE_NO").toString();
@@ -76,11 +80,14 @@ public class AdminBidController {
 			
 			if(pNo.equals("2")){
 				bidEndDay=(Date)list.get(i).get("BID_END_DAY");
-				
-				compare=today.compareTo(bidEndDay);
+				Calendar cal=new GregorianCalendar(Locale.KOREA);
+				cal.setTime(bidEndDay);
+				cal.add(Calendar.DAY_OF_YEAR, 1);
+				bidEndDay2=cal.getTime();
+				compare=today.compareTo(bidEndDay2);
 				
 				logger.info("날짜 비교, today={}, bidEndDay={}", today, bidEndDay);
-				logger.info("날짜 비교, compare={}", compare);
+				logger.info("날짜 비교, bidEndDay2={}, compare={}", bidEndDay2, compare);
 				
 				if(compare>0) {
 					if(list2.size()>0) {

@@ -22,6 +22,11 @@
      
      <!-- ckEditor -->
     <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+    <!-- highCharts -->
+    <script src="${pageContext.request.contextPath}/highcharts/highcharts.js"></script>
+    <script src="${pageContext.request.contextPath}/highcharts/data.js"></script>
+    <script src="${pageContext.request.contextPath}/highcharts/export-data.js"></script>
+    <script src="${pageContext.request.contextPath}/highcharts/exporting.js"></script>
 <style type="text/css">
 
 </style>

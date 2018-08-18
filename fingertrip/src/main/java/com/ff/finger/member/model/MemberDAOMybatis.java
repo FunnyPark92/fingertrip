@@ -129,6 +129,31 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.update(namespace+"pressHeart",id);
 	}
 
+	@Override
+	public List<OutReasonVO> selectOutReason() {
+		return sqlSession.selectList(namespace+"selectOutReason");
+	}
+
+	@Override
+	public int selectOutReasonCount(int outReasonNo) {
+		return sqlSession.selectOne(namespace+"selectOutReasonCount", outReasonNo);
+	}
+
+	@Override
+	public int selectMemberCnt() {
+		return sqlSession.selectOne(namespace+"selectMemberCnt");
+	}
+
+	@Override
+	public int selectJoinCnt(String fDay) {
+		return sqlSession.selectOne(namespace+"selectJoinCnt",fDay);
+	}
+
+	@Override
+	public int selectOutCnt(String fDay) {
+		return sqlSession.selectOne(namespace+"selectOutCnt",fDay);
+	}
+
 	
 
 

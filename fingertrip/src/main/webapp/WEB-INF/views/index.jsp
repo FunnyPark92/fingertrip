@@ -58,22 +58,27 @@ $(document).ready(function(){
             <div class="row">
                 <div class="col-lg-4">
                     <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="img/testimonials-1.jpg" alt="">
+                    	<a href="<c:url value='/nacojja/nacojja1.do'/>">
+                        	<img class="img-fluid rounded-circle mb-3" src="img/testimonials-1.jpg" alt="나코짜">
+                        </a>
                         <h5>나만의 코스 짜기</h5>
                         <p class="font-weight-light mb-0">내 취향에 맞게 코스를 짜고 같은 취향인 사람들의 공감을 받습니다</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="img/testimonials-2.jpg" alt="">
-
+                    	<a href="<c:url value='/nacojja/nacojjaList.do?searchCondition2=1'/>">
+                        	<img class="img-fluid rounded-circle mb-3" src="img/testimonials-2.jpg" alt="나코짜 하트진행중">
+						</a>
                         <h5>코스 좋아요</h5>
                         <p class="font-weight-light mb-0">마음에 드는 코스에 좋아요를 누르면 현실화에 한발 가까워 집니다</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="img/testimonials-3.jpg" alt="">
+                    	<a href="<c:url value='/nacojja/nacojjaList.do?searchCondition2=3'/>">
+                        	<img class="img-fluid rounded-circle mb-3" src="img/testimonials-3.jpg" alt="나코짜 결제진행중">
+                       	</a>
                         <h5>떠나자 취향대로</h5>
                         <p class="font-weight-light mb-0">맞춤 코스로 여행을 갑니다</p>
                     </div>

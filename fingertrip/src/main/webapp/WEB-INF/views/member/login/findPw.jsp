@@ -64,7 +64,7 @@
 					</div>
 					<div class="row marginT30">
 						<div class="col-md-2"></div>	
-						<div class="g-recaptcha col-md-8" data-sitekey="6LcYfmUUAAAAAG4U9XR-aJzwx3udK6wCZJuceJbW"></div>
+ 						<div class="g-recaptcha col-md-8" data-sitekey="6LcYfmUUAAAAAG4U9XR-aJzwx3udK6wCZJuceJbW"></div>
 						<div class="col-md-2"></div>	
 					</div>
 					<div  class="row marginT30">

@@ -30,7 +30,6 @@ public class MemberServiceImpl implements MemberService {
 		String dbPwd = memberDao.selectDbPwd(id);
 		int emailAuth = memberDao.checkMail(id);
 		
-		
 		int result = 0;
 		if (dbPwd != null && !dbPwd.isEmpty()) {
 			if (dbPwd.equals(pwd)) {
@@ -41,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
 					/*Timestamp logoutDate = memberVo.getLogoutDate();
 					Timestamp today = new Timestamp(new Date().getTime());
 					
-					if (today.getTime() - logoutDate.getTime() >= 15552000000L) {
+					if (logoutDate != null && today.getTime() - logoutDate.getTime() >= 15552000000L) { //180일 == 15552000000L
 						result = CommonConstants.LOGIN_OK_LONG_TERM_NOT_LOGIN;
 					} else {
 					}*/
@@ -156,12 +155,12 @@ public class MemberServiceImpl implements MemberService {
 	public int multiDelete(List<MemberVO> list) {
 		int cnt =0;
 		try {
-				for(MemberVO vo : list) {
-					int memberNo = vo.getMemberNo();
-					if(memberNo>0) {
-						cnt = memberDao.adminDeleteMember(vo.getMemberNo());
-					}
+			for(MemberVO vo : list) {
+				int memberNo = vo.getMemberNo();
+				if(memberNo>0) {
+					cnt = memberDao.adminDeleteMember(vo.getMemberNo());
 				}
+			}
 		} catch (RuntimeException e) {
 			cnt=-1;
 			e.printStackTrace();
@@ -174,6 +173,29 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.pressHeart(id);
 	}
 
-	
+	@Override
+	public List<OutReasonVO> selectOutReason() {
+		return memberDao.selectOutReason();
+	}
+
+	@Override
+	public int selectOutReasonCount(int outReasonNo) {
+		return memberDao.selectOutReasonCount(outReasonNo);
+	}
+
+	@Override
+	public int selectMemberCnt() {
+		return memberDao.selectMemberCnt();
+	}
+
+	@Override
+	public int selectJoinCnt(String fDay) {
+		return memberDao.selectJoinCnt(fDay);
+	}
+
+	@Override
+	public int selectOutCnt(String fDay) {
+		return memberDao.selectOutCnt(fDay);
+	}
 
 }

@@ -1,8 +1,5 @@
 package com.ff.finger.admin.controller;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,14 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.ff.finger.admin.model.AdminService;
-import com.ff.finger.common.CommonConstants;
 import com.ff.finger.cs.faq.model.FaqService;
 import com.ff.finger.cs.faq.model.FaqVO;
-import com.ff.finger.cs.notice.model.NoticeVO;
 
 @Controller
 @RequestMapping("/admin/cs/faq")
@@ -33,7 +25,6 @@ public class AdminFaqController {
 	private static final Logger logger=LoggerFactory.getLogger(AdminFaqController.class);
 	
 	@Autowired private FaqService faqservice;
-	@Autowired private AdminService adminService;
 	
 	@RequestMapping("/faqList.do")
 	public String allFaqCategory(@RequestParam(defaultValue="1") int faqCategoryNo, Model model) {
@@ -47,15 +38,12 @@ public class AdminFaqController {
 		return "admin/cs/faq/faqList";
 	}
 	
-	
-	
 	@RequestMapping(value="/faqWrite.do", method=RequestMethod.GET)
 	public String faqWrite() {
 		logger.info("faq 글쓰기 화면");
 		
 		return "admin/cs/faq/faqWrite";
 	}
-	
 	
 	@RequestMapping(value="/faqWrite.do", method=RequestMethod.POST)
 	public String faqWrite_post(@ModelAttribute FaqVO faqVo,
@@ -82,7 +70,6 @@ public class AdminFaqController {
 		
 		return "common/message";
 	}
-	
 	
 	@RequestMapping(value="/faqEdit.do", method=RequestMethod.GET)
 	public String faqEdit(@RequestParam(defaultValue="0") int faqNo, Model model) {
@@ -117,7 +104,6 @@ public class AdminFaqController {
 		
 		return "common/message";
 	}
-	
 	
 	@RequestMapping(value="/faqDetail.do", method=RequestMethod.GET)
 	public String faqDetail(@RequestParam(defaultValue="0") int faqNo, Model model) {

@@ -148,4 +148,28 @@
 	<update id="pressHeart" parameterType="String">
 		update member set heart_count = heart_count -1 where id = #{id} and  heart_count > 0
 	</update>
+	
+	<select id="selectOutReason" resultType="outReasonVo">
+		select * from out_reason
+		order by out_reason_no
+	</select>
+	
+	<select id="selectOutReasonCount" parameterType="int" resultType="int">
+		select count(*) from member
+		where out_reason_no=#{outReasonNo}
+	</select>
+	
+	<select id="selectMemberCnt" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<select id="selectJoinCnt" parameterType="String" resultType="int">
+		select count(*) from member
+		where join_date between to_date(#{fDay},'YYYYMMDD') and last_day(#{fDay})
+	</select>
+	
+	<select id="selectOutCnt" parameterType="String" resultType="int">
+		select count(*) from member
+		where out_date between to_date(#{fDay},'YYYYMMDD') and last_day(#{fDay})
+	</select>
 </mapper>

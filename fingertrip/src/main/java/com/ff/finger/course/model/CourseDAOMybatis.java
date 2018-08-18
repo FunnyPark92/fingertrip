@@ -97,7 +97,15 @@ public class CourseDAOMybatis implements CourseDAO{
 	}
 
 	@Override
-	public int ProgressNo2(int courseNo) {
+	public List<Map<String, Object>> selectListJoinMember(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectListJoinMember",searchVo);
+	}
+
+	@Override
+	public Map<String, Object> selectOneJoinMember(int courseNo) {
+		return sqlSession.selectOne(namespace+"selectOneJoinMember", courseNo);
+	}	
+		public int ProgressNo2(int courseNo) {
 		return sqlSession.update(namespace+"ProgressNo2",courseNo);
 	}
 

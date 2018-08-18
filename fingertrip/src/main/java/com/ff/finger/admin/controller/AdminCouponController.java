@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.PaginationInfo;
 import com.ff.finger.common.SearchVO;
-import com.ff.finger.coupon.model.CouponListVO;
 import com.ff.finger.coupon.model.CouponService;
 import com.ff.finger.coupon.model.CouponVO;
 import com.ff.finger.course.model.CourseService;

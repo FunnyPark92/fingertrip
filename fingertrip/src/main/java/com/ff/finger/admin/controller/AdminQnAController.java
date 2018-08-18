@@ -3,7 +3,6 @@ package com.ff.finger.admin.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,8 +29,6 @@ import com.ff.finger.cs.QnA.model.QnAListVO;
 import com.ff.finger.cs.QnA.model.QnAService;
 import com.ff.finger.cs.QnA.model.QnAVO;
 import com.ff.finger.cs.notice.model.NoticeService;
-import com.ff.finger.cs.notice.model.NoticeVO;
-import com.ff.finger.member.model.MemberListVO;
 
 @Controller
 @RequestMapping("/admin/cs/QnA")
@@ -121,7 +118,7 @@ public class AdminQnAController {
 		        originalFileName+=getOriginalFileName;
 		        fileName+=getFileName;
 		            
-		        File file=new File(fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_PDS), getFileName); 
+		        File file=new File(fileUploadUtil.getUploadPath(request, CommonConstants.PATH_FLAG_IMAGE), getFileName); 
 		        try {
 		        	mf[i].transferTo(file);
 		        } catch (IllegalStateException e) {
@@ -271,5 +268,6 @@ public class AdminQnAController {
 	      model.addAttribute("url",url);
 	      return "common/message";
 	}
+	
+	
 }
-
