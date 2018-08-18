@@ -6,6 +6,10 @@
 		insert into win_bid
 		values(win_bid_seq.nextval, #{bidPrice}, #{bidNo})
 	</insert>
+	
+	<select id="checkWinByBidNo" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM WIN_BID WHERE BID_NO=#{bidNo}
+	</select>
 </mapper>
 
 

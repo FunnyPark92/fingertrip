@@ -4,4 +4,5 @@ import java.util.Map;
 
 public interface WinBidDAO {
 	public int insertWin(Map<String, Object> map);
+	public int checkWinByBidNo(int bidNo);
 }

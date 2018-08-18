@@ -20,11 +20,12 @@
 			<h3>입찰한 목록</h3><br>
 			<table class="table table-condensed" style="text-align: center">
 				<colgroup>
-					<col style="width:11%" />
-					<col style="width:20%" />
-					<col style="width:35%" />
 					<col style="width:15%" />
-					<col style="width:19%" />
+					<col style="width:20%" />
+					<col style="width:20%" />
+					<col style="width:15%" />
+					<col style="width:15%" />
+					<col style="width:20%" />
 				</colgroup>
 				<thead>
 				  <tr>
@@ -32,6 +33,7 @@
 				    <th scope="col">코스제목</th>
 					<th scope="col">입찰가</th>
 					<th scope="col">입찰시점</th>
+					<th scope="col">입찰종료일</th>
 					<th scope="col">입찰결과</th>
 				  </tr>
 				</thead>
@@ -53,7 +55,8 @@
 								</td>
 								<td><fmt:formatNumber value="${map['BID_PRICE'] }" pattern="#,###" />원</td>
 								<td>${map['BID_DAY'] }</td>
-								<td>입찰결과 넣어주는곳</td>
+								<td style="color: red;">${map['BID_END_DAY'] }</td>
+								<td>${map['BID_STATUS'] }</td>
 							</tr>
 						</c:forEach>
 						<!-- 반복 끝 -->

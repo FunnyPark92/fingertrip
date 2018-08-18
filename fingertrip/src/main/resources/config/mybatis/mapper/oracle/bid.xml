@@ -57,7 +57,7 @@
 	</select>
 	
 	<select id="selectMyBidList" parameterType="string" resultType="map">
-		SELECT B.*, C.TITLE, TA.ID
+		SELECT B.*, C.TITLE, C.BID_START_DAY, TA.ID
 		FROM BID B JOIN COURSE C
 		ON B.COURSE_NO = C.COURSE_NO
 		JOIN TRAVEL_AGENCY TA

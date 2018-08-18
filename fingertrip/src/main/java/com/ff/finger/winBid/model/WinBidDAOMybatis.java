@@ -17,4 +17,9 @@ public class WinBidDAOMybatis implements WinBidDAO{
 		return sqlSession.insert(namespace+"insertWin", map);
 	}
 
+	@Override
+	public int checkWinByBidNo(int bidNo) {
+		return sqlSession.selectOne(namespace + "checkWinByBidNo", bidNo);
+	}
+
 }
