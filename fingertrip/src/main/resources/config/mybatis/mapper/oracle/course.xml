@@ -178,7 +178,7 @@
 	</select>
 	
 	<update id="ProgressNo2" parameterType="int">
-		update course set progress_no = 2  where course_No = #{courseNo}
+		update course set progress_no = 2, bid_Start_Day = sysdate  where course_No = #{courseNo}
 	</update>
 	
 </mapper>

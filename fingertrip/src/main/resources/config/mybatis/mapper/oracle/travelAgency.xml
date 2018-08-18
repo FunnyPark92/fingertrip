@@ -50,6 +50,9 @@
 	<select id="selectOneAgency" parameterType="String" resultType="TravelAgencyVO">
 		select * from travel_agency where name =#{name}
 	</select>
+	<select id="selectTravel" parameterType="int" resultType="TravelAgencyVO">
+		select * from travel_agency where travelAgencyNo = #{travelAgencyNo}
+	</select>
 	
 	<delete id="deleteAgency" parameterType="int">
 		delete from travel_agency where travel_agency_no = #{travelAgencyNo}

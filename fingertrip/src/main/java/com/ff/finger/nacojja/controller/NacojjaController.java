@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ff.finger.bid.model.BidService;
+import com.ff.finger.bid.model.BidVO;
 import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.FileUploadUtil;
 import com.ff.finger.common.PaginationInfo;
@@ -34,6 +36,8 @@ import com.ff.finger.heartlist.model.HeartListService;
 import com.ff.finger.heartlist.model.HeartListVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
+import com.ff.finger.travelAgency.model.TravelAgencyService;
+import com.ff.finger.travelAgency.model.TravelAgencyVO;
 import com.ff.finger.travelspot.model.TravelSpotVO;
 
 @Controller
@@ -58,6 +62,12 @@ public class NacojjaController {
 	
 	@Autowired
 	private HeartListService heartListService;
+	
+	@Autowired
+	private TravelAgencyService travelAgencyService;
+	
+	@Autowired
+	private BidService bidService;
 	
 	@RequestMapping("/nacojjaList.do")
 	public String nacojjaList(@ModelAttribute SearchVO searchVo, Model model) {
@@ -326,9 +336,9 @@ public class NacojjaController {
 		//Map<String, Object> map = courseService.selectOneCTJoin(courseNo);
 		MemberVO memberVo = memberService.selectMember(courseVo.getMemberNo());
 		List<TravelSpotVO> travelSpotVoList = courseService.selectTravelSpot(courseNo);
+		BidVO bidVo = bidService.selectWin(courseNo);
 		
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(courseVo.getStartDay());
 		
 		List<Date> travelDateList = new ArrayList<>();
 		travelDateList.add(cal.getTime());
@@ -337,12 +347,13 @@ public class NacojjaController {
 			travelDateList.add(cal.getTime());
 		}
 		
+		model.addAttribute("travelDay",travelDay);
 		model.addAttribute("tdList", travelDateList); //일수 
 		model.addAttribute("courseVo", courseVo); //코스
 		model.addAttribute("memberVo", memberVo); //멤버
 		model.addAttribute("tSpotVoList", travelSpotVoList); //여행지 정보 리스트
 		//model.addAttribute("tSpotVoList", travelSpotVoList); //1일차 여행지 정보 리스트
-		
+		model.addAttribute("bidVo",bidVo);
 		return "nacojja/nacojjaDetail";
 	}
 	
@@ -392,7 +403,7 @@ public class NacojjaController {
 					
 					HeartListVO heartListVo = new HeartListVO();
 					heartListVo.setMemberNo(memberVo.getMemberNo());
-					heartListVo.setStatus("하트");
+					heartListVo.setStatus("하트주기");
 					heartListVo.setHeartNo(heartVo.getHeartNo());
 					
 					int lCnt =heartListService.insertHeartListUse(heartListVo);
@@ -425,4 +436,52 @@ public class NacojjaController {
 		return "common/message";
 	}
 	
+	@RequestMapping("/nacojjaBidding.do")
+	public String courseBidding(@ModelAttribute BidVO bidVo,HttpSession session,Model model) {
+		String agencyid = (String)session.getAttribute("agencyid");
+		logger.info("입찰하기 파람 bidvo={},agencyid={}",bidVo,agencyid);
+		
+		String agencyName =travelAgencyService.getAgencyName(agencyid);
+		TravelAgencyVO travelVo = travelAgencyService.selectOneAgency(agencyName);
+		bidVo.setTravelAgencyNo(travelVo.getTravelAgencyNo());
+		int cnt =bidService.insertBId(bidVo);
+		logger.info("입찰 결과 cnt={}",cnt);
+		String msg="", url="/nacojja/nacojjaList.do";
+		if(cnt==CommonConstants.EXIST_ID) {
+			msg="한 코스에 한번만 입찰 가능합니다.";
+		}else {
+			msg="입찰 성공!";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

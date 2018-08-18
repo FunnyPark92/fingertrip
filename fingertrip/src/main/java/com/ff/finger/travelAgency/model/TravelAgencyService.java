@@ -17,4 +17,5 @@ public interface TravelAgencyService {
 	public int updateAgency(TravelAgencyVO vo);
 	public int processAgencyLogin(String id, String password);
 	public String getAgencyName(String agencyid);
+	public TravelAgencyVO selectTravel(int travelAgencyNo);
 }

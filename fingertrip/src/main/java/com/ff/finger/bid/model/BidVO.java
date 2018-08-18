@@ -1,15 +1,15 @@
 package com.ff.finger.bid.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class BidVO {
 	private int bidNo;
 	private int bidPrice;
-	private Timestamp bidDay;
-	private Timestamp tripStartDay1;
-	private Timestamp tripStartDay2;
-	private Timestamp tripStartDay3;
-	private Timestamp tripStartDay4;
+	private Date bidDay;
+	private Date tripStartDay1;
+	private Date tripStartDay2;
+	private Date tripStartDay3;
+	private Date tripStartDay4;
 	private int travelAgencyNo;
 	private int courseNo;
 	
@@ -25,34 +25,34 @@ public class BidVO {
 	public void setBidPrice(int bidPrice) {
 		this.bidPrice = bidPrice;
 	}
-	public Timestamp getBidDay() {
+	public Date getBidDay() {
 		return bidDay;
 	}
-	public void setBidDay(Timestamp bidDay) {
+	public void setBidDay(Date bidDay) {
 		this.bidDay = bidDay;
 	}
-	public Timestamp getTripStartDay1() {
+	public Date getTripStartDay1() {
 		return tripStartDay1;
 	}
-	public void setTripStartDay1(Timestamp tripStartDay1) {
+	public void setTripStartDay1(Date tripStartDay1) {
 		this.tripStartDay1 = tripStartDay1;
 	}
-	public Timestamp getTripStartDay2() {
+	public Date getTripStartDay2() {
 		return tripStartDay2;
 	}
-	public void setTripStartDay2(Timestamp tripStartDay2) {
+	public void setTripStartDay2(Date tripStartDay2) {
 		this.tripStartDay2 = tripStartDay2;
 	}
-	public Timestamp getTripStartDay3() {
+	public Date getTripStartDay3() {
 		return tripStartDay3;
 	}
-	public void setTripStartDay3(Timestamp tripStartDay3) {
+	public void setTripStartDay3(Date tripStartDay3) {
 		this.tripStartDay3 = tripStartDay3;
 	}
-	public Timestamp getTripStartDay4() {
+	public Date getTripStartDay4() {
 		return tripStartDay4;
 	}
-	public void setTripStartDay4(Timestamp tripStartDay4) {
+	public void setTripStartDay4(Date tripStartDay4) {
 		this.tripStartDay4 = tripStartDay4;
 	}
 	public int getTravelAgencyNo() {

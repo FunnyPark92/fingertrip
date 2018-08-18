@@ -48,6 +48,15 @@
 			and bid_price=(select min(bid_price) from bid where course_no=#{courseNo}))
 	</select>
 	
+	<insert id="insertBId" parameterType="bidVO">
+		insert into bid
+		values(bid_seq.nextval,#{bidPrice},sysdate,#{tripStartDay1},#{tripStartDay2},#{tripStartDay3},#{tripStartDay4},#{travelAgencyNo},#{courseNo})
+	</insert>
+	<select id="dupleTravelAgency" parameterType="bidVO" resultType="int">
+		select count(*) from bid where course_no =#{courseNo} and travel_agency_no =#{travelAgencyNo}
+	</select>
+	
+	
 	
 </mapper>
 

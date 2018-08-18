@@ -36,4 +36,16 @@ public class BidDAOMybatis implements BidDAO{
 		return sqlSession.selectOne(namespace+"selectWin", courseNo);
 	}
 
+	@Override
+	public int insertBId(BidVO bidVo) {
+		return sqlSession.insert(namespace+"insertBId",bidVo);
+	}
+
+	@Override
+	public int dupleTravelAgency(BidVO bidVo) {
+		return sqlSession.selectOne(namespace+"dupleTravelAgency",bidVo);
+	}
+
+	
+
 }

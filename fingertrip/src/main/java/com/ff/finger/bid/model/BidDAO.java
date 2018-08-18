@@ -10,4 +10,6 @@ public interface BidDAO {
 	public int totalRecord(SearchVO searchVo);
 	public List<Map<String, Object>> selectByNo(int courseNo);
 	public BidVO selectWin(int courseNo);
+	public int insertBId(BidVO bidVo);
+	public int dupleTravelAgency(BidVO bidVo);
 }

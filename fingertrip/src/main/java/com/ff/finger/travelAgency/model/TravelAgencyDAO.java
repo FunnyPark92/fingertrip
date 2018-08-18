@@ -16,5 +16,6 @@ public interface TravelAgencyDAO {
 	public int updateAgency(TravelAgencyVO vo);
 	public String selectAgencyDbPwd(String id);
 	public String getAgencyName(String agencyid);
+	public TravelAgencyVO selectTravel(int travelAgencyNo);
 	
 }

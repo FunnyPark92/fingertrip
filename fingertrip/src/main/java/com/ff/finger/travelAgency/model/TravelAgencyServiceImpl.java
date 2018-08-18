@@ -119,4 +119,9 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 		return travelAgencyDao.getAgencyName(agencyid);
 	}
 
+	@Override
+	public TravelAgencyVO selectTravel(int travelAgencyNo) {
+		return travelAgencyDao.selectTravel(travelAgencyNo);
+	}
+
 }

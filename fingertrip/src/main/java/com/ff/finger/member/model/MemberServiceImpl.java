@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import com.ff.finger.heartcharge.model.HeartChargeVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
+	public static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 	@Autowired
 	private MemberDAO memberDao;
 
@@ -35,14 +38,14 @@ public class MemberServiceImpl implements MemberService {
 					result = CommonConstants.EMAIL_AUTHENTICATION;
 				} else { //로그인 성공 영역
 					MemberVO memberVo = memberDao.logingMember(id);
-					Timestamp logoutDate = memberVo.getLogoutDate();
+					/*Timestamp logoutDate = memberVo.getLogoutDate();
 					Timestamp today = new Timestamp(new Date().getTime());
 					
 					if (today.getTime() - logoutDate.getTime() >= 15552000000L) {
 						result = CommonConstants.LOGIN_OK_LONG_TERM_NOT_LOGIN;
 					} else {
-						result = CommonConstants.LOGIN_OK;
-					}
+					}*/
+					result = CommonConstants.LOGIN_OK;
 				}
 			} else {
 				result = CommonConstants.PWD_MISMATCH;
