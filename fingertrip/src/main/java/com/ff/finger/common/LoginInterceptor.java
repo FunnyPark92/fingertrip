@@ -20,7 +20,21 @@ public class LoginInterceptor extends HandlerInterceptorAdapter  {
 		logger.info("LoginInterceptor!");
 		
 		String userid = (String) request.getSession().getAttribute("userid");
-		if(userid==null || userid.isEmpty()) {
+		String agencyid = (String) request.getSession().getAttribute("agencyid");
+		logger.info("세션에 저장된 아이디 읽어오기, userid={}, agencyid={}", userid, agencyid);
+		
+		if (agencyid != null && !agencyid.isEmpty()) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out= response.getWriter();
+			out.println("<script type='text/javascript'>");
+			out.print("alert('일반회원만 이용 가능합니다.');");
+			out.println("location.href='"+request.getContextPath()+"/index.do'");
+			out.println("</script>");
+			
+			return false;
+		}
+		
+		if (userid==null || userid.isEmpty()) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out= response.getWriter();
 			out.println("<script type='text/javascript'>");

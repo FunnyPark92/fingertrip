@@ -31,6 +31,8 @@ public class AgencyPageController {
 	
 	@Autowired
 	private TravelAgencyService travelAgencyService; 
+	
+	@Autowired
 	private BidService bidService;
 	
 	@RequestMapping("/bidList.do")
@@ -46,7 +48,7 @@ public class AgencyPageController {
 		return "agencyPage/bidList";
 	}
 
-	@RequestMapping("/myWriteList.do")
+	/*@RequestMapping("/myWriteList.do")
 	public String myWriteList(@ModelAttribute SearchVO searchVo, HttpSession session, Model model) {
 		String agencyId =  (String) session.getAttribute("agencyid");
 		logger.info("기업 내가쓴 글 화면 보여주기 파라미터, agencyId={}", agencyId);
@@ -58,5 +60,5 @@ public class AgencyPageController {
 		int agencyNo=memberVo.getMemberNo();
 		searchVo.setMemberNo(memberNo); //member를 상속받은 searchVo에 저장해둔 memberNo셋팅
 		
-	}
+	}*/
 }
