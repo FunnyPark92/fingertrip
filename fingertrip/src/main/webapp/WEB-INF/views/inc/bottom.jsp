@@ -27,13 +27,13 @@
                             <a href="#">참고하면 좋은 사이트</a>
                         </li>
                         <li class="list-inline-item mr-3">
-                            <a href="#"><i class="fa fa-facebook fa-2x fa-fw">페북</i></a>
+                            <a href="https://www.facebook.com/FingerTrip-319749992128449"><i class="fa fa-facebook fa-2x fa-fw">페북</i></a>
                         </li>
                         <li class="list-inline-item mr-3">
-                            <a href="#"><i class="fa fa-twitter fa-2x fa-fw">트위터</i></a>
+                            <a href="https://twitter.com/fingertrip2018"><i class="fa fa-twitter fa-2x fa-fw">트위터</i></a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#"><i class="fa fa-instagram fa-2x fa-fw">인스타</i></a>
+                            <a href="https://www.instagram.com/fingertrip2018"><i class="fa fa-instagram fa-2x fa-fw">인스타</i></a>
                         </li>
                     </ul>
                 </div>
