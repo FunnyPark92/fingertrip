@@ -16,5 +16,12 @@ public class HowtoController {
 		return "howto/howto";
 	}
 	
+	@RequestMapping("/howto/recommend.do")
+	public String recommend() {   
+		logger.info("추천여행지 보여주기");
+		
+		return "howto/recommend";
+	}
+	
 }
 

@@ -720,3 +720,25 @@ p.replyTitle{
     height: 100px;
 }
 .replyText button{font-size: 0.9em;}
+
+
+/* recommend */
+.recom .row{
+	padding-bottom: 30px;
+	margin-bottom: 60px;
+	border-bottom:1px dotted #8c8c86;
+}
+.recom h4{
+	border-left: 5px solid #2184ff;
+	padding-left: 8px;
+	margin-bottom: 12px;
+}
+.rec{
+	margin:0 -0.5%;
+}
+.rec img{
+	width: 33%;
+	padding:0.5%;
+	float:left;
+}
+.recom p{margin-top: 10px;}
