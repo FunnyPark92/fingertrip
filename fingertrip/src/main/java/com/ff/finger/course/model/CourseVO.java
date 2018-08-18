@@ -89,5 +89,4 @@ public class CourseVO {
 				+ ", thumbImg=" + thumbImg + ", content=" + content + ", heartCount=" + heartCount + ", bidStartDay="
 				+ bidStartDay + ", regDate=" + regDate + ", memberNo=" + memberNo + ", progressNo=" + progressNo + "]";
 	}
-	
 }

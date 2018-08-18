@@ -44,6 +44,9 @@ public class AdminQnAController {
 	@Autowired
 	private AdminService adminService;
 	
+	
+	
+	
 	//목록보기는 QnAContoller를 통해 보여줌
 	
 	@RequestMapping(value="/qnAReplyWrite.do", method=RequestMethod.GET)
