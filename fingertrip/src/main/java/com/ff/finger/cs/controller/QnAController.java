@@ -48,8 +48,6 @@ public class QnAController {
 	@RequestMapping("/QnA/qna.do")
 	public String qna(@ModelAttribute SearchVO searchVo, @RequestParam(defaultValue="0") int aNo,  Model model) {
 		
-		
-		
 		//일반회원 qna리스트와 admin qna리스트를 이 컨트롤러 하나로 해결
 		logger.info("Controller 한개로 페이지 나누기 위한 변수 1=관리자 0=일반회원 aNo={}", aNo);
 
