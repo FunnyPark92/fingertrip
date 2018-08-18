@@ -403,6 +403,7 @@
 						<option value="${bidVo.tripStartDay2}">${bidVo.tripStartDay2}</option>
 						<option value="${bidVo.tripStartDay3}">${bidVo.tripStartDay3}</option>
 						<option value="${bidVo.tripStartDay4}">${bidVo.tripStartDay4}</option>
+
 					</select>
 				</div>
 				

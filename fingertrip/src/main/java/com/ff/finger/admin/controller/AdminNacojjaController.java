@@ -17,6 +17,8 @@ import com.ff.finger.common.CommonConstants;
 import com.ff.finger.common.PaginationInfo;
 import com.ff.finger.common.SearchVO;
 import com.ff.finger.course.model.CourseService;
+import com.ff.finger.cs.QnA.model.QnAVO;
+import com.ff.finger.travelspot.model.TravelSpotVO;
 
 @Controller
 @RequestMapping("/admin/nacojja") 
@@ -66,6 +68,9 @@ public class AdminNacojjaController {
 			return "common/message"; 
 		}
 		
+		List<TravelSpotVO> list=courseService.selectTravelSpot(courseNo);
+		logger.info("admin 나코짜상세보기 여행지 조회결과List={}", list);
+		
 		Map<String, Object> map=courseService.selectOneJoinMember(courseNo);
 		logger.info("admin 나코짜상세보기 조회결과 map={}", map);
 		
@@ -82,6 +87,7 @@ public class AdminNacojjaController {
 		}
 		logger.info("이미지 파일 갯수 확인 listImg.size={}", listImg.size());
 		
+		model.addAttribute("list", list);
 		model.addAttribute("listImg", listImg);
 		model.addAttribute("map", map);
 		return "admin/nacojja/nacojjamanager/nacojjaDetail";	

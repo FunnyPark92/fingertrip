@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +41,7 @@ import com.ff.finger.member.model.MemberVO;
 import com.ff.finger.travelAgency.model.TravelAgencyService;
 import com.ff.finger.travelAgency.model.TravelAgencyVO;
 import com.ff.finger.travelspot.model.TravelSpotVO;
+import com.ff.finger.winBid.model.WinBidService;
 
 @Controller
 @RequestMapping("/nacojja")
@@ -64,10 +67,13 @@ public class NacojjaController {
 	private HeartListService heartListService;
 	
 	@Autowired
-	private TravelAgencyService travelAgencyService;
+	private BidService bidService;
 	
 	@Autowired
-	private BidService bidService;
+	private WinBidService winBidService;
+	
+	@Autowired
+	private TravelAgencyService travelAgencyService;
 	
 	@RequestMapping("/nacojjaList.do")
 	public String nacojjaList(@ModelAttribute SearchVO searchVo, Model model) {
@@ -93,6 +99,100 @@ public class NacojjaController {
 		logger.info("나코짜 목록 totalRecord={}", totalRecord);
 		
 		pagingInfo.setTotalRecord(totalRecord);
+		
+		String cNo="", pNo="", hCnt="";
+		int courseNo=0, compare=0, cnt2=0, cnt=0, heartCnt=0;
+		Date regDate = new Date();
+		Date regDate2 = new Date();
+		Date today = new Date();
+		List<Map<String, Object>> list2=new ArrayList<>();
+		Map<String, Object> map2 =new HashMap<>();	//진행상태변경
+		Map<String, Object> map3 =new HashMap<>();	//낙찰선정
+		map2.clear();
+		map3.clear();
+		Date bidEndDay = new Date();
+		Date bidEndDay2 = new Date();
+		BidVO bidVo=new BidVO();
+		
+		for(int i=0;i<list.size();i++) {
+			cNo=list.get(i).get("COURSE_NO").toString();
+			courseNo=Integer.parseInt(cNo);
+			pNo=list.get(i).get("PROGRESS_NO").toString();
+			logger.info("나코짜목록 courseNo={}, 진행상태 pNo={}",courseNo, pNo);
+			
+			if(pNo.equals("1")){
+				logger.info("진행상태 1");
+				regDate=(Date)list.get(i).get("REGDATE");
+				Calendar cal=new GregorianCalendar(Locale.KOREA);
+				cal.setTime(regDate);
+				cal.add(Calendar.DAY_OF_YEAR, 14);
+				regDate2=cal.getTime();
+				compare=today.compareTo(regDate2);
+				
+				logger.info("날짜 비교, today={}, regDate={}", today, regDate);
+				logger.info("날짜 비교, regDate2={}, compare={}", regDate2, compare);
+				
+				if(compare>0) {
+					hCnt=list.get(i).get("HEART_COUNT").toString();
+					heartCnt=Integer.parseInt(hCnt);
+					if(heartCnt>=200) {
+						map2.put("progressNo", 2);
+						logger.info("진행상태 2");
+					}else if(heartCnt<200){
+						map2.put("progressNo", 5);
+						logger.info("진행상태 5");
+					}
+					map2.put("courseNo", courseNo);
+					
+					cnt=courseService.updateProgress(map2);
+					logger.info("진행상태 변경 후 ,cnt={}", cnt);			
+				}
+				
+			}else if(pNo.equals("2")) {
+				logger.info("진행상태 2");
+				bidEndDay=(Date)list.get(i).get("BID_END_DAY");
+				Calendar cal=new GregorianCalendar(Locale.KOREA);
+				cal.setTime(bidEndDay);
+				cal.add(Calendar.DAY_OF_YEAR, 1);
+				bidEndDay2=cal.getTime();
+				compare=today.compareTo(bidEndDay2);
+				
+				logger.info("날짜 비교, today={}, bidEndDay={}", today, bidEndDay);
+				logger.info("날짜 비교, bidEndDay2={}, compare={}", bidEndDay2, compare);
+				
+				if(compare>0) {
+					list2=bidService.selectByNo(courseNo);
+					logger.info("입찰 조회 후, list2.size={}", list2.size());
+					
+					if(list2.size()>0) {
+						map2.put("progressNo", 3);
+						logger.info("진행상태 3");
+
+						bidVo=bidService.selectWin(courseNo);
+						logger.info("낙찰 조회 후, bidVo={}", bidVo);
+						
+						map3.put("bidPrice", bidVo.getBidPrice());
+						map3.put("bidNo", bidVo.getBidNo());
+						cnt2=winBidService.insertWin(map3);
+						if(cnt2>0) {
+							logger.info("낙찰 선정 완료 cnt2={}", cnt2);
+						}else {
+							logger.info("낙찰 선정 실패 cnt2={}", cnt2);
+						}
+					}else {
+						map2.put("progressNo", 4);
+						logger.info("진행상태 4");
+					}
+					map2.put("courseNo", courseNo);
+					
+					cnt=courseService.updateProgress(map2);
+					logger.info("진행상태 변경 후 ,cnt={}", cnt);			
+				}
+			}
+		}
+		
+		list=courseService.nacojjaList(searchVo);
+		logger.info("나코짜목록 재조회 후 list.size={}", list.size());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);

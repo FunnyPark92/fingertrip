@@ -126,5 +126,4 @@ public class CourseServiceImpl implements CourseService {
 	public int ProgressNo2(int courseNo) {
 		return courseDao.ProgressNo2(courseNo);
 	}
-
 }
