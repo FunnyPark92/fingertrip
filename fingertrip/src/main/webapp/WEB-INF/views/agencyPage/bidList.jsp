@@ -10,8 +10,8 @@
         <div class="col-lg-3">
             <h3>마이페이지</h3>
             <div class="list-group">
-                <a href="" class="list-group-item">입찰한 목록</a>
-                <a href="" class="list-group-item">내가 쓴 글</a>
+                <a href="<c:url value='/agencyPage/bidList.do'/>" class="list-group-item active">입찰한 목록</a>
+                <a href="<c:url value='/agencyPage/myWriteList.do'/>" class="list-group-item">내가 쓴 글</a>
             </div>
         </div>
 
