@@ -40,10 +40,10 @@
             <div class="form">
               <div id="sendmessage">담당자 이메일로 전송됩니다.</div>
               <div id="errormessage"></div>
-              <form action="<c:url value='/footer/advertise/send.do'/>" method="post" role="form" class="contactForm1">
+              <form action="<c:url value='/footer/advertise/send.do'/>" method="post" role="form" class="contactForm">
                 <div class="form-row">
                   <div class="form-group col-lg-6">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="담당자명" data-rule="minlen:4" data-msg="2글자 이상 입력하세요" />
+                    <input type="text" name="name" class="form-control" id="name" placeholder="담당자명" data-rule="minlen:4" data-msg="한글 2자 (영문 4자)이상 입력하세요" />
                     <div class="validation"></div>
                   </div>
                   <div class="form-group col-lg-6">
@@ -70,8 +70,6 @@
     </section>
 
 
+<script src="${pageContext.request.contextPath}/js/contactform.js"></script> 
 
-
-<%--     <script src="${pageContext.request.contextPath}/js/contactform.js"></script>
- --%>
 <%@ include file="../inc/bottom.jsp"%>
