@@ -437,6 +437,7 @@ public class NacojjaController {
 		MemberVO memberVo = memberService.selectMember(courseVo.getMemberNo());
 		List<TravelSpotVO> travelSpotVoList = courseService.selectTravelSpot(courseNo);
 		BidVO bidVo = bidService.selectWin(courseNo);
+		TravelAgencyVO agencyVo = travelAgencyService.selectTravel(bidVo.getTravelAgencyNo());
 		
 		Calendar cal = Calendar.getInstance();
 		
@@ -453,7 +454,8 @@ public class NacojjaController {
 		model.addAttribute("memberVo", memberVo); //멤버
 		model.addAttribute("tSpotVoList", travelSpotVoList); //여행지 정보 리스트
 		//model.addAttribute("tSpotVoList", travelSpotVoList); //1일차 여행지 정보 리스트
-		model.addAttribute("bidVo",bidVo);
+		model.addAttribute("bidVo",bidVo); // 상태가 결재상태일때 낙찰정보
+		model.addAttribute("agencyVo",agencyVo);
 		return "nacojja/nacojjaDetail";
 	}
 	

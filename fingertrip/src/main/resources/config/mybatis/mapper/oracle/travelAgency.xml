@@ -51,7 +51,7 @@
 		select * from travel_agency where name =#{name}
 	</select>
 	<select id="selectTravel" parameterType="int" resultType="TravelAgencyVO">
-		select * from travel_agency where travelAgencyNo = #{travelAgencyNo}
+		select * from travel_agency where travel_Agency_No = #{travelAgencyNo}
 	</select>
 	
 	<delete id="deleteAgency" parameterType="int">

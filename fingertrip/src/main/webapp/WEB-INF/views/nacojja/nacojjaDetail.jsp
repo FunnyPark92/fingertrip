@@ -389,6 +389,7 @@
 		 </c:if>
 
 		<c:if test="${courseVo.progressNo==3}">
+		
 			<!-- 결제할 때 -->
 			<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
 			<div class="col-md-6 naThumHeart marginBottom50" style="display:;">
@@ -397,24 +398,26 @@
 				<div class="thumPay">
 					<span class="leftSpan">여행 날짜</span> <select>
 						<option value="선택">날짜 선택</option>
-						<option value="0911">${courseVo.startDay}</option>
-						<option value="0912">${bidVo.tripStartDay1}</option>
-						<option value="0913">${bidVo.tripStartDay2}</option>
-						<option value="0914">${bidVo.tripStartDay3}</option>
-						<option value="0915">${bidVo.tripStartDay4}</option>
+						<option value="${courseVo.startDay}">${courseVo.startDay}</option>
+						<option value="${bidVo.tripStartDay1}">${bidVo.tripStartDay1}</option>
+						<option value="${bidVo.tripStartDay2}">${bidVo.tripStartDay2}</option>
+						<option value="${bidVo.tripStartDay3}">${bidVo.tripStartDay3}</option>
+						<option value="${bidVo.tripStartDay4}">${bidVo.tripStartDay4}</option>
+
 					</select>
 				</div>
+				
 				<div class="thumPay">
 					<span class="leftSpan">작성자</span>${memberVo.name}
 				</div>
 				<div class="thumPay">
-					<span class="leftSpan">여행사</span> 핑거트립
+					<span class="leftSpan">여행사</span> ${agencyVo.name}
 				</div>
 				<div class="thumPay">
 					<span class="leftSpan">여행가격</span>${bidVo.bidPrice}
 				</div>
 				<div class="thumPay">
-					<span class="leftSpan">여행사 번호</span> 02 - 000 - 0000
+					<span class="leftSpan">여행사 번호</span> ${agencyVo.licenseNo}
 				</div>
 				<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
 				<div>
