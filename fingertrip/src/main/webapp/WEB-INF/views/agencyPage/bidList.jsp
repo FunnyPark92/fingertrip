@@ -17,7 +17,7 @@
 
         <!-- 서브컨텐츠 -->
         <div class="col-lg-9">
-			<h3>쿠폰 내역</h3><br>
+			<h3>입찰한 목록</h3><br>
 			<table class="table table-condensed" style="text-align: center">
 				<colgroup>
 					<col style="width:11%" />
@@ -46,7 +46,11 @@
 						<c:forEach var="map" items="${list}">
 							<tr>
 								<td>${map['BID_NO'] }</td>
-								<td><a href="#" style="color: #4169e1">${map['TITLE'] }</a></td>
+								<td>
+									<a href="<c:url value='/nacojja/nacojjaDetail.do?courseNo=${map["COURSE_NO"] }'/>" style="color: #007bff">
+										${map['TITLE'] }
+									</a>
+								</td>
 								<td><fmt:formatNumber value="${map['BID_PRICE'] }" pattern="#,###" />원</td>
 								<td>${map['BID_DAY'] }</td>
 								<td>입찰결과 넣어주는곳</td>

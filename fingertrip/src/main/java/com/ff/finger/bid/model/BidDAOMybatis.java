@@ -11,8 +11,8 @@ import com.ff.finger.common.SearchVO;
 
 @Repository
 public class BidDAOMybatis implements BidDAO{
-	
 	private String namespace = "config.mybatis.mapper.oracle.bid.";
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
@@ -44,6 +44,11 @@ public class BidDAOMybatis implements BidDAO{
 	@Override
 	public int dupleTravelAgency(BidVO bidVo) {
 		return sqlSession.selectOne(namespace+"dupleTravelAgency",bidVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMyBidList(String agencyId) {
+		return sqlSession.selectList(namespace + "selectMyBidList", agencyId);
 	}
 
 	
