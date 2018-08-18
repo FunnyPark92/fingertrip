@@ -108,7 +108,7 @@ $(document).ready(function(){
                             <figcaption>
                                 <h2>런던</h2>
                                 <p>해리포터, 축구 등 취향의 도시</p>
-                                <a href="#">View more</a>
+                                <a href="<c:url value='/howto/recommend.do#r1'/>">View more</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -122,7 +122,7 @@ $(document).ready(function(){
                             <figcaption >
                                 <h2>교토</h2>
                                 <p>고즈넉한 전통이 느껴지는</p>
-                                <a href="#">View more</a>
+                                <a href="<c:url value='/howto/recommend.do#r2'/>">View more</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -134,9 +134,9 @@ $(document).ready(function(){
                         <figure class="effect-bubba">
                             <img src="img/portfolio-3.jpg" alt="img02" class="img-responsive" />
                             <figcaption>
-                                <h2>그리스</h2>
-                                <p>파란 하늘과 파란 지붕의</p>
-                                <a href="#">View more</a>
+                                <h2>베니스</h2>
+                                <p>예술과 낭만의 도시</p>
+                                <a href="<c:url value='/howto/recommend.do#r3'/>">View more</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -152,7 +152,7 @@ $(document).ready(function(){
                             <figcaption>
                                 <h2>하와이</h2>
                                 <p>대표적인 힐링 휴양지</p>
-                                <a href="#">View more</a>
+                                <a href="<c:url value='/howto/recommend.do#r4'/>">View more</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -164,9 +164,9 @@ $(document).ready(function(){
                         <figure class="effect-bubba">
                             <img src="img/portfolio-5.jpg" alt="img02" class="img-responsive" />
                             <figcaption>
-                                <h2>스위스</h2>
+                                <h2>인터라켄</h2>
                                 <p>청정한 자연을 느낄 수 있는</p>
-                                <a href="#">View more</a>
+                                <a href="<c:url value='/howto/recommend.do#r5'/>">View more</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -180,7 +180,7 @@ $(document).ready(function(){
                             <figcaption>
                                 <h2>로마</h2>
                                 <p>역사와 문화의 도시</p>
-                                <a href="#">View more</a>
+                                <a href="<c:url value='/howto/recommend.do#r6'/>">View more</a>
                             </figcaption>
                         </figure>
                     </div>

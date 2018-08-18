@@ -41,11 +41,11 @@ public class AdvertiseController {
 		try {
 			emailSender.sendEmail(subject, content, to, from);
 			logger.info("이메일 발송 성공");
-			msg="임시 비밀번호를 이메일로 발송하였습니다.";
+			msg="감사합니다. 검토하여 답변드리겠습니다.";
 		} catch (MessagingException e) {
 			logger.info("이메일 발송 실패");
 			e.printStackTrace();
-			msg="임시 비밀번호 발송에 실패하였습니다.";
+			msg="이메일 발송에 실패했습니다.";
 		}
 		
 		model.addAttribute("msg", msg);
