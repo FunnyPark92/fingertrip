@@ -122,30 +122,38 @@ public class NacojjaController {
 			
 			if(pNo.equals("1")){
 				logger.info("진행상태 1");
-				regDate=(Date)list.get(i).get("REGDATE");
-				Calendar cal=new GregorianCalendar(Locale.KOREA);
-				cal.setTime(regDate);
-				cal.add(Calendar.DAY_OF_YEAR, 14);
-				regDate2=cal.getTime();
-				compare=today.compareTo(regDate2);
 				
-				logger.info("날짜 비교, today={}, regDate={}", today, regDate);
-				logger.info("날짜 비교, regDate2={}, compare={}", regDate2, compare);
-				
-				if(compare>0) {
-					hCnt=list.get(i).get("HEART_COUNT").toString();
-					heartCnt=Integer.parseInt(hCnt);
-					if(heartCnt>=200) {
-						map2.put("progressNo", 2);
-						logger.info("진행상태 2");
-					}else if(heartCnt<200){
-						map2.put("progressNo", 5);
-						logger.info("진행상태 5");
-					}
+				hCnt=list.get(i).get("HEART_COUNT").toString();
+				heartCnt=Integer.parseInt(hCnt);
+				if(heartCnt>=200) {
+					map2.put("progressNo", 2);
+					logger.info("진행상태 2");
+					
 					map2.put("courseNo", courseNo);
 					
 					cnt=courseService.updateProgress(map2);
-					logger.info("진행상태 변경 후 ,cnt={}", cnt);			
+					logger.info("진행상태 변경 후 ,cnt={}", cnt);	
+					
+				}else if(heartCnt<200){
+					regDate=(Date)list.get(i).get("REGDATE");
+					Calendar cal=new GregorianCalendar(Locale.KOREA);
+					cal.setTime(regDate);
+					cal.add(Calendar.DAY_OF_YEAR, 14);
+					regDate2=cal.getTime();
+					compare=today.compareTo(regDate2);
+					
+					logger.info("날짜 비교, today={}, regDate={}", today, regDate);
+					logger.info("날짜 비교, regDate2={}, compare={}", regDate2, compare);
+					
+					if(compare>0) {
+						map2.put("progressNo", 5);
+						logger.info("진행상태 5");
+						
+						map2.put("courseNo", courseNo);
+						
+						cnt=courseService.updateProgress(map2);
+						logger.info("진행상태 변경 후 ,cnt={}", cnt);	
+					}
 				}
 				
 			}else if(pNo.equals("2")) {
