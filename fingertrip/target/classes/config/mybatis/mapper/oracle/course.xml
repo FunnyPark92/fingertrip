@@ -7,12 +7,12 @@
 		from(
             select list.*, rownum as rnum
             from(
-                select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, listagg(country, ',') within group (order by course_no) as countries
+                select course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, regdate, listagg(country, ',') within group (order by course_no) as countries
                 from(
-                    select distinct course_no, country, title, start_day, term, thumb_img, heart_count, progress_status, progress_no
+                    select distinct course_no, country, title, start_day, term, thumb_img, heart_count, progress_status, progress_no,regdate
                     from corsTrvlCntryCntnentPrgrsView
                 )
-                group by course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no
+                group by course_no, title, start_day, term, thumb_img, heart_count, progress_status, progress_no, regdate
                 order by course_no desc
             ) list
              <where>
