@@ -50,6 +50,7 @@ public class AdminQnAController {
 	public String anAReplyWrite(@RequestParam(defaultValue="0") int qnaNo, HttpSession session, Model model) {
 		logger.info("QnA답변쓰기 화면 보여주기 파라미터 qnaNo={}", qnaNo);
 		
+		
 		QnAVO vo=qnAService.selectByNoOne(qnaNo);
 		logger.info("QnA답변하기-조회결과, vo={}", vo);
 		

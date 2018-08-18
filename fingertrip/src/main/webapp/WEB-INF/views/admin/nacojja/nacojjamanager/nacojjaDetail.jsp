@@ -60,7 +60,14 @@
 	 		</tr>
 	 		 <tr>
 	 			<th>주요여행지 목록</th>
-	 			<td>${vo.email1}@${vo.email2}</td>
+	 			<td>
+	 			<c:if test="${!empty list}">
+	 				<c:forEach var="vo" items="${list}">
+	 				${vo.travelSpot}(${vo.spotAddress})
+	 				<br>
+	 				</c:forEach>
+	 			</c:if>
+	 			</td>
 	 		</tr>
 	 	</table>
 	 	<div class="fRight aWrap">
