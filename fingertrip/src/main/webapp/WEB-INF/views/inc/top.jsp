@@ -136,8 +136,8 @@
 	            		기업페이지
 	            	</a>
 	            	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-	            		<a class="dropdown-item" href="">뭐1</a>
-	                    <a class="dropdown-item" href="">뭐2</a>
+	            		<a class="dropdown-item" href="">입찰한 목록</a>
+	                    <a class="dropdown-item" href="">내가 쓴 글</a>
 	                    <a class="dropdown-item" href="">뭐3</a>
 	                    <a class="dropdown-item" href="">뭐4</a>
 	                    <a class="dropdown-item" href="">뭐5</a>

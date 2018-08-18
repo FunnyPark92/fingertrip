@@ -30,10 +30,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-	
-		
-		
-	var pattern = new RegExp(/^[0-9]+$/g); //입찰가격 정규식 
 	var myZoom;
 	var map;
 	var marker;
@@ -44,10 +40,6 @@
 	window.onload = function() {
 		initialize();
 		initMarker();//초기 로드시 1일차 map	
-		
-		var startDay = new Date($('#endBid').val());
-		startDay.setDate(startDay.getDate()+3);
-		$('#endBidding').text(startDay.toLocaleDateString());
 	}
 	
 	function initialize() {
@@ -230,64 +222,6 @@
             showMonthAfterYear: true,
             yearSuffix: '년'
         });
-       	
-      	$('.datepicker').change(function() {
-       	/* 	var endbid = new Date(bidStartDay.getTime());
-       		alert(endbid);
-       		endbid.setDate(endbid.getDate()+14);
-       		alert(endbid); */
-       		
-       		/* var endbid = new Date($('#endBid').val()).getTime(); */
-       		var endbid = new Date($('#endBidding').text()).getTime();
-      		var startDay1 = new Date($('input[name=tripStartDay1]').val()).getTime();
-      		var startDay2 = new Date($('input[name=tripStartDay2]').val()).getTime();
-      		var startDay3 = new Date($('input[name=tripStartDay3]').val()).getTime();
-      		var startDay4 = new Date($('input[name=tripStartDay4]').val()).getTime();
-      		
-			if(startDay1 - endbid < 24*60*60*1000 * 14){
-				alert("출발일은 입찰종료후 2주후부터 가능합니다.");
-				$(this).val("");
-				$(this).focus();
-			}else if(startDay2 - endbid < 24*60*60*1000 * 14){
-				alert("출발일은 입찰종료후 2주후부터 가능합니다.");
-				$(this).val("");
-				$(this).focus();
-			}else if(startDay3 - endbid < 24*60*60*1000 * 14){
-				alert("출발일은 입찰종료후 2주후부터 가능합니다.");
-				$(this).val("");
-				$(this).focus();
-			}else if(startDay4 - endbid < 24*60*60*1000 * 14){
-				alert("출발일은 입찰종료후 2주후부터 가능합니다.");
-				$(this).val("");
-				$(this).focus();
-			}
-       	});
-       	
-       	$('#bidding').click(function(){//입찰 유효성 검사 
-       		var bool = true;
-       	
-       		$('.valid').each(function(idx,item){
-	       		if($(this).val().length <1){
-	       			alert($(this).prev().text()+" 입력해주세요");
-	       			$(this).focus();
-	       			bool=false;
-	       			return false;
-	       		}
-       			
-       		});
-       		if(bool){
-	       		 if(pattern.test($('#biddingPrice').val())){
-	       			bool = true;
-	       		}else{
-	       			bool = false;
-	       			alert("입찰가격은 숫자로만 입력해주세요");
-	       		}
-       		}
-       		
-       		alert(bool);
-       		return bool;
-       	});
-    	
     });
 </script>
 
@@ -302,7 +236,7 @@
             <img src="<c:url value='/upload_images/${courseVo.thumbImg}'/>" alt="썸네일">
         </div>
         
-	        <!-- 하트받을때 -->
+	    <!-- 하트받을때 -->
         <c:if test="${courseVo.progressNo==1}">
 	        <div class="col-md-6 naThumHeart marginBottom50">
 	            <div>
@@ -334,62 +268,49 @@
 	        </div>
         </c:if>
         
-        <c:if test="${courseVo.progressNo==2}">
 		<!-- 입찰 -->
-		<div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
-			<form name="biding" method="post" action="<c:url value='/nacojja/nacojjaBidding.do'/>">
-				<div>입찰진행중</div>
-				<h3 class="marginBottom20">${courseVo.title}</h3>
-	            <div>
-	            	<span class="leftSpan">작성자</span>
-	                ${memberVo.name}
-	            </div>
-			 	<div>
-					<span class="leftSpan">작성자 일정</span>
-					<span>${courseVo.startDay} ~ ${courseVo.endDay}</span>
-				</div>
-			 	<div>
-					<span class="leftSpan">여행 일수</span>
-					<span>${travelDay}</span>
-				</div>
-			 	<div>
-					<span class="leftSpan">입찰 종료일</span>
-					<span id="endBidding"></span>
-					<input type="hidden" id="endBid" value="<fmt:formatDate value='${courseVo.bidStartDay}' pattern="yyyy-MM-dd"/>">
-					
-				</div>
-	            <div>
-	               	<img src="<c:url value='/img/quot1.png'/>" style="width: 10px; height: 10px">
-		             ${courseVo.content}
-	               	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
-	            </div>
-			 	<div>
-					<span class="leftSpan">출발일</span>
-		    		<label for="startDay1" hidden="">출발일1</label>
-		        	<input type="text" name="tripStartDay1" placeholder="출발일1" class="datepicker valid expDay" readonly="readonly">,
-		    		<label for="startDay2" hidden="">출발일2</label>
-		        	<input type="text" name="tripStartDay2" placeholder="출발일2" class="datepicker valid expDay" readonly="readonly">
-				</div>
-				<div>
-					<span class="leftSpan"></span>
-		    		<label for="startDay3" hidden="">출발일3</label>
-		        	<input type="text" name="tripStartDay3" placeholder="출발일3" class="datepicker valid expDay" readonly="readonly">,
-		    		<label for="startDay4" hidden="">출발일4</label>
-		        	<input type="text" name="tripStartDay4" placeholder="출발일4" class="datepicker valid expDay" readonly="readonly">
-				</div>
-	            <div class="marginTop10">
-					<span class="leftSpan">입찰금액</span>
-	            	<input type="number" class="valid" id="biddingPrice" placeholder="회원들에게 결제받을 금액을 적어주세요" style="width:70%;" name="bidPrice"/>
-	            </div>
-				<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
-				<input type="hidden" value="${courseVo.courseNo}" name="courseNo">
-				<input type="submit" class="btn payBtn btn-primary" id="bidding" value="입찰하기">
-			</form>
+        <c:if test="${courseVo.progressNo==2}">
+		<div class="col-md-6 naThumHeart marginBottom50" style="display:;">
+			<div>입찰진행중</div>
+			<h3 class="marginBottom20">${courseVo.title}</h3>
+            <div>
+            	<span class="leftSpan">작성자</span>
+                ${memberVo.name}
+            </div>
+			<div>
+				<span class="leftSpan">작성자 일정</span>
+				${courseVo.startDay} ~ ${courseVo.endDay}
+			</div>
+            <div>
+               	<img src="<c:url value='/img/quot1.png'/>" style="width: 10px; height: 10px">
+	             ${courseVo.content}
+               	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
+            </div>
+			<div>
+				<span class="leftSpan">출발일</span>
+	    		<label for="startDay1" hidden="">출발일</label>
+	        	<input type="text" name="startDay1" placeholder="출발일1" class="datepicker valid" readonly="readonly">,
+	    		<label for="startDay2" hidden="">출발일</label>
+	        	<input type="text" name="startDay2" placeholder="출발일2" class="datepicker valid" readonly="readonly">
+			</div>
+			<div>
+				<span class="leftSpan"></span>
+	    		<label for="startDay3" hidden="">출발일</label>
+	        	<input type="text" name="startDay3" placeholder="출발일3" class="datepicker valid" readonly="readonly">,
+	    		<label for="startDay4" hidden="">출발일</label>
+	        	<input type="text" name="startDay4" placeholder="출발일4" class="datepicker valid" readonly="readonly">
+			</div>
+            <div class="marginTop10">
+				<span class="leftSpan">입찰금액</span>
+            	<input type="text" placeholder="회원들에게 결제받을 금액을 적어주세요" style="width:70%;"/>
+            </div>
+			<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
+			<input type="button" class="btn payBtn btn-primary" value="입찰하기">
 		</div> 
 		 </c:if>
 
+		<!-- 결제할 때 -->
 		<c:if test="${courseVo.progressNo==3}">
-			<!-- 결제할 때 -->
 			<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
 			<div class="col-md-6 naThumHeart marginBottom50" style="display:;">
 				<div>결제진행중</div>
@@ -420,12 +341,8 @@
 			</div>
 		</c:if>
 
-
-		
-		
-		
-		<c:if test="${courseVo.progressNo==4 || courseVo.progressNo==5}">
 		<!-- 실패 -->
+		<c:if test="${courseVo.progressNo==4 || courseVo.progressNo==5}">
         <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
             <div>
                	종료
@@ -451,7 +368,6 @@
             <input type="button" class="btn btn-block" disabled="disabled" onclick="pressHeart()" value="종료되었습니다">
         </div>
 		</c:if>
-		
 		
 		<div class="col-md-2">
             <ul class="list-group help-group">
