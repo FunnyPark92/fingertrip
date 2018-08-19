@@ -24,6 +24,7 @@ public interface QnADAO {
 	public QnAVO selectUp(int groupNo);
 	public QnAVO selectDw(int groupNo);
 	public int agencyReply(QnAVO qnAVo);
-	
+	public List<QnAVO> agencyWrite(SearchVO searchVo);
+	public int agencyWritetotalRecord(SearchVO searchVo);
 	
 }

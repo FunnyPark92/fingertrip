@@ -51,8 +51,6 @@ public class QnAController {
 		//일반회원 qna리스트와 admin qna리스트를 이 컨트롤러 하나로 해결
 		logger.info("Controller 한개로 페이지 나누기 위한 변수 1=관리자 0=일반회원 aNo={}", aNo);
 
-		
-		
 		logger.info("QnA 목록 파라미터, searchVo={}", searchVo);
 		
 		PaginationInfo pagingInfo=new PaginationInfo();

@@ -25,5 +25,7 @@ public interface QnAService {
 	public QnAVO selectDw(int groupNo);
 	public int multiDelete(List<QnAVO> list);
 	public int agencyReply(QnAVO qnAVo);
+	public List<QnAVO> agencyWrite(SearchVO searchVo);
+	public int agencyWritetotalRecord(SearchVO searchVo);
 	
 }

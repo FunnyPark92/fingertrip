@@ -126,6 +126,27 @@
 		(select step from qna where qna_no=#{qnaNo})+1,
 		(select sort_no from qna where qna_no=#{qnaNo})+1,#{travelAgencyNo},#{fileName, jdbcType=VARCHAR},#{originalFileName, jdbcType=VARCHAR})
 	</insert>
+	
+	<select id="agencyWrite" parameterType="SearchVo" resultType="QnAVo">
+		select * from(
+			select list.*, rownum as RNUM from(
+				select * from qna
+				where TRAVEL_AGENCY_NO=#{memberNo}
+				<if test="searchKeyword!=null and searchKeyword!=''">
+					and ${searchCondition} like '%' || #{searchKeyword} || '%'
+				</if>
+				order by qna_no desc
+			)list
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} and RNUM<=#{firstRecordIndex}+#{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="agencyWritetotalRecord" parameterType="SearchVo" resultType="int">
+		select count(*) from qna
+		where TRAVEL_AGENCY_NO=#{memberNo}
+	</select>
 </mapper>
 
 

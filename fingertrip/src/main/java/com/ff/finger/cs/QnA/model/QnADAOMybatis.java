@@ -91,4 +91,14 @@ public class QnADAOMybatis implements QnADAO {
 	public int agencyReply(QnAVO qnAVo) {
 		return sqlSession.insert(namespace+"agencyReply", qnAVo);
 	}
+
+	@Override
+	public List<QnAVO> agencyWrite(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"agencyWrite", searchVo);
+	}
+
+	@Override
+	public int agencyWritetotalRecord(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"agencyWritetotalRecord", searchVo);
+	}
 }

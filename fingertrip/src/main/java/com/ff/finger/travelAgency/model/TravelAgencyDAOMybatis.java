@@ -78,5 +78,4 @@ public class TravelAgencyDAOMybatis implements TravelAgencyDAO {
 	public TravelAgencyVO getAgencyVo(String agencyId) {
 		return sqlSession.selectOne(namespace+"getAgencyVo", agencyId);
 	}
-
 }

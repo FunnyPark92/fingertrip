@@ -19,22 +19,19 @@ import com.ff.finger.common.SearchVO;
 import com.ff.finger.course.model.CourseService;
 import com.ff.finger.cs.QnA.model.QnAVO;
 import com.ff.finger.travelspot.model.TravelSpotVO;
+import com.ff.finger.winBid.model.WinBidService;
 
 @Controller
 @RequestMapping("/admin/nacojja") 
 public class AdminNacojjaController {
 	private static final Logger logger=LoggerFactory.getLogger(AdminNacojjaController.class);
 	
-	@Autowired CourseService courseService;
+	@Autowired 
+	CourseService courseService;
 	
 	@RequestMapping("/nacojjaList.do")
 	public String nacojjaList (@ModelAttribute SearchVO searchVo, Model model) {
 		logger.info("admin 나코짜코스 목록 파라미터 SearchVO={}", searchVo);
-		
-		if(searchVo.getSearchCondition().equals("")) {
-			String con="0";
-			searchVo.setSearchCondition(con);
-		}
 		
 		//페이징 처리를 위한 공간
 		PaginationInfo pagingInfo=new PaginationInfo();

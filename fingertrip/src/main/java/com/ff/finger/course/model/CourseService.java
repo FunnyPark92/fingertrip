@@ -26,5 +26,7 @@ public interface CourseService {
 	public List<Map<String, Object>> selectListJoinMember(SearchVO searchVo);
 	public Map<String, Object> selectOneJoinMember(int courseNo);
 	public int ProgressNo2(int courseNo);
+	public List<Map<String, Object>> selectListJoinPayBid(SearchVO searchVo);
+	public List<CourseVO> selectCourse(SearchVO searchVo);
 
 }

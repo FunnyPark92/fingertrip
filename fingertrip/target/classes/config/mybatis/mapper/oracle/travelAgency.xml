@@ -76,9 +76,8 @@
 	</select>
 	
 	<select id="getAgencyVo" parameterType="String" resultType="TravelAgencyVO">
-		
-	
-	
-	
+		select * from TRAVEL_AGENCY 
+		where id=#{agencyid}
 	</select>
+	
 </mapper>

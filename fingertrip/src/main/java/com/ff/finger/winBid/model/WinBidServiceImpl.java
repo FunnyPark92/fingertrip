@@ -16,6 +16,9 @@ public class WinBidServiceImpl implements WinBidService{
 	}
 
 	@Override
+	public int selectPayment(int mon) {
+		return winBidDao.selectPayment(mon);
+	}
 	public WinBidVO selectWinBid(int bidNo) {
 		return winBidDao.selectWinBid(bidNo);
 
@@ -25,5 +28,4 @@ public class WinBidServiceImpl implements WinBidService{
 	public int checkWinByBidNo(int bidNo) {
 		return winBidDao.checkWinByBidNo(bidNo);
 	}
-
 }

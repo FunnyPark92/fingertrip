@@ -103,4 +103,14 @@ public class QnAServiceImpl implements QnAService {
 		cnt=qnADao.agencyReply(qnAVo);
 		return cnt;
 	}
+
+	@Override
+	public List<QnAVO> agencyWrite(SearchVO searchVo) {
+		return qnADao.agencyWrite(searchVo);
+	}
+
+	@Override
+	public int agencyWritetotalRecord(SearchVO searchVo) {
+		return qnADao.agencyWritetotalRecord(searchVo);
+	}
 }

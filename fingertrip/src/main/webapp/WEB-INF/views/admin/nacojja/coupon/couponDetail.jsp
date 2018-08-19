@@ -15,7 +15,7 @@
 		    <li class="on"><a href="<c:url value='/admin/nacojja/coupon/couponList.do'/>">회원혜택관리</a></li>
 		    <li><a href="<c:url value='/admin/nacojja/bid/bidList.do'/>">기업입찰조회</a></li>
 		    <li><a href="<c:url value='/admin/nacojja/nacojjaList.do'/>">나코짜전체관리</a></li>
-		    <li><a href="#">상품매출분석</a></li>
+		    <li><a href="<c:url value='/admin/salesChart.do'/>">상품매출분석</a></li>
 		</ul>
 		<table class="grayBor">
 			<tr>
