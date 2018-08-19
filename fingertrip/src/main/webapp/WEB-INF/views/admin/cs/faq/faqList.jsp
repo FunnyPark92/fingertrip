@@ -15,7 +15,7 @@
 				alert('삭제할 공지사항을 선택해주세요');
 				return false;
 			}else{
-				$('form[name=frmDel]').submit();
+				$('form[name=faqList]').submit();
 			}
 		});
 	});
@@ -34,7 +34,9 @@
 	<%-- <form name="search" action="<c:url value='/admin/cs/faq/faqList.do'/>" method="post">
       	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 	</form> --%>
-	<form name="faqList" class="faqList fRight" method="get" action="<c:url value='/admin/cs/faq/faqList.do'/>"> 
+	<form name="faqList" class="faqList fRight" method="get" 
+	action="<c:url value='/admin/cs/faq/deleteMulti.do'/>"> 
+	<%-- action="<c:url value='/admin/cs/faq/faqList.do'/>">  --%>
 		<select name="faqCategoryNo">
 			<option value="1" 
 				<c:if test="${param.faqCategoryNo==1}">selected</c:if>
@@ -57,7 +59,7 @@
 			
 			<table class="grayTh" style="margin-top:50px;">
 				<tr>
-					<th><input type="checkbox"></th>
+					<th><input type="checkbox" name="chkAll" onclick="allChecked(this.checked)"></th>
 					<th>번호</th>
 					<th>카테고리</th>
 					<th>제목</th>
@@ -65,7 +67,7 @@
 				</tr>
 				<c:forEach var="faqCategoryNo1" items="${list}">
 					<tr>
-						<td><input type="checkbox" name="chk" value="${map['FAQ_NO']}"></td>
+						<td><input type="checkbox" name="chk" value="${faqCategoryNo1['FAQ_NO']}"></td>
 						<td>${faqCategoryNo1['FAQ_NO']}</td>
 						<td>${faqCategoryNo1['FAQ_CATE_TITLE']}</td>
 						<td><a href="<c:url value='/admin/cs/faq/faqDetail.do?faqNo=${faqCategoryNo1["FAQ_NO"]}'/>">${faqCategoryNo1['TITLE']}</a></td>

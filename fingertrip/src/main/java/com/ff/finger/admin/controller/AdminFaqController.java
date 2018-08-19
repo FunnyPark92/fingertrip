@@ -1,5 +1,7 @@
 package com.ff.finger.admin.controller;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ff.finger.common.CommonConstants;
 import com.ff.finger.cs.faq.model.FaqService;
 import com.ff.finger.cs.faq.model.FaqVO;
+import com.ff.finger.cs.notice.model.NoticeVO;
 
 @Controller
 @RequestMapping("/admin/cs/faq")
@@ -122,5 +126,55 @@ public class AdminFaqController {
 		return "admin/cs/faq/faqDetail";
 	}
 	
+	@RequestMapping(value="/faqDelete.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String faqDelete(@ModelAttribute FaqVO faqVo, HttpServletRequest request, Model model) {
+		logger.info("faq 삭제, 파라미터 faqVo={}", faqVo);
+		
+		String msg="", url="/admin/cs/faq/faqList.do";
+		if(faqVo.getFaqNo()==0) {
+			msg="잘못된 url입니다.";
+		}else {
+			int cnt=faqservice.faqDelete(faqVo.getFaqNo());
+			logger.info("faq 삭제 cnt={}", cnt);
+			
+			if(cnt>0) {
+				msg="faq 삭제를 성공하였습니다.";
+			}else {
+				msg="faq 삭제를 실패하였습니다.";
+			}
+		
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping("/deleteMulti.do")
+	public String deleteMulti(@RequestParam String chk[], HttpServletRequest request,Model model) {
+		for(int i=0;i<chk.length;i++) {
+			logger.info("faq 다중 삭제, 파라미터 chk={}", chk[i]);
+			
+		}
+		
+		Map<String, String[]> map=new HashMap<>();
+		map.put("nos", chk);
+		
+		int cnt=faqservice.deleteMulti(map);
+		logger.info("다중 삭제, cnt={}", cnt);
+		
+		String msg="", url="/admin/cs/faq/faqList.do";
+		if(cnt>0) {
+			msg="faq 삭제를 성공하였습니다.";
+		}else {
+			msg="faq 삭제를 실패하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 	
 }

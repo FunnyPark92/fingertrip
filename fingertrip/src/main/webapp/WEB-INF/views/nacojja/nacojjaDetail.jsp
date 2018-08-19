@@ -467,10 +467,9 @@
 					<input type="hidden" id="endBid" value="<fmt:formatDate value='${courseVo.bidStartDay}' pattern='yyyy.MM.dd'/>">
 					
 				</div>
-	            <div>
-	               	<img src="<c:url value='/img/quot1.png'/>" style="width: 10px; height: 10px">
-		             ${courseVo.content}
-	               	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
+	            <div class="expDiv">
+	               	<img src="<c:url value='/img/quote1.png'/>" style="width:30px;">
+	               	${courseVo.content}
 	            </div>
 			 	<div>
 					<span class="leftSpan">출발일</span>

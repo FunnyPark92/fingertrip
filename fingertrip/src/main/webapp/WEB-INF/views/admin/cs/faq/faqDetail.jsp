@@ -57,7 +57,7 @@
        		<div class="divLast">
        			<a href="<c:url value='/admin/cs/faq/faqList.do'/>">목록</a>
        			<a href="<c:url value='/admin/cs/faq/faqEdit.do?faqNo=${vo.faqNo }'/>">수정</a>
-       			<a id="del" class="darkGray" onclick="go()">삭제</a>
+       			<!-- <a id="del" class="darkGray" onclick="go()">삭제</a> -->
             </div>
         </form>
     </section>
