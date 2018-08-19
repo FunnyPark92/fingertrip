@@ -16,7 +16,7 @@ public class WinBidServiceImpl implements WinBidService{
 	}
 
 	@Override
-	public int selectPayment(int mon) {
+	public String selectPayment(int mon) {
 		return winBidDao.selectPayment(mon);
 	}
 	public WinBidVO selectWinBid(int bidNo) {

@@ -335,7 +335,7 @@ public class NacojjaController {
 			System.out.println("전체 삭제할 사이즈: " + travelSpotListById.size());
 			//똥멍청이네.. 이걸 몰라서 엄청 삽질했네..리스트는 중간에 데이터가 삭제되면 인덱스가 옮겨가기때문에 뒤에서부터 삭제해줘야
 			for (int i=travelSpotListById.size()-1; i>=0; ) {  
-				System.out.println("인덱스:" + i);
+				System.out.println("인덱스:" + i); //무한루프?
 				if (travelSpotListById.get(i).containsKey(userid)) {
 					System.out.println(userid + "가 들어간 여행지 삭제 - " + i);
 					travelSpotListById.remove(i);

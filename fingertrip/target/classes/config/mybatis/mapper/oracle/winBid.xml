@@ -7,11 +7,11 @@
 		values(win_bid_seq.nextval, #{bidPrice}, #{bidNo})
 	</insert>
 	
-	<select id="selectPayment" parameterType="int" resultType="int">
-	select sum(win_bid_price)
+	<select id="selectPayment" parameterType="int" resultType="String">
+	select sum(w.win_bid_price)
 	from payment p join win_bid w
 	on p.win_bid_no=w.win_bid_no
-	where p.PAYMENT_DATE between (to_date(20180101)+(INTERVAL #{mon} MONTH)) and (to_date(20180101)+(INTERVAL #{mon+1} MONTH))	
+	where p.PAYMENT_DATE between ADD_MONTHS(to_date(20180101),#{mon}) and ADD_MONTHS(to_date(20180101),#{mon}+1)	
 	</select>
 
 	<select id="selectWinBid" parameterType="int" resultType="WinBidVO">
