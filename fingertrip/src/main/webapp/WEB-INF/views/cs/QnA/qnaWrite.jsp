@@ -27,6 +27,7 @@ $(document).ready(function(){
 	  $("#pu").show();
   });
   $("#pu").click(function(){
+	  $("#password").val("");
 	  $("#pwd").hide();  
 	  $("#pu").hide();
 	  $("#sc").show();

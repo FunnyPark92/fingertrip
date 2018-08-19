@@ -5,7 +5,7 @@
 	function approval(event)
 	{	
 		if(confirm(['코스를 삭제할 경우 되돌릴 수 없습니다. 그래도 진행하시겠습니까?'])){
-			location.href="<c:url value='삭제하는 곳으로 보내야 겄지?memberNo=${vo.memberNo}'/>";
+			location.href="#";
 			return true;
 		}else{
 			return false;
