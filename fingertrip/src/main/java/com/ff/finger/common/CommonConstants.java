@@ -14,7 +14,8 @@ public interface CommonConstants {
 	//기업 입찰에서 사용
 	public static final int TRAVEL_BIDDING = 2; //이미 입찰을 하였다.
 	//공지사항 페이지 처리
-	public static final int BLOCK_SIZE=10;
+	//공지사항, 하트내역 페이징 처리
+	public static final int BLOCK_SIZE=5; //테스트를 위해 5로 변경..
 	public static final int RECORD_COUNT_PER_PAGE=10;
 	
 	//나코짜 페이지 처리

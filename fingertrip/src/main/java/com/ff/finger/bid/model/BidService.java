@@ -11,4 +11,5 @@ public interface BidService {
 	public List<Map<String, Object>> selectByNo(int courseNo);
 	public BidVO selectWin(int courseNo);
 	public int insertBId(BidVO bidVo);
+	public List<Map<String, Object>> selectMyBidList(String agencyId);
 }

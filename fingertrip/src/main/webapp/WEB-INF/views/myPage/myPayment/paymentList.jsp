@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="../../inc/top.jsp" %>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
 <div class="container margin80">
 	<div class="row">
@@ -24,8 +24,7 @@
         <!-- 서브컨텐츠 -->
         <div class="col-lg-9">
 			<h2>결제 내역</h2><br>
-			<table class="box2">
-				<caption>결제 내역</caption>
+			<table class="table table-condensed" style="text-align: center">
 				<colgroup>
 					<col style="width:9%" />
 					<col style="width:12%" />
@@ -47,7 +46,7 @@
 				<tbody>
 					<c:if test="${empty list }">
 						<tr>
-							<td colspan="6">해당 기간의 결제 내역이 없습니다.</td>
+							<td colspan="6">결제 내역이 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list }">

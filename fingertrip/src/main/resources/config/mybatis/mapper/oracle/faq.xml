@@ -34,7 +34,10 @@
 	</insert>
 	
 	<select id="faqSelectByNo" parameterType="int" resultType="faqVo">
-		select * from faq where faq_no=#{faqNo}
+		SELECT f.faq_no, f.TITLE, f.content, f.ADMIN_NO, f.FAQ_CATEGORY_NO, c.FAQ_CATE_TITLe
+		FROM faq f JOIN FAQ_CATEGORY c
+		ON f.faq_category_no = c.faq_category_no	
+		where f.faq_no=#{faqNo}
 	</select>
 	
 	<update id="faqUpdate" parameterType="faqVo">

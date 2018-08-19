@@ -12,9 +12,19 @@
 			window.open("<c:url value='/myPage/myHeart/heartCharge.do'/>", "heartCharge",
 					"width=1000, height=750, left=0, top=0, location=yes, resizable=yes");
 		});
-	}); 
+	});
+	
+	function pageFunc(currentPage){
+		frmPage.currentPage.value=currentPage;
+		frmPage.submit();
+	}
 </script>
 	
+<!-- 페이징 처리를 위한 form -->
+<form name="frmPage" method="post" action="<c:url value='/myPage/myHeart/heartList.do'/>">
+	<input type="hidden" name="currentPage">
+</form>
+
 <div class="container margin80">
 	<div class="row">
 		<!-- 서브메뉴 -->
@@ -31,19 +41,18 @@
             </div>
         </div>
         
-        <!-- 서브메뉴 -->
+        <!-- 서브컨텐츠 -->
         <div class="col-lg-9">
-			<div class="container">
 			<h2>하트 내역</h2><br>
-			<table class="box2">
-				<caption>하트 내역</caption>
+			<span style="position: absolute; top: 40px; left: 550px;">
+				${memberVo.name }님이 보유중인 하트는 <b style="color: blue;">${memberVo.heartCount }</b>개 입니다.
+			</span>
+			<table class="table table-condensed" style="text-align: center">
 				<colgroup>
 					<col style="width:20%" />
-					<col style="width:12%" />
+					<col style="width:10%" />
 					<col style="width:40%" />
 					<col style="width:30%" />
-					<col style="width:12%" />	
-					<col style="width:14%" />
 				</colgroup>
 				<thead>
 				  <tr>
@@ -56,7 +65,7 @@
 				<tbody>
 					<c:if test="${empty hlVoList }">
 						<tr>
-							<td colspan="6">해당 기간의 하트 충전/사용 내역이 없습니다.</td>
+							<td colspan="4">하트 충전/적립/사용 내역이 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty hlVoList }">
@@ -99,9 +108,35 @@
 					</c:if>
 				</tbody>
 			</table>
-			</div>
-				<button type="button" class="btn btn-warning text-center" id="btn1">하트 충전하기</button> 
-			</div>
+			
+			<!-- 페이지 번호 추가 -->		
+			<div class="divPage clear text-center pad15 marginBottom40">
+				<!-- 이전 블럭으로 이동 -->
+               	<c:if test="${pagingInfo.firstPage>1}">
+               		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+               	</c:if>
+               	
+               	<!-- [1][2][3][4][5][6][7][8][9][10] -->
+               	<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
+					<c:choose>
+						<c:when test="${i==pagingInfo.currentPage}">
+							<span class="colorBlue font-weight-bold">${i}</span>
+						</c:when>
+						<c:otherwise>
+							<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i}</a></span>
+						</c:otherwise>
+					</c:choose>
+               	</c:forEach>
+               	
+               	<!-- 다음 블럭으로 이동 -->
+               	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage}">
+               		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+               	</c:if>
+			</div>	
+            <!--  페이지 번호 끝 -->
+			
+			<button type="button" class="btn btn-warning text-center" id="btn1">하트 충전하기</button> 
+		</div>
 	</div>
 </div>
 

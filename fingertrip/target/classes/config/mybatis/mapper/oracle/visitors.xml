@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.visitors">
+	
+	<select id="selectTodayCnt" resultType="int">
+		select count(*) from visitors where visitor_today=substr(sysdate,1,8)
+	</select>	
+	
+	<insert id="insertInit">
+		insert into visitors
+		values(substr(sysdate,1,8),0)
+	</insert>
+	
+	<select id="selectTodayIp" parameterType="string" resultType="int">
+		select count(*) from ip
+		where ip=#{ip}
+		and visitor_today=substr(sysdate,1,8)
+	</select>
+	
+	<insert id="insertIp" parameterType="string">
+		insert into ip
+		values(ip_seq.nextval, #{ip}, substr(sysdate,1,8))
+	</insert>
+	
+	<update id="updateCnt">
+		update visitors
+		set visitor_count=visitor_count+1
+		where visitor_today=substr(sysdate,1,8)
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+

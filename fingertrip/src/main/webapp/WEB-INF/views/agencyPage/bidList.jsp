@@ -10,21 +10,22 @@
         <div class="col-lg-3">
             <h3>마이페이지</h3>
             <div class="list-group">
-                <a href="" class="list-group-item">입찰한 목록</a>
-                <a href="" class="list-group-item">내가 쓴 글</a>
+                <a href="<c:url value='/agencyPage/bidList.do'/>" class="list-group-item active">입찰한 목록</a>
+                <a href="<c:url value='/agencyPage/myWriteList.do'/>" class="list-group-item">내가 쓴 글</a>
             </div>
         </div>
 
         <!-- 서브컨텐츠 -->
         <div class="col-lg-9">
-			<h3>쿠폰 내역</h3><br>
+			<h3>입찰한 목록</h3><br>
 			<table class="table table-condensed" style="text-align: center">
 				<colgroup>
-					<col style="width:11%" />
-					<col style="width:20%" />
-					<col style="width:35%" />
 					<col style="width:15%" />
-					<col style="width:19%" />
+					<col style="width:20%" />
+					<col style="width:20%" />
+					<col style="width:15%" />
+					<col style="width:15%" />
+					<col style="width:20%" />
 				</colgroup>
 				<thead>
 				  <tr>
@@ -32,13 +33,14 @@
 				    <th scope="col">코스제목</th>
 					<th scope="col">입찰가</th>
 					<th scope="col">입찰시점</th>
+					<th scope="col">입찰종료일</th>
 					<th scope="col">입찰결과</th>
 				  </tr>
 				</thead>
 				<tbody>
 					<c:if test="${empty list }">
 						<tr>
-							<td colspan="5">입찰 내역이 없습니다.</td>
+							<td colspan="6">입찰 내역이 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list }">
@@ -46,10 +48,15 @@
 						<c:forEach var="map" items="${list}">
 							<tr>
 								<td>${map['BID_NO'] }</td>
-								<td><a href="#" style="color: #4169e1">${map['TITLE'] }</a></td>
+								<td>
+									<a href="<c:url value='/nacojja/nacojjaDetail.do?courseNo=${map["COURSE_NO"] }'/>" style="color: #007bff">
+										${map['TITLE'] }
+									</a>
+								</td>
 								<td><fmt:formatNumber value="${map['BID_PRICE'] }" pattern="#,###" />원</td>
 								<td>${map['BID_DAY'] }</td>
-								<td>입찰결과 넣어주는곳</td>
+								<td style="color: red;">${map['BID_END_DAY'] }</td>
+								<td>${map['BID_STATUS'] }</td>
 							</tr>
 						</c:forEach>
 						<!-- 반복 끝 -->

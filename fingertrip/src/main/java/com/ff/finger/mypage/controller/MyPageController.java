@@ -70,15 +70,34 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/myHeart/heartList.do")
-	public String myHeart(HttpSession session, Model model) {
-		logger.info("하트 내역 화면 보여주기");
+	public String myHeart(@ModelAttribute PaginationInfo paginationInfo, HttpSession session, Model model) {
+		logger.info("하트 내역 화면 보여주기 파라미터, paginationInfo={}", paginationInfo);
 		
+		//페이징 처리
+		// [1] PaginationInfo 생성 및 값 셋팅
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(CommonConstants.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(CommonConstants.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(paginationInfo.getCurrentPage());
+
 		String userid = (String) session.getAttribute("userid");
 		MemberVO memberVo = memberService.logingMember(userid);
+		pagingInfo.setMemberNo(memberVo.getMemberNo());
+		logger.info("하트 내역 화면 보여주기 값 세팅 후, pagingInfo={}", pagingInfo);
+
+		//List<Map<String, Object>> heartListVoList = heartListService.selectHeartListByMemberNo(memberVo.getMemberNo());
+		List<Map<String, Object>> heartListVoList = heartListService.selectHeartListByMemberNoWithPaging(pagingInfo);
+		logger.info("페이징 적용된 하트내역 조회 결과, list 사이즈={}", heartListVoList.size());
+
+		// [2] 전체 레코드 개수 조회
+		int totalRecord = heartListService.getTotalRecord(memberVo.getMemberNo());
+		pagingInfo.setTotalRecord(totalRecord);
+		logger.info("전체 레코드 개수={}", totalRecord);
+
 		
-		List<Map<String, Object>> heartListVoList = heartListService.selectHeartListByMemberNo(memberVo.getMemberNo());
-		logger.info("list 사이즈={}",heartListVoList.size());
 		model.addAttribute("hlVoList", heartListVoList);
+		model.addAttribute("memberVo", memberVo);
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "myPage/myHeart/heartList";
 	}

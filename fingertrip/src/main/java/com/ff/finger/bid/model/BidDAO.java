@@ -12,4 +12,5 @@ public interface BidDAO {
 	public BidVO selectWin(int courseNo);
 	public int insertBId(BidVO bidVo);
 	public int dupleTravelAgency(BidVO bidVo);
+	public List<Map<String, Object>> selectMyBidList(String agencyId);
 }

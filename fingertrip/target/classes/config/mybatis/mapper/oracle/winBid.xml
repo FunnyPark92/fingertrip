@@ -11,6 +11,9 @@
 		select * from win_bid where bid_no = #{bidNo}
 	</select>
 	
+	<select id="checkWinByBidNo" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM WIN_BID WHERE BID_NO=#{bidNo}
+	</select>
 </mapper>
 
 

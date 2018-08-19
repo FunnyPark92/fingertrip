@@ -38,7 +38,6 @@
 					<th>번호</th>
 					<th>카테고리</th>
 					<th>제목</th>
-					<th>내용</th>
 					<th>관리자</th>
 				</tr>
 				<c:forEach var="faqCategoryNo1" items="${list}">
@@ -47,7 +46,6 @@
 						<td>${faqCategoryNo1['FAQ_NO']}</td>
 						<td>${faqCategoryNo1['FAQ_CATE_TITLE']}</td>
 						<td><a href="<c:url value='/admin/cs/faq/faqDetail.do?faqNo=${faqCategoryNo1["FAQ_NO"]}'/>">${faqCategoryNo1['TITLE']}</a></td>
-						<td>${faqCategoryNo1['CONTENT']}</td>
 						<td>${faqCategoryNo1['ID']}</td>
 					</tr>
 				</c:forEach>

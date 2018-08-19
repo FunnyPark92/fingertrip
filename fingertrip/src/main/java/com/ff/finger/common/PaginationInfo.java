@@ -1,6 +1,8 @@
 package com.ff.finger.common;
 
-public class PaginationInfo {
+import com.ff.finger.member.model.MemberVO;
+
+public class PaginationInfo extends MemberVO {
 	/**
 	 * Required Fields
 	  	currentPage : 현재 페이지
@@ -8,7 +10,7 @@ public class PaginationInfo {
 		blockSize : 블럭당 보여질 페이지 수
 		totalRecord : totalRecord 총 레코드 수
 	 * */
-	private int currentPage; //현재 페이지
+	private int currentPage = 1; //현재 페이지
 	private int recordCountPerPage;  //pageSize 페이지당 보여질 레코드수
 	private int blockSize; //블럭당 보여질 페이지 수
 	private int totalRecord; //총 레코드 수
@@ -55,6 +57,15 @@ public class PaginationInfo {
 	private int firstRecordIndex; //curPos 페이지당 시작 인덱스 0, 5, 10, 15 ...
 	private int lastRecordIndex;  //페이지당 마지막 인덱스	5,10,15,20....
 	  
+	
+	public void setFirstRecordIndex(int firstRecordIndex) {
+		this.firstRecordIndex = firstRecordIndex;
+	}
+	
+	public void setLastRecordIndex(int lastRecordIndex) {
+		this.lastRecordIndex = lastRecordIndex;
+	}
+
 	public int getTotalPage() {
 		totalPage=(int)Math.ceil((float)totalRecord/recordCountPerPage);
 		//totalPage = ((getTotalRecord()-1)/getRecordCountPerPage()) + 1;
@@ -62,7 +73,6 @@ public class PaginationInfo {
 		return totalPage;
 	}
 		
-	
 	public int getFirstPage() {
 		firstPage= currentPage-((currentPage-1)%blockSize);
 		//firstPage = ((getCurrentPage()-1)/getBlockSize())*getBlockSize() + 1;
@@ -87,5 +97,15 @@ public class PaginationInfo {
 	public int getLastRecordIndex() {
 		lastRecordIndex = getCurrentPage() * getRecordCountPerPage();
 		return lastRecordIndex;
+	}
+
+	@Override
+	public String toString() {
+		return "PaginationInfo [currentPage=" + currentPage + ", recordCountPerPage=" + recordCountPerPage
+				+ ", blockSize=" + blockSize + ", totalRecord=" + totalRecord + ", totalPage=" + totalPage
+				+ ", firstPage=" + firstPage + ", lastPage=" + lastPage + ", firstRecordIndex=" + firstRecordIndex
+				+ ", lastRecordIndex=" + lastRecordIndex + ", toString()=" + super.toString() + "]";
 	}	
+	
+	
 }

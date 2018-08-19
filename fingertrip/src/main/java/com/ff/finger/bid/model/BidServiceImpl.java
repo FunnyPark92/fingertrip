@@ -46,5 +46,10 @@ public class BidServiceImpl implements BidService{
 		return  result;
 	}
 
+	@Override
+	public List<Map<String, Object>> selectMyBidList(String agencyId) {
+		return bidDao.selectMyBidList(agencyId);
+	}
+
 	
 }

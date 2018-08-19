@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="../../inc/top.jsp" %>
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
 
 <div class="container margin80">
@@ -22,9 +23,8 @@
 
         <!-- 서브컨텐츠 -->
         <div class="col-lg-9">
-			<h3>쿠폰 내역</h3><br>
+			<h2>쿠폰 내역</h2><br>
 			<table class="table table-condensed" style="text-align: center">
-				
 				<colgroup>
 					<col style="width:11%" />
 					<col style="width:20%" />
@@ -48,7 +48,6 @@
 						</tr>
 					</c:if>
 					<c:if test="${!empty list }">
-					
 						<!-- 반복 시작 -->
 						<c:forEach var="map" items="${list}">
 							<tr>

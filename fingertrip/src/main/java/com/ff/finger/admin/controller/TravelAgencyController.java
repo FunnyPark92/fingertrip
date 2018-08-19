@@ -77,8 +77,6 @@ public class TravelAgencyController {
 		return result;
 	}
 	
-	
-	
 	@RequestMapping("/agency/agencyList.do")
 	public String agencyList(@ModelAttribute SearchVO searchVo, Model model) {
 		logger.info("여행사 리스트 searchVo={}", searchVo);
@@ -91,7 +89,6 @@ public class TravelAgencyController {
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		searchVo.setRecordCountPerPage(CommonConstants.AGENCY_PER_PAGE);
 		
-		
 		List<TravelAgencyVO> list = travelAgencyServise.selectAgency(searchVo);
 		logger.info("여행사 리스트 list={}",list.size());
 		
@@ -103,9 +100,7 @@ public class TravelAgencyController {
 		model.addAttribute("pagingInfo",pagingInfo);
 		
 		return "admin/agency/agencyList";
-		
 	}
-	
 
 	@RequestMapping(value="/agency/agencyEdit.do", method=RequestMethod.GET)
 	public String agencyEdit(@RequestParam String name,Model model) {
@@ -116,11 +111,12 @@ public class TravelAgencyController {
 		for(String ss : aa) {
 			
 		}*/
+		
 		model.addAttribute("vo",vo);
-
 		
 		return "admin/agency/agencyEdit";
 	}
+	
 	@RequestMapping(value="/agency/agencyEdit.do", method=RequestMethod.POST)
 	public String agencyEdit_post(@ModelAttribute TravelAgencyVO vo,Model model) {
 		logger.info("기업회원 수정하기  vo={}",vo);
@@ -189,6 +185,7 @@ public class TravelAgencyController {
 		
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
+		
 		return "common/message";
 	}
 	
@@ -211,14 +208,5 @@ public class TravelAgencyController {
 		
 		return "common/message";
 	}
+	
 }
-
-
-
-
-
-
-
-
-
-

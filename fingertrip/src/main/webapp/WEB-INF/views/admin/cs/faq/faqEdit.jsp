@@ -28,7 +28,7 @@
 				$('div[name=content]').focus();
 				return false;
 			}else{
-				var confrm=confirm("공지사항을 수정하시겠습니까?");
+				var confrm=confirm("faq를 수정하시겠습니까?");
 				if(!confrm) {
 					$('div[name=content]').focus();
 					return false;
@@ -48,7 +48,7 @@
        	<li><a href="<c:url value='/admin/cs/faq/faqWrite.do'/>">FAQ등록</a></li>
   	</ul>
     <form name="frmCk" action="<c:url value='/admin/cs/faq/faqEdit.do'/>" method="post" enctype="multipart/form-data">
-  		<h2>공지사항 수정</h2>
+  		<h2>FAQ 수정</h2>
   		<input type="hidden" name="faqNo" value="${vo.faqNo }">
   		<input type="hidden" name="faqCategoryNo1" class="cate" value="${vo.faqCategoryNo }">
             <table class="grayBor">
@@ -95,7 +95,6 @@
 	    	</script>
 	       	<input type="hidden" name="content">
 	       
-          		<hr>
        		<div class="divLast">
        			<input type="submit" class="btn btn-info float-right " value="수정">
             </div>

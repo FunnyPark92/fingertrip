@@ -41,9 +41,10 @@
 	var myCenter;
 	var path;
 	var poly;
+	
 	window.onload = function() {
 		initialize();
-		initMarker();//초기 로드시 1일차 map	
+		initMarker(); //초기 로드시 1일차 map
 		
 		var startDay = new Date($('#endBid').val());
 		startDay.setDate(startDay.getDate()+3);
@@ -93,8 +94,6 @@
     	
 		poly.setMap(map);
 		animate(poly);
-		
-	
 	}
   
 	function animate(line) {
@@ -560,11 +559,10 @@
             
           	  <div id="map" class="marginBottom50"></div>
             <c:forEach var="tSpotVo" items="${tSpotVoList }">
-            	<c:if test="${tSpotVo.day == 1 && !empty tSpotVo.travelContent }">
+            	<c:if test="${tSpotVo.day == 1 }">
             		<input type="hidden" value="${tSpotVo.latLng}" class="mapLat">
             	</c:if>
             </c:forEach>
-            
                  
             <div class="spotDiv marginBottom20">
             	<!-- 여행지명<br>

@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.bid">
-	
 	<select id="selectBidList" parameterType="SearchVo" resultType="map">
 		select *
 		from (
@@ -52,10 +51,20 @@
 		insert into bid
 		values(bid_seq.nextval,#{bidPrice},sysdate,#{tripStartDay1},#{tripStartDay2},#{tripStartDay3},#{tripStartDay4},#{travelAgencyNo},#{courseNo})
 	</insert>
+	
 	<select id="dupleTravelAgency" parameterType="bidVO" resultType="int">
 		select count(*) from bid where course_no =#{courseNo} and travel_agency_no =#{travelAgencyNo}
 	</select>
 	
+	<select id="selectMyBidList" parameterType="string" resultType="map">
+		SELECT B.*, C.TITLE, C.BID_START_DAY, TA.ID
+		FROM BID B JOIN COURSE C
+		ON B.COURSE_NO = C.COURSE_NO
+		JOIN TRAVEL_AGENCY TA
+		ON B.TRAVEL_AGENCY_NO = TA.TRAVEL_AGENCY_NO
+		WHERE ID=#{agencyID}
+		ORDER BY BID_NO DESC
+	</select>
 	
 	
 </mapper>

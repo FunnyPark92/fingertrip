@@ -18,6 +18,12 @@ public class WinBidServiceImpl implements WinBidService{
 	@Override
 	public WinBidVO selectWinBid(int bidNo) {
 		return winBidDao.selectWinBid(bidNo);
+
+	}
+
+	@Override
+	public int checkWinByBidNo(int bidNo) {
+		return winBidDao.checkWinByBidNo(bidNo);
 	}
 
 }
