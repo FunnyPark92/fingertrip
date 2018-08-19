@@ -18,7 +18,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/heartChargeC.css">
 
     <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		var IMP = window.IMP;

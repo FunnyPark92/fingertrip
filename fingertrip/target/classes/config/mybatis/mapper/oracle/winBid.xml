@@ -6,6 +6,11 @@
 		insert into win_bid
 		values(win_bid_seq.nextval, #{bidPrice}, #{bidNo})
 	</insert>
+	
+	<select id="selectWinBid" parameterType="int" resultType="WinBidVO">
+		select * from win_bid where bid_no = #{bidNo}
+	</select>
+	
 </mapper>
 
 

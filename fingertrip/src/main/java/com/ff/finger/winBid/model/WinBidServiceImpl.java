@@ -15,4 +15,9 @@ public class WinBidServiceImpl implements WinBidService{
 		return winBidDao.insertWin(map);
 	}
 
+	@Override
+	public WinBidVO selectWinBid(int bidNo) {
+		return winBidDao.selectWinBid(bidNo);
+	}
+
 }

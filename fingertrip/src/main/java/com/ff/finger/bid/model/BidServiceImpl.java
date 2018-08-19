@@ -39,9 +39,9 @@ public class BidServiceImpl implements BidService{
 		int result =0;
 		int cnt =bidDao.dupleTravelAgency(bidVo);
 		if(cnt>0) {
-			result = CommonConstants.EXIST_ID; //이미 입찰을 하였다.
+			result = CommonConstants.TRAVEL_BIDDING; //이미 입찰을 하였다.
 		}else {
-			result =bidDao.insertBId(bidVo);
+			result = bidDao.insertBId(bidVo);
 		}
 		return  result;
 	}

@@ -11,7 +11,8 @@ public interface CommonConstants {
 	public static final int ID_NONE = 3;  //해당 아이디가 없다.
 	public static final int EMAIL_AUTHENTICATION=4; // 이메일 인증을 하지 않았다.
 	public static final int LOGIN_OK_LONG_TERM_NOT_LOGIN = 5; //장기 미접속자(6개월 이상)
-	
+	//기업 입찰에서 사용
+	public static final int TRAVEL_BIDDING = 2; //이미 입찰을 하였다.
 	//공지사항 페이지 처리
 	public static final int BLOCK_SIZE=10;
 	public static final int RECORD_COUNT_PER_PAGE=10;

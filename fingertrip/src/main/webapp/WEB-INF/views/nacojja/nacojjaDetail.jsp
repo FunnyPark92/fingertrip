@@ -28,11 +28,11 @@
 </style>
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
+
 	
-		
-		
+
 	var pattern = new RegExp(/^[0-9]+$/g); //입찰가격 정규식 
 	var myZoom;
 	var map;
@@ -48,6 +48,23 @@
 		var startDay = new Date($('#endBid').val());
 		startDay.setDate(startDay.getDate()+3);
 		$('#endBidding').text(startDay.toLocaleDateString());
+		
+		//결제 할때 여행 날짜 보여주는 거
+		var travelDay = ${travelDay};
+		var tripStartDay1 = new Date("${bidVo.tripStartDay1}");
+		tripStartDay1.setDate(tripStartDay1.getDate()+travelDay);
+		$('#startDay1').append(" ~ "+tripStartDay1.toLocaleDateString());
+		var tripStartDay2 = new Date("${bidVo.tripStartDay2}");
+		tripStartDay2.setDate(tripStartDay2.getDate()+travelDay);
+		$('#startDay2').append(" ~ "+tripStartDay2.toLocaleDateString());
+		var tripStartDay3 = new Date("${bidVo.tripStartDay3}");
+		tripStartDay3.setDate(tripStartDay3.getDate()+travelDay);
+		$('#startDay3').append(" ~ "+tripStartDay3.toLocaleDateString());
+		var tripStartDay4 = new Date("${bidVo.tripStartDay4}");
+		tripStartDay4.setDate(tripStartDay4.getDate()+travelDay);
+		$('#startDay4').append(" ~ "+tripStartDay4.toLocaleDateString());
+		
+		
 	}
 	
 	function initialize() {
@@ -119,15 +136,71 @@
         	markers[i].setMap(map);
       	}
     }
+    
     function pressHeart(){ // 하트 누르기 
-    	if(confirm("하트 1개가 차감됩니다. 여행에 한걸음 다가서겠습니까?")){
-    		location.href="<c:url value='/nacojja/pressHeart.do?courseNo=${courseVo.courseNo}'/>";
+    	if(${empty sessionScope.userid}){
+    		alert("회원 로그인후 이용 가능합니다.");
+    		location.href="<c:url value='/member/login/login.do'/>";
     	}else{
-    		alert("아쉽군");
+	    	if(confirm("하트 1개가 차감됩니다. 여행에 한걸음 다가서겠습니까?")){
+	    		location.href="<c:url value='/nacojja/pressHeart.do?courseNo=${courseVo.courseNo}'/>";
+	    	}else{
+	    		alert("아쉽군");
+	    	}
     	}
     }
     
 	$(document).ready(function(){
+		var IMP = window.IMP;
+		IMP.init('imp72373641');
+		//결제 
+		$('#coursePayment').click(function(){
+			var msg;
+			IMP.request_pay({
+			    pg : 'html5_inicis', // version 1.1.0부터 지원.
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '주문명: 코스결제',
+			    amount : '${bidVo.bidPrice}',
+			    buyer_email : '${memberVo.email1}@${memberVo.email2}',
+			    buyer_name : '${memberVo.name}',
+			    buyer_tel : '${memberVo.hp1}-${memberVo.hp2}-${memberVo.hp3}',
+			    buyer_addr : '${memberVo.address} ${memberVo.addressDetail}',
+			    buyer_postcode : '${memberVo.zipcode}',
+			}, function(rsp) {
+			    if (rsp.success) {
+			    	jQuery.ajax({
+			    		url: "<c:url value='/nacojja//nacojjaPayment.do'/>",
+			    		type: 'POST',
+			    		dataType: 'json',
+			    		data: {
+				    		imp_uid : rsp.imp_uid,
+				    		amount : rsp.paid_amount,
+				    		courseNo : "${courseVo.courseNo}",
+				    		memberNo : "${memberVo.memberNo}",
+				    		winBidNo : "${winBidVo.winBidNo}"
+			    		}
+			    	}).done(function(data) {
+			    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+			    		if (data) {
+			    			msg = '코스 결제가 완료되었습니다.';
+			    			alert(msg);
+			    			
+			    			self.close();
+			    		} else {
+			    			alert("아직 제대로 결제가 되지 않았습니다.");
+			    		}
+			    	});
+			    
+			    } else {
+			        msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			});
+
+		});
+		
 		$(".datepicker").datepicker({
             dateFormat: "yy-mm-dd"
         });
@@ -232,32 +305,27 @@
         });
        	
       	$('.datepicker').change(function() {
-       	/* 	var endbid = new Date(bidStartDay.getTime());
-       		alert(endbid);
-       		endbid.setDate(endbid.getDate()+14);
-       		alert(endbid); */
-       		
-       		/* var endbid = new Date($('#endBid').val()).getTime(); */
-       		var endbid = new Date($('#endBidding').text()).getTime();
+       
+       		var endbid1 = new Date($('#regDate').text()).getTime();
       		var startDay1 = new Date($('input[name=tripStartDay1]').val()).getTime();
       		var startDay2 = new Date($('input[name=tripStartDay2]').val()).getTime();
       		var startDay3 = new Date($('input[name=tripStartDay3]').val()).getTime();
       		var startDay4 = new Date($('input[name=tripStartDay4]').val()).getTime();
       		
-			if(startDay1 - endbid < 24*60*60*1000 * 14){
-				alert("출발일은 입찰종료후 2주후부터 가능합니다.");
+			if(startDay1 - endbid1 < 24*60*60*1000 * 31){
+				alert("출발일은 등록일 기준 최소 30일 후부터 선택 가능합니다!");
 				$(this).val("");
 				$(this).focus();
-			}else if(startDay2 - endbid < 24*60*60*1000 * 14){
-				alert("출발일은 입찰종료후 2주후부터 가능합니다.");
+			}else if(startDay2 - endbid1 < 24*60*60*1000 * 31){
+				alert("출발일은 등록일 기준 최소 30일 후부터 선택 가능합니다!");
 				$(this).val("");
 				$(this).focus();
-			}else if(startDay3 - endbid < 24*60*60*1000 * 14){
-				alert("출발일은 입찰종료후 2주후부터 가능합니다.");
+			}else if(startDay3 - endbid1 < 24*60*60*1000 * 31){
+				alert("출발일은 등록일 기준 최소 30일 후부터 선택 가능합니다!");
 				$(this).val("");
 				$(this).focus();
-			}else if(startDay4 - endbid < 24*60*60*1000 * 14){
-				alert("출발일은 입찰종료후 2주후부터 가능합니다.");
+			}else if(startDay4 - endbid1 < 24*60*60*1000 * 31){
+				alert("출발일은 등록일 기준 최소 30일 후부터 선택 가능합니다!");
 				$(this).val("");
 				$(this).focus();
 			}
@@ -265,26 +333,30 @@
        	
        	$('#bidding').click(function(){//입찰 유효성 검사 
        		var bool = true;
-       	
-       		$('.valid').each(function(idx,item){
-	       		if($(this).val().length <1){
-	       			alert($(this).prev().text()+" 입력해주세요");
-	       			$(this).focus();
-	       			bool=false;
-	       			return false;
-	       		}
-       			
-       		});
-       		if(bool){
-	       		 if(pattern.test($('#biddingPrice').val())){
-	       			bool = true;
-	       		}else{
-	       			bool = false;
-	       			alert("입찰가격은 숫자로만 입력해주세요");
+       		if(${empty sessionScope.agencyid}){
+       			alert("기업 로그인후 이용가능 합니다.");
+				bool=false;
+				location.href="<c:url value='/member/login/login.do'/>";
+       		}else{
+	       		$('.valid').each(function(idx,item){
+		       		if($(this).val().length <1){
+		       			alert($(this).prev().text()+" 입력해주세요");
+		       			$(this).focus();
+		       			bool=false;
+		       			return false;
+		       		}
+	       			
+	       		});
+	       		
+	       		if(bool){
+		       		 if(pattern.test($('#biddingPrice').val())){
+		       			bool = true;
+		       		}else{
+		       			bool = false;
+		       			alert("입찰가격은 숫자로만 입력해주세요");
+		       		}
 	       		}
        		}
-       		
-       		alert(bool);
        		return bool;
        	});
     	
@@ -328,7 +400,6 @@
 	            <input type="button" class="heartBtn btn btn-block btn-danger" onclick="pressHeart()" value="하트 누르기">
 	            <div>
 	            	<span class="listTitle float-left"><img src="${pageContext.request.contextPath }/img/heart.png" class="qna"></span>
-	            	
 	            	<p class="float-left heart2">${courseVo.heartCount }</p>
 	            </div>
 	        </div>
@@ -353,9 +424,13 @@
 					<span>${travelDay}</span>
 				</div>
 			 	<div>
+					<span class="leftSpan">등록일</span>
+					<span id="regDate"><fmt:formatDate value="${courseVo.regDate}" pattern="yyyy.M.dd"/> </span>
+				</div>
+			 	<div>
 					<span class="leftSpan">입찰 종료일</span>
 					<span id="endBidding"></span>
-					<input type="hidden" id="endBid" value="<fmt:formatDate value='${courseVo.bidStartDay}' pattern="yyyy-MM-dd"/>">
+					<input type="hidden" id="endBid" value="<fmt:formatDate value='${courseVo.bidStartDay}' pattern='yyyy.MM.dd'/>">
 					
 				</div>
 	            <div>
@@ -393,16 +468,17 @@
 			<!-- 결제할 때 -->
 			<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
 			<div class="col-md-6 naThumHeart marginBottom50" style="display:;">
+				<form name="payfrm" method="post" action="<c:url value='/nacojja/nacojjaPayment.do'/>">
 				<div>결제진행중</div>
 				<h3 class="marginBottom20">${courseVo.title}</h3>
 				<div class="thumPay">
 					<span class="leftSpan">여행 날짜</span> <select>
 						<option value="선택">날짜 선택</option>
-						<option value="${courseVo.startDay}">${courseVo.startDay}</option>
-						<option value="${bidVo.tripStartDay1}">${bidVo.tripStartDay1}</option>
-						<option value="${bidVo.tripStartDay2}">${bidVo.tripStartDay2}</option>
-						<option value="${bidVo.tripStartDay3}">${bidVo.tripStartDay3}</option>
-						<option value="${bidVo.tripStartDay4}">${bidVo.tripStartDay4}</option>
+						<option value="${courseVo.startDay}">${courseVo.startDay} ~ ${courseVo.endDay}</option>
+						<option id="startDay1" value="${bidVo.tripStartDay1}">${bidVo.tripStartDay1}</option>
+						<option id="startDay2" value="${bidVo.tripStartDay2}">${bidVo.tripStartDay2}</option>
+						<option id="startDay3" value="${bidVo.tripStartDay3}">${bidVo.tripStartDay3}</option>
+						<option id="startDay4" value="${bidVo.tripStartDay4}">${bidVo.tripStartDay4}</option>
 
 					</select>
 				</div>
@@ -414,15 +490,16 @@
 					<span class="leftSpan">여행사</span> ${agencyVo.name}
 				</div>
 				<div class="thumPay">
-					<span class="leftSpan">여행가격</span>${bidVo.bidPrice}
+					<span class="leftSpan">여행가격</span>${bidVo.bidPrice} 원
 				</div>
 				<div class="thumPay">
 					<span class="leftSpan">여행사 번호</span> ${agencyVo.licenseNo}
 				</div>
 				<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
 				<div>
-					<input type="button" class="btn payBtn btn-primary" value="결제하기">
+					<input type="button" id="coursePayment" class="btn payBtn btn-primary" value="결제하기">
 				</div>
+				</form>
 			</div>
 		</c:if>
 

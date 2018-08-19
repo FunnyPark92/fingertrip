@@ -24,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ff.finger.IamportRestClient.IamportClient;
+import com.ff.finger.IamportRestClient.response.AccessToken;
+import com.ff.finger.IamportRestClient.response.IamportResponse;
+import com.ff.finger.IamportRestClient.response.Payment;
 import com.ff.finger.bid.model.BidService;
 import com.ff.finger.bid.model.BidVO;
 import com.ff.finger.common.CommonConstants;
@@ -38,14 +42,18 @@ import com.ff.finger.heartlist.model.HeartListService;
 import com.ff.finger.heartlist.model.HeartListVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
+import com.ff.finger.payment.PaymentService;
+import com.ff.finger.payment.PaymentVO;
 import com.ff.finger.travelAgency.model.TravelAgencyService;
 import com.ff.finger.travelAgency.model.TravelAgencyVO;
 import com.ff.finger.travelspot.model.TravelSpotVO;
 import com.ff.finger.winBid.model.WinBidService;
+import com.ff.finger.winBid.model.WinBidVO;
 
 @Controller
 @RequestMapping("/nacojja")
 public class NacojjaController {
+	private IamportClient client;
 	private static final Logger logger = LoggerFactory.getLogger(NacojjaController.class);
 	//private List<TravelSpotVO> travelSpotList = new ArrayList<>();
 	private List<Map<String, TravelSpotVO>> travelSpotListById = new ArrayList<>();
@@ -74,6 +82,10 @@ public class NacojjaController {
 	
 	@Autowired
 	private TravelAgencyService travelAgencyService;
+	
+	@Autowired
+	private PaymentService paymentService;
+	
 	
 	@RequestMapping("/nacojjaList.do")
 	public String nacojjaList(@ModelAttribute SearchVO searchVo, Model model) {
@@ -438,9 +450,11 @@ public class NacojjaController {
 		List<TravelSpotVO> travelSpotVoList = courseService.selectTravelSpot(courseNo);
 		if(courseVo.getProgressNo()==3) {
 			BidVO bidVo = bidService.selectWin(courseNo);
+			WinBidVO winBidVo = winBidService.selectWinBid(bidVo.getBidNo());
 			TravelAgencyVO agencyVo = travelAgencyService.selectTravel(bidVo.getTravelAgencyNo());
 			model.addAttribute("bidVo",bidVo); // 상태가 결재상태일때 낙찰정보
 			model.addAttribute("agencyVo",agencyVo);
+			model.addAttribute("winBidVo",winBidVo);
 		}
 		
 		Calendar cal = Calendar.getInstance();
@@ -471,68 +485,69 @@ public class NacojjaController {
 		
 		return travelSpotVoList;
 	}
+	
 	@RequestMapping("/pressHeart.do")
 	public String pressHeart(@ModelAttribute HeartVO heartVo,HttpSession session, Model model) {
-		String id =  (String) session.getAttribute("userid"); //하트 누르는 사람의 아이디! 등록한 사람 이 아님
-		logger.info("하트 누르기 파라미터 userid={} courseNo={}",id,heartVo.getCourseNo());
-		
-		MemberVO memberVo = memberService.logingMember(id);
-		heartVo.setMemberNo(memberVo.getMemberNo());
-		int result = heartService.countHeartMember(heartVo);
+		logger.info("하트 누르기 파라미터 userid={} courseNo={}",session.getAttribute("userid"),heartVo.getCourseNo());
 		
 		String msg="", url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
-		
-		if(result>0) { //이미 해당코스에 하트를 사용했을 경우 
-			msg="이미 하트를 부여했습니다. 하트주기는 코스당 1회로 제한됩니다.!";
-			logger.info("과거 해당코스에 하트 부여 여부 result={}",result);
-		}else {
-			
-			int cnt  = memberService.pressHeart(id);
-			logger.info("하트 누르기 멤버 업데이트 결과 cnt={}",cnt);
-			
+			String id =  (String) session.getAttribute("userid"); //하트 누르는 사람의 아이디! 등록한 사람 이 아님
+			MemberVO memberVo = memberService.logingMember(id);
 			heartVo.setMemberNo(memberVo.getMemberNo());
-			if(cnt>0) {
-				msg="소중한 하트 감사합니다.";
-				url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
-				int countHeart = heartService.countHeart200(heartVo.getCourseNo());
-				logger.info("하트 200개  countHeart={}",countHeart);
-				if(countHeart > 0) {
-					int progress2 = courseService.ProgressNo2(heartVo.getCourseNo());
-					logger.info("진행상태 업뎃2 결과 progress={}",progress2);
-					int cCnt =heartService.updateCourseHeart(heartVo.getCourseNo());
-					logger.info("코스테이블에 하트 업데이트 결과 cCnt={}",cCnt);
-					
-					int hCnt =heartService.insertHeart(heartVo);
-					logger.info("하트테이블 insert결과 hCnt={}",hCnt);
-					
-					HeartListVO heartListVo = new HeartListVO();
-					heartListVo.setMemberNo(memberVo.getMemberNo());
-					heartListVo.setStatus("하트주기");
-					heartListVo.setHeartNo(heartVo.getHeartNo());
-					
-					int lCnt =heartListService.insertHeartListUse(heartListVo);
-					logger.info("하트내역 insert결과 lCnt={}",lCnt);
-				}else {
-					int cCnt =heartService.updateCourseHeart(heartVo.getCourseNo());
-					logger.info("코스테이블에 하트 업데이트 결과 cCnt={}",cCnt);
-					
-					int hCnt =heartService.insertHeart(heartVo);
-					logger.info("하트테이블 insert결과 hCnt={}",hCnt);
-					
-					HeartListVO heartListVo = new HeartListVO();
-					heartListVo.setMemberNo(memberVo.getMemberNo());
-					heartListVo.setStatus("하트");
-					heartListVo.setHeartNo(heartVo.getHeartNo());
-					
-					int lCnt =heartListService.insertHeartListUse(heartListVo);
-					logger.info("하트내역 insert결과 lCnt={}",lCnt);
-				}
+			int result = heartService.countHeartMember(heartVo);
+			
+			if(result>0) { //이미 해당코스에 하트를 사용했을 경우 
+				msg="이미 하트를 부여했습니다. 하트주기는 코스당 1회로 제한됩니다.!";
+				logger.info("과거 해당코스에 하트 부여 여부 result={}",result);
 			}else {
 				
-				msg="하트가 부족합니다! 충전하러 가시겠어요?";
-				url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
+				int cnt  = memberService.pressHeart(id);
+				logger.info("하트 누르기 멤버 업데이트 결과 cnt={}",cnt);
+				
+				heartVo.setMemberNo(memberVo.getMemberNo());
+				if(cnt>0) {
+					msg="소중한 하트 감사합니다.";
+					url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
+					int countHeart = heartService.countHeart200(heartVo.getCourseNo());
+					logger.info("하트 200개  countHeart={}",countHeart);
+					if(countHeart > 0) {
+						int progress2 = courseService.ProgressNo2(heartVo.getCourseNo());
+						logger.info("진행상태 업뎃2 결과 progress={}",progress2);
+						int cCnt =heartService.updateCourseHeart(heartVo.getCourseNo());
+						logger.info("코스테이블에 하트 업데이트 결과 cCnt={}",cCnt);
+						
+						int hCnt =heartService.insertHeart(heartVo);
+						logger.info("하트테이블 insert결과 hCnt={}",hCnt);
+						
+						HeartListVO heartListVo = new HeartListVO();
+						heartListVo.setMemberNo(memberVo.getMemberNo());
+						heartListVo.setStatus("하트주기");
+						heartListVo.setHeartNo(heartVo.getHeartNo());
+						
+						int lCnt =heartListService.insertHeartListUse(heartListVo);
+						logger.info("하트내역 insert결과 lCnt={}",lCnt);
+					}else {
+						int cCnt =heartService.updateCourseHeart(heartVo.getCourseNo());
+						logger.info("코스테이블에 하트 업데이트 결과 cCnt={}",cCnt);
+						
+						int hCnt =heartService.insertHeart(heartVo);
+						logger.info("하트테이블 insert결과 hCnt={}",hCnt);
+						
+						HeartListVO heartListVo = new HeartListVO();
+						heartListVo.setMemberNo(memberVo.getMemberNo());
+						heartListVo.setStatus("하트");
+						heartListVo.setHeartNo(heartVo.getHeartNo());
+						
+						int lCnt =heartListService.insertHeartListUse(heartListVo);
+						logger.info("하트내역 insert결과 lCnt={}",lCnt);
+					}
+				}else {
+					msg="하트가 부족합니다! 충전하러 가시겠어요?";
+					url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
+				}
 			}
-		}
+			
+	
 		
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
@@ -542,25 +557,54 @@ public class NacojjaController {
 	
 	@RequestMapping("/nacojjaBidding.do")
 	public String courseBidding(@ModelAttribute BidVO bidVo,HttpSession session,Model model) {
-		String agencyid = (String)session.getAttribute("agencyid");
-		logger.info("입찰하기 파람 bidvo={},agencyid={}",bidVo,agencyid);
+		logger.info("입찰하기 파람 bidvo={},agencyid={}",bidVo,session.getAttribute("agencyid"));
+		String msg="", url="/nacojja/nacojjaDetail.do?courseNo="+bidVo.getCourseNo();
+			String agencyid = (String)session.getAttribute("agencyid");
+			String agencyName =travelAgencyService.getAgencyName(agencyid);
+			TravelAgencyVO travelVo = travelAgencyService.selectOneAgency(agencyName);
+			bidVo.setTravelAgencyNo(travelVo.getTravelAgencyNo());
+			int cnt =bidService.insertBId(bidVo);
+			logger.info("입찰 결과 cnt={}",cnt);
+			
+			if(cnt==CommonConstants.TRAVEL_BIDDING) {
+				msg="한 코스에 한번만 입찰 가능합니다.";
+			}else {
+				msg="입찰 성공!";
+			}
 		
-		String agencyName =travelAgencyService.getAgencyName(agencyid);
-		TravelAgencyVO travelVo = travelAgencyService.selectOneAgency(agencyName);
-		bidVo.setTravelAgencyNo(travelVo.getTravelAgencyNo());
-		int cnt =bidService.insertBId(bidVo);
-		logger.info("입찰 결과 cnt={}",cnt);
-		String msg="", url="/nacojja/nacojjaList.do";
-		if(cnt==CommonConstants.EXIST_ID) {
-			msg="한 코스에 한번만 입찰 가능합니다.";
-		}else {
-			msg="입찰 성공!";
-		}
 		
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
 		
 		return "common/message";
+	}
+	@RequestMapping("/nacojjaPayment.do")
+	@ResponseBody
+	public boolean nacojjaPayment(@ModelAttribute PaymentVO paymentVo,@RequestParam String imp_uid,
+			@RequestParam int amount,HttpSession session) {
+		logger.info("코스결제 파람 paymentVo={},imp_uid={}",paymentVo,imp_uid);
+		logger.info("코스결제 파람 amount={},id",amount,session.getAttribute("agencyid"));
+		
+		String test_api_key = "3971268384217405";
+		String test_api_secret = "aLBqv3qP2aZgRODLdPTWiZx1fUKDxcKIYm8upyjsJjIB7lmlbfhuePvuJg7gtRYre6VEFf6pyO0Fam0m";
+		client = new IamportClient(test_api_key, test_api_secret);
+		
+		IamportResponse<AccessToken> auth_response = client.getAuth();
+		logger.info("REST API 사용을 위한 access_token값={}", auth_response.getResponse().getToken());
+		
+		IamportResponse<Payment> payment_result = client.paymentByImpUid(imp_uid);
+		
+		//amount_to_be_paid = query_amount_to_be_paid(payment_result.merchant_uid); //결제되었어야 하는 금액 조회. 가맹점에서는 merchant_uid기준으로 관리
+		
+		logger.info("결제 상태 값={}", payment_result.getResponse().getStatus());
+		if(payment_result.getResponse().getStatus().equalsIgnoreCase("paid")) {
+			//db
+			int cnt =paymentService.insertPayment(paymentVo);
+			logger.info("paymentInsert결과 ={}",cnt);
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }
