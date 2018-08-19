@@ -21,7 +21,7 @@
 			>쿠폰</option>
 			<option value="3"
 				<c:if test="${param.faqCategoryNo==3}">selected</c:if>
-			>상품</option>
+			>코스/일정</option>
 			<option value="4"
 				<c:if test="${param.faqCategoryNo==4}">selected</c:if>
 			>계정</option>

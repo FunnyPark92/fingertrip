@@ -56,7 +56,7 @@ $(document).ready(function(){
 					<c:if test="${param.faqCategoryNo==3 }">
 						class="gray"
 					</c:if>
-				>상품</li>
+				>코스/일정</li>
 				<li value="4"
 					<c:if test="${param.faqCategoryNo==4 }">
 						class="gray"
