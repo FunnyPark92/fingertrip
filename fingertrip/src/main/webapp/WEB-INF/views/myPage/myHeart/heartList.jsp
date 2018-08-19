@@ -34,6 +34,9 @@
         <!-- 서브컨텐츠 -->
         <div class="col-lg-9">
 			<h2>하트 내역</h2><br>
+			<span style="position: absolute; top: 40px; left: 550px;">
+				${memberVo.name }님이 보유중인 하트는 <b style="color: blue;">${memberVo.heartCount }</b>개 입니다.
+			</span>
 			<table class="table table-condensed" style="text-align: center">
 				<colgroup>
 					<col style="width:20%" />

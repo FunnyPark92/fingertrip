@@ -78,7 +78,9 @@ public class MyPageController {
 		
 		List<Map<String, Object>> heartListVoList = heartListService.selectHeartListByMemberNo(memberVo.getMemberNo());
 		logger.info("list 사이즈={}",heartListVoList.size());
+		
 		model.addAttribute("hlVoList", heartListVoList);
+		model.addAttribute("memberVo", memberVo);
 		
 		return "myPage/myHeart/heartList";
 	}
