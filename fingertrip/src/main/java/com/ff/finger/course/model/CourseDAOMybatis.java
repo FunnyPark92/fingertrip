@@ -110,4 +110,14 @@ public class CourseDAOMybatis implements CourseDAO{
 		return sqlSession.update(namespace+"ProgressNo2",courseNo);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectListJoinPayBid(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectListJoinPayBid", searchVo);
+	}
+
+	@Override
+	public List<CourseVO> selectCourse(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectCourse", searchVo);
+	}
+
 }

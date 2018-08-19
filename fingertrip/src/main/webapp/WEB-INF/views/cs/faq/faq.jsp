@@ -35,12 +35,10 @@ $(document).ready(function(){
 
 		<!-- 서브컨텐츠 -->
 		<div class="col-lg-9">
-
 			<form name="faqList" class="faqList" method="get"
 				action="<c:url value='/cs/faq/faq.do'/>">
 				<input name="faqCategoryNo" type="hidden">
 			</form>
-			
 			
 			<h4>FAQ</h4>
 			<ul class="faqTabNav clearFix">

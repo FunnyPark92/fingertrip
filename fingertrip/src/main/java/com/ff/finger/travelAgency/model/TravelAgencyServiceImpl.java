@@ -128,5 +128,4 @@ public class TravelAgencyServiceImpl implements TravelAgencyService {
 	public TravelAgencyVO getAgencyVo(String agencyId) {
 		return travelAgencyDao.getAgencyVo(agencyId);
 	}
-
 }

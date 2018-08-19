@@ -126,4 +126,14 @@ public class CourseServiceImpl implements CourseService {
 	public int ProgressNo2(int courseNo) {
 		return courseDao.ProgressNo2(courseNo);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectListJoinPayBid(SearchVO searchVo) {
+		return courseDao.selectListJoinPayBid(searchVo);
+	}
+
+	@Override
+	public List<CourseVO> selectCourse(SearchVO searchVo) {
+		return courseDao.selectCourse(searchVo);
+	}
 }

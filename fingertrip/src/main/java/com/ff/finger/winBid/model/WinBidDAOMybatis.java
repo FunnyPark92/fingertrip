@@ -18,6 +18,10 @@ public class WinBidDAOMybatis implements WinBidDAO{
 	}
 
 	@Override
+	public int selectPayment(int mon) {
+		return sqlSession.selectOne(namespace+"selectPayment", mon);
+	}
+
 	public WinBidVO selectWinBid(int bidNo) {
 		return sqlSession.selectOne(namespace+"selectWinBid",bidNo);
 
