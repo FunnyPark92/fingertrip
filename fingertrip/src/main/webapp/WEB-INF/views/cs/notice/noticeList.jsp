@@ -34,6 +34,7 @@
             		</form>
             	</div>
             	
+            	<h4>공지사항</h4>
                 <table class="table table-hover tableBorder">
                     <thead class="thead-dark">
                         <tr>

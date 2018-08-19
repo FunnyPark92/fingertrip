@@ -42,7 +42,7 @@ function pageFunc(currentPage){
             </div>
            <!-- 서브컨텐츠 -->
             <div class="col-lg-9">
-                <h4>QnA게시판</h4>
+                <h4>Q&A</h4>
                 <table class="table table-hover tableBorder">
                     <thead class="thead-dark">
                         <tr>
