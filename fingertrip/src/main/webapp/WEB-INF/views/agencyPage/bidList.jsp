@@ -40,7 +40,7 @@
 				<tbody>
 					<c:if test="${empty list }">
 						<tr>
-							<td colspan="5">입찰 내역이 없습니다.</td>
+							<td colspan="6">입찰 내역이 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list }">

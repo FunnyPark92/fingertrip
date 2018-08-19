@@ -31,19 +31,15 @@
             </div>
         </div>
         
-        <!-- 서브메뉴 -->
+        <!-- 서브컨텐츠 -->
         <div class="col-lg-9">
-			<div class="container">
 			<h2>하트 내역</h2><br>
-			<table class="box2">
-				<caption>하트 내역</caption>
+			<table class="table table-condensed" style="text-align: center">
 				<colgroup>
 					<col style="width:20%" />
-					<col style="width:12%" />
+					<col style="width:10%" />
 					<col style="width:40%" />
 					<col style="width:30%" />
-					<col style="width:12%" />	
-					<col style="width:14%" />
 				</colgroup>
 				<thead>
 				  <tr>
@@ -56,7 +52,7 @@
 				<tbody>
 					<c:if test="${empty hlVoList }">
 						<tr>
-							<td colspan="6">해당 기간의 하트 충전/사용 내역이 없습니다.</td>
+							<td colspan="4">하트 충전/적립/사용 내역이 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty hlVoList }">
@@ -99,9 +95,8 @@
 					</c:if>
 				</tbody>
 			</table>
-			</div>
-				<button type="button" class="btn btn-warning text-center" id="btn1">하트 충전하기</button> 
-			</div>
+			<button type="button" class="btn btn-warning text-center" id="btn1">하트 충전하기</button> 
+		</div>
 	</div>
 </div>
 
