@@ -75,8 +75,8 @@ $(document).ready(function(){
 							${map['TITLE']}
 						</c:if>
 	                </a></td>
-	                <td><fmt:formatDate value="${map['BID_START_DAY']}" pattern="yyyy-MM-dd"/></td>
-	                <td><fmt:formatDate value="${map['BID_END_DAY']}" pattern="yyyy-MM-dd"/></td>
+	                <td>${map['BID_START_DAY']}</td>
+	                <td>${map['BID_END_DAY']}</td>
 	                <td>${map['PROGRESS_STATUS']}</td>
 	            </tr>
             </c:forEach>

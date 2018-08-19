@@ -36,10 +36,7 @@
 	 		</tr>	
 			<tr>
 	 			<th>입찰 기간</th>
-	 			<td>
-	 				<fmt:formatDate value="${map['BID_START_DAY'] }" pattern="yyyy-MM-dd"/> ~  
-					<fmt:formatDate value="${map['BID_END_DAY']}" pattern="yyyy-MM-dd"/> 
-	 			</td>
+	 			<td>${map['BID_START_DAY'] } ~  ${map['BID_END_DAY']}</td>
 	 		</tr>
 		</table>
 		
