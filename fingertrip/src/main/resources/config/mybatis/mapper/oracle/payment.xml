@@ -3,10 +3,19 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.payment">
 	
-	<insert id="insertPayment" parameterType="paymentVO">
+	<insert id="insertPayment" parameterType="PaymentVO">
 		insert into payment
-		values(payment_seq.nextval,sysdate,#{memberNo},#{courseNo},#{winBidNo})
+		values(payment_seq.nextval,sysdate,#{travelstart},#{memberNo},#{courseNo},#{winBidNo})
 	</insert>
+	
+	<select id="selectAllPayment" parameterType="int" resultType="map">
+			select p.*,s.title,w.WIN_BID_PRICE 
+			from payment p join course s
+			on p.COURSE_NO = s.COURSE_NO
+			join win_bid w
+			on p.WIN_BID_NO = w.WIN_BID_NO
+			where p.member_no = #{memberNo}
+	</select>
 	
 	
 </mapper>

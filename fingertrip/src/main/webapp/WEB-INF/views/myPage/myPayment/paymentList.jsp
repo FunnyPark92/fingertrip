@@ -26,21 +26,19 @@
 			<h2>결제 내역</h2><br>
 			<table class="table table-condensed" style="text-align: center">
 				<colgroup>
-					<col style="width:9%" />
-					<col style="width:12%" />
-					<col style="width:40%" />
-					<col style="width:12%" />
-					<col style="width:12%" />	
-					<col style="width:14%" />
+					<col style="width:11%" />
+					<col style="width:30%" />
+					<col style="width:13%" />
+					<col style="width:20%" />	
+					<col style="width:25%" />
 				</colgroup>
 				<thead>
 				  <tr>
 				    <th scope="col">결제번호</th>
-					<th scope="col">결제일자</th>
 					<th scope="col">코스명</th>
 					<th scope="col">결제금액</th>
-					<th scope="col">???</th>
-					<th scope="col">???</th>
+					<th scope="col">여행일정</th>
+					<th scope="col">결제일자</th>
 				  </tr>
 				</thead> 
 				<tbody>
@@ -51,7 +49,15 @@
 					</c:if>
 					<c:if test="${!empty list }">
 						<!-- 반복 시작 -->
-						
+						<c:forEach var="map" items="${list}">
+							<tr style="color: red">
+								<td>${map['PAYMENT_NO']}</td>
+								<td>${map['TITLE']}</td>
+								<td>${map['WIN_BID_PRICE']}</td>
+								<td>${map['TRAVELSTART']}</td>
+								<td>${map['PAYMENT_DATE']}</td>
+							</tr>
+						</c:forEach>
 						<!-- 반복 끝 -->
 					</c:if>
 				</tbody>
