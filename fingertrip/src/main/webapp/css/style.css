@@ -603,6 +603,15 @@ table a:hover, table a:active{text-decoration: none;}
     color: #fff;
     width: 95%;
 }
+.expDiv{
+	min-height: 115px;
+	background-image: url(../img/quote2.png);
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-size:30px;
+	color: #a6acaf;
+    margin-top: 5px;
+}
 
 .ncjP{border-top: 2px solid #ffc68b;}
 .ncjP span{display: inline-block;}

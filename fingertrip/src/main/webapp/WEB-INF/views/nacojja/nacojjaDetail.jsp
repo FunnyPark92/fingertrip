@@ -392,9 +392,8 @@
 	                <small>등록일 : </small>${courseVo.regDate}
 	            </div>
 	            <div class="expDiv">
-	               	<img src="<c:url value='/img/quot1.png'/>" style="width: 10px; height: 10px">
+	               	<img src="<c:url value='/img/quote1.png'/>" style="width:30px;">
 	               	${courseVo.content}
-	               	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
 	            </div>
 	            <input type="button" class="heartBtn btn btn-block btn-danger" onclick="pressHeart()" value="하트 누르기">
 	            <div>
@@ -406,7 +405,7 @@
         
         <c:if test="${courseVo.progressNo==2}">
 		<!-- 입찰 -->
-		<div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
+		<div class="col-md-6 naThumHeart marginBottom50">
 			<form name="biding" method="post" action="<c:url value='/nacojja/nacojjaBidding.do'/>">
 				<div>입찰진행중</div>
 				<h3 class="marginBottom20">${courseVo.title}</h3>
@@ -466,7 +465,7 @@
 		
 			<!-- 결제할 때 -->
 			<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
-			<div class="col-md-6 naThumHeart marginBottom50" style="display:;">
+			<div class="col-md-6 naThumHeart marginBottom50">
 				<form name="payfrm" method="post" action="<c:url value='/nacojja/nacojjaPayment.do'/>">
 				<div>결제진행중</div>
 				<h3 class="marginBottom20">${courseVo.title}</h3>
@@ -508,7 +507,7 @@
 		
 		<c:if test="${courseVo.progressNo==4 || courseVo.progressNo==5}">
 		<!-- 실패 -->
-        <div class="col-md-6 naThumHeart marginBottom50" style="display: ;">
+        <div class="col-md-6 naThumHeart marginBottom50">
             <div>
                	종료
             </div>
