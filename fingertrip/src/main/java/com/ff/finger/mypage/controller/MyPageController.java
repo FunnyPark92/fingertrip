@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,8 @@ import com.ff.finger.heartlist.model.HeartListService;
 import com.ff.finger.heartlist.model.HeartListVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
+import com.ff.finger.payment.PaymentService;
+import com.ff.finger.payment.PaymentVO;
 
 @Controller
 @RequestMapping("/myPage")
@@ -61,13 +64,11 @@ public class MyPageController {
 	
 	@Autowired
 	private HeartListService heartListService;
+	
+	@Autowired
+	private PaymentService paymentService;
 
-	@RequestMapping("/myPayment/paymentList.do")
-	public String myPayment() {
-		logger.info("결제 내역 화면 보여주기");
-		
-		return "myPage/myPayment/paymentList";
-	}
+	
 	
 	@RequestMapping("/myHeart/heartList.do")
 	public String myHeart(@ModelAttribute PaginationInfo paginationInfo, HttpSession session, Model model) {
@@ -274,4 +275,47 @@ public class MyPageController {
 		
 		return "myPage/myWrite/myWriteList";
 	}
+	
+	@RequestMapping("/myPayment/paymentList.do")
+	public String paymentList(HttpSession session,Model model) {
+		String id = (String) session.getAttribute("userid");
+		logger.info("결제내역 화면={}",id);
+		MemberVO memberVo =memberService.logingMember(id);
+		List<Map<String, Object>> list= paymentService.selectAllPayment(memberVo.getMemberNo());
+		logger.info("결제리스트 사이즈 list.size={}",list.size());
+		model.addAttribute("list",list);
+		
+		return "myPage/myPayment/paymentList";
+	}
+
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

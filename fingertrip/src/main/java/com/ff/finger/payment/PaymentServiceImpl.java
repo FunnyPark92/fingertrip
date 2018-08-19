@@ -1,12 +1,13 @@
 package com.ff.finger.payment;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ff.finger.IamportRestClient.response.Payment;
-import com.ff.finger.member.model.MemberDAO;
 import com.ff.finger.member.model.MemberServiceImpl;
 
 @Service
@@ -18,6 +19,11 @@ public class PaymentServiceImpl implements PaymentService {
 	public int insertPayment(PaymentVO vo) {
 		return paymentDao.insertPayment(vo);
 	}
+	@Override
+	public List<Map<String, Object>> selectAllPayment(int memberNo) {
+		return paymentDao.selectAllPayment(memberNo);
+	}
+	
 	
 	
 	

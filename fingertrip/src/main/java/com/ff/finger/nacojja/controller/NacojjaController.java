@@ -466,6 +466,7 @@ public class NacojjaController {
 		}
 		
 		Calendar cal = Calendar.getInstance();
+		cal.setTime(courseVo.getStartDay());
 		
 		List<Date> travelDateList = new ArrayList<>();
 		travelDateList.add(cal.getTime());
@@ -473,7 +474,7 @@ public class NacojjaController {
 			cal.add(Calendar.DATE, 1);
 			travelDateList.add(cal.getTime());
 		}
-		
+	
 		model.addAttribute("travelDay",travelDay);
 		model.addAttribute("tdList", travelDateList); //일수 
 		model.addAttribute("courseVo", courseVo); //코스
@@ -586,12 +587,13 @@ public class NacojjaController {
 		
 		return "common/message";
 	}
+	
 	@RequestMapping("/nacojjaPayment.do")
 	@ResponseBody
 	public boolean nacojjaPayment(@ModelAttribute PaymentVO paymentVo,@RequestParam String imp_uid,
 			@RequestParam int amount,HttpSession session) {
 		logger.info("코스결제 파람 paymentVo={},imp_uid={}",paymentVo,imp_uid);
-		logger.info("코스결제 파람 amount={},id",amount,session.getAttribute("agencyid"));
+		logger.info("코스결제 파람 amount={}",amount);
 		
 		String test_api_key = "3971268384217405";
 		String test_api_secret = "aLBqv3qP2aZgRODLdPTWiZx1fUKDxcKIYm8upyjsJjIB7lmlbfhuePvuJg7gtRYre6VEFf6pyO0Fam0m";

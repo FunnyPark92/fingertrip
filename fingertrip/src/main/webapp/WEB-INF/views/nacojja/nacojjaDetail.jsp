@@ -31,8 +31,6 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 
-	
-
 	var pattern = new RegExp(/^[0-9]+$/g); //입찰가격 정규식 
 	var myZoom;
 	var map;
@@ -65,66 +63,29 @@
 		tripStartDay4.setDate(tripStartDay4.getDate()+travelDay);
 		$('#startDay4').append(" ~ "+tripStartDay4.toLocaleDateString());
 		
-		var endPay0 = new Date().getTime();
+		
+	 	/* var endPay0 = new Date().getTime();
 		var startPay0 = new Date($('#startDay0').val()).getTime();
 		//endPay0.setDate(endPay0.getDate()-14);
 		//var endpayment0 = new Date(endPay0).getTime(); // startDay1 2주전
-		
-		if(startPay0 - endPay0 < 24*60*60*1000 * 14){
-			<c:set var="ff" value="N"/>
-		}else{
-			<c:set var="ff" value="Y"/>
-		}	
-		
-		
-		var endPay1 = new Date($('#startDay1').val());
 		var startPay1 = new Date($('#startDay1').val()).getTime();
-		endPay1.setDate(endPay1.getDate()-14);
-		var endpayment1 = new Date(endPay1).getTime(); // startDay1 2주전
-		
-		var endPay2 = new Date($('#startDay2').val());
 		var startPay2 = new Date($('#startDay2').val()).getTime();
-		endPay2.setDate(endPay2.getDate()-14);
-		var endpayment2 = new Date(endPay2).getTime(); // startDay1 2주전
-		
-		var endPay3 = new Date($('#startDay3').val());
 		var startPay3 = new Date($('#startDay3').val()).getTime();
-		endPay3.setDate(endPay3.getDate()-14);
-		var endpayment3 = new Date(endPay3).getTime(); // startDay1 2주전
-		
-		var endPay4 = new Date($('#startDay4').val());
 		var startPay4 = new Date($('#startDay4').val()).getTime();
-		endPay4.setDate(endPay4.getDate()-14);
-		var endpayment4 = new Date(endPay4).getTime(); // startDay1 2주전
 		
-	
-		if(startPay1 - endpayment1 < 24*60*60*1000 * 14){
+	 	var fff = startPay0 - endPay0;
+		if(fff < 24*60*60*1000 * 14){
+			$('#option').append("<option>"+ ${courseVo.startDay} + "</option>" )
+		}else if(startPay1 - endPay0 < 24*60*60*1000 * 14){
 			<c:set var="aa" value="N"/>
-		}else{
-			<c:set var="aa" value="Y"/>
-		}	
-		
-		if(startPay2 - endpayment2 < 24*60*60*1000 * 14){
+		}else if(startPay2 - endPay0 < 24*60*60*1000 * 14){
 			<c:set var="bb" value="N"/>
-		}else{
-			<c:set var="bb" value="Y"/>
-		}	
-		
-		if(startPay3 - endpayment3 < 24*60*60*1000 * 14){
+		}else if(startPay3 - endPay0 < 24*60*60*1000 * 14){
 			<c:set var="cc" value="N"/>
-		}else{
-			<c:set var="cc" value="Y"/>
-		}	
-		
-		if(startPay4 - endpayment4 < 24*60*60*1000 * 14){
+		}else if(startPay4 - endPay0 < 24*60*60*1000 * 14){
 			<c:set var="dd" value="N"/>
-		}else{
-			<c:set var="dd" value="Y"/>
-		}	
-		
-		
-		
-		
+		}
+			 */
 	}
 	
 	function initialize() {
@@ -215,55 +176,62 @@
 		$('#coursePayment').click(function(){
 			if(${empty sessionScope.userid}){
 				alert("회원로그인후 이용하실 수 있습니다.");
+				return false;
 				location.href="<c:url value='/member/login/login.do'/>";
 			}else{
-				var msg;
-				IMP.request_pay({
-				    pg : 'html5_inicis', // version 1.1.0부터 지원.
-				    pay_method : 'card',
-				    merchant_uid : 'merchant_' + new Date().getTime(),
-				    name : '주문명: 코스결제',
-				    amount : '${bidVo.bidPrice}',
-				    buyer_email : '${memberVo.email1}@${memberVo.email2}',
-				    buyer_name : '${memberVo.name}',
-				    buyer_tel : '${memberVo.hp1}-${memberVo.hp2}-${memberVo.hp3}',
-				    buyer_addr : '${memberVo.address} ${memberVo.addressDetail}',
-				    buyer_postcode : '${memberVo.zipcode}',
-				}, function(rsp) {
-				    if (rsp.success) {
-				    	jQuery.ajax({
-				    		url: "<c:url value='/nacojja//nacojjaPayment.do'/>",
-				    		type: 'POST',
-				    		dataType: 'json',
-				    		data: {
-					    		imp_uid : rsp.imp_uid,
-					    		amount : rsp.paid_amount,
-					    		courseNo : "${courseVo.courseNo}",
-					    		memberNo : "${memberVo.memberNo}",
-					    		winBidNo : "${winBidVo.winBidNo}"
-				    		},
-				    		success:function(res){
-				    			msg = '코스 결제가 완료되었습니다.';
-				    			alert(msg);
-				    		},
-				    		error:function(xhr,status,error){
-								alert("error : "+ error);
-							}
-				    	}) .done(function(data) {
-				    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-				    		if (data) {
-				    			self.close();
-				    		} else {
-				    			alert("아직 제대로 결제가 되지 않았습니다.");
-				    		}
-				    	}); 
-				    } else {
-				        msg = '결제에 실패하였습니다.';
-				        msg += '에러내용 : ' + rsp.error_msg;
-				    }
-				    //alert(msg);
-				});
+				if($('#option').val()=='select'){
+					alert("여행날짜를 선택해주세요");
+					return false;
+				}else{
+					var msg;
+					IMP.request_pay({
+					    pg : 'html5_inicis', // version 1.1.0부터 지원.
+					    pay_method : 'card',
+					    merchant_uid : 'merchant_' + new Date().getTime(),
+					    name : '주문명: 코스결제',
+					    amount : '${bidVo.bidPrice}',
+					    buyer_email : '${memberVo.email1}@${memberVo.email2}',
+					    buyer_name : '${memberVo.name}',
+					    buyer_tel : '${memberVo.hp1}-${memberVo.hp2}-${memberVo.hp3}',
+					    buyer_addr : '${memberVo.address} ${memberVo.addressDetail}',
+					    buyer_postcode : '${memberVo.zipcode}',
+					}, function(rsp) {
+					    if (rsp.success) {
+					    	jQuery.ajax({
+					    		url: "<c:url value='/nacojja//nacojjaPayment.do'/>",
+					    		type: 'POST',
+					    		dataType: 'json',
+					    		data: {
+						    		imp_uid : rsp.imp_uid,
+						    		amount : rsp.paid_amount,
+						    		courseNo : "${courseVo.courseNo}",
+						    		memberNo : "${memberVo.memberNo}",
+						    		winBidNo : "${winBidVo.winBidNo}",
+						    		travelstart : $('#option').val()
+						    		
+					    		},
+					    		success:function(res){
+					    			msg = '코스 결제가 완료되었습니다.';
+					    			alert(msg);
+					    		},
+					    		error:function(xhr,status,error){
+									alert("error : "+ error);
+								}
+					    	}) .done(function(data) {
+					    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+					    		if (data) {
+					    			self.close();
+					    		} else {
+					    			alert("아직 제대로 결제가 되지 않았습니다.");
+					    		}
+					    	}); 
+					    } else {
+					        msg = '결제에 실패하였습니다.';
+					        msg += '에러내용 : ' + rsp.error_msg;
+					    }
+					});
 				
+				}
 			}
 
 		});
@@ -538,28 +506,14 @@
 				<div>결제진행중</div>
 				<h3 class="marginBottom20">${courseVo.title}</h3>
 				<div class="thumPay">
-					<span class="leftSpan">여행 날짜</span> 
-					<select>
-						<option value="선택">날짜 선택</option>
-						<c:if test="${ff=='Y'}">
+					<span class="leftSpan">여행 날짜</span>
+					<select name="travelstart" id="option">
+						<option value="select">날짜 선택</option>
 							<option id="startDay0" value="${courseVo.startDay}">${courseVo.startDay} ~ ${courseVo.endDay}</option>
-						</c:if>
-						<c:if test="${aa=='Y'}">
 							<option id="startDay1" value="${bidVo.tripStartDay1}">${bidVo.tripStartDay1}</option>
-						</c:if>
-						
-						<c:if test="${bb=='Y'}">
 							<option id="startDay2" value="${bidVo.tripStartDay2}">${bidVo.tripStartDay2}</option>
-						</c:if>
-						
-						<c:if test="${cc=='Y'}">
 							<option id="startDay3" value="${bidVo.tripStartDay3}">${bidVo.tripStartDay3}</option>
-						</c:if>
-						
-						<c:if test="${dd=='Y'}">
 							<option id="startDay4" value="${bidVo.tripStartDay4}">${bidVo.tripStartDay4}</option>
-						</c:if>
-						
 					</select>
 				</div>
 				

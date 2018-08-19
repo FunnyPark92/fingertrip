@@ -6,9 +6,17 @@ public class PaymentVO {
 
 	private int paymentNo;
 	private Date paymentDate; 
+	private String travelstart; 
 	private int memberNo; 
 	private int courseNo;
 	private int winBidNo;
+	
+	public String getTravelstart() {
+		return travelstart;
+	}
+	public void setTravelstart(String travelstart) {
+		this.travelstart = travelstart;
+	}
 	public int getPaymentNo() {
 		return paymentNo;
 	}
@@ -41,8 +49,8 @@ public class PaymentVO {
 	}
 	@Override
 	public String toString() {
-		return "PaymentVO [paymentNo=" + paymentNo + ", paymentDate=" + paymentDate + ", memberNo=" + memberNo
-				+ ", courseNo=" + courseNo + ", winBidNo=" + winBidNo + "]";
+		return "PaymentVO [paymentNo=" + paymentNo + ", paymentDate=" + paymentDate + ", travelstart=" + travelstart
+				+ ", memberNo=" + memberNo + ", courseNo=" + courseNo + ", winBidNo=" + winBidNo + "]";
 	}
 	
 	
