@@ -93,7 +93,29 @@ footer{border-top: 1px solid #d8d8d8;}
     margin-right: 5px;
 }
 .minHeight580{min-height: 580px;}
-
+.refer{position: relative;}
+.refer p{cursor: pointer;}
+.refer>div{
+	position: absolute;
+	bottom:28px;
+	right: 0;
+	width: 159px;
+    border: 1px solid #dadada;
+    text-align: center;
+    display: none;
+    background: rgba(255,255,255,0.5);
+}
+.refer a{
+	display: block;
+	list-style: square;
+	color: #000;
+    padding: 5px 0px;
+    text-decoration: none;
+}
+.refer a:first-child{border-bottom: 1px solid #dadada;}
+.refer a:hover, .refer a:active, .refer a:focus{
+	background: rgba(166, 204, 243, 0.8);
+}
 
 /* 로그인  */
 .login{
@@ -738,6 +760,7 @@ p.replyTitle{
 	margin-bottom: 60px;
 	border-bottom:1px dotted #8c8c86;
 }
+.recom .row:last-child{border: none;}
 .recom h4{
 	border-left: 5px solid #2184ff;
 	padding-left: 8px;
