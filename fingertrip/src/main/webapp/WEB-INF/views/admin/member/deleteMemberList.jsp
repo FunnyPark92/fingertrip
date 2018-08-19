@@ -9,10 +9,7 @@ function pageFunc(currentPage){
 
 </script>
 <section class="admCenter marginTop40" style="text-align: center">
-	<ul class="clearFix marginBottom40 lineGnb">
-	    <li class="on"><a href="<c:url value='/admin/member/deleteMemberList.do'/>">탈퇴회원조회</a></li>
-	    <li><a href="<c:url value='/admin/member/deleteMemberChart.do'/>">탈퇴회원분석</a></li>
-	</ul>
+	
         <form name="page" action="<c:url value='/admin/member/deleteMemberList.do'/>" method="post">
 			<input type="hidden" name="currentPage">
 	        <input type="hidden" name="searchCondition" value="${param.searchCondition }">

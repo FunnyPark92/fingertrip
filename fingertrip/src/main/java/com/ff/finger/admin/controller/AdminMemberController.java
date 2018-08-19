@@ -1,5 +1,6 @@
 package com.ff.finger.admin.controller;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +26,8 @@ import com.ff.finger.member.model.MemberListVO;
 import com.ff.finger.member.model.MemberService;
 import com.ff.finger.member.model.MemberVO;
 import com.ff.finger.member.model.OutReasonVO;
+import com.ff.finger.visitors.model.VisitorsService;
+import com.ff.finger.visitors.model.VisitorsVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,6 +36,9 @@ public class AdminMemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private VisitorsService visitorsService;
 	
 	@RequestMapping("/member/memberList.do")
 	public String memberList(@ModelAttribute SearchVO searchVo, Model model) {
@@ -151,7 +157,7 @@ public class AdminMemberController {
 	      return "common/message";
 	}
 	
-	@RequestMapping("/member/deleteMemberChart.do")
+	@RequestMapping("/member/memberChart.do")
 	public String deleteMemberChart(Model model) {
 		logger.info("탈퇴멤버분석");
 		
@@ -194,6 +200,11 @@ public class AdminMemberController {
 		
 		model.addAttribute("cntOut", cntOut);
 		
-		return "/admin/member/deleteMemberChart";
+		List<VisitorsVO>listV=visitorsService.selectWeekCnt();
+		logger.info("일주일 방문자 조회 listV.size={}", listV.size());
+		
+		model.addAttribute("listV", listV);
+		
+		return "/admin/member/memberChart";
 	}
 }

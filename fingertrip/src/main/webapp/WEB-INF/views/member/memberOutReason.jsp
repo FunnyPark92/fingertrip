@@ -2,7 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css"/>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('input[name=sbm]').click(function(){
+			if($('select[name=outReasonNo]').val()==0){
+				alert('탈퇴사유를 선택해주세요');
+				return false;
+			}
+		});		
+	});
+</script>
 <div class="container margin80">
 	<div class="row">
 				
@@ -55,7 +64,7 @@
 				<hr class="marginTB">
 	         	<div class="row">
 	         		<div class="col-md-12 text-center">
-		         		<input type="submit" class="btn btn-danger btn-lg" value="회원탈퇴">
+		         		<input name="sbm" type="submit" class="btn btn-danger btn-lg" value="회원탈퇴">
 	         		</div>
 	         	</div>
         	</form>
