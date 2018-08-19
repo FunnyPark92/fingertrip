@@ -12,8 +12,8 @@ public interface CommonConstants {
 	public static final int EMAIL_AUTHENTICATION=4; // 이메일 인증을 하지 않았다.
 	public static final int LOGIN_OK_LONG_TERM_NOT_LOGIN = 5; //장기 미접속자(6개월 이상)
 	
-	//공지사항 페이지 처리
-	public static final int BLOCK_SIZE=10;
+	//공지사항, 하트내역 페이징 처리
+	public static final int BLOCK_SIZE=5; //테스트를 위해 5로 변경..
 	public static final int RECORD_COUNT_PER_PAGE=10;
 	
 	//나코짜 페이지 처리

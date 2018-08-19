@@ -12,9 +12,19 @@
 			window.open("<c:url value='/myPage/myHeart/heartCharge.do'/>", "heartCharge",
 					"width=1000, height=750, left=0, top=0, location=yes, resizable=yes");
 		});
-	}); 
+	});
+	
+	function pageFunc(currentPage){
+		frmPage.currentPage.value=currentPage;
+		frmPage.submit();
+	}
 </script>
 	
+<!-- 페이징 처리를 위한 form -->
+<form name="frmPage" method="post" action="<c:url value='/myPage/myHeart/heartList.do'/>">
+	<input type="hidden" name="currentPage">
+</form>
+
 <div class="container margin80">
 	<div class="row">
 		<!-- 서브메뉴 -->
@@ -98,6 +108,33 @@
 					</c:if>
 				</tbody>
 			</table>
+			
+			<!-- 페이지 번호 추가 -->		
+			<div class="divPage clear text-center pad15 marginBottom40">
+				<!-- 이전 블럭으로 이동 -->
+               	<c:if test="${pagingInfo.firstPage>1}">
+               		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.firstPage-1})">◀</a>
+               	</c:if>
+               	
+               	<!-- [1][2][3][4][5][6][7][8][9][10] -->
+               	<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
+					<c:choose>
+						<c:when test="${i==pagingInfo.currentPage}">
+							<span class="colorBlue font-weight-bold">${i}</span>
+						</c:when>
+						<c:otherwise>
+							<span><a href="#" class="decoN colorGray" onclick="pageFunc(${i})">${i}</a></span>
+						</c:otherwise>
+					</c:choose>
+               	</c:forEach>
+               	
+               	<!-- 다음 블럭으로 이동 -->
+               	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage}">
+               		<a href="#" class="decoN colorGray" onclick="pageFunc(${pagingInfo.lastPage+1})">▶</a>
+               	</c:if>
+			</div>	
+            <!--  페이지 번호 끝 -->
+			
 			<button type="button" class="btn btn-warning text-center" id="btn1">하트 충전하기</button> 
 		</div>
 	</div>

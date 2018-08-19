@@ -23,6 +23,47 @@
 		WHERE HL.MEMBER_NO=#{memberNo}
 		ORDER BY HEART_LIST_NO DESC
 	</select>
+	
+	<select id="selectHeartListByMemberNoWithPaging" parameterType="paginationInfo" resultType="map">
+		SELECT *
+		FROM (
+		    SELECT ROWNUM AS RNUM, LIST.*
+		    FROM (
+		        SELECT *		
+		        FROM (
+		            SELECT *
+		            FROM HEART_LIST HL LEFT OUTER JOIN HEART_CHARGE HC
+		            ON HL.HEART_CHARGE_NO = HC.HEART_CHARGE_NO
+		            LEFT OUTER JOIN HEART H
+		            ON HL.HEART_NO = H.HEART_NO
+		            LEFT OUTER JOIN COURSE C
+		            ON H.COURSE_NO = C.COURSE_NO
+		            WHERE HL.MEMBER_NO=#{memberNo}
+		            ORDER BY HEART_LIST_NO DESC
+		        )
+		    )LIST
+		)
+		<![CDATA[
+		WHERE RNUM > #{firstRecordIndex} 
+		AND RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="getTotalRecord" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM (
+			SELECT *
+            FROM HEART_LIST HL LEFT OUTER JOIN HEART_CHARGE HC
+            ON HL.HEART_CHARGE_NO = HC.HEART_CHARGE_NO
+            LEFT OUTER JOIN HEART H
+            ON HL.HEART_NO = H.HEART_NO
+            LEFT OUTER JOIN COURSE C
+            ON H.COURSE_NO = C.COURSE_NO
+            WHERE HL.MEMBER_NO=#{memberNo}
+            ORDER BY HEART_LIST_NO DESC
+		)
+	</select>
+	
 </mapper>
 
 
