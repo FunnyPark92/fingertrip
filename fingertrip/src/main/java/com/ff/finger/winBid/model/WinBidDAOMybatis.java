@@ -18,7 +18,7 @@ public class WinBidDAOMybatis implements WinBidDAO{
 	}
 
 	@Override
-	public int selectPayment(int mon) {
+	public String selectPayment(int mon) {
 		return sqlSession.selectOne(namespace+"selectPayment", mon);
 	}
 

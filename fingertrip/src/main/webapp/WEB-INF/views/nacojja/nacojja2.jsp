@@ -617,7 +617,7 @@
 
 <section class="container marginBottom80 minheight400 plan2">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
             <ul class="list-group help-group">
                 <div class="faq-list list-group nav">
                     <c:set var="i" value="1"></c:set>
@@ -630,10 +630,13 @@
                    		<c:set var="i" value="${i+1}"></c:set>
                     </c:forEach>
                 </div>
+                
+                 <div id="mapFinal" class="mapFinal"></div>
+                 
             </ul>
         </div>
         
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="tab-content panels-faq">
            		<div class="tab-pane active" id="tab1">
                     <form name="frmNacojja2" method="post" class="course" action="<c:url value='/nacojja/nacojja2.do'/>" class="frmNacojja2">
@@ -691,7 +694,9 @@
 						    <input onclick="deleteMarkers();" type=button value="모든 마커 제거">
 					    </div> -->
                        
-                        <div id="map" class="map"></div>
+                        
+                		<div id="map" class="map" class="marginTop20"></div>
+                        
                         
                         <div class="mapSearch">
                             <input id="address" type="textbox" placeholder="지도에 표시될 여행지를 검색해주세요" 
@@ -727,7 +732,6 @@
                         	<input type="hidden" id="img" name="img" class="marginTop10">
                         </div>
                         
-                        <div id="mapFinal" class="mapFinal"></div>
                         
                         <input type="submit" id="btnFinalAdd" value="나코짜 최종 등록" class="btn btn-primary btn-block marginTop30">
                        

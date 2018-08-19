@@ -10,32 +10,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap core CSS -->
-	<link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet">
-	<!-- 셀프 css -->
-    <link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet">
+<!-- 셀프 css -->
+<link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/heartChargeC.css">
 
-    <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
-
+<script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var IMP = window.IMP;
 		IMP.init('imp72373641');
 		
 		var price=0;
-		var heartChargeCount = 0;
+		var heartChargeCount=0;
 		
 		$("#resultCharge").keyup(function(){
-			$("#calcPayment").val($(this).val() * 1100);
+			$("#calcPayment").val($(this).val() * 1000);
 		});
 		
 		$('.btnC').each(function(idx, item){
 			$(this).click(function(){
 				price += $(this).val()*1;
 				$('#resultCharge').val(price);
-				$('#payment').text(price * 1100 + " 원");
+				$('#payment').text(price * 1000 + " 원");
 			});
 		});
 		
@@ -43,7 +43,7 @@
 			//alert($(this).prev().val());
 			//alert("기타: " + $("#resultCharge").val() * 1100);
 			$("#etcHeartCnt").val($("#resultCharge").val());
-			$("#etcAmount").val($("#resultCharge").val() * 1100);
+			$("#etcAmount").val($("#resultCharge").val() * 1000);
 			heartChargeCount = $(this).parent().find(":first").val();
 			
 			IMP.request_pay({
@@ -114,10 +114,10 @@
 			<div class="area text-right">
 				<span>하트 <strong>1</strong>개</span><br>
 				<span class="price">
-					<fmt:formatNumber value="100" pattern="#,###" />
+					<fmt:formatNumber value="1000" pattern="#,###" />
 				</span>원
 			</div>
-			<input type="hidden" value="100">
+			<input type="hidden" value="1000">
 			<button type="button" class="btn btn-primary btnA btn-lg">구매하기</button>
 		 </div>
 		
@@ -128,9 +128,11 @@
 			<input type="hidden" value="3">
 			<div class="area text-right">
 				<span>하트 <strong>3</strong>개</span><br>
-				<span class="price">3,200원</span>
+				<span class="price">
+					<fmt:formatNumber value="3000" pattern="#,###" />
+				</span>원
 			</div>
-			<input type="hidden" value="3200">
+			<input type="hidden" value="3000">
 			<button type="button" class="btn btn-primary btnA btn-lg">구매하기</button>
 		 </div>
 		 
@@ -141,9 +143,11 @@
 			<input type="hidden" value="5">
 			<div class="area text-right">
 				<span>하트 <strong>5</strong>개</span><br>
-				<span class="price">5,500원</span>
+				<span class="price">
+					<fmt:formatNumber value="5000" pattern="#,###" />
+				</span>원
 			</div>
-			<input type="hidden" value="5500">
+			<input type="hidden" value="5000">
 			<button type="button" class="btn btn-primary btnA btn-lg">구매하기</button>
 		 </div>
 		 
@@ -154,7 +158,9 @@
 			<input type="hidden" value="10">
 			<div class="area text-right">
 				<span>하트 <strong>10</strong>개</span><br>
-				<span class="price">10,000원</span>
+				<span class="price">
+					<fmt:formatNumber value="10000" pattern="#,###" />
+				</span>원
 			</div>
 			<input type="hidden" value="10000">
 			<button type="button" class="btn btn-primary btnA btn-lg">구매하기</button>
@@ -167,7 +173,9 @@
 			<input type="hidden" value="30">
 			<div class="area text-right">
 				<span>하트 <strong>30</strong>개</span><br>
-				<span class="price">30,000원</span>
+				<span class="price">
+					<fmt:formatNumber value="30000" pattern="#,###" />
+				</span>원
 			</div>
 			<input type="hidden" value="30000">
 			<button type="button" class="btn btn-primary btnA btn-lg">구매하기</button>
@@ -180,7 +188,9 @@
 			<input type="hidden" value="50">
 			<div class="area text-right">
 				<span>하트 <strong>50</strong>개</span><br>
-				<span class="price">50,000원</span>
+				<span class="price">
+					<fmt:formatNumber value="50000" pattern="#,###" />
+				</span>원
 			</div>
 			<input type="hidden" value="50000">
 			<button type="button" class="btn btn-primary btnA btn-lg">구매하기</button>
@@ -195,7 +205,7 @@
 				<p>기타 충전</p>
 				<span>하트 &nbsp;</span>
 				<input type="number" class="etcInput" id="resultCharge" oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
-				<span style=" margin-left: 184px;">개</span>
+				<span style="margin-left: 184px;">개</span>
 			</div>
 				<span class="spanCharge">
 					<input type="text" id="calcPayment" value="0" style="border: none;" readonly="readonly">원
@@ -203,7 +213,7 @@
 			<input type="hidden" id="etcAmount">
 			<button type="button" class="btn btn-danger btn-lg etcBtn">구매하기</button>
 		</div>
-			
+		
 		<div style="clear: both;"></div>
 
     </div>

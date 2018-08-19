@@ -7,7 +7,7 @@ public class TravelSpotVO extends CourseVO {
 	private int day; /* 일차 NOT NULL*/
 	private String city; /* 도시 NOT NULL*/
 	private String travelSpot; /* 여행지 NOT NULL*/
-	private String spotAddress;
+	private String spotAddress; /* 여행지주소 NOT NULL*/
 	private String img; /* 이미지 */
 	private String travelContent; /* 설명 */
 	private String latLng; /* 위도경도 NOT NULL*/

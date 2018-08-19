@@ -35,12 +35,10 @@ $(document).ready(function(){
 
 		<!-- 서브컨텐츠 -->
 		<div class="col-lg-9">
-
 			<form name="faqList" class="faqList" method="get"
 				action="<c:url value='/cs/faq/faq.do'/>">
 				<input name="faqCategoryNo" type="hidden">
 			</form>
-			
 			
 			<h4>FAQ</h4>
 			<ul class="faqTabNav clearFix">
@@ -58,7 +56,7 @@ $(document).ready(function(){
 					<c:if test="${param.faqCategoryNo==3 }">
 						class="gray"
 					</c:if>
-				>상품</li>
+				>코스/일정</li>
 				<li value="4"
 					<c:if test="${param.faqCategoryNo==4 }">
 						class="gray"

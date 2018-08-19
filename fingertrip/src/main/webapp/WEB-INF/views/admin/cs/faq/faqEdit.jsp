@@ -58,7 +58,7 @@
        					<select name="faqCategoryNo" class="cateSelc">
 							<option value="1">결제/환불</option>
 							<option value="2">쿠폰</option>
-							<option value="3">상품</option>
+							<option value="3">코스/일정</option>
 							<option value="4">계정</option>
 							<option value="5">기타</option>				
 						</select> 
