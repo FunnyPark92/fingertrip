@@ -2,6 +2,29 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/adminTop.jsp"%>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('a[name=del]').click(function(){
+			var count=0;
+			$('input[name=chk]').each(function(){
+				if($(this).is(':checked')){
+					count++;
+				}
+			});
+			if(count==0){
+				alert('삭제할 공지사항을 선택해주세요');
+				return false;
+			}else{
+				$('form[name=frmDel]').submit();
+			}
+		});
+	});
+	
+	function allChecked(bool){
+		$('input[name=chk]').prop('checked',bool);
+	}
+</script>
+
 <section class="admCenter marginTop40" style="text-align: center">
 	<ul class="clearFix marginBottom40 lineGnb">
      	<li class="on"><a href="<c:url value='/admin/cs/faq/faqList.do'/>">FAQ조회</a></li>
@@ -42,7 +65,7 @@
 				</tr>
 				<c:forEach var="faqCategoryNo1" items="${list}">
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" name="chk" value="${map['FAQ_NO']}"></td>
 						<td>${faqCategoryNo1['FAQ_NO']}</td>
 						<td>${faqCategoryNo1['FAQ_CATE_TITLE']}</td>
 						<td><a href="<c:url value='/admin/cs/faq/faqDetail.do?faqNo=${faqCategoryNo1["FAQ_NO"]}'/>">${faqCategoryNo1['TITLE']}</a></td>
@@ -51,7 +74,9 @@
 				</c:forEach>
 			</table>
 			
-                
+            <div class="aWrap fRight">
+		 		<a href="#" class="darkBorder" name="del">삭제</a>
+			</div>
 </section>
 
 

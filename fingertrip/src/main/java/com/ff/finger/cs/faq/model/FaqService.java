@@ -13,4 +13,6 @@ public interface FaqService {
 	public int faqInsert(FaqVO faqVo);
 	public FaqVO faqSelectByNo(int faqNo);
 	public int faqUpdate(FaqVO faqVo);
+	public int faqDelete(int faqNo);
+	public int deleteMulti(Map<String, String[]> map);
 }

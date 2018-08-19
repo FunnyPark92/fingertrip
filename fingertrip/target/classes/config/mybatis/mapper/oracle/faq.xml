@@ -46,4 +46,15 @@
 		where faq_no=#{faqNo}
 	</update>
 	
+	<delete id="faqDelete" parameterType="int">
+		delete from faq where faq_no=#{faqNo}
+	</delete>
+	
+	<delete id="deleteMulti" parameterType="map">
+		delete from faq
+		where faq_no in
+		<foreach collection="nos" item="no" open="(" close=")" separator="," >
+			#{no}
+		</foreach>
+	</delete>
 </mapper>
