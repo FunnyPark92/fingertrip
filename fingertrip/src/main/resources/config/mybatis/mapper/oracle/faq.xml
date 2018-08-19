@@ -22,6 +22,7 @@
 	<select id="selectFaqCategory" parameterType="int" resultType="FaqVO">
 		select * from faq
 		where faq_category_no=#{faqCategoryNo}
+		order by faq_no desc
 	</select>
 	
 	<select id="getAdminNo" parameterType="string" resultType="int">
