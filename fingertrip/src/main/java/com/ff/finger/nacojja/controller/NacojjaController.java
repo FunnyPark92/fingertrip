@@ -456,7 +456,10 @@ public class NacojjaController {
 		//Map<String, Object> map = courseService.selectOneCTJoin(courseNo);
 		
 		String userid = (String) session.getAttribute("userid");
-		MemberVO loginMemberVo = memberService.logingMember(userid);
+		if (userid != null && !userid.isEmpty()) {
+			MemberVO loginMemberVo = memberService.logingMember(userid);
+			model.addAttribute("loginMemberVo", loginMemberVo); //현재 로그인 중인 멤버
+		}
 		
 		MemberVO memberVo = memberService.selectMember(courseVo.getMemberNo());
 		List<TravelSpotVO> travelSpotVoList = courseService.selectTravelSpot(courseNo);
@@ -483,7 +486,6 @@ public class NacojjaController {
 		model.addAttribute("tdList", travelDateList); //일수 
 		model.addAttribute("courseVo", courseVo); //코스
 		model.addAttribute("memberVo", memberVo); //작성자 멤버
-		model.addAttribute("loginMemberVo", loginMemberVo); //현재 로그인 중인 멤버
 		model.addAttribute("tSpotVoList", travelSpotVoList); //여행지 정보 리스트
 		//model.addAttribute("tSpotVoList", travelSpotVoList); //1일차 여행지 정보 리스트
 		return "nacojja/nacojjaDetail";
