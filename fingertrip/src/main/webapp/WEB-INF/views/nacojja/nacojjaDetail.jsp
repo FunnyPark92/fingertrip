@@ -443,7 +443,7 @@
 		<!-- 입찰 -->
 		<div class="col-md-6 naThumHeart marginBottom50">
 			<form name="biding" method="post" action="<c:url value='/nacojja/nacojjaBidding.do'/>">
-				<div>입찰진행중</div>
+				<div><p style="color: blue"> 입찰진행중</p></div>
 				<h3 class="marginBottom20">${courseVo.title}</h3>
 	            <div>
 	            	<span class="leftSpan">작성자</span>
@@ -465,13 +465,14 @@
 					<span class="leftSpan">입찰 종료일</span>
 					<span id="endBidding"></span>
 					<input type="hidden" id="endBid" value="<fmt:formatDate value='${courseVo.bidStartDay}' pattern='yyyy.MM.dd'/>">
-					
 				</div>
+				
 	            <div>
 	               	<img src="<c:url value='/img/quot1.png'/>" style="width: 10px; height: 10px">
 		             ${courseVo.content}
 	               	<img src="<c:url value='/img/quot2.png'/>" style="width: 10px; height: 10px">
 	            </div>
+	            <c:if test="${!empty sessionScope.agencyid}">
 			 	<div>
 					<span class="leftSpan">출발일</span>
 		    		<label for="startDay1" hidden="">출발일1</label>
@@ -493,48 +494,74 @@
 				<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
 				<input type="hidden" value="${courseVo.courseNo}" name="courseNo">
 				<input type="submit" class="btn payBtn btn-primary" id="bidding" value="입찰하기">
+				</c:if>
 			</form>
 		</div> 
 		 </c:if>
 
 		<c:if test="${courseVo.progressNo==3}">
-		
 			<!-- 결제할 때 -->
 			<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
+			<c:if test="${empty sessionScope.agencyid}">
 			<div class="col-md-6 naThumHeart marginBottom50">
-				<form name="payfrm" method="post" action="<c:url value='/nacojja/nacojjaPayment.do'/>">
-				<div>결제진행중</div>
-				<h3 class="marginBottom20">${courseVo.title}</h3>
-				<div class="thumPay">
-					<span class="leftSpan">여행 날짜</span>
-					<select name="travelstart" id="option">
-						<option value="select">날짜 선택</option>
-							<option id="startDay0" value="${courseVo.startDay}">${courseVo.startDay} ~ ${courseVo.endDay}</option>
-							<option id="startDay1" value="${bidVo.tripStartDay1}">${bidVo.tripStartDay1}</option>
-							<option id="startDay2" value="${bidVo.tripStartDay2}">${bidVo.tripStartDay2}</option>
-							<option id="startDay3" value="${bidVo.tripStartDay3}">${bidVo.tripStartDay3}</option>
-							<option id="startDay4" value="${bidVo.tripStartDay4}">${bidVo.tripStartDay4}</option>
-					</select>
+		            <div>
+		               	<p style="color: blue"> 결제진행중</p>
+		            </div>
+		            <h2>
+		               	${courseVo.title}
+		            </h2>
+		            <h5>
+		                ${courseVo.startDay} ~ ${courseVo.endDay}
+		            </h5>
+		            <div>
+		                <small>작성자 : </small>${memberVo.name}
+		            </div>
+		            <div>
+		                <small>등록일 : </small>${courseVo.regDate}
+		            </div>
+		            <div class="expDiv">
+		               	<img src="<c:url value='/img/quote1.png'/>" style="width:30px;">
+		               	${courseVo.content}
+		            </div>
+		         
+	        </div>
+	        </c:if>
+			<c:if test="${!empty sessionScope.agencyid}">
+				<div class="col-md-6 naThumHeart marginBottom50">
+					<form name="payfrm" method="post" action="<c:url value='/nacojja/nacojjaPayment.do'/>">
+					<div>결제진행중</div>
+					<h3 class="marginBottom20">${courseVo.title}</h3>
+					<div class="thumPay">
+						<span class="leftSpan">여행 날짜</span>
+						<select name="travelstart" id="option">
+							<option value="select">날짜 선택</option>
+								<option id="startDay0" value="${courseVo.startDay}">${courseVo.startDay} ~ ${courseVo.endDay}</option>
+								<option id="startDay1" value="${bidVo.tripStartDay1}">${bidVo.tripStartDay1}</option>
+								<option id="startDay2" value="${bidVo.tripStartDay2}">${bidVo.tripStartDay2}</option>
+								<option id="startDay3" value="${bidVo.tripStartDay3}">${bidVo.tripStartDay3}</option>
+								<option id="startDay4" value="${bidVo.tripStartDay4}">${bidVo.tripStartDay4}</option>
+						</select>
+					</div>
+					
+					<div class="thumPay">
+						<span class="leftSpan">작성자</span>${memberVo.name}
+					</div>
+					<div class="thumPay">
+						<span class="leftSpan">여행사</span> ${agencyVo.name}
+					</div>
+					<div class="thumPay">
+						<span class="leftSpan">여행가격</span>${bidVo.bidPrice} 원
+					</div>
+					<div class="thumPay">
+						<span class="leftSpan">여행사 번호</span> ${agencyVo.licenseNo}
+					</div>
+					<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
+					<div>
+						<input type="button" id="coursePayment" class="btn payBtn btn-primary" value="결제하기">
+					</div>
+					</form>
 				</div>
-				
-				<div class="thumPay">
-					<span class="leftSpan">작성자</span>${memberVo.name}
-				</div>
-				<div class="thumPay">
-					<span class="leftSpan">여행사</span> ${agencyVo.name}
-				</div>
-				<div class="thumPay">
-					<span class="leftSpan">여행가격</span>${bidVo.bidPrice} 원
-				</div>
-				<div class="thumPay">
-					<span class="leftSpan">여행사 번호</span> ${agencyVo.licenseNo}
-				</div>
-				<div class="marginTop10 marginBottom50">${map['CONTENT'] }</div>
-				<div>
-					<input type="button" id="coursePayment" class="btn payBtn btn-primary" value="결제하기">
-				</div>
-				</form>
-			</div>
+			</c:if>
 		</c:if>
 
 

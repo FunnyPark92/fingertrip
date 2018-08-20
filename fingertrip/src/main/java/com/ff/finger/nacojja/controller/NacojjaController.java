@@ -550,8 +550,9 @@ public class NacojjaController {
 						int lCnt =heartListService.insertHeartListUse(heartListVo);
 						logger.info("하트내역 insert결과 lCnt={}",lCnt);
 					}
+					
 				}else {
-					msg="하트가 부족합니다! 충전하러 가시겠어요?";
+					msg="하트가 부족합니다! 하트 충전 후 이용바랍니다!";
 					url="/nacojja/nacojjaDetail.do?courseNo="+heartVo.getCourseNo();
 				}
 			}
