@@ -2,6 +2,29 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/adminTop.jsp"%>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('a[name=del]').click(function(){
+			var count=0;
+			$('input[name=chk]').each(function(){
+				if($(this).is(':checked')){
+					count++;
+				}
+			});
+			if(count==0){
+				alert('삭제할 공지사항을 선택해주세요');
+				return false;
+			}else{
+				$('form[name=faqLists]').submit();
+			}
+		});
+	});
+	
+	function allChecked(bool){
+		$('input[name=chk]').prop('checked',bool);
+	}
+</script>
+
 <section class="admCenter marginTop40" style="text-align: center">
 	<ul class="clearFix marginBottom40 lineGnb">
      	<li class="on"><a href="<c:url value='/admin/cs/faq/faqList.do'/>">FAQ조회</a></li>
@@ -11,7 +34,9 @@
 	<%-- <form name="search" action="<c:url value='/admin/cs/faq/faqList.do'/>" method="post">
       	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 	</form> --%>
-	<form name="faqList" class="faqList fRight" method="get" action="<c:url value='/admin/cs/faq/faqList.do'/>"> 
+	<form name="faqList" class="faqList fRight" method="get" 
+	action="<c:url value='/admin/cs/faq/deleteMulti.do'/>"> 
+	<%-- action="<c:url value='/admin/cs/faq/faqList.do'/>">  --%>
 		<select name="faqCategoryNo">
 			<option value="1" 
 				<c:if test="${param.faqCategoryNo==1}">selected</c:if>
@@ -31,10 +56,11 @@
 		</select>
 		<button>검색</button>
 	 </form> 
-			
+	
+	<form name="faqLists" method="get" action="<c:url value='/admin/cs/faq/deleteMulti.do'/>"> 
 			<table class="grayTh" style="margin-top:50px;">
 				<tr>
-					<th><input type="checkbox"></th>
+					<th><input type="checkbox" name="chkAll" onclick="allChecked(this.checked)"></th>
 					<th>번호</th>
 					<th>카테고리</th>
 					<th>제목</th>
@@ -42,7 +68,7 @@
 				</tr>
 				<c:forEach var="faqCategoryNo1" items="${list}">
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" name="chk" value="${faqCategoryNo1['FAQ_NO']}"></td>
 						<td>${faqCategoryNo1['FAQ_NO']}</td>
 						<td>${faqCategoryNo1['FAQ_CATE_TITLE']}</td>
 						<td><a href="<c:url value='/admin/cs/faq/faqDetail.do?faqNo=${faqCategoryNo1["FAQ_NO"]}'/>">${faqCategoryNo1['TITLE']}</a></td>
@@ -51,7 +77,10 @@
 				</c:forEach>
 			</table>
 			
-                
+            <div class="aWrap fRight">
+		 		<a href="#" class="darkBorder" name="del">삭제</a>
+			</div>
+		</form>
 </section>
 
 

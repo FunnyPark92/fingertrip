@@ -28,6 +28,12 @@
 		set visitor_count=visitor_count+1
 		where visitor_today=substr(sysdate,1,8)
 	</update>
+	
+	<select id="selectWeekCnt" resultType="VisitorsVo">
+		select * from visitors
+		where visitor_today between to_date(substr(sysdate,1,8))-6 and to_date(substr(sysdate,1,8))
+		order by visitor_today
+	</select>
 </mapper>
 
 

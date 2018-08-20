@@ -47,7 +47,7 @@
      	<li class="on"><a href="<c:url value='/admin/cs/faq/faqList.do'/>">FAQ조회</a></li>
        	<li><a href="<c:url value='/admin/cs/faq/faqWrite.do'/>">FAQ등록</a></li>
   	</ul>
-    <form name="frmCk" action="<c:url value='/admin/cs/faq/faqEdit.do'/>" method="post" enctype="multipart/form-data">
+    <form name="frmCk" action="<c:url value='/admin/cs/faq/faqEdit.do'/>" method="post">
   		<h2>FAQ 수정</h2>
   		<input type="hidden" name="faqNo" value="${vo.faqNo }">
   		<input type="hidden" name="faqCategoryNo1" class="cate" value="${vo.faqCategoryNo }">

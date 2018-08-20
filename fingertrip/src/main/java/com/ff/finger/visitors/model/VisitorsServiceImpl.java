@@ -1,5 +1,7 @@
 package com.ff.finger.visitors.model;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,11 @@ public class VisitorsServiceImpl implements VisitorsService{
 		System.out.println("ip 입력 후 cnt="+cnt);
 		
 		return visitorsDao.updateCnt();
+	}
+
+	@Override
+	public List<VisitorsVO> selectWeekCnt() {
+		return visitorsDao.selectWeekCnt();
 	}
 
 }

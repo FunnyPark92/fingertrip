@@ -113,7 +113,7 @@ footer{border-top: 1px solid #d8d8d8;}
     text-decoration: none;
 }
 .refer a:first-child{border-bottom: 1px solid #dadada;}
-.refer a:hover, .refer a:active, .refer a:focus{
+.refer a:hover, .refer a:focus{
 	background: rgba(166, 204, 243, 0.8);
 }
 

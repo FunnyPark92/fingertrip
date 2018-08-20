@@ -46,4 +46,14 @@ public class FaqDAOMybatis implements FaqDAO {
 		return sqlSession.update(namespace+"faqUpdate", faqVo);
 	}
 
+	@Override
+	public int faqDelete(int faqNo) {
+		return sqlSession.delete(namespace+"faqDelete", faqNo);
+	}
+
+	@Override
+	public int deleteMulti(Map<String, String[]> map) {
+		return sqlSession.delete(namespace+"deleteMulti", map);
+	}
+
 }

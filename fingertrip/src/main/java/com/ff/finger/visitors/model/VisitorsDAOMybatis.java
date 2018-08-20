@@ -1,5 +1,7 @@
 package com.ff.finger.visitors.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,5 +36,11 @@ public class VisitorsDAOMybatis implements VisitorsDAO{
 	@Override
 	public int updateCnt() {
 		return sqlSession.update(namespace+"updateCnt");
+	}
+
+	@Override
+	public List<VisitorsVO> selectWeekCnt() {
+		return sqlSession.selectList(namespace+"selectWeekCnt");
+		
 	}
 }

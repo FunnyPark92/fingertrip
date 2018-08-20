@@ -27,6 +27,7 @@
     <script src="${pageContext.request.contextPath}/highcharts/data.js"></script>
     <script src="${pageContext.request.contextPath}/highcharts/export-data.js"></script>
     <script src="${pageContext.request.contextPath}/highcharts/exporting.js"></script>
+    <script src="${pageContext.request.contextPath}/highcharts/series-label.js"></script>
 <style type="text/css">
 
 </style>

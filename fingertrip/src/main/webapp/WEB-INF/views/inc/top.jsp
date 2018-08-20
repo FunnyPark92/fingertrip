@@ -136,10 +136,6 @@
 	            	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	            		<a class="dropdown-item" href="<c:url value='/agencyPage/bidList.do'/>">입찰한 목록</a>
 	                    <a class="dropdown-item" href="<c:url value='/agencyPage/myWriteList.do'/>">내가 쓴 글</a>
-	                    <a class="dropdown-item" href="">뭐3</a>
-	                    <a class="dropdown-item" href="">뭐4</a>
-	                    <a class="dropdown-item" href="">뭐5</a>
-	                    <a class="dropdown-item" href="">뭐6</a>
 	            	</div>
 	            </li>
 	            <button type="button" id="btnAgencyLogout" class="btn btn-primary disNone992">로그아웃</button>

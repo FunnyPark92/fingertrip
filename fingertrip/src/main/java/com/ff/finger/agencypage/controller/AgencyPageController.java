@@ -41,7 +41,6 @@ public class AgencyPageController {
 	private TravelAgencyService travelAgencyService; 
 	
 	@Autowired
-
 	private BidService bidService;
 	
 	@Autowired
@@ -113,6 +112,7 @@ public class AgencyPageController {
 		logger.info("QnA totalRecord={}", QnAtotalRecord);
 		pagingInfo.setTotalRecord(QnAtotalRecord);
 		
+		//디테일에서 처리를 위한 변수 
 		model.addAttribute("list",list);
 		model.addAttribute("pagingInfo", pagingInfo);	
 		

@@ -40,4 +40,14 @@ public class FaqServiceImpl implements FaqService {
 		return faqDao.faqUpdate(faqVo);
 	}
 
+	@Override
+	public int faqDelete(int faqNo) {
+		return faqDao.faqDelete(faqNo);
+	}
+
+	@Override
+	public int deleteMulti(Map<String, String[]> map) {
+		return faqDao.deleteMulti(map);
+	}
+
 }
