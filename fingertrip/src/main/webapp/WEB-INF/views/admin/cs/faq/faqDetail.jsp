@@ -44,7 +44,7 @@
        			</tr>
        			<tr>
        				<th>내용</th>
-       				<td>
+       				<td class="minH200">
       					<div id="toolbar-container"></div>
 	      				<div id="editor" name="content" class="">
 					        <p>${vo.content }</p>
@@ -54,9 +54,9 @@
          	</table>
 	       	<input type="hidden" name="content">
 	       
-       		<div class="divLast">
-       			<a href="<c:url value='/admin/cs/faq/faqList.do'/>">목록</a>
-       			<a href="<c:url value='/admin/cs/faq/faqEdit.do?faqNo=${vo.faqNo }'/>">수정</a>
+       		<div class="divLast aWrap">
+       			<a href="<c:url value='/admin/cs/faq/faqList.do'/>" class="darkBorder">목록</a>
+       			<a href="<c:url value='/admin/cs/faq/faqEdit.do?faqNo=${vo.faqNo }'/>" class="lightGray">수정</a>
        			<!-- <a id="del" class="darkGray" onclick="go()">삭제</a> -->
             </div>
         </form>

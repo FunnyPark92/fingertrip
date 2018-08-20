@@ -70,7 +70,7 @@
        			</tr>
        			<tr>
        				<th>내용</th>
-       				<td>
+       				<td class="minH200">
       					<div id="toolbar-container"></div>
 	      				<div id="editor" name="content" class="">
 					        <p>${vo.content }</p>
