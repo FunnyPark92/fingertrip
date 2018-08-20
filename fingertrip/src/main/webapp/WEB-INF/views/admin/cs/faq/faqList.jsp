@@ -15,7 +15,7 @@
 				alert('삭제할 공지사항을 선택해주세요');
 				return false;
 			}else{
-				$('form[name=faqList]').submit();
+				$('form[name=faqLists]').submit();
 			}
 		});
 	});
@@ -56,7 +56,8 @@
 		</select>
 		<button>검색</button>
 	 </form> 
-			
+	
+	<form name="faqLists" method="get" action="<c:url value='/admin/cs/faq/deleteMulti.do'/>"> 
 			<table class="grayTh" style="margin-top:50px;">
 				<tr>
 					<th><input type="checkbox" name="chkAll" onclick="allChecked(this.checked)"></th>
@@ -79,6 +80,7 @@
             <div class="aWrap fRight">
 		 		<a href="#" class="darkBorder" name="del">삭제</a>
 			</div>
+		</form>
 </section>
 
 
