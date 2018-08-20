@@ -9,6 +9,7 @@
 .heart2{
 	margin-top: 4px;
 	font-size: 25px;
+	display: inline-block;
 }
 </style>
 
@@ -431,9 +432,9 @@
 	               	<img src="<c:url value='/img/quote1.png'/>" style="width:30px;">
 	               	${courseVo.content}
 	            </div>
-	            <div>
-	            	<span class="listTitle float-left"><img src="${pageContext.request.contextPath }/img/heart.png" class="qna"></span>
-	            	<p class="float-left heart2">${courseVo.heartCount }</p>
+	            <div style="height: 88px;">
+	            	<span class="listTitle"><img src="${pageContext.request.contextPath }/img/heart.png" class="qna"></span>
+	            	<p class="heart2">${courseVo.heartCount }</p>
 	            </div>
 	            <input type="button" class="heartBtn btn btn-block btn-danger" onclick="pressHeart()" value="하트 누르기">
 	        </div>
