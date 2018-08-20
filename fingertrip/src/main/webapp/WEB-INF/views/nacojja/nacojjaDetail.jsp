@@ -500,31 +500,30 @@
 		<c:if test="${courseVo.progressNo==3}">
 			<!-- 결제할 때 -->
 			<!--  <div class="col-md-6 marginBottom50 naThumPay"  style="display: none;"> -->
-			<c:if test="${empty sessionScope.agencyid}">
-			<div class="col-md-6 naThumHeart marginBottom50">
-		            <div>
-		               	<p style="color: blue"> 결제진행중</p>
-		            </div>
-		            <h2>
-		               	${courseVo.title}
-		            </h2>
-		            <h5>
-		                ${courseVo.startDay} ~ ${courseVo.endDay}
-		            </h5>
-		            <div>
-		                <small>작성자 : </small>${memberVo.name}
-		            </div>
-		            <div>
-		                <small>등록일 : </small>${courseVo.regDate}
-		            </div>
-		            <div class="expDiv">
-		               	<img src="<c:url value='/img/quote1.png'/>" style="width:30px;">
-		               	${courseVo.content}
-		            </div>
-		         
-	        </div>
+			<c:if test="${empty sessionScope.userid}">
+				<div class="col-md-6 naThumHeart marginBottom50">
+			            <div>
+			               	<p style="color: blue"> 결제진행중</p>
+			            </div>
+			            <h2>
+			               	${courseVo.title}
+			            </h2>
+			            <h5>
+			                ${courseVo.startDay} ~ ${courseVo.endDay}
+			            </h5>
+			            <div>
+			                <small>작성자 : </small>${memberVo.name}
+			            </div>
+			            <div>
+			                <small>등록일 : </small>${courseVo.regDate}
+			            </div>
+			            <div class="expDiv">
+			               	<img src="<c:url value='/img/quote1.png'/>" style="width:30px;">
+			               	${courseVo.content}
+			            </div>
+		        </div>
 	        </c:if>
-			<c:if test="${!empty sessionScope.agencyid}">
+			<c:if test="${!empty sessionScope.userid}">
 				<div class="col-md-6 naThumHeart marginBottom50">
 					<form name="payfrm" method="post" action="<c:url value='/nacojja/nacojjaPayment.do'/>">
 					<div>결제진행중</div>
