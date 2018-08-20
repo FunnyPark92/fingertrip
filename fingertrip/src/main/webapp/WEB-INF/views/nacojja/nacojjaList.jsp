@@ -8,11 +8,15 @@
 		$('select[name="search2"]').change(function(){
 			$('form[name=frmSearch2] input[name=searchCondition2]').val($('select[name=search2] option:selected').val());
 			$('form[name=frmSearch2] input[name=recordCountPerPage]').val($('select[name=recordCountPerPage] option:selected').val());
+			$('form[name=frmSearch2] input[name=searchCondition]').val($('select[name=searchCondition] option:selected').val());
+			$('form[name=frmSearch2] input[name=searchKeyword]').val($('form[name=frmSC] input[name=searchKeyword]').val());
 			$('form[name=frmSearch2]').submit();
 		});
 		$('select[name="recordCountPerPage"]').change(function(){
 			$('form[name=frmSearch2] input[name=searchCondition2]').val($('select[name=search2] option:selected').val());
 			$('form[name=frmSearch2] input[name=recordCountPerPage]').val($('select[name=recordCountPerPage] option:selected').val());
+			$('form[name=frmSearch2] input[name=searchCondition]').val($('select[name=searchCondition] option:selected').val());
+			$('form[name=frmSearch2] input[name=searchKeyword]').val($('form[name=frmSC] input[name=searchKeyword]').val());
 			$('form[name=frmSearch2]').submit();
 		});
 	});
