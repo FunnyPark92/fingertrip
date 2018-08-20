@@ -209,7 +209,6 @@
 						    		memberNo : "${memberVo.memberNo}",
 						    		winBidNo : "${winBidVo.winBidNo}",
 						    		travelstart : $('#option').val()
-						    		
 					    		},
 					    		success:function(res){
 					    			msg = '코스 결제가 완료되었습니다.';
@@ -231,7 +230,6 @@
 					        msg += '에러내용 : ' + rsp.error_msg;
 					    }
 					});
-				
 				}
 			}
 
@@ -569,12 +567,18 @@
 		<c:if test="${courseVo.progressNo==4 || courseVo.progressNo==5}">
 		<!-- 실패 -->
         <div class="col-md-6 naThumHeart marginBottom50">
+        <c:if test="${courseVo.progressNo==4}">
             <div>
-               	종료
+               	입찰 실패로 인한 종료
             </div>
+        </c:if>
+        <c:if test="${courseVo.progressNo==5}">
+       		 <div>
+               	하트 부족으로 인한 종료
+            </div>
+        </c:if>
             <h2>
                	${courseVo.title}
-               	
             </h2>
             <h5>
                 ${courseVo.startDay} ~ ${courseVo.endDay}

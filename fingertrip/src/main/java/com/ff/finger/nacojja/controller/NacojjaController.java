@@ -448,12 +448,19 @@ public class NacojjaController {
 	}
 	
 	@RequestMapping("/nacojjaDetail.do")
-	public String nacojjaDetail(@RequestParam int courseNo, Model model) {   
+	public String nacojjaDetail(@RequestParam int courseNo, HttpSession session, Model model) {   
 		logger.info("나코짜 상세보기");
 		
 		int travelDay = courseService.selectMaxDay(courseNo);
 		CourseVO courseVo = courseService.selectOneCourse(courseNo);
 		//Map<String, Object> map = courseService.selectOneCTJoin(courseNo);
+		
+		String userid = (String) session.getAttribute("userid");
+		if (userid != null && !userid.isEmpty()) {
+			MemberVO loginMemberVo = memberService.logingMember(userid);
+			model.addAttribute("loginMemberVo", loginMemberVo); //현재 로그인 중인 멤버
+		}
+		
 		MemberVO memberVo = memberService.selectMember(courseVo.getMemberNo());
 		List<TravelSpotVO> travelSpotVoList = courseService.selectTravelSpot(courseNo);
 		if(courseVo.getProgressNo()==3) {
@@ -478,7 +485,7 @@ public class NacojjaController {
 		model.addAttribute("travelDay",travelDay);
 		model.addAttribute("tdList", travelDateList); //일수 
 		model.addAttribute("courseVo", courseVo); //코스
-		model.addAttribute("memberVo", memberVo); //멤버
+		model.addAttribute("memberVo", memberVo); //작성자 멤버
 		model.addAttribute("tSpotVoList", travelSpotVoList); //여행지 정보 리스트
 		//model.addAttribute("tSpotVoList", travelSpotVoList); //1일차 여행지 정보 리스트
 		return "nacojja/nacojjaDetail";
