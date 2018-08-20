@@ -431,11 +431,11 @@
 	               	<img src="<c:url value='/img/quote1.png'/>" style="width:30px;">
 	               	${courseVo.content}
 	            </div>
-	            <input type="button" class="heartBtn btn btn-block btn-danger" onclick="pressHeart()" value="하트 누르기">
 	            <div>
 	            	<span class="listTitle float-left"><img src="${pageContext.request.contextPath }/img/heart.png" class="qna"></span>
 	            	<p class="float-left heart2">${courseVo.heartCount }</p>
 	            </div>
+	            <input type="button" class="heartBtn btn btn-block btn-danger" onclick="pressHeart()" value="하트 누르기">
 	        </div>
         </c:if>
         
