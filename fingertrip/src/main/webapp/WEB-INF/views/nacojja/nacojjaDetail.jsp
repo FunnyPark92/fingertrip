@@ -191,11 +191,11 @@
 					    merchant_uid : 'merchant_' + new Date().getTime(),
 					    name : '주문명: 코스결제',
 					    amount : '${bidVo.bidPrice}',
-					    buyer_email : '${loginMemberVo.email1}@${loginMemberVo.email2}',
-					    buyer_name : '${loginMemberVo.name}',
-					    buyer_tel : '${loginMemberVo.hp1}-${loginMemberVo.hp2}-${loginMemberVo.hp3}',
-					    buyer_addr : '${loginMemberVo.address} ${loginMemberVo.addressDetail}',
-					    buyer_postcode : '${loginMemberVo.zipcode}',
+					    buyer_email : '${memberVo.email1}@${memberVo.email2}',
+					    buyer_name : '${memberVo.name}',
+					    buyer_tel : '${memberVo.hp1}-${memberVo.hp2}-${memberVo.hp3}',
+					    buyer_addr : '${memberVo.address} ${memberVo.addressDetail}',
+					    buyer_postcode : '${memberVo.zipcode}',
 					}, function(rsp) {
 					    if (rsp.success) {
 					    	jQuery.ajax({
@@ -206,10 +206,9 @@
 						    		imp_uid : rsp.imp_uid,
 						    		amount : rsp.paid_amount,
 						    		courseNo : "${courseVo.courseNo}",
-						    		memberNo : "${loginMemberVo.memberNo}",
+						    		memberNo : "${memberVo.memberNo}",
 						    		winBidNo : "${winBidVo.winBidNo}",
 						    		travelstart : $('#option').val()
-						    		
 					    		},
 					    		success:function(res){
 					    			msg = '코스 결제가 완료되었습니다.';
@@ -231,7 +230,6 @@
 					        msg += '에러내용 : ' + rsp.error_msg;
 					    }
 					});
-				
 				}
 			}
 
@@ -569,12 +567,18 @@
 		<c:if test="${courseVo.progressNo==4 || courseVo.progressNo==5}">
 		<!-- 실패 -->
         <div class="col-md-6 naThumHeart marginBottom50">
+        <c:if test="${courseVo.progressNo==4}">
             <div>
-               	종료
+               	입찰 실패로 인한 종료
             </div>
+        </c:if>
+        <c:if test="${courseVo.progressNo==5}">
+       		 <div>
+               	하트 부족으로 인한 종료
+            </div>
+        </c:if>
             <h2>
                	${courseVo.title}
-               	
             </h2>
             <h5>
                 ${courseVo.startDay} ~ ${courseVo.endDay}
