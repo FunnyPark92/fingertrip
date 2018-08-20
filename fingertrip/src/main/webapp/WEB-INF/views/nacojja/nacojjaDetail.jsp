@@ -191,11 +191,11 @@
 					    merchant_uid : 'merchant_' + new Date().getTime(),
 					    name : '주문명: 코스결제',
 					    amount : '${bidVo.bidPrice}',
-					    buyer_email : '${memberVo.email1}@${memberVo.email2}',
-					    buyer_name : '${memberVo.name}',
-					    buyer_tel : '${memberVo.hp1}-${memberVo.hp2}-${memberVo.hp3}',
-					    buyer_addr : '${memberVo.address} ${memberVo.addressDetail}',
-					    buyer_postcode : '${memberVo.zipcode}',
+					    buyer_email : '${loginMemberVo.email1}@${loginMemberVo.email2}',
+					    buyer_name : '${loginMemberVo.name}',
+					    buyer_tel : '${loginMemberVo.hp1}-${loginMemberVo.hp2}-${loginMemberVo.hp3}',
+					    buyer_addr : '${loginMemberVo.address} ${loginMemberVo.addressDetail}',
+					    buyer_postcode : '${loginMemberVo.zipcode}',
 					}, function(rsp) {
 					    if (rsp.success) {
 					    	jQuery.ajax({
@@ -206,7 +206,7 @@
 						    		imp_uid : rsp.imp_uid,
 						    		amount : rsp.paid_amount,
 						    		courseNo : "${courseVo.courseNo}",
-						    		memberNo : "${memberVo.memberNo}",
+						    		memberNo : "${loginMemberVo.memberNo}",
 						    		winBidNo : "${winBidVo.winBidNo}",
 						    		travelstart : $('#option').val()
 					    		},
