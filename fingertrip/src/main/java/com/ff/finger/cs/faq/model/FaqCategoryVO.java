@@ -2,26 +2,25 @@ package com.ff.finger.cs.faq.model;
 
 public class FaqCategoryVO /*extends SearchVO*/ {
 	private int faqCategoryNo;
-	private String title;
+	private String faqCateTitle;
 	
-	public int getFaqCategotyNo() {
+	public int getFaqCategoryNo() {
 		return faqCategoryNo;
 	}
 	public void setFaqCategoryNo(int faqCategoryNo) {
 		this.faqCategoryNo = faqCategoryNo;
 	}
-	public String getTitle() {
-		return title;
+	public String getFaqCateTitle() {
+		return faqCateTitle;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setFaqCateTitle(String faqCateTitle) {
+		this.faqCateTitle = faqCateTitle;
 	}
+	
 	@Override
 	public String toString() {
-		return "FaqCategoryVO [faqCategotyNo=" + faqCategoryNo + ", title=" + title + ", toString()=" + super.toString()
-				+ "]";
+		return "FaqCategoryVO [faqCategoryNo=" + faqCategoryNo + ", faqCateTitle=" + faqCateTitle + ", toString()="
+				+ super.toString() + "]";
 	}
-	
-	
 	
 }

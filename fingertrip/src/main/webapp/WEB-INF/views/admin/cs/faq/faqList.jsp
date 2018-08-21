@@ -35,8 +35,7 @@
       	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
 	</form> --%>
 	<form name="faqList" class="faqList fRight" method="get" 
-	action="<c:url value='/admin/cs/faq/deleteMulti.do'/>"> 
-	<%-- action="<c:url value='/admin/cs/faq/faqList.do'/>">  --%>
+	action="<c:url value='/admin/cs/faq/faqList.do'/>"> 
 		<select name="faqCategoryNo">
 			<option value="1" 
 				<c:if test="${param.faqCategoryNo==1}">selected</c:if>

@@ -11,7 +11,7 @@
 		text-decoration: underline;
 		color: blue;
 	}
-	#editor p{min-height: 300px;}
+	#editor{min-height: 300px;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -67,9 +67,7 @@
        				<th>내용</th>
        				<td>
       					<div id="toolbar-container"></div>
-	      				<div id="editor" name="content">
-					        <p>자주하는 질문을 입력하세요.</p>
-					    </div>
+	      				<div id="editor" name="content"><p>자주하는 질문을 입력하세요.</p></div>
 					    <script>
 					        DecoupledEditor
 					            .create( document.querySelector( '#editor' ),{

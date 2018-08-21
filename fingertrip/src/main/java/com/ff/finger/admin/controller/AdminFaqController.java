@@ -126,7 +126,7 @@ public class AdminFaqController {
 		return "admin/cs/faq/faqDetail";
 	}
 	
-	@RequestMapping(value="/faqDelete.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/faqDelete.do")
 	public String faqDelete(@ModelAttribute FaqVO faqVo, HttpServletRequest request, Model model) {
 		logger.info("faq 삭제, 파라미터 faqVo={}", faqVo);
 		

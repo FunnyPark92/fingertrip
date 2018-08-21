@@ -14,14 +14,14 @@
 </style>
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		$('#del').click(function(){
-			var confrm=confirm("삭제하시겠습니까?");
-			if(confrm){
-				$('form[name=frmDel]').submit();
+	function del(event){
+			if(confirm("정말삭제하시겠습니까?")){
+				location.href="<c:url value='/admin/cs/faq/faqDelete.do?faqNo=${vo.faqNo}'/>"
+				return true;
+			}else{
+				return false;
 			}
-		});
-	});
+	} 
 </script>
 
 <section class="admCenter marginTop40">
@@ -29,10 +29,9 @@
      	<li class="on"><a href="<c:url value='/admin/cs/faq/faqList.do'/>">FAQ조회</a></li>
        	<li><a href="<c:url value='/admin/cs/faq/faqWrite.do'/>">FAQ등록</a></li>
   	</ul>
-    <form name="frmDel" action="<c:url value='/admin/cs/faq/faqDetail.do'/>" method="post" enctype="multipart/form-data">
+    <form name="frmDel" action="<c:url value='/admin/cs/faq/faqDetail.do'/>" method="get">
   		<h2>FAQ 상세보기</h2>
   		<input type="hidden" name="faqNo" value="${vo.faqNo }">
-  		<input type="hidden" name="faqCateNo" class="cate" value="${vo.faqCategoryNo }">
             <table class="grayBor">
             	<tr class="div1st">
        				<th><label for="faqCategoryNo">분류</label></th>
@@ -52,12 +51,11 @@
        				</td>
        			</tr>
          	</table>
-	       	<input type="hidden" name="content">
 	       
        		<div class="divLast aWrap">
        			<a href="<c:url value='/admin/cs/faq/faqList.do'/>" class="darkBorder">목록</a>
        			<a href="<c:url value='/admin/cs/faq/faqEdit.do?faqNo=${vo.faqNo }'/>" class="lightGray">수정</a>
-       			<!-- <a id="del" class="darkGray" onclick="go()">삭제</a> -->
+       			<a id="del" class="darkGray" onclick="del()">삭제</a>
             </div>
         </form>
     </section>
