@@ -14,7 +14,7 @@
 				<if test="searchCondition!=0">
 					and c.progress_no=#{searchCondition}
 				</if>
-				order by c.bid_start_day
+				order by c.bid_start_day desc
 				)list
 			)
 		<![CDATA[
@@ -39,6 +39,7 @@
 		left join win_bid w
 		on b.bid_no=w.bid_no
 		where course_no=#{courseNo}
+		order by b.bid_no
 	</select>
 	
 	<select id="selectWin" parameterType="int" resultType="bidVo">

@@ -130,7 +130,7 @@
 				<if test="searchKeyword!=null and searchKeyword!=''">
 					and ${searchCondition} like '%' || #{searchKeyword} || '%'
 				</if>
-				order by start_day
+				order by course_no desc
 				)list
 			)
 		<![CDATA[

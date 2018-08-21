@@ -19,6 +19,14 @@
 			$('form[name=frmSearch2] input[name=searchKeyword]').val($('form[name=frmSC] input[name=searchKeyword]').val());
 			$('form[name=frmSearch2]').submit();
 		});
+		$('form[name=frmSC]').submit(function(){
+			$('form[name=frmSearch2] input[name=searchCondition2]').val($('select[name=search2] option:selected').val());
+			$('form[name=frmSearch2] input[name=recordCountPerPage]').val($('select[name=recordCountPerPage] option:selected').val());
+			$('form[name=frmSearch2] input[name=searchCondition]').val($('select[name=searchCondition] option:selected').val());
+			$('form[name=frmSearch2] input[name=searchKeyword]').val($('form[name=frmSC] input[name=searchKeyword]').val());
+			$('form[name=frmSearch2] input[name=currentPage]').val($('form[name=frmSC] input[name=currentPage]').val());
+			$('form[name=frmSearch2]').submit();
+		});
 	});
 	
 	function pageFunc(currentPage){
@@ -157,6 +165,7 @@
 			
 			<div class="margin0 width350">
 				<form name="frmSC" action="<c:url value='/nacojja/nacojjaList.do'/>" method="post" class="colorGray form-inline">
+					<input type="hidden" value="${param.currentPage }" name="currentPage">
 					<input type="hidden" value="${param.searchCondition2 }" name="searchCondition2">
 					<input type="hidden" value="${param.recordCountPerPage }" name="recordCountPerPage">
 					<select name="searchCondition" class="form-control colorGray marginR10">

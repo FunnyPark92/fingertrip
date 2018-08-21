@@ -15,12 +15,12 @@
 	
 	<select id="findId" parameterType="MemberVo" resultType="string">
 		select id from member
-		where name=#{name} and email1=#{email1} and email2=#{email2}
+		where name=#{name} and email1=#{email1} and email2=#{email2} and out_date is null
 	</select>
 	
 	<select id="findPwCnt" parameterType="MemberVo" resultType="int">
 		select count(*) from member
-		where id=#{id} and email1=#{email1} and email2=#{email2}
+		where id=#{id} and email1=#{email1} and email2=#{email2} and out_date is null
 	</select>
 	
 	<update id="updatePw" parameterType="MemberVo">

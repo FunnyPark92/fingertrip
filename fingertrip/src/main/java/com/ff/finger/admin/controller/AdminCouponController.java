@@ -132,23 +132,25 @@ public class AdminCouponController {
 	}
 	
 	@RequestMapping("/offerCoupon.do")
-	public String offerCoupon(@RequestParam(defaultValue="0") int courseNo, @RequestParam(defaultValue="0") int memberNo, 
+	public String offerCoupon(@RequestParam(defaultValue="0") int courseNo, @RequestParam(defaultValue="0") int[] memberNo, 
 			@RequestParam(defaultValue="0") int couponNo, Model model) {
 		logger.info("쿠폰 제공하기, 파라미터 courseNo={}, memberNo={}",courseNo, memberNo);
 		logger.info("쿠폰 제공하기, 파라미터 couponNo={}", couponNo);
 
 		String msg="", url="";
-		if(courseNo==0||memberNo==0||couponNo==0) {
+		int cnt=0;
+		if(courseNo==0||memberNo==null||couponNo==0) {
 			msg="잘못된 url입니다";
 			url="/admin/nacojja/coupon/couponList.do";
 		}else {
 			Map<String, Object> map=new HashMap<>();
 			map.put("courseNo", courseNo);
-			map.put("memberNo", memberNo);
 			map.put("couponNo", couponNo);
-			
-			int cnt=couponService.offerCoupon(map);
-			logger.info("쿠폰제공 후 cnt={}", cnt);
+			for(int i=0;i<memberNo.length;i++) {
+				map.put("memberNo", memberNo[i]);
+				cnt=couponService.offerCoupon(map);
+				logger.info("쿠폰제공 후 cnt={}", cnt);
+			}
 			
 			if(cnt>0) {
 				msg="쿠폰제공이 완료되었습니다.";

@@ -66,9 +66,8 @@
 		<form name="frmCp" action="<c:url value='/admin/nacojja/coupon/offerCoupon.do'/>" method="post">
 			<table class="grayTh">
 	            <tr>
-	                <th scope="col" style="width:10%; text-align: center">회원번호</th>
-	                <th scope="col" style="width:25%; text-align: center">이름</th>
-	                <th scope="col" style="width:25%; text-align: center">아이디</th>
+	                <th scope="col" style="width:30%; text-align: center">이름</th>
+	                <th scope="col" style="width:30%; text-align: center">아이디</th>
 	                <th scope="col" style="width:40%; text-align: center">쿠폰</th>
 	            </tr>
 	            <!-- 반복 시작 -->
@@ -78,10 +77,13 @@
 	            	<input name="memberNo" type="hidden" value="${map2['MEMBER_NO'] }">
 	            	<input name="couponNo" type="hidden">
 		            <tr style="text-align: center">
-		                <td>${map2['MEMBER_NO']}</td>
 		                <td>${map2['NAME']}</td>
 		                <td>${map2['ID']}</td>
-		                <td>${map2['COUPON_NAME']}  제공 완료</td>
+		                <td>
+		                	<c:if test="${!empty map2['COUPON_NAME'] }">
+		                		${map2['COUPON_NAME']}  제공 완료
+		                	</c:if>
+		                </td>
 		            </tr>
 		            <c:set var="couponName" value="${map2['COUPON_NAME']}"/>
 	            </c:forEach>
