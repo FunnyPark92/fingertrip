@@ -1,2 +1,5 @@
-# fingertrip
-pilot project "fingertrip" by Five Fingers:D
+## Fingertrip  
+
+* 자신의 취향에 맞게 여행코스를 직접 기획하며 사람들의 추천을 받아 경매를 통하여 확실한 여행상품을 만드는 것
+ 
+- ### 개발 환경
